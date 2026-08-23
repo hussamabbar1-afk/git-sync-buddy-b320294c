@@ -79,7 +79,6 @@ export function buildQuotePdf(quote: QuotePdfSource, items: DocItem[], company: 
 
   const blob = buildBusinessDocument({
     title: "Angebot",
-    documentNumber: `Angebotsnummer ${quote.quote_number}`,
     company,
     customer: {
       name: quote.customer_name,
@@ -141,7 +140,6 @@ export function buildInvoicePdf(
 
   const blob = buildBusinessDocument({
     title: "Rechnung",
-    documentNumber: `Rechnungsnummer ${invoice.invoice_number}`,
     company,
     customer: {
       name: invoice.customer_name,
