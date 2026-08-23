@@ -127,7 +127,10 @@ function LoginPage() {
               <label className="flex items-center gap-2 text-muted-foreground">
                 <Checkbox id="remember" defaultChecked /> Angemeldet bleiben
               </label>
-              <span className="text-primary">Passwort vergessen?</span>
+              <Link to="/passwort-vergessen" className="font-medium text-primary">
+                Passwort vergessen?
+              </Link>
+
             </div>
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? "Anmeldung läuft …" : "Anmelden"}
