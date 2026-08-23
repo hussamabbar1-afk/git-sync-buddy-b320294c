@@ -5,8 +5,9 @@ import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { supabase } from "@/integrations/supabase/client";
+import { getExternalOrigin } from "@/lib/auth-redirect";
 import { germanAuthError } from "@/lib/auth-errors";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/passwort-vergessen")({
   head: () => ({
