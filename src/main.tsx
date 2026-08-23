@@ -1,3 +1,9 @@
+import { captureRecoveryHash } from "./lib/recovery-hash";
+
+// Must run before the Supabase client module is evaluated: its URL session
+// detection consumes and strips the recovery hash from the address bar.
+captureRecoveryHash();
+
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "@tanstack/react-router";
