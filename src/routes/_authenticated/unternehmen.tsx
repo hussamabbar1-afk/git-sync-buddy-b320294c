@@ -92,6 +92,15 @@ function CompanyPage() {
     email: "",
     address: "",
     about: "",
+    legal_name: "",
+    vat_id: "",
+    tax_number: "",
+    bank_account_holder: "",
+    bank_iban: "",
+    bank_bic: "",
+    quote_terms: "",
+    quote_footer: "",
+    invoice_payment_terms_days: "",
   });
 
   const [services, setServices] = useState<ServiceRow[]>([]);
@@ -167,6 +176,19 @@ function CompanyPage() {
           email: companyData.email ?? "",
           address: companyData.address ?? "",
           about: companyData.description ?? "",
+          legal_name: companyData.legal_name ?? "",
+          vat_id: companyData.vat_id ?? "",
+          tax_number: companyData.tax_number ?? "",
+          bank_account_holder: companyData.bank_account_holder ?? "",
+          bank_iban: companyData.bank_iban ?? "",
+          bank_bic: companyData.bank_bic ?? "",
+          quote_terms: companyData.quote_terms ?? "",
+          quote_footer: companyData.quote_footer ?? "",
+          invoice_payment_terms_days:
+            companyData.invoice_payment_terms_days === null ||
+            companyData.invoice_payment_terms_days === undefined
+              ? ""
+              : String(companyData.invoice_payment_terms_days),
         });
 
         setServices(
@@ -231,6 +253,17 @@ function CompanyPage() {
     event?.preventDefault();
     if (!company) return;
 
+    const paymentTermsRaw = form.invoice_payment_terms_days.trim();
+    const paymentTermsDays = paymentTermsRaw === "" ? null : Number(paymentTermsRaw);
+    if (
+      paymentTermsDays !== null &&
+      (!Number.isInteger(paymentTermsDays) || paymentTermsDays < 0 || paymentTermsDays > 365)
+    ) {
+      setSaveSuccess(false);
+      setError("Zahlungsziel: Bitte eine ganze Zahl zwischen 0 und 365 Tagen eingeben.");
+      return;
+    }
+
     const hoursError = validateHours(hours);
     if (hoursError) {
       setSaveSuccess(false);
@@ -255,6 +288,15 @@ function CompanyPage() {
           email: form.email || null,
           address: form.address || null,
           description: form.about || null,
+          legal_name: form.legal_name.trim() || null,
+          vat_id: form.vat_id.trim() || null,
+          tax_number: form.tax_number.trim() || null,
+          bank_account_holder: form.bank_account_holder.trim() || null,
+          bank_iban: form.bank_iban.trim() || null,
+          bank_bic: form.bank_bic.trim() || null,
+          quote_terms: form.quote_terms.trim() || null,
+          quote_footer: form.quote_footer.trim() || null,
+          ...(paymentTermsDays === null ? {} : { invoice_payment_terms_days: paymentTermsDays }),
         })
         .eq("id", companyId);
       if (companyError) throw companyError;
@@ -490,6 +532,7 @@ function CompanyPage() {
           <TabsTrigger value="leistungen">Leistungen</TabsTrigger>
           <TabsTrigger value="gebiete">Servicegebiete</TabsTrigger>
           <TabsTrigger value="zeiten">Öffnungszeiten</TabsTrigger>
+          <TabsTrigger value="dokumente">Dokumente &amp; Finanzen</TabsTrigger>
         </TabsList>
 
         <TabsContent value="stammdaten" className="mt-4">
@@ -747,6 +790,102 @@ function CompanyPage() {
                   </div>
                 </div>
               ))}
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="dokumente" className="mt-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>Dokumente &amp; Finanzen</CardTitle>
+              <CardDescription>
+                Diese Angaben erscheinen auf Angebots- und Rechnungs-PDFs. PDFs enthalten
+                ausschließlich gespeicherte Informationen; leere Felder werden weggelassen.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="grid gap-4 sm:grid-cols-2">
+              <div className="space-y-2 sm:col-span-2">
+                <Label htmlFor="legal_name">Rechtlicher Firmenname</Label>
+                <Input
+                  id="legal_name"
+                  value={form.legal_name}
+                  onChange={(e) => setForm({ ...form, legal_name: e.target.value })}
+                  placeholder="z. B. Muster Haustechnik GmbH"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="vat_id">USt-IdNr.</Label>
+                <Input
+                  id="vat_id"
+                  value={form.vat_id}
+                  onChange={(e) => setForm({ ...form, vat_id: e.target.value })}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="tax_number">Steuernummer</Label>
+                <Input
+                  id="tax_number"
+                  value={form.tax_number}
+                  onChange={(e) => setForm({ ...form, tax_number: e.target.value })}
+                />
+              </div>
+              <div className="space-y-2 sm:col-span-2">
+                <Label htmlFor="bank_account_holder">Kontoinhaber</Label>
+                <Input
+                  id="bank_account_holder"
+                  value={form.bank_account_holder}
+                  onChange={(e) => setForm({ ...form, bank_account_holder: e.target.value })}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="bank_iban">IBAN</Label>
+                <Input
+                  id="bank_iban"
+                  value={form.bank_iban}
+                  onChange={(e) => setForm({ ...form, bank_iban: e.target.value })}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="bank_bic">BIC</Label>
+                <Input
+                  id="bank_bic"
+                  value={form.bank_bic}
+                  onChange={(e) => setForm({ ...form, bank_bic: e.target.value })}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="invoice_payment_terms_days">Zahlungsziel (Tage)</Label>
+                <Input
+                  id="invoice_payment_terms_days"
+                  inputMode="numeric"
+                  value={form.invoice_payment_terms_days}
+                  onChange={(e) =>
+                    setForm({ ...form, invoice_payment_terms_days: e.target.value })
+                  }
+                  placeholder="z. B. 14"
+                />
+                <p className="text-xs text-muted-foreground">
+                  Ganze Zahl zwischen 0 und 365 Tagen.
+                </p>
+              </div>
+              <div className="space-y-2 sm:col-span-2">
+                <Label htmlFor="quote_terms">Angebotsbedingungen</Label>
+                <Textarea
+                  id="quote_terms"
+                  rows={4}
+                  value={form.quote_terms}
+                  onChange={(e) => setForm({ ...form, quote_terms: e.target.value })}
+                />
+              </div>
+              <div className="space-y-2 sm:col-span-2">
+                <Label htmlFor="quote_footer">Angebots-Fußzeile</Label>
+                <Textarea
+                  id="quote_footer"
+                  rows={3}
+                  value={form.quote_footer}
+                  onChange={(e) => setForm({ ...form, quote_footer: e.target.value })}
+                />
+              </div>
             </CardContent>
           </Card>
         </TabsContent>
