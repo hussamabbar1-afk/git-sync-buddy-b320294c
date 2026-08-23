@@ -130,7 +130,6 @@ function LoginPage() {
               <Link to="/passwort-vergessen" className="font-medium text-primary">
                 Passwort vergessen?
               </Link>
-
             </div>
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? "Anmeldung läuft …" : "Anmelden"}
