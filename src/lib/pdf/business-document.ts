@@ -116,7 +116,7 @@ export function buildBusinessDocument(input: BusinessDocumentInput): Blob {
   }
 
   // Customer address block (left)
-  let y = MARGIN + 12;
+  let y = MARGIN + 16;
   doc.setFontSize(8);
   doc.setTextColor(120);
   if (companyName) {
@@ -179,10 +179,11 @@ export function buildBusinessDocument(input: BusinessDocumentInput): Blob {
     ],
     body: body.length > 0 ? body : [["", "Keine Positionen erfasst.", "", "", "", "", ""]],
     margin: { left: MARGIN, right: MARGIN, bottom: 22 },
+    rowPageBreak: "avoid",
     styles: { font: "helvetica", fontSize: 9, cellPadding: 2, overflow: "linebreak" },
     headStyles: { fillColor: [40, 44, 52], textColor: 255, fontStyle: "bold" },
     columnStyles: {
-      0: { cellWidth: 10 },
+      0: { cellWidth: 12 },
       1: { cellWidth: "auto" },
       2: { cellWidth: 16, halign: "right" },
       3: { cellWidth: 16 },
