@@ -61,22 +61,44 @@ export const sendChatMessage = createServerFn({ method: "POST" })
       throw new Error(`Chat-Backend antwortete mit Status ${res.status}`);
     }
 
-    const raw = (await res.json().catch(() => null)) as unknown;
-    const payload = Array.isArray(raw) ? raw[0] : raw;
+    // n8n can answer with JSON, a JSON string, plain text or an empty body.
+    const text = await res.text();
+    let raw: unknown = null;
+    if (text.trim()) {
+      try {
+        raw = JSON.parse(text);
+      } catch {
+        raw = { message: text };
+      }
+    }
+    let payload = Array.isArray(raw) ? raw[0] : raw;
+    if (typeof payload === "string") {
+      payload = { message: payload };
+    }
 
     if (!payload || typeof payload !== "object") {
-      throw new Error("Ungültige Antwort vom Chat-Backend");
+      return { message: "", conversation_id: null, assistant_message_id: null, language: null };
     }
 
     const responseBody = payload as {
       message?: unknown;
+      output?: unknown;
+      text?: unknown;
+      reply?: unknown;
       conversation_id?: unknown;
       assistant_message_id?: unknown;
       language?: unknown;
     };
 
+    const messageText = [
+      responseBody.message,
+      responseBody.output,
+      responseBody.text,
+      responseBody.reply,
+    ].find((value) => typeof value === "string" && value.trim());
+
     return {
-      message: typeof responseBody.message === "string" ? responseBody.message : "",
+      message: typeof messageText === "string" ? messageText : "",
       conversation_id:
         typeof responseBody.conversation_id === "string" ? responseBody.conversation_id : null,
       // Present from prepared v11 onwards; live v3 omits these.
