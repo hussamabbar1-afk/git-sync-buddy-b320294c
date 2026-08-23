@@ -370,8 +370,7 @@ function DashboardPage() {
     {
       label: "Offene Aufgaben",
       value: d.open_tasks,
-      hint:
-        d.overdue_tasks > 0 ? `${d.overdue_tasks} überfällig` : "Keine überfälligen Aufgaben",
+      hint: d.overdue_tasks > 0 ? `${d.overdue_tasks} überfällig` : "Keine überfälligen Aufgaben",
       icon: d.overdue_tasks > 0 ? AlertTriangle : CheckSquare,
       to: "/aufgaben" as const,
     },
