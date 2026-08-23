@@ -61,23 +61,41 @@ export const sendChatMessage = createServerFn({ method: "POST" })
       throw new Error(`Chat-Backend antwortete mit Status ${res.status}`);
     }
 
-    // n8n can answer with JSON, a JSON string, plain text or an empty body.
     const text = await res.text();
-    let raw: unknown = null;
-    if (text.trim()) {
-      try {
-        raw = JSON.parse(text);
-      } catch {
-        raw = { message: text };
-      }
+    if (!text.trim()) {
+      throw new Error("Ungültige Antwort vom Chat-Backend: Leere Antwort erhalten.");
     }
-    let payload = Array.isArray(raw) ? raw[0] : raw;
+
+    let raw: unknown;
+    try {
+      raw = JSON.parse(text);
+    } catch {
+      raw = { message: text };
+    }
+
+    let payload: unknown;
+    if (Array.isArray(raw)) {
+      payload = raw.find((item) => {
+        if (typeof item === "string") return item.trim().length > 0;
+        if (item && typeof item === "object") {
+          const candidate = item as Record<string, unknown>;
+          return ["message", "output", "text", "reply"].some(
+            (key) =>
+              typeof candidate[key] === "string" && candidate[key].toString().trim().length > 0,
+          );
+        }
+        return false;
+      });
+    } else {
+      payload = raw;
+    }
+
     if (typeof payload === "string") {
       payload = { message: payload };
     }
 
-    if (!payload || typeof payload !== "object") {
-      return { message: "", conversation_id: null, assistant_message_id: null, language: null };
+    if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+      throw new Error("Ungültige Antwort vom Chat-Backend: Keine verwertbare Nachricht gefunden.");
     }
 
     const responseBody = payload as {
@@ -90,15 +108,17 @@ export const sendChatMessage = createServerFn({ method: "POST" })
       language?: unknown;
     };
 
-    const messageText = [
-      responseBody.message,
-      responseBody.output,
-      responseBody.text,
-      responseBody.reply,
-    ].find((value) => typeof value === "string" && value.trim());
+    const supportedFields = ["message", "output", "text", "reply"] as const;
+    const messageText = supportedFields
+      .map((key) => responseBody[key])
+      .find((value) => typeof value === "string" && value.trim().length > 0);
+
+    if (typeof messageText !== "string") {
+      throw new Error("Ungültige Antwort vom Chat-Backend: Keine verwertbare Nachricht gefunden.");
+    }
 
     return {
-      message: typeof messageText === "string" ? messageText : "",
+      message: messageText,
       conversation_id:
         typeof responseBody.conversation_id === "string" ? responseBody.conversation_id : null,
       // Present from prepared v11 onwards; live v3 omits these.
