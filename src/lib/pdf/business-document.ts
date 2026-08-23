@@ -39,7 +39,6 @@ export type PdfSection = { title: string; body: string };
 
 export type BusinessDocumentInput = {
   title: string;
-  documentNumber: string;
   company: PdfCompany;
   customer: PdfCustomer;
   meta: PdfMetaEntry[];
@@ -125,10 +124,14 @@ export function buildBusinessDocument(input: BusinessDocumentInput): Blob {
   }
   doc.setTextColor(0);
   doc.setFontSize(11);
+  const customerAddress = clean(input.customer.address);
+  const customerPostalCode = clean(input.customer.postal_code);
   const customerLines = [
     clean(input.customer.name),
-    clean(input.customer.address),
-    clean(input.customer.postal_code),
+    customerAddress,
+    customerPostalCode && customerAddress && customerAddress.includes(customerPostalCode)
+      ? null
+      : customerPostalCode,
   ].filter((line): line is string => Boolean(line));
   if (customerLines.length === 0) customerLines.push("—");
   for (const line of customerLines) {
@@ -146,7 +149,6 @@ export function buildBusinessDocument(input: BusinessDocumentInput): Blob {
   doc.text(input.title, MARGIN, y);
   doc.setFont("helvetica", "normal");
   doc.setFontSize(11);
-  doc.text(input.documentNumber, MARGIN, y + 7);
 
   let metaY = y - 2;
   doc.setFontSize(9);
