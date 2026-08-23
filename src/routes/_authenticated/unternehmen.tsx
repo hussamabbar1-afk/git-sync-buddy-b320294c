@@ -39,15 +39,7 @@ type HourRow = {
   close_time: string;
 };
 
-const dayLabels = [
-  "Montag",
-  "Dienstag",
-  "Mittwoch",
-  "Donnerstag",
-  "Freitag",
-  "Samstag",
-  "Sonntag",
-];
+const dayLabels = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"];
 
 // day_of_week: 1 = Montag ... 7 = Sonntag
 const dayOrder = [1, 2, 3, 4, 5, 6, 7];
@@ -275,7 +267,6 @@ function CompanyPage() {
     setSaveSuccess(false);
     setError(null);
 
-
     const companyId = company.id;
 
     try {
@@ -312,15 +303,13 @@ function CompanyPage() {
 
       const newServices = services.filter((s) => !s.id && s.name.trim());
       if (newServices.length > 0) {
-        const { error: e } = await supabase
-          .from("services")
-          .insert(
-            newServices.map((s) => ({
-              company_id: companyId,
-              name: s.name.trim(),
-              is_active: s.is_active,
-            })),
-          );
+        const { error: e } = await supabase.from("services").insert(
+          newServices.map((s) => ({
+            company_id: companyId,
+            name: s.name.trim(),
+            is_active: s.is_active,
+          })),
+        );
         if (e) throw e;
       }
 
@@ -364,10 +353,7 @@ function CompanyPage() {
           close_time: h.is_open && h.close_time ? h.close_time : null,
         };
         if (h.id) {
-          const { error: e } = await supabase
-            .from("opening_hours")
-            .update(payload)
-            .eq("id", h.id);
+          const { error: e } = await supabase.from("opening_hours").update(payload).eq("id", h.id);
           if (e) throw e;
         } else {
           const { error: e } = await supabase
@@ -611,9 +597,7 @@ function CompanyPage() {
             </CardHeader>
             <CardContent className="space-y-3">
               {services.length === 0 ? (
-                <p className="text-sm text-muted-foreground">
-                  Noch keine Leistungen hinterlegt.
-                </p>
+                <p className="text-sm text-muted-foreground">Noch keine Leistungen hinterlegt.</p>
               ) : null}
               {services.map((service, index) => (
                 <div
@@ -652,10 +636,7 @@ function CompanyPage() {
                 type="button"
                 variant="outline"
                 onClick={() =>
-                  setServices((prev) => [
-                    ...prev,
-                    { id: null, name: "", is_active: true },
-                  ])
+                  setServices((prev) => [...prev, { id: null, name: "", is_active: true }])
                 }
               >
                 Leistung hinzufügen
@@ -769,7 +750,9 @@ function CompanyPage() {
                       disabled={!entry.is_open}
                       onChange={(e) =>
                         setHours((prev) =>
-                          prev.map((h, i) => (i === index ? { ...h, open_time: e.target.value } : h)),
+                          prev.map((h, i) =>
+                            i === index ? { ...h, open_time: e.target.value } : h,
+                          ),
                         )
                       }
                     />
@@ -859,9 +842,7 @@ function CompanyPage() {
                   id="invoice_payment_terms_days"
                   inputMode="numeric"
                   value={form.invoice_payment_terms_days}
-                  onChange={(e) =>
-                    setForm({ ...form, invoice_payment_terms_days: e.target.value })
-                  }
+                  onChange={(e) => setForm({ ...form, invoice_payment_terms_days: e.target.value })}
                   placeholder="z. B. 14"
                 />
                 <p className="text-xs text-muted-foreground">

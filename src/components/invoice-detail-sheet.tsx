@@ -340,8 +340,6 @@ export function InvoiceDetailSheet({
     !("error" in parsedPaymentAmount) &&
     (parsedPaymentAmount.cents ?? 0) > invoice.balance_cents;
 
-
-
   async function handleSave() {
     if (!invoice || !form || !companyId || !isDraft) return;
     setSaveError(null);
@@ -389,7 +387,6 @@ export function InvoiceDetailSheet({
     }
 
     setStatusBusy(true);
-
 
     const { error: statusUpdateError } = await supabase
       .from("invoices")
@@ -966,7 +963,6 @@ export function InvoiceDetailSheet({
                             {formatCents(invoice.balance_cents)}.
                           </p>
                         ) : null}
-
                       </div>
                       <div className="space-y-1">
                         <Label htmlFor="payment-method">Zahlungsart</Label>
