@@ -1,4 +1,4 @@
-import { Loader2, Plus, Trash2 } from "lucide-react";
+import { Download, Loader2, Plus, Printer, Trash2 } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
 import { Badge } from "@/components/ui/badge";
@@ -36,6 +36,8 @@ import {
   quoteStatusVariant,
   toDateInput,
 } from "@/lib/crm";
+import { downloadPdfBlob, printPdfBlob } from "@/lib/pdf/business-document";
+import { buildQuotePdf, loadPdfCompany } from "@/lib/pdf/documents";
 
 const QUOTE_COLUMNS =
   "id, company_id, quote_number, status, customer_name, phone, email, address, postal_code, currency, valid_until, notes, subtotal_cents, tax_cents, total_cents, sent_at, accepted_at, rejected_at, created_at, updated_at, customer_id, lead_id";
@@ -173,6 +175,8 @@ export function QuoteDetailSheet({
   const [statusTarget, setStatusTarget] = useState<string | null>(null);
   const [statusBusy, setStatusBusy] = useState(false);
   const [statusError, setStatusError] = useState<string | null>(null);
+  const [pdfBusy, setPdfBusy] = useState(false);
+  const [pdfError, setPdfError] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     if (!quoteId || !companyId) return null;
@@ -220,6 +224,7 @@ export function QuoteDetailSheet({
       setStatusError(null);
       setStatusTarget(null);
       setDraft(emptyDraft);
+      setPdfError(null);
       setQuote(null);
       setForm(null);
       setItems([]);
@@ -371,6 +376,22 @@ export function QuoteDetailSheet({
     onChanged?.();
   }
 
+  async function handlePdf(mode: "download" | "print") {
+    if (!quote || !companyId) return;
+    setPdfError(null);
+    setPdfBusy(true);
+    try {
+      const company = await loadPdfCompany(companyId);
+      const { blob, fileName } = buildQuotePdf(quote, items, company);
+      if (mode === "download") downloadPdfBlob(blob, fileName);
+      else printPdfBlob(blob);
+    } catch {
+      setPdfError("Das PDF konnte nicht erstellt werden. Bitte erneut versuchen.");
+    } finally {
+      setPdfBusy(false);
+    }
+  }
+
   const locked = quote ? ["accepted", "cancelled"].includes(quote.status) : false;
 
   return (
@@ -393,6 +414,28 @@ export function QuoteDetailSheet({
             <p className="py-10 text-center text-sm text-destructive">{error}</p>
           ) : quote && form ? (
             <>
+              <div className="flex flex-wrap items-center gap-2">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  disabled={pdfBusy}
+                  onClick={() => void handlePdf("download")}
+                >
+                  <Download className="size-4" />
+                  {pdfBusy ? "PDF wird erstellt …" : "PDF herunterladen"}
+                </Button>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  disabled={pdfBusy}
+                  onClick={() => void handlePdf("print")}
+                >
+                  <Printer className="size-4" />
+                  Drucken
+                </Button>
+                {pdfError ? <span className="text-xs text-destructive">{pdfError}</span> : null}
+              </div>
+
               <div className="grid gap-4 sm:grid-cols-2">
                 <Field label="Kunde">{customerName(quote.customer_name)}</Field>
                 <Field label="Status">

@@ -1,4 +1,4 @@
-import { Loader2, Plus, Trash2 } from "lucide-react";
+import { Download, Loader2, Plus, Printer, Trash2 } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
 import { Badge } from "@/components/ui/badge";
@@ -39,6 +39,8 @@ import {
   str,
   toDateInput,
 } from "@/lib/crm";
+import { downloadPdfBlob, printPdfBlob } from "@/lib/pdf/business-document";
+import { buildInvoicePdf, loadPdfCompany } from "@/lib/pdf/documents";
 
 const INVOICE_COLUMNS =
   "id, company_id, invoice_number, status, customer_name, phone, email, address, postal_code, currency, issue_date, due_date, payment_reference, notes, subtotal_cents, tax_cents, total_cents, paid_cents, balance_cents, sent_at, paid_at, cancelled_at, created_at, updated_at, customer_id, lead_id, quote_id, job_id";
@@ -203,6 +205,9 @@ export function InvoiceDetailSheet({
   const [payments, setPayments] = useState<InvoicePayment[]>([]);
   const [share, setShare] = useState<ShareStatus | null>(null);
   const [jobNumber, setJobNumber] = useState<string | null>(null);
+  const [jobCompletedAt, setJobCompletedAt] = useState<string | null>(null);
+  const [pdfBusy, setPdfBusy] = useState(false);
+  const [pdfError, setPdfError] = useState<string | null>(null);
   const [form, setForm] = useState<FormState | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -273,13 +278,15 @@ export function InvoiceDetailSheet({
     if (detail.job_id) {
       const { data: job } = await supabase
         .from("jobs")
-        .select("job_number, title")
+        .select("job_number, title, completed_at")
         .eq("id", detail.job_id)
         .eq("company_id", companyId)
         .maybeSingle();
       setJobNumber(job ? (str(job.job_number) ?? str(job.title)) : null);
+      setJobCompletedAt(job ? str(job.completed_at) : null);
     } else {
       setJobNumber(null);
+      setJobCompletedAt(null);
     }
 
     return detail;
@@ -305,6 +312,8 @@ export function InvoiceDetailSheet({
       setPayments([]);
       setShare(null);
       setJobNumber(null);
+      setJobCompletedAt(null);
+      setPdfError(null);
       await load();
       if (!cancelled) setLoading(false);
     }
@@ -330,8 +339,6 @@ export function InvoiceDetailSheet({
     invoice !== null &&
     !("error" in parsedPaymentAmount) &&
     (parsedPaymentAmount.cents ?? 0) > invoice.balance_cents;
-
-
 
   async function handleSave() {
     if (!invoice || !form || !companyId || !isDraft) return;
@@ -380,7 +387,6 @@ export function InvoiceDetailSheet({
     }
 
     setStatusBusy(true);
-
 
     const { error: statusUpdateError } = await supabase
       .from("invoices")
@@ -526,6 +532,22 @@ export function InvoiceDetailSheet({
     onChanged?.();
   }
 
+  async function handlePdf(mode: "download" | "print") {
+    if (!invoice || !companyId) return;
+    setPdfError(null);
+    setPdfBusy(true);
+    try {
+      const company = await loadPdfCompany(companyId);
+      const { blob, fileName } = buildInvoicePdf(invoice, items, company, jobCompletedAt);
+      if (mode === "download") downloadPdfBlob(blob, fileName);
+      else printPdfBlob(blob);
+    } catch {
+      setPdfError("Das PDF konnte nicht erstellt werden. Bitte erneut versuchen.");
+    } finally {
+      setPdfBusy(false);
+    }
+  }
+
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent className="w-full overflow-y-auto sm:max-w-2xl">
@@ -549,6 +571,28 @@ export function InvoiceDetailSheet({
             <p className="py-10 text-center text-sm text-destructive">{error}</p>
           ) : invoice && form ? (
             <>
+              <div className="flex flex-wrap items-center gap-2">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  disabled={pdfBusy}
+                  onClick={() => void handlePdf("download")}
+                >
+                  <Download className="size-4" />
+                  {pdfBusy ? "PDF wird erstellt …" : "PDF herunterladen"}
+                </Button>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  disabled={pdfBusy}
+                  onClick={() => void handlePdf("print")}
+                >
+                  <Printer className="size-4" />
+                  Drucken
+                </Button>
+                {pdfError ? <span className="text-xs text-destructive">{pdfError}</span> : null}
+              </div>
+
               <div className="grid gap-4 sm:grid-cols-2">
                 <Field label="Kunde">{customerName(invoice.customer_name)}</Field>
                 <Field label="Status">
@@ -919,7 +963,6 @@ export function InvoiceDetailSheet({
                             {formatCents(invoice.balance_cents)}.
                           </p>
                         ) : null}
-
                       </div>
                       <div className="space-y-1">
                         <Label htmlFor="payment-method">Zahlungsart</Label>
