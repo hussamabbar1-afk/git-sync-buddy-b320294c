@@ -48,7 +48,7 @@ function ForgotPasswordPage() {
 
     setLoading(true);
     const { error: resetError } = await supabase.auth.resetPasswordForEmail(email.trim(), {
-      redirectTo: `${window.location.origin}/passwort-zuruecksetzen`,
+      redirectTo: `${getExternalOrigin()}/passwort-zuruecksetzen`,
     });
     setLoading(false);
 
