@@ -80,7 +80,8 @@ export const sendChatMessage = createServerFn({ method: "POST" })
         if (item && typeof item === "object") {
           const candidate = item as Record<string, unknown>;
           return ["message", "output", "text", "reply"].some(
-            (key) => typeof candidate[key] === "string" && candidate[key].toString().trim().length > 0,
+            (key) =>
+              typeof candidate[key] === "string" && candidate[key].toString().trim().length > 0,
           );
         }
         return false;
