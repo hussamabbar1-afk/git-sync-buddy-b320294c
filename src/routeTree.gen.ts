@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as PasswortVergessenRouteImport } from './routes/passwort-vergessen'
+import { Route as PasswortZuruecksetzenRouteImport } from './routes/passwort-zuruecksetzen'
 import { Route as RegistrierenRouteImport } from './routes/registrieren'
 import { Route as WidgetRouteImport } from './routes/widget'
 import { Route as AuthenticatedAngeboteRouteImport } from './routes/_authenticated/angebote'
@@ -40,6 +42,16 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PasswortVergessenRoute = PasswortVergessenRouteImport.update({
+  id: '/passwort-vergessen',
+  path: '/passwort-vergessen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PasswortZuruecksetzenRoute = PasswortZuruecksetzenRouteImport.update({
+  id: '/passwort-zuruecksetzen',
+  path: '/passwort-zuruecksetzen',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RegistrierenRoute = RegistrierenRouteImport.update({
@@ -126,6 +138,8 @@ const AuthenticatedUnternehmenRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/passwort-vergessen': typeof PasswortVergessenRoute
+  '/passwort-zuruecksetzen': typeof PasswortZuruecksetzenRoute
   '/registrieren': typeof RegistrierenRoute
   '/widget': typeof WidgetRoute
   '/angebote': typeof AuthenticatedAngeboteRoute
@@ -145,6 +159,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/passwort-vergessen': typeof PasswortVergessenRoute
+  '/passwort-zuruecksetzen': typeof PasswortZuruecksetzenRoute
   '/registrieren': typeof RegistrierenRoute
   '/widget': typeof WidgetRoute
   '/angebote': typeof AuthenticatedAngeboteRoute
@@ -166,6 +182,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/login': typeof LoginRoute
+  '/passwort-vergessen': typeof PasswortVergessenRoute
+  '/passwort-zuruecksetzen': typeof PasswortZuruecksetzenRoute
   '/registrieren': typeof RegistrierenRoute
   '/widget': typeof WidgetRoute
   '/_authenticated/angebote': typeof AuthenticatedAngeboteRoute
@@ -187,6 +205,8 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/login'
+    | '/passwort-vergessen'
+    | '/passwort-zuruecksetzen'
     | '/registrieren'
     | '/widget'
     | '/angebote'
@@ -206,6 +226,8 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/login'
+    | '/passwort-vergessen'
+    | '/passwort-zuruecksetzen'
     | '/registrieren'
     | '/widget'
     | '/angebote'
@@ -226,6 +248,8 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/login'
+    | '/passwort-vergessen'
+    | '/passwort-zuruecksetzen'
     | '/registrieren'
     | '/widget'
     | '/_authenticated/angebote'
@@ -247,6 +271,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   LoginRoute: typeof LoginRoute
+  PasswortVergessenRoute: typeof PasswortVergessenRoute
+  PasswortZuruecksetzenRoute: typeof PasswortZuruecksetzenRoute
   RegistrierenRoute: typeof RegistrierenRoute
   WidgetRoute: typeof WidgetRoute
 }
@@ -272,6 +298,20 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/passwort-vergessen': {
+      id: '/passwort-vergessen'
+      path: '/passwort-vergessen'
+      fullPath: '/passwort-vergessen'
+      preLoaderRoute: typeof PasswortVergessenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/passwort-zuruecksetzen': {
+      id: '/passwort-zuruecksetzen'
+      path: '/passwort-zuruecksetzen'
+      fullPath: '/passwort-zuruecksetzen'
+      preLoaderRoute: typeof PasswortZuruecksetzenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/registrieren': {
@@ -421,6 +461,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   LoginRoute: LoginRoute,
+  PasswortVergessenRoute: PasswortVergessenRoute,
+  PasswortZuruecksetzenRoute: PasswortZuruecksetzenRoute,
   RegistrierenRoute: RegistrierenRoute,
   WidgetRoute: WidgetRoute,
 }
