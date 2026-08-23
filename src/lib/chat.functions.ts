@@ -82,13 +82,23 @@ export const sendChatMessage = createServerFn({ method: "POST" })
 
     const responseBody = payload as {
       message?: unknown;
+      output?: unknown;
+      text?: unknown;
+      reply?: unknown;
       conversation_id?: unknown;
       assistant_message_id?: unknown;
       language?: unknown;
     };
 
+    const messageText = [
+      responseBody.message,
+      responseBody.output,
+      responseBody.text,
+      responseBody.reply,
+    ].find((value) => typeof value === "string" && value.trim());
+
     return {
-      message: typeof responseBody.message === "string" ? responseBody.message : "",
+      message: typeof messageText === "string" ? messageText : "",
       conversation_id:
         typeof responseBody.conversation_id === "string" ? responseBody.conversation_id : null,
       // Present from prepared v11 onwards; live v3 omits these.
