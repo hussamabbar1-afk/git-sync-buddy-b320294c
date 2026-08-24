@@ -118,6 +118,12 @@ export function AiKnowledgeCard({
     void load();
   }, [load]);
 
+  useEffect(() => {
+    const refreshGaps = () => void load();
+    window.addEventListener("handwerkai:knowledge-gap-updated", refreshGaps);
+    return () => window.removeEventListener("handwerkai:knowledge-gap-updated", refreshGaps);
+  }, [load]);
+
   const resetKnowledge = () => {
     setKnowledgeId(null);
     setKnowledgeForm(emptyKnowledge);

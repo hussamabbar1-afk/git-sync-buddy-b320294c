@@ -247,6 +247,7 @@ export function WidgetSettingsCard({
 
   const scriptTag = embed?.script_tag ?? null;
   const published = Boolean(embed?.public_widget_base_url);
+  const securityReady = Boolean(security?.enabled && security.allowed_origins.length > 0);
 
   if (loading) {
     return (
@@ -287,8 +288,8 @@ export function WidgetSettingsCard({
           <Badge variant={settings?.enabled ? "secondary" : "outline"}>
             {settings?.enabled ? "Widget aktiviert" : "Widget deaktiviert"}
           </Badge>
-          <Badge variant={security?.enabled ? "secondary" : "outline"}>
-            {security?.enabled ? "Sicherheitsfreigabe aktiv" : "Sicherheitsfreigabe gesperrt"}
+          <Badge variant={securityReady ? "secondary" : "outline"}>
+            {securityReady ? "Domainfreigabe aktiv" : "Domainfreigabe fehlt"}
           </Badge>
           <Badge variant={published ? "secondary" : "outline"}>
             {published ? "Veröffentlicht" : "Noch nicht veröffentlicht"}
@@ -449,8 +450,8 @@ export function WidgetSettingsCard({
               </p>
               {!allowedOrigins.trim() ? (
                 <p className="flex items-start gap-2 rounded-md border border-amber-500/40 bg-amber-500/10 p-3 text-xs text-amber-800 dark:text-amber-200">
-                  <AlertTriangle className="mt-0.5 size-4 shrink-0" /> Ohne Domain-Liste ist das
-                  Widget für alle Websites freigegeben. Tragen Sie vor der Veröffentlichung die
+                  <AlertTriangle className="mt-0.5 size-4 shrink-0" /> Ohne Domain-Liste bleibt
+                  das Widget serverseitig gesperrt. Tragen Sie vor der Veröffentlichung die
                   produktiven Kundendomains ein.
                 </p>
               ) : null}
@@ -531,7 +532,7 @@ export function WidgetSettingsCard({
           </div>
         ) : null}
 
-        {embed?.widget_key ? (
+        {embed?.widget_key && securityReady ? (
           <div className="space-y-2">
             <p className="flex items-center gap-2 text-sm font-medium">
               <Code2 className="size-4" /> Testchat
@@ -539,9 +540,18 @@ export function WidgetSettingsCard({
             <ChatWidget
               widgetKey={embed.widget_key}
               welcomeMessage={welcomeMessage ?? null}
+              metadata={{
+                origin: security!.allowed_origins[0]!,
+                client_id: `dashboard-test-${agentId}`,
+              }}
               maxMessageLength={security?.max_message_length ?? 4000}
             />
           </div>
+        ) : embed?.widget_key ? (
+          <p className="rounded-md border bg-muted/40 p-3 text-xs text-muted-foreground">
+            Der Testchat wird verfügbar, sobald mindestens eine erlaubte Website-Domain
+            gespeichert ist.
+          </p>
         ) : null}
       </CardContent>
     </Card>

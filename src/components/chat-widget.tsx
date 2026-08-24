@@ -124,6 +124,9 @@ export function ChatWidget({
         }),
       });
       if (!res.ok) throw new Error("feedback failed");
+      if (rating === -1 && typeof window !== "undefined") {
+        window.dispatchEvent(new CustomEvent("handwerkai:knowledge-gap-updated"));
+      }
     } catch {
       setMessages((m) => m.map((item, i) => (i === index ? { ...item, rating: previous } : item)));
     }
