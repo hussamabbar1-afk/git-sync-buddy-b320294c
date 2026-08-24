@@ -3,7 +3,7 @@ import { Loader2, Send, ThumbsDown, ThumbsUp } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { SUPABASE_FUNCTIONS_URL } from "@/lib/supabase-urls";
 import { sendChatMessage } from "@/lib/chat.functions";
 
@@ -34,10 +34,12 @@ export function ChatWidget({
   widgetKey,
   welcomeMessage,
   metadata,
+  maxMessageLength = 4000,
 }: {
   widgetKey: string;
   welcomeMessage?: string | null;
   metadata?: ChatMetadata;
+  maxMessageLength?: number;
 }) {
   const send = useServerFn(sendChatMessage);
   const [input, setInput] = useState("");
@@ -59,6 +61,12 @@ export function ChatWidget({
   const handleSend = async () => {
     const text = input.trim();
     if (!text || pending) return;
+    if (text.length > maxMessageLength) {
+      setError(
+        `Die Nachricht darf höchstens ${maxMessageLength.toLocaleString("de-DE")} Zeichen enthalten.`,
+      );
+      return;
+    }
 
     setError(null);
     setPending(true);
@@ -176,22 +184,30 @@ export function ChatWidget({
 
       {error ? <p className="border-t px-3 py-2 text-xs text-destructive">{error}</p> : null}
 
-      <div className="flex gap-2 border-t p-2">
-        <Input
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && !e.shiftKey) {
-              e.preventDefault();
-              void handleSend();
-            }
-          }}
-          placeholder="Nachricht schreiben"
-          disabled={pending}
-        />
-        <Button onClick={() => void handleSend()} disabled={pending || !input.trim()}>
-          {pending ? <Loader2 className="size-4 animate-spin" /> : <Send className="size-4" />}
-        </Button>
+      <div className="border-t p-2">
+        <div className="flex items-end gap-2">
+          <Textarea
+            rows={2}
+            maxLength={maxMessageLength}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                void handleSend();
+              }
+            }}
+            placeholder="Nachricht schreiben"
+            disabled={pending}
+            aria-describedby="chat-character-count"
+          />
+          <Button onClick={() => void handleSend()} disabled={pending || !input.trim()}>
+            {pending ? <Loader2 className="size-4 animate-spin" /> : <Send className="size-4" />}
+          </Button>
+        </div>
+        <p id="chat-character-count" className="mt-1 text-right text-[10px] text-muted-foreground">
+          {input.length.toLocaleString("de-DE")} / {maxMessageLength.toLocaleString("de-DE")}
+        </p>
       </div>
     </div>
   );

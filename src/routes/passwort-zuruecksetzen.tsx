@@ -9,7 +9,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { germanAuthError } from "@/lib/auth-errors";
 
 export const Route = createFileRoute("/passwort-zuruecksetzen")({
-  ssr: false,
   head: () => ({
     meta: [
       { title: "Neues Passwort festlegen – HandwerkAI" },

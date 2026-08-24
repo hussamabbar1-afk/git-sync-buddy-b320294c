@@ -3,12 +3,12 @@ import { z } from "zod";
 
 const FALLBACK_CHAT_ENDPOINT = "https://mohamad-alabar.app.n8n.cloud/webhook/chat";
 
-const optionalText = z.string().min(1).max(2000).optional();
+const optionalText = z.string().trim().min(1).max(2000).optional();
 
 const schema = z.object({
-  widget_key: z.string().min(1),
-  message: z.string().min(1),
-  conversation_id: z.string().min(1).optional(),
+  widget_key: z.string().uuid(),
+  message: z.string().trim().min(1).max(20_000),
+  conversation_id: z.string().uuid().optional(),
   // Optional host-page metadata captured by widget-loader v2.
   client_id: optionalText,
   origin: optionalText,
@@ -36,7 +36,7 @@ const metadataKeys = [
 ] as const;
 
 export const sendChatMessage = createServerFn({ method: "POST" })
-  .inputValidator((data: unknown) => schema.parse(data))
+  .validator((data: unknown) => schema.parse(data))
   .handler(async ({ data }) => {
     const endpoint = process.env["N8N_CHAT_ENDPOINT"] || FALLBACK_CHAT_ENDPOINT;
 

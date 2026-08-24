@@ -64,6 +64,7 @@ type WidgetConfig = {
   primary_color?: string;
   launcher_label?: string;
   show_branding?: boolean;
+  max_message_length?: number;
 };
 
 function WidgetPage() {
@@ -158,6 +159,7 @@ function WidgetPage() {
               widgetKey={widgetKey as string}
               welcomeMessage={config?.welcome_message ?? null}
               metadata={metadata}
+              maxMessageLength={config?.max_message_length ?? 4000}
             />
           </div>
           {config?.show_branding ? (

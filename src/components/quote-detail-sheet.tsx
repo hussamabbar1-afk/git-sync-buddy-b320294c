@@ -1,4 +1,4 @@
-import { Download, Loader2, Plus, Printer, Trash2 } from "lucide-react";
+import { Download, Loader2, Mail, Plus, Printer, Trash2 } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
 import { Badge } from "@/components/ui/badge";
@@ -38,6 +38,7 @@ import {
 } from "@/lib/crm";
 import { downloadPdfBlob, printPdfBlob } from "@/lib/pdf/business-document";
 import { buildQuotePdf, loadPdfCompany } from "@/lib/pdf/documents";
+import { sendBusinessDocumentEmail } from "@/lib/business-document-email";
 
 const QUOTE_COLUMNS =
   "id, company_id, quote_number, status, customer_name, phone, email, address, postal_code, currency, valid_until, notes, subtotal_cents, tax_cents, total_cents, sent_at, accepted_at, rejected_at, created_at, updated_at, customer_id, lead_id";
@@ -177,6 +178,10 @@ export function QuoteDetailSheet({
   const [statusError, setStatusError] = useState<string | null>(null);
   const [pdfBusy, setPdfBusy] = useState(false);
   const [pdfError, setPdfError] = useState<string | null>(null);
+  const [sendBusy, setSendBusy] = useState(false);
+  const [sendConfirm, setSendConfirm] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
+  const [sendSuccess, setSendSuccess] = useState(false);
 
   const load = useCallback(async () => {
     if (!quoteId || !companyId) return null;
@@ -225,6 +230,10 @@ export function QuoteDetailSheet({
       setStatusTarget(null);
       setDraft(emptyDraft);
       setPdfError(null);
+      setSendBusy(false);
+      setSendConfirm(false);
+      setSendError(null);
+      setSendSuccess(false);
       setQuote(null);
       setForm(null);
       setItems([]);
@@ -302,6 +311,12 @@ export function QuoteDetailSheet({
   function requestStatus(next: string) {
     if (!quote || next === quote.status || locked) return;
     setStatusError(null);
+    if (next === "sent") {
+      setStatusError(
+        "Der Status „Gesendet“ wird ausschließlich nach erfolgreichem E-Mail-Versand gesetzt.",
+      );
+      return;
+    }
     if (consequentialStatuses.has(next)) {
       setStatusTarget(next);
       return;
@@ -362,6 +377,29 @@ export function QuoteDetailSheet({
     onChanged?.();
   }
 
+  async function handleSendEmail() {
+    if (!quote || quote.status !== "draft") return;
+    setSendError(null);
+    setSendSuccess(false);
+    setSendBusy(true);
+
+    try {
+      await sendBusinessDocumentEmail("quote", quote.id);
+      await load();
+      setSendConfirm(false);
+      setSendSuccess(true);
+      onChanged?.();
+    } catch (sendEmailError) {
+      setSendError(
+        sendEmailError instanceof Error
+          ? sendEmailError.message
+          : "Die E-Mail konnte nicht gesendet werden.",
+      );
+    } finally {
+      setSendBusy(false);
+    }
+  }
+
   async function handleDeleteItem(itemId: string) {
     setItemError(null);
     setItemBusy(true);
@@ -393,6 +431,10 @@ export function QuoteDetailSheet({
   }
 
   const locked = quote ? ["accepted", "cancelled"].includes(quote.status) : false;
+  const hasUnsavedChanges = Boolean(
+    quote && form && JSON.stringify(form) !== JSON.stringify(toForm(quote)),
+  );
+  const hasZeroTotal = (quote?.total_cents ?? 0) <= 0;
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
@@ -457,6 +499,45 @@ export function QuoteDetailSheet({
 
               <div className="space-y-3">
                 <h3 className="text-sm font-semibold">Status ändern</h3>
+                {quote.status === "draft" ? (
+                  <div className="flex flex-col items-start gap-1">
+                    <Button
+                      size="sm"
+                      disabled={
+                        sendBusy ||
+                        statusBusy ||
+                        hasZeroTotal ||
+                        !quote.email ||
+                        hasUnsavedChanges ||
+                        items.length === 0
+                      }
+                      onClick={() => {
+                        setSendError(null);
+                        setSendSuccess(false);
+                        setSendConfirm(true);
+                      }}
+                    >
+                      <Mail className="size-4" />
+                      Per E-Mail senden
+                    </Button>
+                    {hasZeroTotal || items.length === 0 ? (
+                      <p className="text-xs text-muted-foreground">
+                        Bitte zuerst mindestens eine Position mit einem Gesamtbetrag über 0,00 €
+                        hinzufügen.
+                      </p>
+                    ) : null}
+                    {!quote.email ? (
+                      <p className="text-xs text-muted-foreground">
+                        Bitte zuerst eine gültige Kunden-E-Mail speichern.
+                      </p>
+                    ) : null}
+                    {hasUnsavedChanges ? (
+                      <p className="text-xs text-muted-foreground">
+                        Bitte die Änderungen vor dem Versand speichern.
+                      </p>
+                    ) : null}
+                  </div>
+                ) : null}
                 <Select
                   value={quote.status}
                   onValueChange={requestStatus}
@@ -466,17 +547,49 @@ export function QuoteDetailSheet({
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    {quoteStatusOptions.map((status) => (
-                      <SelectItem key={status} value={status}>
-                        {quoteStatusLabel(status)}
-                      </SelectItem>
-                    ))}
+                    {quoteStatusOptions
+                      .filter((status) => status !== "sent" || quote.status === "sent")
+                      .map((status) => (
+                        <SelectItem key={status} value={status}>
+                          {quoteStatusLabel(status)}
+                        </SelectItem>
+                      ))}
                   </SelectContent>
                 </Select>
                 {locked ? (
                   <p className="text-xs text-muted-foreground">
                     Angenommene oder stornierte Angebote können nicht mehr umgestellt werden.
                   </p>
+                ) : null}
+
+                {sendConfirm ? (
+                  <div className="rounded-md border border-dashed p-3 text-sm">
+                    <p className="font-medium">Angebot jetzt per E-Mail senden?</p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      Das Angebot wird mit dem aktuellen PDF an {quote.email} gesendet. Erst nach
+                      erfolgreicher Zustellung an Brevo wird der Status auf „Gesendet“ gesetzt.
+                    </p>
+                    <div className="mt-3 flex gap-2">
+                      <Button size="sm" disabled={sendBusy} onClick={() => void handleSendEmail()}>
+                        {sendBusy ? (
+                          <>
+                            <Loader2 className="size-4 animate-spin" />
+                            Wird gesendet …
+                          </>
+                        ) : (
+                          "Jetzt senden"
+                        )}
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        disabled={sendBusy}
+                        onClick={() => setSendConfirm(false)}
+                      >
+                        Abbrechen
+                      </Button>
+                    </div>
+                  </div>
                 ) : null}
 
                 {statusTarget ? (
@@ -506,6 +619,10 @@ export function QuoteDetailSheet({
                 ) : null}
 
                 {statusError ? <p className="text-xs text-destructive">{statusError}</p> : null}
+                {sendError ? <p className="text-xs text-destructive">{sendError}</p> : null}
+                {sendSuccess ? (
+                  <p className="text-xs text-emerald-700">Das Angebot wurde per E-Mail gesendet.</p>
+                ) : null}
               </div>
 
               <Separator />

@@ -1,4 +1,4 @@
-import { Download, Loader2, Plus, Printer, Trash2 } from "lucide-react";
+import { Download, Loader2, Mail, Plus, Printer, Trash2 } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
 import { Badge } from "@/components/ui/badge";
@@ -41,6 +41,7 @@ import {
 } from "@/lib/crm";
 import { downloadPdfBlob, printPdfBlob } from "@/lib/pdf/business-document";
 import { buildInvoicePdf, loadPdfCompany } from "@/lib/pdf/documents";
+import { sendBusinessDocumentEmail } from "@/lib/business-document-email";
 
 const INVOICE_COLUMNS =
   "id, company_id, invoice_number, status, customer_name, phone, email, address, postal_code, currency, issue_date, due_date, payment_reference, notes, subtotal_cents, tax_cents, total_cents, paid_cents, balance_cents, sent_at, paid_at, cancelled_at, created_at, updated_at, customer_id, lead_id, quote_id, job_id";
@@ -208,6 +209,10 @@ export function InvoiceDetailSheet({
   const [jobCompletedAt, setJobCompletedAt] = useState<string | null>(null);
   const [pdfBusy, setPdfBusy] = useState(false);
   const [pdfError, setPdfError] = useState<string | null>(null);
+  const [sendBusy, setSendBusy] = useState(false);
+  const [sendConfirm, setSendConfirm] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
+  const [sendSuccess, setSendSuccess] = useState(false);
   const [form, setForm] = useState<FormState | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -314,6 +319,10 @@ export function InvoiceDetailSheet({
       setJobNumber(null);
       setJobCompletedAt(null);
       setPdfError(null);
+      setSendBusy(false);
+      setSendConfirm(false);
+      setSendError(null);
+      setSendSuccess(false);
       await load();
       if (!cancelled) setLoading(false);
     }
@@ -333,6 +342,9 @@ export function InvoiceDetailSheet({
   const canPay = invoice ? ["sent", "overdue"].includes(invoice.status) : false;
   const isFinal = invoice ? ["paid", "cancelled"].includes(invoice.status) : false;
   const hasZeroTotal = (invoice?.total_cents ?? 0) <= 0;
+  const hasUnsavedChanges = Boolean(
+    invoice && form && JSON.stringify(form) !== JSON.stringify(toForm(invoice)),
+  );
 
   const parsedPaymentAmount = euroInputToCents(paymentDraft.amount);
   const paymentExceedsBalance =
@@ -378,14 +390,6 @@ export function InvoiceDetailSheet({
     if (!invoice || !companyId) return;
     setStatusError(null);
 
-    if (next === "sent" && invoice.total_cents <= 0) {
-      setStatusTarget(null);
-      setStatusError(
-        "Diese Rechnung hat einen Gesamtbetrag von 0,00 €. Bitte fügen Sie zuerst Positionen hinzu, bevor Sie sie als gesendet markieren.",
-      );
-      return;
-    }
-
     setStatusBusy(true);
 
     const { error: statusUpdateError } = await supabase
@@ -404,6 +408,29 @@ export function InvoiceDetailSheet({
     setStatusBusy(false);
     setStatusTarget(null);
     onChanged?.();
+  }
+
+  async function handleSendEmail() {
+    if (!invoice || !isDraft) return;
+    setSendError(null);
+    setSendSuccess(false);
+    setSendBusy(true);
+
+    try {
+      await sendBusinessDocumentEmail("invoice", invoice.id);
+      await load();
+      setSendConfirm(false);
+      setSendSuccess(true);
+      onChanged?.();
+    } catch (sendEmailError) {
+      setSendError(
+        sendEmailError instanceof Error
+          ? sendEmailError.message
+          : "Die E-Mail konnte nicht gesendet werden.",
+      );
+    } finally {
+      setSendBusy(false);
+    }
   }
 
   async function handleAddItem() {
@@ -638,18 +665,37 @@ export function InvoiceDetailSheet({
                       <div className="flex flex-col gap-1">
                         <Button
                           size="sm"
-                          disabled={statusBusy || hasZeroTotal}
+                          disabled={
+                            sendBusy ||
+                            statusBusy ||
+                            hasZeroTotal ||
+                            !invoice.email ||
+                            hasUnsavedChanges ||
+                            items.length === 0
+                          }
                           onClick={() => {
-                            setStatusError(null);
-                            setStatusTarget("sent");
+                            setSendError(null);
+                            setSendSuccess(false);
+                            setSendConfirm(true);
                           }}
                         >
-                          Als gesendet markieren
+                          <Mail className="size-4" />
+                          Per E-Mail senden
                         </Button>
                         {hasZeroTotal ? (
                           <p className="text-xs text-muted-foreground">
                             Rechnungen mit 0,00 € Gesamtbetrag können nicht gesendet werden. Bitte
                             zuerst Positionen hinzufügen.
+                          </p>
+                        ) : null}
+                        {!invoice.email ? (
+                          <p className="text-xs text-muted-foreground">
+                            Bitte zuerst eine gültige Kunden-E-Mail speichern.
+                          </p>
+                        ) : null}
+                        {hasUnsavedChanges ? (
+                          <p className="text-xs text-muted-foreground">
+                            Bitte die Änderungen vor dem Versand speichern.
                           </p>
                         ) : null}
                       </div>
@@ -671,15 +717,43 @@ export function InvoiceDetailSheet({
                   </div>
                 )}
 
+                {sendConfirm ? (
+                  <div className="rounded-md border border-dashed p-3 text-sm">
+                    <p className="font-medium">Rechnung jetzt per E-Mail senden?</p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      Die Rechnung wird mit dem aktuellen PDF an {invoice.email} gesendet. Erst nach
+                      erfolgreicher Zustellung an Brevo wird der Status auf „Gesendet“ gesetzt.
+                    </p>
+                    <div className="mt-3 flex gap-2">
+                      <Button size="sm" disabled={sendBusy} onClick={() => void handleSendEmail()}>
+                        {sendBusy ? (
+                          <>
+                            <Loader2 className="size-4 animate-spin" />
+                            Wird gesendet …
+                          </>
+                        ) : (
+                          "Jetzt senden"
+                        )}
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        disabled={sendBusy}
+                        onClick={() => setSendConfirm(false)}
+                      >
+                        Abbrechen
+                      </Button>
+                    </div>
+                  </div>
+                ) : null}
+
                 {statusTarget ? (
                   <div className="rounded-md border border-dashed p-3 text-sm">
                     <p className="font-medium">
                       Status auf „{invoiceStatusLabel(statusTarget)}“ setzen?
                     </p>
                     <p className="mt-1 text-xs text-muted-foreground">
-                      {statusTarget === "sent"
-                        ? "Die Rechnung wird als gesendet markiert und ist danach nicht mehr bearbeitbar. Es wird dabei keine E-Mail versendet."
-                        : "Stornierte Rechnungen sind endgültig abgeschlossen."}
+                      Stornierte Rechnungen sind endgültig abgeschlossen.
                     </p>
                     <div className="mt-3 flex gap-2">
                       <Button
@@ -702,6 +776,12 @@ export function InvoiceDetailSheet({
                 ) : null}
 
                 {statusError ? <p className="text-xs text-destructive">{statusError}</p> : null}
+                {sendError ? <p className="text-xs text-destructive">{sendError}</p> : null}
+                {sendSuccess ? (
+                  <p className="text-xs text-emerald-700">
+                    Die Rechnung wurde per E-Mail gesendet.
+                  </p>
+                ) : null}
               </div>
 
               <Separator />

@@ -1,4 +1,4 @@
-import { Check, Code2, Copy, Loader2 } from "lucide-react";
+import { AlertTriangle, Check, Code2, Copy, Loader2, ShieldCheck } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
 import { ChatWidget } from "@/components/chat-widget";
@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
 
 type EmbedInfo = {
@@ -52,20 +53,32 @@ type DisplaySettings = {
   mobile_fullscreen: boolean;
 };
 
+type SecuritySettings = {
+  enabled: boolean;
+  allowed_origins: string[];
+  hourly_request_limit: number;
+  max_message_length: number;
+};
+
 const platformLabels: Record<string, string> = {
   wordpress: "WordPress",
   wix: "Wix",
   jimdo: "Jimdo",
+  webflow: "Webflow",
+  shopify: "Shopify",
   custom: "Eigene Website",
   generic: "Allgemein",
+  unknown: "Unbekannt",
 };
 
 export function WidgetSettingsCard({
   agentId,
   welcomeMessage,
+  canManage,
 }: {
   agentId: string;
   welcomeMessage?: string | null;
+  canManage: boolean;
 }) {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -75,12 +88,14 @@ export function WidgetSettingsCard({
   const [embed, setEmbed] = useState<EmbedInfo | null>(null);
   const [installations, setInstallations] = useState<Installation[]>([]);
   const [settings, setSettings] = useState<DisplaySettings | null>(null);
+  const [security, setSecurity] = useState<SecuritySettings | null>(null);
+  const [allowedOrigins, setAllowedOrigins] = useState("");
 
   const load = useCallback(async () => {
     setLoading(true);
     setError(null);
 
-    const [embedRes, distRes, settingsRes] = await Promise.all([
+    const [embedRes, distRes, settingsRes, securityRes] = await Promise.all([
       supabase.rpc("get_widget_embed_info", { p_ai_agent_id: agentId }),
       supabase.rpc("get_widget_distribution_status"),
       supabase
@@ -90,10 +105,16 @@ export function WidgetSettingsCard({
         )
         .eq("ai_agent_id", agentId)
         .maybeSingle(),
+      supabase
+        .from("widget_security_settings")
+        .select("enabled, allowed_origins, hourly_request_limit, max_message_length")
+        .eq("ai_agent_id", agentId)
+        .maybeSingle(),
     ]);
 
-    if (embedRes.error) {
-      setError("Widget-Informationen konnten nicht geladen werden.");
+    const loadError = embedRes.error ?? distRes.error ?? settingsRes.error ?? securityRes.error;
+    if (loadError) {
+      setError(`Widget-Informationen konnten nicht geladen werden: ${loadError.message}`);
       setLoading(false);
       return;
     }
@@ -117,6 +138,18 @@ export function WidgetSettingsCard({
         : null,
     );
 
+    setSecurity(
+      securityRes.data
+        ? {
+            enabled: securityRes.data.enabled,
+            allowed_origins: securityRes.data.allowed_origins,
+            hourly_request_limit: securityRes.data.hourly_request_limit,
+            max_message_length: securityRes.data.max_message_length,
+          }
+        : null,
+    );
+    setAllowedOrigins((securityRes.data?.allowed_origins ?? []).join("\n"));
+
     setLoading(false);
   }, [agentId]);
 
@@ -127,33 +160,89 @@ export function WidgetSettingsCard({
   const set = <K extends keyof DisplaySettings>(key: K, value: DisplaySettings[K]) =>
     setSettings((s) => (s ? { ...s, [key]: value } : s));
 
+  const setSecurityValue = <K extends keyof SecuritySettings>(key: K, value: SecuritySettings[K]) =>
+    setSecurity((current) => (current ? { ...current, [key]: value } : current));
+
   const handleSave = async () => {
-    if (!settings || saving) return;
+    if (!settings || !security || saving || !canManage) return;
     setSaving(true);
     setError(null);
     setSuccess(null);
 
+    if (!/^#[0-9a-fA-F]{6}$/.test(settings.primary_color)) {
+      setSaving(false);
+      setError("Bitte geben Sie eine gültige Primärfarbe im Format #111827 ein.");
+      return;
+    }
+    if (!settings.launcher_label.trim() || settings.launcher_label.trim().length > 40) {
+      setSaving(false);
+      setError("Die Beschriftung muss zwischen 1 und 40 Zeichen lang sein.");
+      return;
+    }
+
+    const normalizedOrigins: string[] = [];
+    for (const raw of allowedOrigins
+      .split(/[\n,]/)
+      .map((value) => value.trim())
+      .filter(Boolean)) {
+      try {
+        const parsed = new URL(raw);
+        if (!["http:", "https:"].includes(parsed.protocol)) throw new Error("invalid protocol");
+        normalizedOrigins.push(parsed.origin.toLowerCase());
+      } catch {
+        setSaving(false);
+        setError(`Ungültige erlaubte Domain: ${raw}. Bitte mit https:// oder http:// angeben.`);
+        return;
+      }
+    }
+    const uniqueOrigins = Array.from(new Set(normalizedOrigins));
+    if (
+      security.hourly_request_limit < 10 ||
+      security.hourly_request_limit > 5000 ||
+      security.max_message_length < 100 ||
+      security.max_message_length > 20_000
+    ) {
+      setSaving(false);
+      setError(
+        "Rate-Limit oder maximale Nachrichtenlänge liegt außerhalb des zulässigen Bereichs.",
+      );
+      return;
+    }
+
     // Only display fields are written; company_id, ai_agent_id, widget_key and
     // public_widget_base_url are never editable from the frontend.
-    const { error: updateError } = await supabase
-      .from("widget_display_settings")
-      .update({
-        enabled: settings.enabled,
-        position: settings.position,
-        primary_color: settings.primary_color,
-        launcher_label: settings.launcher_label,
-        show_branding: settings.show_branding,
-        mobile_fullscreen: settings.mobile_fullscreen,
-
-      })
-      .eq("ai_agent_id", agentId);
+    const [displayUpdate, securityUpdate] = await Promise.all([
+      supabase
+        .from("widget_display_settings")
+        .update({
+          enabled: settings.enabled,
+          position: settings.position,
+          primary_color: settings.primary_color,
+          launcher_label: settings.launcher_label.trim(),
+          show_branding: settings.show_branding,
+          mobile_fullscreen: settings.mobile_fullscreen,
+        })
+        .eq("ai_agent_id", agentId),
+      supabase
+        .from("widget_security_settings")
+        .update({
+          enabled: security.enabled,
+          allowed_origins: uniqueOrigins,
+          hourly_request_limit: security.hourly_request_limit,
+          max_message_length: security.max_message_length,
+        })
+        .eq("ai_agent_id", agentId),
+    ]);
 
     setSaving(false);
+    const updateError = displayUpdate.error ?? securityUpdate.error;
     if (updateError) {
       setError(`Speichern fehlgeschlagen: ${updateError.message}`);
       return;
     }
-    setSuccess("Widget-Einstellungen gespeichert.");
+    setAllowedOrigins(uniqueOrigins.join("\n"));
+    setSecurity((current) => (current ? { ...current, allowed_origins: uniqueOrigins } : current));
+    setSuccess("Widget-Darstellung und Sicherheit gespeichert.");
   };
 
   const scriptTag = embed?.script_tag ?? null;
@@ -198,10 +287,20 @@ export function WidgetSettingsCard({
           <Badge variant={settings?.enabled ? "secondary" : "outline"}>
             {settings?.enabled ? "Widget aktiviert" : "Widget deaktiviert"}
           </Badge>
+          <Badge variant={security?.enabled ? "secondary" : "outline"}>
+            {security?.enabled ? "Sicherheitsfreigabe aktiv" : "Sicherheitsfreigabe gesperrt"}
+          </Badge>
           <Badge variant={published ? "secondary" : "outline"}>
             {published ? "Veröffentlicht" : "Noch nicht veröffentlicht"}
           </Badge>
         </div>
+
+        {!canManage ? (
+          <p className="rounded-md border bg-muted/40 p-3 text-xs text-muted-foreground">
+            Die Widget-Konfiguration ist schreibgeschützt. Änderungen sind Eigentümern und
+            Administratoren vorbehalten.
+          </p>
+        ) : null}
 
         <div className="space-y-2">
           <Label className="text-xs text-muted-foreground">Widget-Schlüssel</Label>
@@ -310,16 +409,91 @@ export function WidgetSettingsCard({
               />
             </div>
 
-            <div className="sm:col-span-2">
-              <Button onClick={() => void handleSave()} disabled={saving}>
-                {saving ? <Loader2 className="size-4 animate-spin" /> : null}
-                Widget-Einstellungen speichern
-              </Button>
-            </div>
+            <div className="sm:col-span-2"></div>
           </div>
         ) : (
           <p className="rounded-md border bg-muted/40 p-3 text-xs text-muted-foreground">
             Für diesen KI-Mitarbeiter sind noch keine Widget-Darstellungseinstellungen hinterlegt.
+          </p>
+        )}
+
+        {security ? (
+          <div className="space-y-4 rounded-md border p-4">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="flex items-center gap-2 text-sm font-medium">
+                  <ShieldCheck className="size-4" /> Missbrauchsschutz
+                </p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Die serverseitige Sicherheitsprüfung läuft vor jeder Chat-Anfrage.
+                </p>
+              </div>
+              <Switch
+                checked={security.enabled}
+                onCheckedChange={(value) => setSecurityValue("enabled", value)}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="widget-origins">Erlaubte Website-Domains</Label>
+              <Textarea
+                id="widget-origins"
+                rows={4}
+                value={allowedOrigins}
+                onChange={(event) => setAllowedOrigins(event.target.value)}
+                placeholder={"https://www.mein-betrieb.de\nhttps://mein-betrieb.de"}
+              />
+              <p className="text-xs text-muted-foreground">
+                Eine Origin pro Zeile, einschließlich https://. Pfade werden beim Speichern
+                entfernt.
+              </p>
+              {!allowedOrigins.trim() ? (
+                <p className="flex items-start gap-2 rounded-md border border-amber-500/40 bg-amber-500/10 p-3 text-xs text-amber-800 dark:text-amber-200">
+                  <AlertTriangle className="mt-0.5 size-4 shrink-0" /> Ohne Domain-Liste ist das
+                  Widget für alle Websites freigegeben. Tragen Sie vor der Veröffentlichung die
+                  produktiven Kundendomains ein.
+                </p>
+              ) : null}
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-2">
+              <div className="space-y-2">
+                <Label htmlFor="widget-hourly-limit">Anfragen pro Besucher und Stunde</Label>
+                <Input
+                  id="widget-hourly-limit"
+                  type="number"
+                  min={10}
+                  max={5000}
+                  value={security.hourly_request_limit}
+                  onChange={(event) =>
+                    setSecurityValue("hourly_request_limit", Number(event.target.value))
+                  }
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="widget-max-length">Maximale Nachrichtenlänge</Label>
+                <Input
+                  id="widget-max-length"
+                  type="number"
+                  min={100}
+                  max={20_000}
+                  value={security.max_message_length}
+                  onChange={(event) =>
+                    setSecurityValue("max_message_length", Number(event.target.value))
+                  }
+                />
+              </div>
+            </div>
+
+            <Button onClick={() => void handleSave()} disabled={saving || !canManage}>
+              {saving ? <Loader2 className="size-4 animate-spin" /> : null}
+              Widget-Darstellung und Sicherheit speichern
+            </Button>
+          </div>
+        ) : (
+          <p className="rounded-md border border-destructive/40 bg-destructive/10 p-3 text-xs text-destructive">
+            Sicherheitskonfiguration fehlt. Bitte den Support kontaktieren, bevor das Widget
+            veröffentlicht wird.
           </p>
         )}
 
@@ -362,7 +536,11 @@ export function WidgetSettingsCard({
             <p className="flex items-center gap-2 text-sm font-medium">
               <Code2 className="size-4" /> Testchat
             </p>
-            <ChatWidget widgetKey={embed.widget_key} welcomeMessage={welcomeMessage ?? null} />
+            <ChatWidget
+              widgetKey={embed.widget_key}
+              welcomeMessage={welcomeMessage ?? null}
+              maxMessageLength={security?.max_message_length ?? 4000}
+            />
           </div>
         ) : null}
       </CardContent>

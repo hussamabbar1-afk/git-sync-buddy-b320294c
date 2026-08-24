@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "lib": ["deno.window", "deno.ns", "dom", "esnext"],
+    "strict": true
+  },
+  "imports": {
+    "@supabase/server": "npm:@supabase/server@1.4.1",
+    "jspdf": "npm:jspdf@4.2.1",
+    "jspdf-autotable": "npm:jspdf-autotable@5.0.8"
+  }
+}

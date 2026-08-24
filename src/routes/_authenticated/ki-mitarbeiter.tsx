@@ -1,10 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Bot, Check, Globe, Loader2 } from "lucide-react";
+import { Bot, Check, Clock3, Globe, Languages, Loader2, ShieldCheck } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import { AiKnowledgeCard } from "@/components/ai-knowledge-card";
 import { AppShell, PageHeader } from "@/components/app-shell";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -39,10 +41,19 @@ export const Route = createFileRoute("/_authenticated/ki-mitarbeiter")({
 });
 
 const capabilities = [
-  { title: "Anfragen entgegennehmen", description: "Rund um die Uhr, auch außerhalb der Öffnungszeiten." },
-  { title: "Anliegen qualifizieren", description: "Art der Störung, Dringlichkeit und Objektdaten erfassen." },
+  {
+    title: "Anfragen entgegennehmen",
+    description: "Rund um die Uhr, auch außerhalb der Öffnungszeiten.",
+  },
+  {
+    title: "Anliegen qualifizieren",
+    description: "Art der Störung, Dringlichkeit und Objektdaten erfassen.",
+  },
   { title: "Terminwunsch aufnehmen", description: "Wunschtermine sammeln und im Lead vermerken." },
-  { title: "Notfälle erkennen", description: "Bei Wasserschaden oder Gasgeruch an das Büro übergeben." },
+  {
+    title: "Notfälle erkennen",
+    description: "Bei Wasserschaden oder Gasgeruch an das Büro übergeben.",
+  },
 ];
 
 type AgentForm = {
@@ -54,6 +65,10 @@ type AgentForm = {
   welcome_message: string;
   fallback_message: string;
   human_handoff_enabled: boolean;
+  supported_languages: string[];
+  auto_detect_language: boolean;
+  staff_summary_language: string;
+  translate_staff_summary: boolean;
 };
 
 const emptyForm: AgentForm = {
@@ -65,7 +80,24 @@ const emptyForm: AgentForm = {
   welcome_message: "",
   fallback_message: "",
   human_handoff_enabled: true,
+  supported_languages: ["de"],
+  auto_detect_language: true,
+  staff_summary_language: "de",
+  translate_staff_summary: true,
 };
+
+const languageOptions = [
+  ["de", "Deutsch"],
+  ["en", "Englisch"],
+  ["ar", "Arabisch"],
+  ["tr", "Türkisch"],
+  ["pl", "Polnisch"],
+  ["ru", "Russisch"],
+  ["uk", "Ukrainisch"],
+  ["fr", "Französisch"],
+  ["es", "Spanisch"],
+  ["it", "Italienisch"],
+] as const;
 
 function AiEmployeePage() {
   const [loading, setLoading] = useState(true);
@@ -73,6 +105,11 @@ function AiEmployeePage() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [noCompany, setNoCompany] = useState(false);
+  const [companyId, setCompanyId] = useState<string | null>(null);
+  const [canManage, setCanManage] = useState(false);
+  const [handoffSlaMinutes, setHandoffSlaMinutes] = useState(15);
+  const [companyTimezone, setCompanyTimezone] = useState("Europe/Berlin");
+  const [openingHoursCount, setOpeningHoursCount] = useState(0);
   const [agentId, setAgentId] = useState<string | null>(null);
   const [form, setForm] = useState<AgentForm>(emptyForm);
 
@@ -98,7 +135,7 @@ function AiEmployeePage() {
 
       const { data: profile, error: profileError } = await supabase
         .from("profiles")
-        .select("company_id")
+        .select("company_id, role")
         .eq("id", user.id)
         .maybeSingle();
 
@@ -116,19 +153,35 @@ function AiEmployeePage() {
         return;
       }
 
-      const { data: agent, error: agentError } = await supabase
-        .from("ai_agents")
-        .select("*")
-        .eq("company_id", profile.company_id)
-        .maybeSingle();
+      setCompanyId(profile.company_id);
+      setCanManage(profile.role === "owner" || profile.role === "admin");
+
+      const [agentRes, companyRes, hoursRes] = await Promise.all([
+        supabase.from("ai_agents").select("*").eq("company_id", profile.company_id).maybeSingle(),
+        supabase
+          .from("companies")
+          .select("handoff_sla_minutes, timezone")
+          .eq("id", profile.company_id)
+          .maybeSingle(),
+        supabase
+          .from("opening_hours")
+          .select("id", { count: "exact", head: true })
+          .eq("company_id", profile.company_id),
+      ]);
 
       if (cancelled) return;
 
-      if (agentError) {
-        setError(`Fehler beim Laden des KI-Mitarbeiters: ${agentError.message}`);
+      const loadError = agentRes.error ?? companyRes.error ?? hoursRes.error;
+      if (loadError) {
+        setError(`Fehler beim Laden des KI-Mitarbeiters: ${loadError.message}`);
         setLoading(false);
         return;
       }
+
+      const agent = agentRes.data;
+      setHandoffSlaMinutes(companyRes.data?.handoff_sla_minutes ?? 15);
+      setCompanyTimezone(companyRes.data?.timezone ?? "Europe/Berlin");
+      setOpeningHoursCount(hoursRes.count ?? 0);
 
       if (agent) {
         setAgentId(agent.id);
@@ -141,6 +194,10 @@ function AiEmployeePage() {
           welcome_message: agent.welcome_message ?? "",
           fallback_message: agent.fallback_message ?? "",
           human_handoff_enabled: agent.human_handoff_enabled ?? true,
+          supported_languages: agent.supported_languages ?? [agent.language ?? "de"],
+          auto_detect_language: agent.auto_detect_language ?? true,
+          staff_summary_language: agent.staff_summary_language ?? "de",
+          translate_staff_summary: agent.translate_staff_summary ?? true,
         });
       }
 
@@ -156,8 +213,27 @@ function AiEmployeePage() {
   const handleSave = async () => {
     if (saving) return;
 
+    if (!canManage || !companyId) {
+      setError("Nur Eigentümer und Administratoren können die KI-Konfiguration ändern.");
+      setSuccess(null);
+      return;
+    }
+
     if (!form.name.trim()) {
       setError("Bitte geben Sie einen Namen für den KI-Mitarbeiter ein.");
+      setSuccess(null);
+      return;
+    }
+
+    if (handoffSlaMinutes < 5 || handoffSlaMinutes > 1440) {
+      setError("Die Reaktionszeit für Übergaben muss zwischen 5 und 1.440 Minuten liegen.");
+      setSuccess(null);
+      return;
+    }
+
+    const supportedLanguages = Array.from(new Set([...form.supported_languages, form.language]));
+    if (!supportedLanguages.length || supportedLanguages.length > 20) {
+      setError("Bitte wählen Sie mindestens eine und höchstens 20 Kundensprachen.");
       setSuccess(null);
       return;
     }
@@ -166,54 +242,83 @@ function AiEmployeePage() {
     setSuccess(null);
     setSaving(true);
 
+    const agentPayload = {
+      name: form.name.trim(),
+      description: form.description.trim() || null,
+      is_active: form.is_active,
+      language: form.language,
+      response_style: form.response_style,
+      welcome_message: form.welcome_message.trim() || null,
+      fallback_message: form.fallback_message.trim() || null,
+      human_handoff_enabled: form.human_handoff_enabled,
+      supported_languages: supportedLanguages,
+      auto_detect_language: form.auto_detect_language,
+      staff_summary_language: form.staff_summary_language,
+      translate_staff_summary: form.translate_staff_summary,
+    };
+
     if (agentId) {
-      const { error: updateError } = await supabase
-        .from("ai_agents")
-        .update({
-          name: form.name.trim(),
-          description: form.description.trim() || null,
-          is_active: form.is_active,
-          language: form.language,
-          response_style: form.response_style,
-          welcome_message: form.welcome_message.trim() || null,
-          fallback_message: form.fallback_message.trim() || null,
-          human_handoff_enabled: form.human_handoff_enabled,
-          updated_at: new Date().toISOString(),
-        })
-        .eq("id", agentId);
+      const [agentUpdate, companyUpdate] = await Promise.all([
+        supabase.from("ai_agents").update(agentPayload).eq("id", agentId),
+        supabase
+          .from("companies")
+          .update({ handoff_sla_minutes: handoffSlaMinutes })
+          .eq("id", companyId),
+      ]);
 
       setSaving(false);
 
+      const updateError = agentUpdate.error ?? companyUpdate.error;
       if (updateError) {
         setError(`Fehler beim Speichern: ${updateError.message}`);
         return;
       }
 
+      setForm((current) => ({ ...current, supported_languages: supportedLanguages }));
       setSuccess("KI-Mitarbeiter erfolgreich gespeichert.");
       return;
     }
 
-    const { data, error: rpcError } = await supabase.rpc(
-      "create_ai_agent_for_current_company",
-      {
-        agent_name: form.name.trim(),
-        agent_description: form.description.trim(),
-        agent_language: form.language,
-        agent_response_style: form.response_style,
-        agent_welcome_message: form.welcome_message.trim(),
-        agent_fallback_message: form.fallback_message.trim(),
-        agent_human_handoff_enabled: form.human_handoff_enabled,
-      },
-    );
-
-    setSaving(false);
+    const { data, error: rpcError } = await supabase.rpc("create_ai_agent_for_current_company", {
+      agent_name: form.name.trim(),
+      agent_description: form.description.trim(),
+      agent_language: form.language,
+      agent_response_style: form.response_style,
+      agent_welcome_message: form.welcome_message.trim(),
+      agent_fallback_message: form.fallback_message.trim(),
+      agent_human_handoff_enabled: form.human_handoff_enabled,
+    });
 
     if (rpcError) {
+      setSaving(false);
       setError(`Fehler beim Anlegen: ${rpcError.message}`);
       return;
     }
 
-    if (typeof data === "string") setAgentId(data);
+    if (typeof data !== "string") {
+      setSaving(false);
+      setError("Der KI-Mitarbeiter wurde angelegt, aber die Kennung fehlt.");
+      return;
+    }
+
+    const [agentUpdate, companyUpdate] = await Promise.all([
+      supabase.from("ai_agents").update(agentPayload).eq("id", data),
+      supabase
+        .from("companies")
+        .update({ handoff_sla_minutes: handoffSlaMinutes })
+        .eq("id", companyId),
+    ]);
+    setSaving(false);
+    const updateError = agentUpdate.error ?? companyUpdate.error;
+    if (updateError) {
+      setError(
+        `KI-Mitarbeiter angelegt, Zusatzkonfiguration fehlgeschlagen: ${updateError.message}`,
+      );
+      return;
+    }
+
+    setAgentId(data);
+    setForm((current) => ({ ...current, supported_languages: supportedLanguages }));
     setSuccess("KI-Mitarbeiter erfolgreich gespeichert.");
   };
 
@@ -262,7 +367,7 @@ function AiEmployeePage() {
         title="KI-Mitarbeiter"
         description="Legen Sie fest, wie sich Ihr digitaler Mitarbeiter gegenüber Kunden verhält."
         action={
-          <Button onClick={handleSave} disabled={saving}>
+          <Button onClick={handleSave} disabled={saving || !canManage}>
             {saving ? <Loader2 className="size-4 animate-spin" /> : null}
             {agentId ? "Konfiguration speichern" : "KI-Mitarbeiter erstellen"}
           </Button>
@@ -284,6 +389,12 @@ function AiEmployeePage() {
           Sie haben noch keinen KI-Mitarbeiter. Füllen Sie die Felder aus und erstellen Sie ihn.
         </p>
       ) : null}
+      {!canManage ? (
+        <p className="mb-4 rounded-md border bg-muted/40 p-3 text-sm text-muted-foreground">
+          Die Konfiguration ist schreibgeschützt. Änderungen sind Eigentümern und Administratoren
+          vorbehalten.
+        </p>
+      ) : null}
 
       <div className="grid gap-4 lg:grid-cols-3">
         <Card className="lg:col-span-2">
@@ -303,10 +414,7 @@ function AiEmployeePage() {
             </div>
             <div className="space-y-2">
               <Label htmlFor="tone">Antwortstil</Label>
-              <Select
-                value={form.response_style}
-                onValueChange={(v) => set("response_style", v)}
-              >
+              <Select value={form.response_style} onValueChange={(v) => set("response_style", v)}>
                 <SelectTrigger id="tone">
                   <SelectValue />
                 </SelectTrigger>
@@ -371,10 +479,7 @@ function AiEmployeePage() {
                   {form.is_active ? "KI-Mitarbeiter aktiv" : "KI-Mitarbeiter inaktiv"}
                 </CardDescription>
               </div>
-              <Switch
-                checked={form.is_active}
-                onCheckedChange={(v) => set("is_active", v)}
-              />
+              <Switch checked={form.is_active} onCheckedChange={(v) => set("is_active", v)} />
             </CardHeader>
             <CardContent className="space-y-3 text-sm text-muted-foreground">
               <p className="flex items-center gap-2">
@@ -382,16 +487,18 @@ function AiEmployeePage() {
               </p>
               <div className="space-y-2">
                 <Label htmlFor="language" className="flex items-center gap-2 text-muted-foreground">
-                  <Globe className="size-4" /> Sprache
+                  <Globe className="size-4" /> Standardsprache
                 </Label>
                 <Select value={form.language} onValueChange={(v) => set("language", v)}>
                   <SelectTrigger id="language">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="de">Deutsch</SelectItem>
-                    <SelectItem value="en">Englisch</SelectItem>
-                    <SelectItem value="tr">Türkisch</SelectItem>
+                    {languageOptions.map(([value, label]) => (
+                      <SelectItem key={value} value={value}>
+                        {label}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               </div>
@@ -414,12 +521,136 @@ function AiEmployeePage() {
         </div>
       </div>
 
+      <div className="mt-4 grid gap-4 lg:grid-cols-2">
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-base">
+              <Languages className="size-4" /> Sprachen und Team-Zusammenfassung
+            </CardTitle>
+            <CardDescription>
+              Der Chat erkennt Kundensprachen automatisch und kann interne Zusammenfassungen auf
+              Deutsch bereitstellen.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="grid gap-2 sm:grid-cols-2">
+              {languageOptions.map(([value, label]) => {
+                const checked = form.supported_languages.includes(value);
+                return (
+                  <label
+                    key={value}
+                    className="flex items-center gap-2 rounded-md border p-3 text-sm"
+                  >
+                    <Checkbox
+                      checked={checked}
+                      onCheckedChange={(next) =>
+                        set(
+                          "supported_languages",
+                          next
+                            ? Array.from(new Set([...form.supported_languages, value]))
+                            : form.supported_languages.filter((language) => language !== value),
+                        )
+                      }
+                    />
+                    {label}
+                  </label>
+                );
+              })}
+            </div>
+            <div className="flex items-start justify-between gap-4 rounded-md border p-3">
+              <div>
+                <p className="text-sm font-medium">Kundensprache automatisch erkennen</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Antworten werden in einer unterstützten Sprache des Kunden erzeugt.
+                </p>
+              </div>
+              <Switch
+                checked={form.auto_detect_language}
+                onCheckedChange={(value) => set("auto_detect_language", value)}
+              />
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <div className="space-y-2">
+                <Label htmlFor="staff-language">Sprache für Mitarbeiter</Label>
+                <Select
+                  value={form.staff_summary_language}
+                  onValueChange={(value) => set("staff_summary_language", value)}
+                >
+                  <SelectTrigger id="staff-language">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {languageOptions.map(([value, label]) => (
+                      <SelectItem key={value} value={value}>
+                        {label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="flex items-center justify-between gap-3 rounded-md border p-3">
+                <Label>Team-Zusammenfassung übersetzen</Label>
+                <Switch
+                  checked={form.translate_staff_summary}
+                  onCheckedChange={(value) => set("translate_staff_summary", value)}
+                />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-base">
+              <ShieldCheck className="size-4" /> Übergabe und Betriebszeiten
+            </CardTitle>
+            <CardDescription>
+              Der Chat erhält Öffnungszeiten, Betriebsschließungen und Zeitzone automatisch aus den
+              Unternehmensdaten.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="handoff-sla">Ziel-Reaktionszeit bei Übergabe (Minuten)</Label>
+              <Input
+                id="handoff-sla"
+                type="number"
+                min={5}
+                max={1440}
+                value={handoffSlaMinutes}
+                onChange={(event) => setHandoffSlaMinutes(Number(event.target.value))}
+              />
+              <p className="text-xs text-muted-foreground">
+                Wird dem KI-Mitarbeiter als Erwartung für die menschliche Nachbearbeitung übergeben.
+              </p>
+            </div>
+            <div className="rounded-md border p-3 text-sm">
+              <p className="flex items-center gap-2 font-medium">
+                <Clock3 className="size-4" /> Öffnungszeiten im KI-Kontext
+              </p>
+              <p className="mt-2 text-muted-foreground">
+                {openingHoursCount >= 7
+                  ? `${openingHoursCount} Tagesregeln geladen · Zeitzone ${companyTimezone}`
+                  : `Nur ${openingHoursCount} Tagesregeln vorhanden · bitte Unternehmensdaten vervollständigen.`}
+              </p>
+              <Button asChild variant="outline" size="sm" className="mt-3">
+                <Link to="/unternehmen">Öffnungszeiten verwalten</Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
       {agentId ? (
-        <div className="mt-4">
-          <WidgetSettingsCard agentId={agentId} welcomeMessage={form.welcome_message} />
+        <div className="mt-4 space-y-4">
+          {companyId ? <AiKnowledgeCard companyId={companyId} canManage={canManage} /> : null}
+          <WidgetSettingsCard
+            agentId={agentId}
+            welcomeMessage={form.welcome_message}
+            canManage={canManage}
+          />
         </div>
       ) : null}
-
 
       <Card className="mt-4">
         <CardHeader>
