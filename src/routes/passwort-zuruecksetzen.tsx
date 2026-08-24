@@ -28,6 +28,18 @@ export const Route = createFileRoute("/passwort-zuruecksetzen")({
   component: ResetPasswordPage,
 });
 
+const PASSWORD_SYMBOLS = "!@#$%^&*()_+-=[]{};'\\:\"|<>?,./`~";
+
+function isStrongPassword(value: string) {
+  return (
+    value.length >= 8 &&
+    /[a-z]/.test(value) &&
+    /[A-Z]/.test(value) &&
+    /\d/.test(value) &&
+    [...value].some((character) => PASSWORD_SYMBOLS.includes(character))
+  );
+}
+
 type SessionState = "loading" | "ready" | "invalid";
 
 function ResetPasswordPage() {
@@ -70,8 +82,10 @@ function ResetPasswordPage() {
     if (loading) return;
     setError(null);
 
-    if (password.length < 6) {
-      setError("Das Passwort muss mindestens 6 Zeichen lang sein.");
+    if (!isStrongPassword(password)) {
+      setError(
+        "Das Passwort muss mindestens 8 Zeichen sowie Groß- und Kleinbuchstaben, eine Zahl und ein Sonderzeichen enthalten.",
+      );
       return;
     }
     if (password !== passwordConfirm) {
@@ -137,7 +151,8 @@ function ResetPasswordPage() {
           <>
             <h1 className="text-2xl font-semibold">Neues Passwort festlegen</h1>
             <p className="mt-2 text-sm text-muted-foreground">
-              Wählen Sie ein neues Passwort mit mindestens 6 Zeichen.
+              Verwenden Sie mindestens 8 Zeichen, Groß- und Kleinbuchstaben, eine Zahl und ein
+              Sonderzeichen.
             </p>
 
             <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
@@ -155,7 +170,7 @@ function ResetPasswordPage() {
                 <Input
                   id="password"
                   type="password"
-                  placeholder="Mindestens 6 Zeichen"
+                  placeholder="Mindestens 8 Zeichen"
                   autoComplete="new-password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}

@@ -6,9 +6,17 @@ export function germanAuthError(message?: string): string {
     return "Bitte bestätigen Sie zuerst Ihre E-Mail-Adresse über den Link in Ihrem Postfach.";
   if (m.includes("user already registered") || m.includes("already been registered"))
     return "Für diese E-Mail-Adresse existiert bereits ein Konto.";
-  if (m.includes("password should be at least"))
-    return "Das Passwort muss mindestens 6 Zeichen lang sein.";
-  if (m.includes("unable to validate email") || m.includes("invalid email") || m.includes("is invalid"))
+  if (
+    m.includes("password should be at least") ||
+    m.includes("password should contain") ||
+    m.includes("weak password")
+  )
+    return "Das Passwort muss mindestens 8 Zeichen sowie Groß- und Kleinbuchstaben, eine Zahl und ein Sonderzeichen enthalten.";
+  if (
+    m.includes("unable to validate email") ||
+    m.includes("invalid email") ||
+    m.includes("is invalid")
+  )
     return "Bitte geben Sie eine gültige E-Mail-Adresse ein.";
 
   if (m.includes("rate limit") || m.includes("too many"))
