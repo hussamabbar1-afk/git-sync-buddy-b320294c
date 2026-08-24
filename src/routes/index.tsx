@@ -6,25 +6,11 @@ export const Route = createFileRoute("/")({
   component: IndexRedirect,
 });
 
-function isRecoveryHash(hash: string): boolean {
-  const raw = hash.startsWith("#") ? hash.slice(1) : hash;
-  if (!raw) return false;
-  const params = new URLSearchParams(raw);
-  const type = params.get("type");
-  const hasTokenMarker =
-    Boolean(params.get("access_token")) || Boolean(params.get("refresh_token"));
-  return type === "recovery" && hasTokenMarker;
-}
-
 function IndexRedirect() {
   const navigate = useNavigate();
 
+  // Recovery links are handled by the pre-bootstrap script in __root.tsx.
   useEffect(() => {
-    const hash = window.location.hash;
-    if (isRecoveryHash(hash)) {
-      window.location.replace(`/passwort-zuruecksetzen${hash}`);
-      return;
-    }
     void navigate({ to: "/login", replace: true });
   }, [navigate]);
 
