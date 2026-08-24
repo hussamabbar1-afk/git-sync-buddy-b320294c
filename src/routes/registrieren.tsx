@@ -32,8 +32,11 @@ export const Route = createFileRoute("/registrieren")({
         content: "30 Tage, 99 € netto inklusive persönlicher Einrichtung, ohne Jahresvertrag.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://zunftecho.de/registrieren" },
+      { property: "og:locale", content: "de_DE" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://zunftecho.de/registrieren" }],
   }),
   component: PilotRequestPage,
 });

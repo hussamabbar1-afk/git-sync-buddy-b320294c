@@ -24,6 +24,7 @@ export const Route = createFileRoute("/passwort-vergessen")({
         content: "Link zum Zurücksetzen des Passworts für Ihr ZunftEcho-Konto anfordern.",
       },
       { property: "og:type", content: "website" },
+      { name: "robots", content: "noindex,nofollow" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),

@@ -22,6 +22,7 @@ export const Route = createFileRoute("/passwort-zuruecksetzen")({
         content: "Sicher ein neues Passwort für Ihr ZunftEcho-Konto vergeben.",
       },
       { property: "og:type", content: "website" },
+      { name: "robots", content: "noindex,nofollow" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),

@@ -9,6 +9,21 @@ type ServerEntry = {
 
 let serverEntryPromise: Promise<ServerEntry> | undefined;
 
+function getCanonicalRedirect(request: Request): Response | undefined {
+  const url = new URL(request.url);
+  const isProductionDomain = url.hostname === "zunftecho.de" || url.hostname === "www.zunftecho.de";
+
+  if (!isProductionDomain || (url.protocol === "https:" && url.hostname === "zunftecho.de")) {
+    return undefined;
+  }
+
+  url.protocol = "https:";
+  url.hostname = "zunftecho.de";
+  url.port = "";
+
+  return Response.redirect(url.toString(), 308);
+}
+
 async function getServerEntry(): Promise<ServerEntry> {
   if (!serverEntryPromise) {
     serverEntryPromise = import("@tanstack/react-start/server-entry").then(
@@ -47,6 +62,9 @@ function isH3SwallowedErrorBody(body: string): boolean {
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
+      const canonicalRedirect = getCanonicalRedirect(request);
+      if (canonicalRedirect) return canonicalRedirect;
+
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
       return await normalizeCatastrophicSsrResponse(response);

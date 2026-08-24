@@ -24,6 +24,7 @@ export const Route = createFileRoute("/login")({
         content: "Zugang zur KI-Mitarbeiter-Plattform für Heizung, Sanitär und Klima.",
       },
       { property: "og:type", content: "website" },
+      { name: "robots", content: "noindex,nofollow" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
