@@ -1,22 +1,9 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
+// Recovery links are handled by the pre-bootstrap script in __root.tsx, which
+// runs before any router code and preserves the URL hash across this redirect.
 export const Route = createFileRoute("/")({
-  ssr: false,
-  component: IndexRedirect,
+  beforeLoad: () => {
+    throw redirect({ to: "/login", replace: true });
+  },
 });
-
-function IndexRedirect() {
-  const navigate = useNavigate();
-
-  // Recovery links are handled by the pre-bootstrap script in __root.tsx.
-  useEffect(() => {
-    void navigate({ to: "/login", replace: true });
-  }, [navigate]);
-
-  return (
-    <div className="flex min-h-screen items-center justify-center px-6">
-      <p className="text-sm text-muted-foreground">Wird geladen …</p>
-    </div>
-  );
-}
