@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { AlertCircle, Bot, ShieldCheck } from "lucide-react";
+import { AlertCircle, Bot, LockKeyhole } from "lucide-react";
 import { useEffect, useState, type FormEvent } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -137,9 +137,9 @@ function LoginPage() {
           </form>
 
           <p className="mt-6 text-sm text-muted-foreground">
-            Noch kein Konto?{" "}
+            Interesse an HandwerkAI?{" "}
             <Link to="/registrieren" className="font-medium text-primary">
-              Jetzt registrieren
+              Pilot anfragen
             </Link>
           </p>
         </div>
@@ -157,7 +157,8 @@ function LoginPage() {
           </p>
         </div>
         <div className="flex items-center gap-2 text-xs text-sidebar-foreground/70">
-          <ShieldCheck className="size-4" /> DSGVO-konform · Serverstandort Deutschland
+          <LockKeyhole className="size-4" /> Geschützter Arbeitsbereich · nur für eingerichtete
+          Betriebe
         </div>
       </div>
     </div>
