@@ -115,10 +115,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
+// Runs before the client bundle (and therefore before the Supabase client's
+// implicit-flow URL detection) so a recovery hash is never lost. No token is
+// logged or exposed; the whole fragment is forwarded as-is.
+const RECOVERY_REDIRECT_SCRIPT = `(function(){try{var h=location.hash;if(!h||h.charAt(0)!=="#")return;var p=new URLSearchParams(h.slice(1));if(p.get("type")!=="recovery")return;if(!p.get("access_token")&&!p.get("refresh_token"))return;if(location.pathname==="/passwort-zuruecksetzen")return;location.replace("/passwort-zuruecksetzen"+location.search+h);}catch(e){}})();`;
+
 function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
+        <script dangerouslySetInnerHTML={{ __html: RECOVERY_REDIRECT_SCRIPT }} />
         <HeadContent />
       </head>
       <body>
