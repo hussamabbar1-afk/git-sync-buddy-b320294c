@@ -108,14 +108,14 @@ function deliveryCopy(
   const isQuote = type === "quote";
   const label = isQuote ? "Angebot" : "Rechnung";
   const number = documentNumber(type, document);
-  const companyName = String(company.legal_name ?? company.name ?? "HandwerkAI").trim();
+  const companyName = String(company.legal_name ?? company.name ?? "ZunftEcho").trim();
   const customerName = String(document.customer_name ?? "").trim();
   const greeting = customerName ? `Guten Tag ${customerName},` : "Guten Tag,";
   const attachmentSentence = `anbei erhalten Sie ${isQuote ? "unser" : "unsere"} ${label.toLowerCase()} ${number} als PDF.`;
   const totalSentence = `Gesamtbetrag: ${money(Number(document.total_cents) || 0)}`;
   const closing = `Freundliche Grüße\n${companyName}`;
   const text = `${greeting}\n\n${attachmentSentence}\n${totalSentence}\n\n${closing}`;
-  const html = `<!doctype html><html lang="de"><body style="margin:0;background:#f5f5f5;font-family:Arial,sans-serif;color:#202124"><div style="max-width:640px;margin:0 auto;padding:32px 20px"><div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:32px"><h1 style="font-size:22px;margin:0 0 24px">${escapeHtml(label)} ${escapeHtml(number)}</h1><p>${escapeHtml(greeting)}</p><p>${escapeHtml(attachmentSentence)}</p><p style="font-weight:700">${escapeHtml(totalSentence)}</p><p style="white-space:pre-line;margin-top:28px">${escapeHtml(closing)}</p></div><p style="font-size:12px;color:#6b7280;text-align:center">Dieses Dokument wurde sicher über HandwerkAI versendet.</p></div></body></html>`;
+  const html = `<!doctype html><html lang="de"><body style="margin:0;background:#f5f5f5;font-family:Arial,sans-serif;color:#202124"><div style="max-width:640px;margin:0 auto;padding:32px 20px"><div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:32px"><h1 style="font-size:22px;margin:0 0 24px">${escapeHtml(label)} ${escapeHtml(number)}</h1><p>${escapeHtml(greeting)}</p><p>${escapeHtml(attachmentSentence)}</p><p style="font-weight:700">${escapeHtml(totalSentence)}</p><p style="white-space:pre-line;margin-top:28px">${escapeHtml(closing)}</p></div><p style="font-size:12px;color:#6b7280;text-align:center">Dieses Dokument wurde sicher über ZunftEcho versendet.</p></div></body></html>`;
   return { subject: `${label} ${number} von ${companyName}`, text, html };
 }
 
@@ -303,7 +303,7 @@ export default {
 
       const senderName =
         String(Deno.env.get("BREVO_SENDER_NAME") ?? "").trim() ||
-        String(company.legal_name ?? company.name ?? "HandwerkAI").trim();
+        String(company.legal_name ?? company.name ?? "ZunftEcho").trim();
       const companyEmail = String(company.email ?? "")
         .trim()
         .toLowerCase();

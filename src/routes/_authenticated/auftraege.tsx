@@ -57,13 +57,13 @@ import {
 export const Route = createFileRoute("/_authenticated/auftraege")({
   head: () => ({
     meta: [
-      { title: "Aufträge – HandwerkAI" },
+      { title: "Aufträge – ZunftEcho" },
       {
         name: "description",
         content:
           "Aufträge Ihres SHK-Betriebs planen, Termine und Prioritäten steuern und Werte von Schätzung bis Abschluss verfolgen.",
       },
-      { property: "og:title", content: "Aufträge – HandwerkAI" },
+      { property: "og:title", content: "Aufträge – ZunftEcho" },
       {
         property: "og:description",
         content: "Auftragsübersicht mit Kennzahlen, Planung, Prioritäten und Auftragswerten.",
@@ -207,7 +207,6 @@ function AuftraegePage() {
     }));
   }
 
-
   useEffect(() => {
     let cancelled = false;
 
@@ -322,7 +321,6 @@ function AuftraegePage() {
       setCreateError("Bitte einen Kundennamen angeben.");
       return;
     }
-
 
     const estimated = euroInputToCents(createForm.estimated_value);
     if ("error" in estimated) {

@@ -96,7 +96,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           <span className="flex size-8 items-center justify-center rounded-md bg-sidebar-primary text-sidebar-primary-foreground">
             <Bot className="size-4" />
           </span>
-          <span className="font-display text-lg font-semibold tracking-tight">HandwerkAI</span>
+          <span className="font-display text-lg font-semibold tracking-tight">ZunftEcho</span>
         </div>
 
         <nav className="flex-1 space-y-4 p-3">
@@ -142,7 +142,7 @@ export function AppShell({ children }: { children: ReactNode }) {
               </Avatar>
               <div className="hidden text-left text-xs leading-tight sm:block">
                 <p className="font-medium">{email ?? "Angemeldet"}</p>
-                <p className="text-muted-foreground">HandwerkAI Konto</p>
+                <p className="text-muted-foreground">ZunftEcho Konto</p>
               </div>
             </div>
             <Button variant="ghost" size="icon" aria-label="Abmelden" onClick={handleSignOut}>
@@ -152,6 +152,15 @@ export function AppShell({ children }: { children: ReactNode }) {
         </header>
 
         <main className="flex-1 px-4 py-6 lg:px-8 lg:py-8">{children}</main>
+
+        <footer className="hidden items-center justify-end gap-4 border-t bg-card px-8 py-3 text-xs text-muted-foreground lg:flex">
+          <Link to="/impressum" className="hover:text-foreground">
+            Impressum
+          </Link>
+          <Link to="/datenschutz" className="hover:text-foreground">
+            Datenschutz
+          </Link>
+        </footer>
 
         <nav className="sticky bottom-0 flex border-t bg-card lg:hidden">
           {mobileNavigation.map((item) => (

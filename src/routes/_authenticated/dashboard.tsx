@@ -45,13 +45,13 @@ import {
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
     meta: [
-      { title: "Dashboard – HandwerkAI" },
+      { title: "Dashboard – ZunftEcho" },
       {
         name: "description",
         content:
           "Übersicht über Gespräche, Leads und die Auslastung Ihres KI-Mitarbeiters im SHK-Betrieb.",
       },
-      { property: "og:title", content: "Dashboard – HandwerkAI" },
+      { property: "og:title", content: "Dashboard – ZunftEcho" },
       {
         property: "og:description",
         content: "Kennzahlen zu Gesprächen, Leads und Terminanfragen auf einen Blick.",

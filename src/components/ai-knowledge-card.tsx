@@ -120,8 +120,8 @@ export function AiKnowledgeCard({
 
   useEffect(() => {
     const refreshGaps = () => void load();
-    window.addEventListener("handwerkai:knowledge-gap-updated", refreshGaps);
-    return () => window.removeEventListener("handwerkai:knowledge-gap-updated", refreshGaps);
+    window.addEventListener("zunftecho:knowledge-gap-updated", refreshGaps);
+    return () => window.removeEventListener("zunftecho:knowledge-gap-updated", refreshGaps);
   }, [load]);
 
   const resetKnowledge = () => {

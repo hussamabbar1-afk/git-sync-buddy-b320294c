@@ -12,13 +12,13 @@ import { germanAuthError } from "@/lib/auth-errors";
 export const Route = createFileRoute("/login")({
   head: () => ({
     meta: [
-      { title: "Anmelden – HandwerkAI" },
+      { title: "Anmelden – ZunftEcho" },
       {
         name: "description",
         content:
-          "Melden Sie sich bei HandwerkAI an und verwalten Sie Ihren KI-Mitarbeiter für Ihren SHK-Betrieb.",
+          "Melden Sie sich bei ZunftEcho an und verwalten Sie Ihren KI-Mitarbeiter für Ihren SHK-Betrieb.",
       },
-      { property: "og:title", content: "Anmelden – HandwerkAI" },
+      { property: "og:title", content: "Anmelden – ZunftEcho" },
       {
         property: "og:description",
         content: "Zugang zur KI-Mitarbeiter-Plattform für Heizung, Sanitär und Klima.",
@@ -83,7 +83,7 @@ function LoginPage() {
             <span className="flex size-9 items-center justify-center rounded-md bg-primary text-primary-foreground">
               <Bot className="size-5" />
             </span>
-            <span className="font-display text-xl font-semibold">HandwerkAI</span>
+            <span className="font-display text-xl font-semibold">ZunftEcho</span>
           </div>
 
           <h1 className="text-2xl font-semibold">Willkommen zurück</h1>
@@ -137,9 +137,18 @@ function LoginPage() {
           </form>
 
           <p className="mt-6 text-sm text-muted-foreground">
-            Interesse an HandwerkAI?{" "}
+            Interesse an ZunftEcho?{" "}
             <Link to="/registrieren" className="font-medium text-primary">
               Pilot anfragen
+            </Link>
+          </p>
+          <p className="mt-4 text-xs text-muted-foreground">
+            <Link to="/impressum" className="hover:text-foreground">
+              Impressum
+            </Link>
+            <span className="mx-2">·</span>
+            <Link to="/datenschutz" className="hover:text-foreground">
+              Datenschutz
             </Link>
           </p>
         </div>

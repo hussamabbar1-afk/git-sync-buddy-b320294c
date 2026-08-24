@@ -52,13 +52,13 @@ function toTimeValue(value: string | null) {
 export const Route = createFileRoute("/_authenticated/unternehmen")({
   head: () => ({
     meta: [
-      { title: "Unternehmensprofil – HandwerkAI" },
+      { title: "Unternehmensprofil – ZunftEcho" },
       {
         name: "description",
         content:
           "Stammdaten, Leistungen, Servicegebiete und Öffnungszeiten Ihres SHK-Betriebs verwalten.",
       },
-      { property: "og:title", content: "Unternehmensprofil – HandwerkAI" },
+      { property: "og:title", content: "Unternehmensprofil – ZunftEcho" },
       {
         property: "og:description",
         content: "Alle Betriebsdaten an einem Ort: Leistungen, Gebiete und Erreichbarkeit.",

@@ -27,12 +27,12 @@ import { supabase } from "@/integrations/supabase/client";
 export const Route = createFileRoute("/_authenticated/termine")({
   head: () => ({
     meta: [
-      { title: "Termine – HandwerkAI" },
+      { title: "Termine – ZunftEcho" },
       {
         name: "description",
         content: "Alle vom KI-Mitarbeiter gebuchten Kundentermine im Monatskalender.",
       },
-      { property: "og:title", content: "Termine – HandwerkAI" },
+      { property: "og:title", content: "Termine – ZunftEcho" },
       {
         property: "og:description",
         content: "Kundentermine Ihres Unternehmens als schreibgeschützte Kalenderansicht.",
@@ -504,12 +504,15 @@ function TerminePage() {
         ) : null}
       </div>
 
-      <Dialog open={selected !== null} onOpenChange={(open) => {
+      <Dialog
+        open={selected !== null}
+        onOpenChange={(open) => {
           if (!open) {
             setSelected(null);
             clearDeepLink();
           }
-        }}>
+        }}
+      >
         <DialogContent className="max-h-[85vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Termindetails</DialogTitle>

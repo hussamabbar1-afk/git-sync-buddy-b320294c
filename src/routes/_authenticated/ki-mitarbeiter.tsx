@@ -24,13 +24,13 @@ import { supabase } from "@/integrations/supabase/client";
 export const Route = createFileRoute("/_authenticated/ki-mitarbeiter")({
   head: () => ({
     meta: [
-      { title: "KI-Mitarbeiter – HandwerkAI" },
+      { title: "KI-Mitarbeiter – ZunftEcho" },
       {
         name: "description",
         content:
           "Namen, Tonalität, Aufgaben und Website-Chat-Widget Ihres KI-Mitarbeiters konfigurieren.",
       },
-      { property: "og:title", content: "KI-Mitarbeiter – HandwerkAI" },
+      { property: "og:title", content: "KI-Mitarbeiter – ZunftEcho" },
       {
         property: "og:description",
         content: "Konfiguration von Auftreten, Aufgaben und Chat-Widget des KI-Mitarbeiters.",

@@ -14,12 +14,12 @@ import { supabase } from "@/integrations/supabase/client";
 export const Route = createFileRoute("/_authenticated/konversationen")({
   head: () => ({
     meta: [
-      { title: "Konversationen – HandwerkAI" },
+      { title: "Konversationen – ZunftEcho" },
       {
         name: "description",
         content: "Alle Kundengespräche Ihres KI-Mitarbeiters nachlesen und nachverfolgen.",
       },
-      { property: "og:title", content: "Konversationen – HandwerkAI" },
+      { property: "og:title", content: "Konversationen – ZunftEcho" },
       {
         property: "og:description",
         content: "Gesprächsverläufe aus Website-Chat und Anfragen im Überblick.",
@@ -466,7 +466,8 @@ function ConversationsPage() {
                   </Button>
                 </div>
                 <p className="text-xs text-destructive">
-                  Übergabe angefordert am {formatDateTime(selectedConversation.handoff_requested_at)}
+                  Übergabe angefordert am{" "}
+                  {formatDateTime(selectedConversation.handoff_requested_at)}
                 </p>
                 <p className="text-xs text-destructive">
                   Grund: {clean(selectedConversation.handoff_reason) || "Kein Grund hinterlegt"}

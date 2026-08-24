@@ -12,13 +12,13 @@ const PILOT_EMAIL = "hussamabbar4@gmail.com";
 export const Route = createFileRoute("/registrieren")({
   head: () => ({
     meta: [
-      { title: "30-Tage-Pilot anfragen – HandwerkAI" },
+      { title: "30-Tage-Pilot anfragen – ZunftEcho" },
       {
         name: "description",
         content:
-          "Fragen Sie den persönlich eingerichteten 30-Tage-Pilot von HandwerkAI für Ihren SHK-Betrieb an.",
+          "Fragen Sie den persönlich eingerichteten 30-Tage-Pilot von ZunftEcho für Ihren SHK-Betrieb an.",
       },
-      { property: "og:title", content: "HandwerkAI Pilot anfragen" },
+      { property: "og:title", content: "ZunftEcho Pilot anfragen" },
       {
         property: "og:description",
         content: "30 Tage, 99 € netto inklusive persönlicher Einrichtung, ohne Jahresvertrag.",
@@ -41,7 +41,7 @@ function PilotRequestPage() {
     const body = [
       "Guten Tag,",
       "",
-      "ich interessiere mich für den 30-Tage-Einführungspilot von HandwerkAI.",
+      "ich interessiere mich für den 30-Tage-Einführungspilot von ZunftEcho.",
       "",
       `Firma: ${value("company")}`,
       `Ansprechpartner: ${value("contact")}`,
@@ -56,7 +56,7 @@ function PilotRequestPage() {
     ].join("\n");
 
     window.location.href = `mailto:${PILOT_EMAIL}?subject=${encodeURIComponent(
-      `Pilotanfrage HandwerkAI – ${value("company")}`,
+      `Pilotanfrage ZunftEcho – ${value("company")}`,
     )}&body=${encodeURIComponent(body)}`;
     setMailOpened(true);
   }
@@ -69,7 +69,7 @@ function PilotRequestPage() {
             <span className="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
               <Bot className="size-5" />
             </span>
-            <span className="font-display text-lg font-semibold">HandwerkAI</span>
+            <span className="font-display text-lg font-semibold">ZunftEcho</span>
           </Link>
           <Button asChild variant="ghost">
             <Link to="/login">Kundenlogin</Link>
@@ -90,7 +90,7 @@ function PilotRequestPage() {
             30-Tage-Einführungspilot
           </p>
           <h1 className="mt-3 text-4xl leading-tight font-semibold">
-            Prüfen wir gemeinsam, ob HandwerkAI zu Ihrem Betrieb passt.
+            Prüfen wir gemeinsam, ob ZunftEcho zu Ihrem Betrieb passt.
           </h1>
           <p className="mt-5 text-lg leading-8 text-slate-600">
             Senden Sie uns ein paar Eckdaten. Wir besprechen die Einrichtung persönlich, bevor ein
@@ -179,7 +179,11 @@ function PilotRequestPage() {
               </Button>
               <p className="mt-3 text-center text-xs leading-5 text-slate-500">
                 Beim Klick öffnet sich Ihr E-Mail-Programm. Die Anfrage wird erst versendet, wenn
-                Sie dort auf „Senden“ klicken.
+                Sie dort auf „Senden“ klicken. Hinweise finden Sie in unserer{" "}
+                <Link to="/datenschutz" className="font-medium text-primary hover:underline">
+                  Datenschutzerklärung
+                </Link>
+                .
               </p>
             </div>
           </form>
@@ -193,6 +197,15 @@ function PilotRequestPage() {
           </div>
         </section>
       </main>
+      <footer className="border-t border-slate-200 bg-white px-5 py-6 text-center text-sm text-slate-500">
+        <Link to="/impressum" className="hover:text-slate-950">
+          Impressum
+        </Link>
+        <span className="mx-3">·</span>
+        <Link to="/datenschutz" className="hover:text-slate-950">
+          Datenschutz
+        </Link>
+      </footer>
     </div>
   );
 }

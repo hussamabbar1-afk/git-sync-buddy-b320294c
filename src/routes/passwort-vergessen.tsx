@@ -12,16 +12,16 @@ import { supabase } from "@/integrations/supabase/client";
 export const Route = createFileRoute("/passwort-vergessen")({
   head: () => ({
     meta: [
-      { title: "Passwort vergessen – HandwerkAI" },
+      { title: "Passwort vergessen – ZunftEcho" },
       {
         name: "description",
         content:
-          "Setzen Sie Ihr HandwerkAI-Passwort zurück: Wir senden Ihnen einen sicheren Link per E-Mail.",
+          "Setzen Sie Ihr ZunftEcho-Passwort zurück: Wir senden Ihnen einen sicheren Link per E-Mail.",
       },
-      { property: "og:title", content: "Passwort vergessen – HandwerkAI" },
+      { property: "og:title", content: "Passwort vergessen – ZunftEcho" },
       {
         property: "og:description",
-        content: "Link zum Zurücksetzen des Passworts für Ihr HandwerkAI-Konto anfordern.",
+        content: "Link zum Zurücksetzen des Passworts für Ihr ZunftEcho-Konto anfordern.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -67,7 +67,7 @@ function ForgotPasswordPage() {
           <span className="flex size-9 items-center justify-center rounded-md bg-primary text-primary-foreground">
             <Bot className="size-5" />
           </span>
-          <span className="font-display text-xl font-semibold">HandwerkAI</span>
+          <span className="font-display text-xl font-semibold">ZunftEcho</span>
         </div>
 
         {sent ? (

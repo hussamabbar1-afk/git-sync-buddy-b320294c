@@ -403,7 +403,7 @@ export function WidgetSettingsCard({
             </div>
 
             <div className="flex items-center justify-between gap-4 rounded-md border p-3">
-              <p className="text-sm font-medium">HandwerkAI-Hinweis zeigen</p>
+              <p className="text-sm font-medium">ZunftEcho-Hinweis zeigen</p>
               <Switch
                 checked={settings.show_branding}
                 onCheckedChange={(v) => set("show_branding", v)}
@@ -450,9 +450,9 @@ export function WidgetSettingsCard({
               </p>
               {!allowedOrigins.trim() ? (
                 <p className="flex items-start gap-2 rounded-md border border-amber-500/40 bg-amber-500/10 p-3 text-xs text-amber-800 dark:text-amber-200">
-                  <AlertTriangle className="mt-0.5 size-4 shrink-0" /> Ohne Domain-Liste bleibt
-                  das Widget serverseitig gesperrt. Tragen Sie vor der Veröffentlichung die
-                  produktiven Kundendomains ein.
+                  <AlertTriangle className="mt-0.5 size-4 shrink-0" /> Ohne Domain-Liste bleibt das
+                  Widget serverseitig gesperrt. Tragen Sie vor der Veröffentlichung die produktiven
+                  Kundendomains ein.
                 </p>
               ) : null}
             </div>
@@ -549,8 +549,8 @@ export function WidgetSettingsCard({
           </div>
         ) : embed?.widget_key ? (
           <p className="rounded-md border bg-muted/40 p-3 text-xs text-muted-foreground">
-            Der Testchat wird verfügbar, sobald mindestens eine erlaubte Website-Domain
-            gespeichert ist.
+            Der Testchat wird verfügbar, sobald mindestens eine erlaubte Website-Domain gespeichert
+            ist.
           </p>
         ) : null}
       </CardContent>

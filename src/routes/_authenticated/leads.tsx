@@ -39,12 +39,12 @@ import {
 export const Route = createFileRoute("/_authenticated/leads")({
   head: () => ({
     meta: [
-      { title: "Leads – HandwerkAI" },
+      { title: "Leads – ZunftEcho" },
       {
         name: "description",
         content: "Qualifizierte Kundenanfragen mit Anliegen, Dringlichkeit und Status verwalten.",
       },
-      { property: "og:title", content: "Leads – HandwerkAI" },
+      { property: "og:title", content: "Leads – ZunftEcho" },
       {
         property: "og:description",
         content: "Alle Anfragen Ihres KI-Mitarbeiters als strukturierte Leads.",

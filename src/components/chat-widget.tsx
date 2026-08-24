@@ -28,7 +28,7 @@ type ChatMessage = {
   rating?: 1 | -1 | null;
 };
 
-const storageKey = (widgetKey: string) => `handwerkai_chat_${widgetKey}`;
+const storageKey = (widgetKey: string) => `zunftecho_chat_${widgetKey}`;
 
 export function ChatWidget({
   widgetKey,
@@ -125,7 +125,7 @@ export function ChatWidget({
       });
       if (!res.ok) throw new Error("feedback failed");
       if (rating === -1 && typeof window !== "undefined") {
-        window.dispatchEvent(new CustomEvent("handwerkai:knowledge-gap-updated"));
+        window.dispatchEvent(new CustomEvent("zunftecho:knowledge-gap-updated"));
       }
     } catch {
       setMessages((m) => m.map((item, i) => (i === index ? { ...item, rating: previous } : item)));

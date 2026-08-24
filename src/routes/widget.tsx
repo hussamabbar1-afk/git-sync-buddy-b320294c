@@ -39,15 +39,15 @@ export const Route = createFileRoute("/widget")({
   }),
   head: () => ({
     meta: [
-      { title: "Chat – HandwerkAI" },
+      { title: "Chat – ZunftEcho" },
       {
         name: "description",
-        content: "Eingebetteter HandwerkAI-Chat für Kundenanfragen an Ihren Handwerksbetrieb.",
+        content: "Eingebetteter ZunftEcho-Chat für Kundenanfragen an Ihren Handwerksbetrieb.",
       },
-      { property: "og:title", content: "Chat – HandwerkAI" },
+      { property: "og:title", content: "Chat – ZunftEcho" },
       {
         property: "og:description",
-        content: "Eingebetteter HandwerkAI-Chat für Kundenanfragen.",
+        content: "Eingebetteter ZunftEcho-Chat für Kundenanfragen.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -164,7 +164,7 @@ function WidgetPage() {
           </div>
           {config?.show_branding ? (
             <p className="px-1 text-center text-[10px] text-muted-foreground">
-              Unterstützt von HandwerkAI
+              Unterstützt von ZunftEcho
             </p>
           ) : null}
         </div>

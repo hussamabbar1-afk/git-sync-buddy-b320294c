@@ -4,33 +4,22 @@ import { useEffect, useState } from "react";
 
 import { AppShell, PageHeader } from "@/components/app-shell";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/_authenticated/einstellungen")({
   head: () => ({
     meta: [
-      { title: "Einstellungen – HandwerkAI" },
+      { title: "Einstellungen – ZunftEcho" },
       {
         name: "description",
-        content: "Verwalten Sie Ihre Kontoeinstellungen in HandwerkAI.",
+        content: "Verwalten Sie Ihre Kontoeinstellungen in ZunftEcho.",
       },
-      { property: "og:title", content: "Einstellungen – HandwerkAI" },
+      { property: "og:title", content: "Einstellungen – ZunftEcho" },
       {
         property: "og:description",
         content: "Kontoeinstellungen, Benachrichtigungen und allgemeine Konfiguration.",
@@ -56,9 +45,9 @@ function parsePreferences(value: unknown): Preferences {
   if (!value || typeof value !== "object" || Array.isArray(value)) return defaultPreferences;
   const raw = value as Record<string, unknown>;
   return {
-    language: typeof raw['language'] === "string" ? raw['language'] : defaultPreferences.language,
-    timezone: typeof raw['timezone'] === "string" ? raw['timezone'] : defaultPreferences.timezone,
-    dark_mode: typeof raw['dark_mode'] === "boolean" ? raw['dark_mode'] : false,
+    language: typeof raw["language"] === "string" ? raw["language"] : defaultPreferences.language,
+    timezone: typeof raw["timezone"] === "string" ? raw["timezone"] : defaultPreferences.timezone,
+    dark_mode: typeof raw["dark_mode"] === "boolean" ? raw["dark_mode"] : false,
   };
 }
 
@@ -184,10 +173,7 @@ function SettingsPage() {
     setGeneralError(null);
     setGeneralSuccess(null);
 
-    const { error } = await supabase
-      .from("profiles")
-      .update({ preferences })
-      .eq("id", userId);
+    const { error } = await supabase.from("profiles").update({ preferences }).eq("id", userId);
 
     setGeneralSaving(false);
 
@@ -222,10 +208,7 @@ function SettingsPage() {
 
   return (
     <AppShell>
-      <PageHeader
-        title="Einstellungen"
-        description="Verwalten Sie Ihre Kontoeinstellungen."
-      />
+      <PageHeader title="Einstellungen" description="Verwalten Sie Ihre Kontoeinstellungen." />
 
       <Tabs defaultValue="konto">
         <TabsList>
@@ -309,7 +292,6 @@ function SettingsPage() {
                 E-Mail oder Push sind derzeit noch nicht konfigurierbar.
               </p>
             </CardContent>
-
           </Card>
         </TabsContent>
 

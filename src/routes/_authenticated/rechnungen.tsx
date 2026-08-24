@@ -50,13 +50,13 @@ import {
 export const Route = createFileRoute("/_authenticated/rechnungen")({
   head: () => ({
     meta: [
-      { title: "Rechnungen – HandwerkAI" },
+      { title: "Rechnungen – ZunftEcho" },
       {
         name: "description",
         content:
           "Rechnungen Ihres SHK-Betriebs aus Aufträgen erstellen, Zahlungen erfassen und offene Beträge verfolgen.",
       },
-      { property: "og:title", content: "Rechnungen – HandwerkAI" },
+      { property: "og:title", content: "Rechnungen – ZunftEcho" },
       {
         property: "og:description",
         content: "Rechnungsübersicht mit Kennzahlen, Zahlungen und offenen Beträgen.",

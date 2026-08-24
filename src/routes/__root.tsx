@@ -79,14 +79,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "HandwerkAI – KI-Mitarbeiter für SHK-Betriebe" },
+      { title: "ZunftEcho – KI-Mitarbeiter für SHK-Betriebe" },
       {
         name: "description",
         content:
-          "HandwerkAI ist die KI-Mitarbeiter-Plattform für Heizung, Sanitär und Klima. Anfragen automatisch annehmen, qualifizieren und in Leads verwandeln.",
+          "ZunftEcho ist die KI-Mitarbeiter-Plattform für Heizung, Sanitär und Klima. Anfragen automatisch annehmen, qualifizieren und in Leads verwandeln.",
       },
-      { name: "author", content: "HandwerkAI" },
-      { property: "og:title", content: "HandwerkAI – KI-Mitarbeiter für SHK-Betriebe" },
+      { name: "author", content: "ZunftEcho" },
+      { property: "og:title", content: "ZunftEcho – KI-Mitarbeiter für SHK-Betriebe" },
       {
         property: "og:description",
         content: "Die KI-Mitarbeiter-Plattform für Heizung, Sanitär und Klima.",

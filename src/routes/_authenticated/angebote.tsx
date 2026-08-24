@@ -52,13 +52,13 @@ import {
 export const Route = createFileRoute("/_authenticated/angebote")({
   head: () => ({
     meta: [
-      { title: "Angebote – HandwerkAI" },
+      { title: "Angebote – ZunftEcho" },
       {
         name: "description",
         content:
           "Angebote Ihres SHK-Betriebs erstellen, Positionen pflegen und Status von Entwurf bis Annahme verfolgen.",
       },
-      { property: "og:title", content: "Angebote – HandwerkAI" },
+      { property: "og:title", content: "Angebote – ZunftEcho" },
       {
         property: "og:description",
         content: "Angebotsübersicht mit Kennzahlen, Positionen und Statusverlauf.",
@@ -183,7 +183,6 @@ function AngebotePage() {
       postal_code: customer.postal_code ?? "",
     }));
   }
-
 
   useEffect(() => {
     let cancelled = false;
@@ -350,7 +349,6 @@ function AngebotePage() {
     setSelectedId(data.id);
     setDetailOpen(true);
   }
-
 
   const cards = [
     { label: "Angebote gesamt", value: metrics ? String(metrics.total) : undefined },

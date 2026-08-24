@@ -11,15 +11,15 @@ import { germanAuthError } from "@/lib/auth-errors";
 export const Route = createFileRoute("/passwort-zuruecksetzen")({
   head: () => ({
     meta: [
-      { title: "Neues Passwort festlegen – HandwerkAI" },
+      { title: "Neues Passwort festlegen – ZunftEcho" },
       {
         name: "description",
-        content: "Legen Sie ein neues Passwort für Ihr HandwerkAI-Konto fest.",
+        content: "Legen Sie ein neues Passwort für Ihr ZunftEcho-Konto fest.",
       },
-      { property: "og:title", content: "Neues Passwort festlegen – HandwerkAI" },
+      { property: "og:title", content: "Neues Passwort festlegen – ZunftEcho" },
       {
         property: "og:description",
-        content: "Sicher ein neues Passwort für Ihr HandwerkAI-Konto vergeben.",
+        content: "Sicher ein neues Passwort für Ihr ZunftEcho-Konto vergeben.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -100,7 +100,7 @@ function ResetPasswordPage() {
           <span className="flex size-9 items-center justify-center rounded-md bg-primary text-primary-foreground">
             <Bot className="size-5" />
           </span>
-          <span className="font-display text-xl font-semibold">HandwerkAI</span>
+          <span className="font-display text-xl font-semibold">ZunftEcho</span>
         </div>
 
         {done ? (

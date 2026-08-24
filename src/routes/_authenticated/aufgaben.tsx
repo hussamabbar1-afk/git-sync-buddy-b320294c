@@ -59,13 +59,13 @@ import {
 export const Route = createFileRoute("/_authenticated/aufgaben")({
   head: () => ({
     meta: [
-      { title: "Aufgaben – HandwerkAI" },
+      { title: "Aufgaben – ZunftEcho" },
       {
         name: "description",
         content:
           "Aufgaben Ihres Betriebs verwalten: offene und überfällige To-dos, Zuständigkeiten und die persönliche Arbeitsliste der nächsten 7 Tage.",
       },
-      { property: "og:title", content: "Aufgaben – HandwerkAI" },
+      { property: "og:title", content: "Aufgaben – ZunftEcho" },
       {
         property: "og:description",
         content: "Aufgabenübersicht mit Kennzahlen, Filtern und persönlicher Arbeitsliste.",

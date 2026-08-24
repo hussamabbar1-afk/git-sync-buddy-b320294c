@@ -23,13 +23,13 @@ import { asRecord, customerName, formatCents, formatDateTime, num } from "@/lib/
 export const Route = createFileRoute("/_authenticated/kunden")({
   head: () => ({
     meta: [
-      { title: "Kunden – HandwerkAI" },
+      { title: "Kunden – ZunftEcho" },
       {
         name: "description",
         content:
           "Kundenstamm mit Kontaktdaten, offenen Leads, Terminen, Aufträgen und offenen Rechnungen.",
       },
-      { property: "og:title", content: "Kunden – HandwerkAI" },
+      { property: "og:title", content: "Kunden – ZunftEcho" },
       {
         property: "og:description",
         content: "Zentrales Kundenverzeichnis Ihres SHK-Betriebs mit Kundenhistorie.",
@@ -136,7 +136,6 @@ function KundenPage() {
         "get_customer_directory",
         term.length > 0 ? { p_query: term, p_limit: 100 } : { p_limit: 100 },
       );
-
 
       if (cancelled) return;
 

@@ -22,7 +22,7 @@ const benefits = [
   {
     icon: MessageSquareText,
     title: "Anfragen vollständig erfassen",
-    text: "Lena fragt Problem, Kontaktdaten, Einsatzort und Terminwunsch strukturiert ab.",
+    text: "Ihre digitale Assistentin fragt Problem, Kontaktdaten, Einsatzort und Terminwunsch strukturiert ab.",
   },
   {
     icon: ShieldAlert,
@@ -32,7 +32,7 @@ const benefits = [
   {
     icon: ClipboardCheck,
     title: "Saubere Übergabe ans Team",
-    text: "Jede qualifizierte Anfrage landet als übersichtlicher Lead im HandwerkAI-Dashboard.",
+    text: "Jede qualifizierte Anfrage landet als übersichtlicher Lead im ZunftEcho-Dashboard.",
   },
 ];
 
@@ -40,12 +40,12 @@ const steps = [
   {
     number: "01",
     title: "Wir richten Ihren Betrieb ein",
-    text: "Leistungen, Einsatzgebiete, Öffnungszeiten und der Ton Ihrer digitalen Assistentin werden gemeinsam konfiguriert.",
+    text: "Name, Ton, Leistungen, Einsatzgebiete und Öffnungszeiten Ihrer digitalen Assistentin werden gemeinsam konfiguriert.",
   },
   {
     number: "02",
     title: "Der Assistent übernimmt Website-Anfragen",
-    text: "Kunden schildern ihr Anliegen im Chat. Lena stellt die fehlenden Fragen und sammelt alle wichtigen Angaben.",
+    text: "Kunden schildern ihr Anliegen im Chat. Ihre Assistentin stellt die fehlenden Fragen und sammelt alle wichtigen Angaben.",
   },
   {
     number: "03",
@@ -56,7 +56,7 @@ const steps = [
 
 const pilotIncludes = [
   "Persönliche Einrichtung für Ihren SHK-Betrieb",
-  "Website-Assistentin mit Ihrem Firmennamen und Ihren Leistungen",
+  "Website-Assistentin mit frei wählbarem Namen, Ihrem Firmennamen und Ihren Leistungen",
   "Qualifizierung von Anfragen und Erfassung von Terminwünschen",
   "Lead-, Kunden- und Gesprächsübersicht im Dashboard",
   "Gemeinsame Inbetriebnahme und ein Optimierungstermin",
@@ -65,15 +65,15 @@ const pilotIncludes = [
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "HandwerkAI – Mehr vollständige Anfragen für SHK-Betriebe" },
+      { title: "ZunftEcho – Mehr vollständige Anfragen für SHK-Betriebe" },
       {
         name: "description",
         content:
-          "HandwerkAI nimmt Website-Anfragen für SHK-Betriebe auf, qualifiziert sie und übergibt vollständige Leads an Ihr Team.",
+          "ZunftEcho nimmt Website-Anfragen für SHK-Betriebe auf, qualifiziert sie und übergibt vollständige Leads an Ihr Team.",
       },
       {
         property: "og:title",
-        content: "HandwerkAI – Der digitale Anfrage-Assistent für SHK-Betriebe",
+        content: "ZunftEcho – Der digitale Anfrage-Assistent für SHK-Betriebe",
       },
       {
         property: "og:description",
@@ -92,7 +92,7 @@ function Brand() {
       <span className="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
         <Bot className="size-5" />
       </span>
-      <span className="font-display text-lg font-semibold tracking-tight">HandwerkAI</span>
+      <span className="font-display text-lg font-semibold tracking-tight">ZunftEcho</span>
     </span>
   );
 }
@@ -102,7 +102,7 @@ function LandingPage() {
     <div className="min-h-screen overflow-x-hidden bg-white text-slate-950">
       <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-10">
-          <Link to="/" aria-label="HandwerkAI Startseite">
+          <Link to="/" aria-label="ZunftEcho Startseite">
             <Brand />
           </Link>
 
@@ -145,7 +145,7 @@ function LandingPage() {
                 Mehr vollständige Kundenanfragen. Weniger Rückrufchaos.
               </h1>
               <p className="mt-6 max-w-xl text-lg leading-8 text-slate-600">
-                HandwerkAI nimmt Website-Anfragen auf, stellt die richtigen Rückfragen und übergibt
+                ZunftEcho nimmt Website-Anfragen auf, stellt die richtigen Rückfragen und übergibt
                 Ihrem Team vollständige Leads – auch wenn gerade alle auf der Baustelle sind.
               </p>
 
@@ -187,8 +187,8 @@ function LandingPage() {
                       <Bot className="size-5" />
                     </span>
                     <div>
-                      <p className="text-sm font-semibold">Lena · digitale Assistentin</p>
-                      <p className="text-xs text-emerald-600">● Online</p>
+                      <p className="text-sm font-semibold">Lena · Beispielname</p>
+                      <p className="text-xs text-emerald-600">● Online · Name frei wählbar</p>
                     </div>
                   </div>
                   <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
@@ -340,7 +340,7 @@ function LandingPage() {
                 30 Tage im echten Betrieb testen.
               </h2>
               <p className="mt-5 text-lg leading-8 text-slate-600">
-                Kein anonymer Selbstbedienungs-Test: Wir richten HandwerkAI gemeinsam ein und prüfen
+                Kein anonymer Selbstbedienungs-Test: Wir richten ZunftEcho gemeinsam ein und prüfen
                 mit echten Anfragen, ob es Ihrem Betrieb Arbeit abnimmt.
               </p>
               <div className="mt-7 rounded-xl border border-orange-200 bg-orange-50 p-4 text-sm leading-6 text-orange-950">
@@ -400,7 +400,7 @@ function LandingPage() {
         <section className="bg-primary py-16 text-primary-foreground">
           <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-7 px-5 sm:px-8 lg:flex-row lg:items-center lg:px-10">
             <div>
-              <h2 className="text-3xl font-semibold">Passt HandwerkAI zu Ihrem Betrieb?</h2>
+              <h2 className="text-3xl font-semibold">Passt ZunftEcho zu Ihrem Betrieb?</h2>
               <p className="mt-3 max-w-2xl text-primary-foreground/80">
                 Senden Sie uns Ihre Eckdaten. Wir melden uns persönlich und klären, ob der Pilot für
                 Ihre aktuellen Anfragen sinnvoll ist.
@@ -433,8 +433,14 @@ function LandingPage() {
             <Link className="hover:text-slate-950" to="/login">
               Kundenlogin
             </Link>
+            <Link className="hover:text-slate-950" to="/impressum">
+              Impressum
+            </Link>
+            <Link className="hover:text-slate-950" to="/datenschutz">
+              Datenschutz
+            </Link>
           </div>
-          <p>© {new Date().getFullYear()} HandwerkAI</p>
+          <p>© {new Date().getFullYear()} ZunftEcho</p>
         </div>
       </footer>
     </div>

@@ -16,13 +16,13 @@ import { supabase } from "@/integrations/supabase/client";
 export const Route = createFileRoute("/_authenticated/einrichtung")({
   head: () => ({
     meta: [
-      { title: "Einrichtung – HandwerkAI" },
+      { title: "Einrichtung – ZunftEcho" },
       {
         name: "description",
         content:
           "Schritt-für-Schritt-Einrichtung: Unternehmensprofil, Leistungen, Servicegebiete, Öffnungszeiten und KI-Mitarbeiter.",
       },
-      { property: "og:title", content: "Einrichtung – HandwerkAI" },
+      { property: "og:title", content: "Einrichtung – ZunftEcho" },
       {
         property: "og:description",
         content: "In fünf Schritten zum einsatzbereiten KI-Mitarbeiter für Ihren SHK-Betrieb.",
@@ -155,11 +155,7 @@ function OnboardingPage() {
           .from("opening_hours")
           .select("day_of_week, is_open, open_time, close_time")
           .eq("company_id", existingCompanyId),
-        supabase
-          .from("ai_agents")
-          .select("*")
-          .eq("company_id", existingCompanyId)
-          .maybeSingle(),
+        supabase.from("ai_agents").select("*").eq("company_id", existingCompanyId).maybeSingle(),
       ]);
 
       if (cancelled) return;
@@ -187,9 +183,7 @@ function OnboardingPage() {
         });
       }
 
-      setServices(
-        (servicesRes.data ?? []).map((row) => (row.name ?? "").trim()).filter(Boolean),
-      );
+      setServices((servicesRes.data ?? []).map((row) => (row.name ?? "").trim()).filter(Boolean));
       setAreas((areasRes.data ?? []).map((row) => (row.name ?? "").trim()).filter(Boolean));
 
       if ((hoursRes.data ?? []).length) {
@@ -256,7 +250,6 @@ function OnboardingPage() {
       };
     });
 
-
   const saveAgent = async (targetCompanyId: string) => {
     const name = ai.name.trim();
     if (!name) return null;
@@ -278,18 +271,15 @@ function OnboardingPage() {
       return updateError?.message ?? null;
     }
 
-    const { data, error: rpcError } = await supabase.rpc(
-      "create_ai_agent_for_current_company",
-      {
-        agent_name: name,
-        agent_description: ai.description.trim(),
-        agent_language: "de",
-        agent_response_style: "professionell",
-        agent_welcome_message: ai.welcome_message.trim(),
-        agent_fallback_message: ai.fallback_message.trim(),
-        agent_human_handoff_enabled: ai.human_handoff_enabled,
-      },
-    );
+    const { data, error: rpcError } = await supabase.rpc("create_ai_agent_for_current_company", {
+      agent_name: name,
+      agent_description: ai.description.trim(),
+      agent_language: "de",
+      agent_response_style: "professionell",
+      agent_welcome_message: ai.welcome_message.trim(),
+      agent_fallback_message: ai.fallback_message.trim(),
+      agent_human_handoff_enabled: ai.human_handoff_enabled,
+    });
 
     if (rpcError) return rpcError.message;
     if (typeof data === "string") setAgentId(data);
@@ -335,9 +325,11 @@ function OnboardingPage() {
       if (delError) return delError.message;
     }
     if (newServices.length) {
-      const { error: insError } = await supabase.from("services").insert(
-        newServices.map((name) => ({ company_id: targetCompanyId, name, is_active: true })),
-      );
+      const { error: insError } = await supabase
+        .from("services")
+        .insert(
+          newServices.map((name) => ({ company_id: targetCompanyId, name, is_active: true })),
+        );
       if (insError) return insError.message;
     }
 
@@ -366,9 +358,9 @@ function OnboardingPage() {
       if (delError) return delError.message;
     }
     if (newAreas.length) {
-      const { error: insError } = await supabase.from("service_areas").insert(
-        newAreas.map((name) => ({ company_id: targetCompanyId, name, is_active: true })),
-      );
+      const { error: insError } = await supabase
+        .from("service_areas")
+        .insert(newAreas.map((name) => ({ company_id: targetCompanyId, name, is_active: true })));
       if (insError) return insError.message;
     }
 
@@ -426,7 +418,6 @@ function OnboardingPage() {
       return;
     }
 
-
     setError(null);
     setSuccess(null);
     setLoading(true);
@@ -451,20 +442,17 @@ function OnboardingPage() {
       return;
     }
 
-    const { data, error: rpcError } = await (supabase.rpc as any)(
-      "complete_company_onboarding",
-      {
-        company_name: company.name.trim(),
-        company_industry: company.branche.trim(),
-        company_phone: company.phone.trim(),
-        company_email: company.email.trim(),
-        company_address: company.address.trim(),
-        company_description: company.description.trim(),
-        services_data: services,
-        service_areas_data: areas,
-        opening_hours_data: openingHoursPayload(),
-      },
-    );
+    const { data, error: rpcError } = await supabase.rpc("complete_company_onboarding", {
+      company_name: company.name.trim(),
+      company_industry: company.branche.trim(),
+      company_phone: company.phone.trim(),
+      company_email: company.email.trim(),
+      company_address: company.address.trim(),
+      company_description: company.description.trim(),
+      services_data: services,
+      service_areas_data: areas,
+      opening_hours_data: openingHoursPayload(),
+    });
 
     if (rpcError) {
       setLoading(false);
@@ -515,7 +503,6 @@ function OnboardingPage() {
     }
     goToStep(Math.min(steps.length - 1, step + 1));
   };
-
 
   const addTo = (
     value: string,
@@ -823,9 +810,7 @@ function OnboardingPage() {
                   </div>
                   <Switch
                     checked={ai.human_handoff_enabled}
-                    onCheckedChange={(checked) =>
-                      setAi({ ...ai, human_handoff_enabled: checked })
-                    }
+                    onCheckedChange={(checked) => setAi({ ...ai, human_handoff_enabled: checked })}
                   />
                 </div>
                 <div className="flex items-center justify-between gap-4 rounded-md border p-3">

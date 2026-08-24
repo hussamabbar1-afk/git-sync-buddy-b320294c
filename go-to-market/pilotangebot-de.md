@@ -1,12 +1,12 @@
-# HandwerkAI Pilotangebot
+# ZunftEcho Pilotangebot
 
 Stand: 24. August 2026
 
 ## Positionierung
 
-HandwerkAI ist der digitale Anfrageassistent für kleine SHK-Betriebe, die während Baustellen- und Kundenterminen nicht jede Website-Anfrage sofort beantworten können.
+ZunftEcho ist der digitale Anfrageassistent für kleine SHK-Betriebe, die während Baustellen- und Kundenterminen nicht jede Website-Anfrage sofort beantworten können.
 
-Der Assistent nimmt Anfragen rund um die Uhr entgegen, qualifiziert das Anliegen, erfasst Kontaktdaten und Einsatzort, erkennt akute Gefahren, prüft Terminwünsche und übergibt Sonderfälle strukturiert an einen Mitarbeiter. Alle Vorgänge landen im gemeinsamen HandwerkAI-Arbeitsbereich.
+Der Assistent nimmt Anfragen rund um die Uhr entgegen, qualifiziert das Anliegen, erfasst Kontaktdaten und Einsatzort, erkennt akute Gefahren, prüft Terminwünsche und übergibt Sonderfälle strukturiert an einen Mitarbeiter. Alle Vorgänge landen im gemeinsamen ZunftEcho-Arbeitsbereich.
 
 ## Zielkunde des ersten Piloten
 
@@ -42,7 +42,7 @@ Der Pilot ist auf maximal fünf gleichzeitig betreute Betriebe begrenzt.
 
 **149 € netto pro Monat**, monatlich kündbar.
 
-Der Betrieb entscheidet erst nach dem 30-Tage-Piloten, ob HandwerkAI weiter genutzt wird. Bei einer Fortsetzung fällt keine weitere Einrichtungsgebühr an.
+Der Betrieb entscheidet erst nach dem 30-Tage-Piloten, ob ZunftEcho weiter genutzt wird. Bei einer Fortsetzung fällt keine weitere Einrichtungsgebühr an.
 
 Außergewöhnlich hohes Anfragevolumen oder individuelle Integrationen werden vorab separat vereinbart. Es werden im Pilotangebot keine künstlichen Funktions- oder Nachrichtenkontingente versprochen.
 
@@ -58,7 +58,7 @@ Diese Punkte dürfen im Verkauf nicht als bereits verfügbar dargestellt werden.
 
 ## Nutzenversprechen
 
-> Mehr vollständige Kundenanfragen, weniger Rückrufchaos: HandwerkAI erfasst Anliegen, Kontaktdaten und Terminwünsche, während Ihr Team arbeitet.
+> Mehr vollständige Kundenanfragen, weniger Rückrufchaos: ZunftEcho erfasst Anliegen, Kontaktdaten und Terminwünsche, während Ihr Team arbeitet.
 
 Kurze Variante:
 
@@ -87,7 +87,7 @@ In der Demo wird eine echte Kundenanfrage des Betriebs durchgespielt. Es werden 
 
 ## Interne Preislogik
 
-Der Pilotpreis von 99 € senkt das Risiko für den ersten Kunden, bleibt aber ein bezahlter Auftrag. Der reguläre Preis von 149 € positioniert HandwerkAI zwischen einfacher Handwerkersoftware und einem betreuten KI-Chat-Angebot.
+Der Pilotpreis von 99 € senkt das Risiko für den ersten Kunden, bleibt aber ein bezahlter Auftrag. Der reguläre Preis von 149 € positioniert ZunftEcho zwischen einfacher Handwerkersoftware und einem betreuten KI-Chat-Angebot.
 
 Öffentlich einsehbare Vergleichswerte zum Stand August 2026:
 
