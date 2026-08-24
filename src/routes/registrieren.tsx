@@ -49,6 +49,7 @@ function PilotRequestPage() {
     const formElement = event.currentTarget;
     const form = new FormData(formElement);
     const value = (name: string) => String(form.get(name) ?? "").trim();
+    const requestSource = new URLSearchParams(window.location.search).get("source")?.trim() ?? "";
 
     setRequestState("submitting");
 
@@ -64,6 +65,9 @@ function PilotRequestPage() {
             website: value("website"),
             message: value("message"),
             fax: value("fax"),
+            source: /^[a-z0-9][a-z0-9:-]{0,79}$/i.test(requestSource)
+              ? requestSource.toLowerCase()
+              : "website",
           },
         },
       );

@@ -118,6 +118,8 @@ export default {
       const phone = text(payload, "phone", 50);
       const website = text(payload, "website", 300);
       const message = text(payload, "message", 2000);
+      const sourceValue = text(payload, "source", 80).toLowerCase();
+      const source = /^[a-z0-9][a-z0-9:-]{0,79}$/.test(sourceValue) ? sourceValue : "website";
 
       if (company.length < 2 || contactName.length < 2 || !isEmail(email) || !isWebsite(website)) {
         throw new RequestFailure(422, "invalid_request", "Bitte prüfen Sie Ihre Angaben.");
@@ -153,6 +155,7 @@ export default {
           phone: phone || null,
           website: website || null,
           message: message || null,
+          source,
           fingerprint_hash: fingerprint,
         })
         .select("id")
@@ -172,6 +175,7 @@ export default {
           ["E-Mail", email],
           ["Telefon", phone || "–"],
           ["Website", website || "–"],
+          ["Quelle", source],
           ["Nachricht", message || "–"],
         ]
           .map(
@@ -197,7 +201,7 @@ export default {
               replyTo: { email, name: contactName.slice(0, 70) },
               subject: `Neue Pilotanfrage – ${company}`,
               htmlContent: `<h2>Neue ZunftEcho-Pilotanfrage</h2>${details}`,
-              textContent: `Neue ZunftEcho-Pilotanfrage\n\nFirma: ${company}\nAnsprechpartner: ${contactName}\nE-Mail: ${email}\nTelefon: ${phone || "–"}\nWebsite: ${website || "–"}\n\n${message || "–"}`,
+              textContent: `Neue ZunftEcho-Pilotanfrage\n\nFirma: ${company}\nAnsprechpartner: ${contactName}\nE-Mail: ${email}\nTelefon: ${phone || "–"}\nWebsite: ${website || "–"}\nQuelle: ${source}\n\n${message || "–"}`,
             }),
             signal: AbortSignal.timeout(15_000),
           });
