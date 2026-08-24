@@ -2,3 +2,6 @@ project_id = "srufegisweghdswdsdxb"
 
 [functions.send-business-document]
 verify_jwt = true
+
+[functions.pilot-request]
+verify_jwt = false

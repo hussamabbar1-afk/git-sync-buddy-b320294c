@@ -76,12 +76,15 @@ function DatenschutzPage() {
                 3. Pilot- und Kontaktanfragen
               </h2>
               <p className="mt-3">
-                Das Pilotformular überträgt keine Daten automatisch. Es erstellt lokal eine E-Mail
-                in Ihrem E-Mail-Programm. Erst wenn Sie diese dort absenden, erhalten wir die von
-                Ihnen eingetragenen Angaben. Wir verarbeiten sie zur Beantwortung Ihrer Anfrage und
-                zur Vorbereitung eines möglichen Vertrags nach Art. 6 Abs. 1 lit. b DSGVO. Soweit
-                keine Geschäftsbeziehung entsteht, löschen wir die Anfrage grundsätzlich spätestens
-                nach zwölf Monaten, sofern keine gesetzlichen Aufbewahrungspflichten entgegenstehen.
+                Wenn Sie das Pilotformular absenden, verarbeiten wir Firmenname, Ansprechpartner,
+                geschäftliche E-Mail-Adresse sowie Ihre freiwilligen Angaben zu Telefon, Website und
+                Anliegen. Die Angaben werden in unserer über Supabase bereitgestellten Datenbank
+                gespeichert und zur Benachrichtigung per E-Mail über Brevo verarbeitet. Zur
+                Missbrauchsabwehr bilden wir vorübergehend einen nicht öffentlich zugänglichen,
+                pseudonymisierten Prüfwert aus Verbindungs- und Anfragedaten. Rechtsgrundlage ist
+                Art. 6 Abs. 1 lit. b und lit. f DSGVO. Soweit keine Geschäftsbeziehung entsteht,
+                löschen wir die Anfrage grundsätzlich spätestens nach zwölf Monaten, sofern keine
+                gesetzlichen Aufbewahrungspflichten entgegenstehen.
               </p>
             </section>
 

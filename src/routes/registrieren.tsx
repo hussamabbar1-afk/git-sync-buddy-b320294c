@@ -1,13 +1,21 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, Bot, Check, Mail, Send } from "lucide-react";
+import { ArrowLeft, ArrowRight, Bot, Check, CircleCheck, LoaderCircle, Send } from "lucide-react";
 import { useState, type FormEvent } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { supabase } from "@/integrations/supabase/client";
 
 const PILOT_EMAIL = "hussamabbar4@gmail.com";
+
+type PilotRequestResponse = {
+  ok?: boolean;
+  message?: string;
+};
+
+type RequestState = "idle" | "submitting" | "success" | "error";
 
 export const Route = createFileRoute("/registrieren")({
   head: () => ({
@@ -31,34 +39,42 @@ export const Route = createFileRoute("/registrieren")({
 });
 
 function PilotRequestPage() {
-  const [mailOpened, setMailOpened] = useState(false);
+  const [requestState, setRequestState] = useState<RequestState>("idle");
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const form = new FormData(event.currentTarget);
+    const formElement = event.currentTarget;
+    const form = new FormData(formElement);
     const value = (name: string) => String(form.get(name) ?? "").trim();
 
-    const body = [
-      "Guten Tag,",
-      "",
-      "ich interessiere mich für den 30-Tage-Einführungspilot von ZunftEcho.",
-      "",
-      `Firma: ${value("company")}`,
-      `Ansprechpartner: ${value("contact")}`,
-      `E-Mail: ${value("email")}`,
-      `Telefon: ${value("phone") || "–"}`,
-      `Website: ${value("website") || "–"}`,
-      "",
-      "Aktuelle Situation / Nachricht:",
-      value("message") || "–",
-      "",
-      "Bitte melden Sie sich zur persönlichen Abstimmung bei mir.",
-    ].join("\n");
+    setRequestState("submitting");
 
-    window.location.href = `mailto:${PILOT_EMAIL}?subject=${encodeURIComponent(
-      `Pilotanfrage ZunftEcho – ${value("company")}`,
-    )}&body=${encodeURIComponent(body)}`;
-    setMailOpened(true);
+    try {
+      const { data, error } = await supabase.functions.invoke<PilotRequestResponse>(
+        "pilot-request",
+        {
+          body: {
+            company: value("company"),
+            contact: value("contact"),
+            email: value("email"),
+            phone: value("phone"),
+            website: value("website"),
+            message: value("message"),
+            fax: value("fax"),
+          },
+        },
+      );
+
+      if (error || !data?.ok) {
+        setRequestState("error");
+        return;
+      }
+
+      formElement.reset();
+      setRequestState("success");
+    } catch {
+      setRequestState("error");
+    }
   }
 
   return (
@@ -129,20 +145,38 @@ function PilotRequestPage() {
             </p>
           </div>
 
-          {mailOpened ? (
+          {requestState === "success" ? (
             <div
               role="status"
-              className="mb-6 flex items-start gap-3 rounded-xl border border-sky-200 bg-sky-50 p-4 text-sm leading-6 text-sky-950"
+              className="mb-6 flex items-start gap-3 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm leading-6 text-emerald-950"
             >
-              <Mail className="mt-0.5 size-4 shrink-0" />
+              <CircleCheck className="mt-0.5 size-4 shrink-0" />
               <span>
-                Ihr E-Mail-Programm wurde geöffnet. Bitte prüfen Sie die vorbereitete Nachricht und
-                klicken Sie dort auf „Senden“.
+                Vielen Dank. Ihre Pilotanfrage ist bei uns eingegangen. Wir melden uns persönlich
+                zur Abstimmung der nächsten Schritte.
               </span>
             </div>
           ) : null}
 
+          {requestState === "error" ? (
+            <div
+              role="alert"
+              className="mb-6 rounded-xl border border-red-200 bg-red-50 p-4 text-sm leading-6 text-red-950"
+            >
+              Die Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es erneut oder
+              schreiben Sie an{" "}
+              <a className="font-semibold underline" href={`mailto:${PILOT_EMAIL}`}>
+                {PILOT_EMAIL}
+              </a>
+              .
+            </div>
+          ) : null}
+
           <form className="grid gap-5 sm:grid-cols-2" onSubmit={handleSubmit}>
+            <div className="hidden" aria-hidden="true">
+              <Label htmlFor="fax">Fax</Label>
+              <Input id="fax" name="fax" tabIndex={-1} autoComplete="off" />
+            </div>
             <div className="space-y-2">
               <Label htmlFor="company">Firmenname *</Label>
               <Input id="company" name="company" autoComplete="organization" required />
@@ -174,12 +208,25 @@ function PilotRequestPage() {
             </div>
 
             <div className="sm:col-span-2">
-              <Button type="submit" size="lg" className="h-12 w-full text-base">
-                E-Mail mit Pilotanfrage öffnen <Send />
+              <Button
+                type="submit"
+                size="lg"
+                className="h-12 w-full text-base"
+                disabled={requestState === "submitting"}
+              >
+                {requestState === "submitting" ? (
+                  <>
+                    Anfrage wird gesendet <LoaderCircle className="animate-spin" />
+                  </>
+                ) : (
+                  <>
+                    Pilot unverbindlich anfragen <Send />
+                  </>
+                )}
               </Button>
               <p className="mt-3 text-center text-xs leading-5 text-slate-500">
-                Beim Klick öffnet sich Ihr E-Mail-Programm. Die Anfrage wird erst versendet, wenn
-                Sie dort auf „Senden“ klicken. Hinweise finden Sie in unserer{" "}
+                Wir verwenden Ihre Angaben ausschließlich zur Bearbeitung der Anfrage. Hinweise
+                finden Sie in unserer{" "}
                 <Link to="/datenschutz" className="font-medium text-primary hover:underline">
                   Datenschutzerklärung
                 </Link>
@@ -189,7 +236,7 @@ function PilotRequestPage() {
           </form>
 
           <div className="mt-7 border-t border-slate-200 pt-6 text-sm text-slate-600">
-            E-Mail-Programm öffnet sich nicht? Schreiben Sie direkt an{" "}
+            Sie möchten lieber eine E-Mail schreiben? Erreichen Sie uns direkt unter{" "}
             <a className="font-medium text-primary hover:underline" href={`mailto:${PILOT_EMAIL}`}>
               {PILOT_EMAIL}
             </a>
