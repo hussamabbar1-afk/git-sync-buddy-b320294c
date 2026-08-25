@@ -9,6 +9,8 @@ import {
   Flame,
   LifeBuoy,
   Loader2,
+  MoonStar,
+  TrendingUp,
   Users,
 } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -141,6 +143,17 @@ type SeriesPoint = {
   appointments: number;
 };
 
+type PilotValueMetrics = {
+  days: number;
+  conversations: number;
+  after_hours_conversations: number;
+  leads: number;
+  appointments: number;
+  handoffs: number;
+  lead_conversion_rate_percent: number;
+  booking_conversion_rate_percent: number;
+};
+
 const itemTypeLabels: Record<string, string> = {
   handoff: "Übergabe",
   lead_sla: "Lead-Reaktion",
@@ -203,6 +216,20 @@ function parseOverview(payload: unknown): Overview {
   };
 }
 
+function parsePilotValue(payload: unknown): PilotValueMetrics {
+  const root = asRecord(payload);
+  return {
+    days: num(root["days"]),
+    conversations: num(root["conversations"]),
+    after_hours_conversations: num(root["after_hours_conversations"]),
+    leads: num(root["leads"]),
+    appointments: num(root["appointments"]),
+    handoffs: num(root["handoffs"]),
+    lead_conversion_rate_percent: num(root["lead_conversion_rate_percent"]),
+    booking_conversion_rate_percent: num(root["booking_conversion_rate_percent"]),
+  };
+}
+
 const chartConfig = {
   conversations: { label: "Gespräche", color: "var(--chart-1)" },
   leads: { label: "Leads", color: "var(--chart-2)" },
@@ -214,9 +241,11 @@ function DashboardPage() {
   const [queue, setQueue] = useState<AttentionItem[]>([]);
   const [topLeads, setTopLeads] = useState<TopLead[]>([]);
   const [series, setSeries] = useState<SeriesPoint[]>([]);
+  const [pilotValue, setPilotValue] = useState<PilotValueMetrics | null>(null);
   const [queueError, setQueueError] = useState<string | null>(null);
   const [leadsError, setLeadsError] = useState<string | null>(null);
   const [seriesError, setSeriesError] = useState<string | null>(null);
+  const [pilotValueError, setPilotValueError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -229,12 +258,14 @@ function DashboardPage() {
       setQueueError(null);
       setLeadsError(null);
       setSeriesError(null);
+      setPilotValueError(null);
 
-      const [overviewRes, queueRes, leadsRes, seriesRes] = await Promise.all([
+      const [overviewRes, queueRes, leadsRes, seriesRes, pilotValueRes] = await Promise.all([
         supabase.rpc("get_business_overview", { p_days: 30 }),
         supabase.rpc("get_attention_queue", { p_limit: 8 }),
         supabase.rpc("get_top_leads", { p_limit: 5 }),
         supabase.rpc("get_dashboard_series", { p_days: 14 }),
+        supabase.rpc("get_pilot_value_metrics", { p_days: 30 }),
       ]);
 
       if (cancelled) return;
@@ -301,6 +332,13 @@ function DashboardPage() {
             appointments: num(row.appointments),
           })),
         );
+      }
+
+      if (pilotValueRes.error) {
+        setPilotValueError("Der Pilot-Nutzen konnte nicht geladen werden.");
+        setPilotValue(null);
+      } else {
+        setPilotValue(parsePilotValue(pilotValueRes.data));
       }
 
       setLoading(false);
@@ -522,6 +560,51 @@ function DashboardPage() {
           </CardContent>
         </Card>
       </div>
+
+      <Card className="mt-6 border-primary/25 bg-primary/[0.03]">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <TrendingUp className="size-5 text-primary" /> Pilot-Nutzen (30 Tage)
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          {pilotValueError ? (
+            <p className="text-sm text-destructive">{pilotValueError}</p>
+          ) : pilotValue ? (
+            <div className="space-y-5">
+              <div className="rounded-lg border bg-background p-4">
+                <p className="flex items-center gap-2 text-sm font-medium">
+                  <MoonStar className="size-4 text-primary" />
+                  {pilotValue.after_hours_conversations} Anfragen außerhalb Ihrer Öffnungszeiten
+                  aufgenommen
+                </p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Genau diese Zahl macht sichtbar, welchen zusätzlichen Kundenzugang ZunftEcho Ihrem
+                  Betrieb ermöglicht.
+                </p>
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                {[
+                  { label: "Anfragen erfasst", value: pilotValue.conversations },
+                  { label: "Leads gewonnen", value: pilotValue.leads },
+                  { label: "Termine gebucht", value: pilotValue.appointments },
+                  {
+                    label: "Lead-Quote",
+                    value: `${pilotValue.lead_conversion_rate_percent} %`,
+                  },
+                ].map((stat) => (
+                  <div key={stat.label}>
+                    <p className="text-xs text-muted-foreground">{stat.label}</p>
+                    <p className="text-2xl font-semibold">{stat.value}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <p className="text-sm text-muted-foreground">Noch keine Pilotdaten vorhanden.</p>
+          )}
+        </CardContent>
+      </Card>
 
       <div className="mt-6 grid gap-4 lg:grid-cols-3">
         <Card className="lg:col-span-2">

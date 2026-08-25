@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "lib": ["deno.window", "deno.ns", "dom", "esnext"],
+    "strict": true
+  },
+  "imports": {
+    "@supabase/server": "npm:@supabase/server@1.4.1"
+  }
+}

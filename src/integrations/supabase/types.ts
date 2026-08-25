@@ -592,6 +592,7 @@ export type Database = {
           bank_bic: string | null
           bank_iban: string | null
           created_at: string
+          customer_appointment_emails_enabled: boolean
           daily_digest_enabled: boolean
           daily_digest_hour: number
           data_retention_days: number | null
@@ -609,6 +610,7 @@ export type Database = {
           legal_name: string | null
           minimum_booking_notice_minutes: number
           name: string
+          operational_email_notifications_enabled: boolean
           phone: string | null
           privacy_policy_url: string | null
           privacy_policy_version: string | null
@@ -630,6 +632,7 @@ export type Database = {
           bank_bic?: string | null
           bank_iban?: string | null
           created_at?: string
+          customer_appointment_emails_enabled?: boolean
           daily_digest_enabled?: boolean
           daily_digest_hour?: number
           data_retention_days?: number | null
@@ -647,6 +650,7 @@ export type Database = {
           legal_name?: string | null
           minimum_booking_notice_minutes?: number
           name?: string
+          operational_email_notifications_enabled?: boolean
           phone?: string | null
           privacy_policy_url?: string | null
           privacy_policy_version?: string | null
@@ -668,6 +672,7 @@ export type Database = {
           bank_bic?: string | null
           bank_iban?: string | null
           created_at?: string
+          customer_appointment_emails_enabled?: boolean
           daily_digest_enabled?: boolean
           daily_digest_hour?: number
           data_retention_days?: number | null
@@ -685,6 +690,7 @@ export type Database = {
           legal_name?: string | null
           minimum_booking_notice_minutes?: number
           name?: string
+          operational_email_notifications_enabled?: boolean
           phone?: string | null
           privacy_policy_url?: string | null
           privacy_policy_version?: string | null
@@ -2860,6 +2866,7 @@ export type Database = {
           created_at: string
           created_by: string | null
           customer_id: string | null
+          dedupe_key: string | null
           entity_id: string | null
           entity_type: string | null
           failed_at: string | null
@@ -2889,6 +2896,7 @@ export type Database = {
           created_at?: string
           created_by?: string | null
           customer_id?: string | null
+          dedupe_key?: string | null
           entity_id?: string | null
           entity_type?: string | null
           failed_at?: string | null
@@ -2918,6 +2926,7 @@ export type Database = {
           created_at?: string
           created_by?: string | null
           customer_id?: string | null
+          dedupe_key?: string | null
           entity_id?: string | null
           entity_type?: string | null
           failed_at?: string | null
@@ -4202,6 +4211,7 @@ export type Database = {
         Returns: Json
       }
       get_business_overview: { Args: { p_days?: number }; Returns: Json }
+      get_pilot_value_metrics: { Args: { p_days?: number }; Returns: Json }
       get_calendar_feed_status: { Args: never; Returns: Json }
       get_chat_quality_metrics: { Args: { p_days?: number }; Returns: Json }
       get_chatbot_context: { Args: { p_widget_key: string }; Returns: Json }

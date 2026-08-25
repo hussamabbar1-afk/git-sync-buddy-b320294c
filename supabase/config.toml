@@ -3,5 +3,8 @@ project_id = "srufegisweghdswdsdxb"
 [functions.send-business-document]
 verify_jwt = true
 
+[functions.send-outbound-messages]
+verify_jwt = false
+
 [functions.pilot-request]
 verify_jwt = false

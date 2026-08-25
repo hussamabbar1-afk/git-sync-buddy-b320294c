@@ -93,6 +93,9 @@ function CompanyPage() {
     quote_terms: "",
     quote_footer: "",
     invoice_payment_terms_days: "",
+    operational_email_notifications_enabled: false,
+    customer_appointment_emails_enabled: false,
+    appointment_reminder_minutes: "60",
   });
 
   const [services, setServices] = useState<ServiceRow[]>([]);
@@ -181,6 +184,11 @@ function CompanyPage() {
             companyData.invoice_payment_terms_days === undefined
               ? ""
               : String(companyData.invoice_payment_terms_days),
+          operational_email_notifications_enabled:
+            companyData.operational_email_notifications_enabled ?? false,
+          customer_appointment_emails_enabled:
+            companyData.customer_appointment_emails_enabled ?? false,
+          appointment_reminder_minutes: String(companyData.appointment_reminder_minutes ?? 60),
         });
 
         setServices(
@@ -247,12 +255,30 @@ function CompanyPage() {
 
     const paymentTermsRaw = form.invoice_payment_terms_days.trim();
     const paymentTermsDays = paymentTermsRaw === "" ? null : Number(paymentTermsRaw);
+    const reminderMinutes = Number(form.appointment_reminder_minutes.trim());
     if (
       paymentTermsDays !== null &&
       (!Number.isInteger(paymentTermsDays) || paymentTermsDays < 0 || paymentTermsDays > 365)
     ) {
       setSaveSuccess(false);
       setError("Zahlungsziel: Bitte eine ganze Zahl zwischen 0 und 365 Tagen eingeben.");
+      return;
+    }
+
+    if (!Number.isInteger(reminderMinutes) || reminderMinutes < 0 || reminderMinutes > 10080) {
+      setSaveSuccess(false);
+      setError("Terminerinnerung: Bitte eine ganze Zahl zwischen 0 und 10080 Minuten eingeben.");
+      return;
+    }
+
+    if (
+      (form.operational_email_notifications_enabled || form.customer_appointment_emails_enabled) &&
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())
+    ) {
+      setSaveSuccess(false);
+      setError(
+        "Bitte hinterlegen Sie eine gültige Betriebs-E-Mail, bevor Sie E-Mail-Benachrichtigungen aktivieren.",
+      );
       return;
     }
 
@@ -287,6 +313,9 @@ function CompanyPage() {
           bank_bic: form.bank_bic.trim() || null,
           quote_terms: form.quote_terms.trim() || null,
           quote_footer: form.quote_footer.trim() || null,
+          operational_email_notifications_enabled: form.operational_email_notifications_enabled,
+          customer_appointment_emails_enabled: form.customer_appointment_emails_enabled,
+          appointment_reminder_minutes: reminderMinutes,
           ...(paymentTermsDays === null ? {} : { invoice_payment_terms_days: paymentTermsDays }),
         })
         .eq("id", companyId);
@@ -513,11 +542,12 @@ function CompanyPage() {
       ) : null}
 
       <Tabs defaultValue="stammdaten">
-        <TabsList>
+        <TabsList className="h-auto flex-wrap">
           <TabsTrigger value="stammdaten">Stammdaten</TabsTrigger>
           <TabsTrigger value="leistungen">Leistungen</TabsTrigger>
           <TabsTrigger value="gebiete">Servicegebiete</TabsTrigger>
           <TabsTrigger value="zeiten">Öffnungszeiten</TabsTrigger>
+          <TabsTrigger value="benachrichtigungen">Benachrichtigungen</TabsTrigger>
           <TabsTrigger value="dokumente">Dokumente &amp; Finanzen</TabsTrigger>
         </TabsList>
 
@@ -773,6 +803,84 @@ function CompanyPage() {
                   </div>
                 </div>
               ))}
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="benachrichtigungen" className="mt-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>E-Mail-Benachrichtigungen</CardTitle>
+              <CardDescription>
+                Aktivieren Sie nur die Nachrichten, die Ihr Betrieb tatsächlich versenden möchte.
+                Der Versand ist standardmäßig ausgeschaltet.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="flex items-start justify-between gap-6 rounded-lg border p-4">
+                <div className="space-y-1">
+                  <Label htmlFor="operational-email-notifications">
+                    Neue Leads &amp; Übergaben
+                  </Label>
+                  <p className="text-sm text-muted-foreground">
+                    Der Betrieb erhält sofort eine E-Mail, wenn ZunftEcho einen Lead erfasst oder
+                    einen Mitarbeiter benötigt.
+                  </p>
+                </div>
+                <Switch
+                  id="operational-email-notifications"
+                  checked={form.operational_email_notifications_enabled}
+                  onCheckedChange={(checked) =>
+                    setForm({ ...form, operational_email_notifications_enabled: checked })
+                  }
+                />
+              </div>
+
+              <div className="space-y-4 rounded-lg border p-4">
+                <div className="flex items-start justify-between gap-6">
+                  <div className="space-y-1">
+                    <Label htmlFor="customer-appointment-emails">
+                      Terminbestätigungen &amp; Erinnerungen
+                    </Label>
+                    <p className="text-sm text-muted-foreground">
+                      Kunden mit hinterlegter E-Mail-Adresse erhalten eine Bestätigung und eine
+                      einmalige Erinnerung.
+                    </p>
+                  </div>
+                  <Switch
+                    id="customer-appointment-emails"
+                    checked={form.customer_appointment_emails_enabled}
+                    onCheckedChange={(checked) =>
+                      setForm({ ...form, customer_appointment_emails_enabled: checked })
+                    }
+                  />
+                </div>
+
+                <div className="max-w-xs space-y-2">
+                  <Label htmlFor="appointment-reminder-minutes">Erinnerung vor Termin</Label>
+                  <Input
+                    id="appointment-reminder-minutes"
+                    type="number"
+                    inputMode="numeric"
+                    min={0}
+                    max={10080}
+                    value={form.appointment_reminder_minutes}
+                    disabled={!form.customer_appointment_emails_enabled}
+                    onChange={(event) =>
+                      setForm({ ...form, appointment_reminder_minutes: event.target.value })
+                    }
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    Minuten vor dem Termin, z. B. 60. Mit 0 wird die Erinnerung deaktiviert; die
+                    Bestätigung bleibt aktiv.
+                  </p>
+                </div>
+              </div>
+
+              <p className="text-xs text-muted-foreground">
+                Als Absender wird die verifizierte ZunftEcho-Adresse verwendet. Antworten gehen an
+                die im Reiter „Stammdaten“ hinterlegte Betriebs-E-Mail.
+              </p>
             </CardContent>
           </Card>
         </TabsContent>
