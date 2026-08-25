@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
   Bot,
-  CalendarCheck,
   Check,
   CheckCircle2,
   ChevronRight,
@@ -12,11 +11,11 @@ import {
   PhoneCall,
   ShieldAlert,
   Sparkles,
-  UserCheck,
   Wrench,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { InteractiveChatDemo } from "@/components/interactive-chat-demo";
 
 const benefits = [
   {
@@ -219,50 +218,7 @@ function LandingPage() {
 
             <div className="relative mx-auto w-full max-w-xl lg:mx-0">
               <div className="absolute -inset-4 -z-10 rotate-2 rounded-[2rem] bg-sky-100/80" />
-              <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_32px_80px_-30px_rgba(15,23,42,0.35)]">
-                <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
-                  <div className="flex items-center gap-3">
-                    <span className="flex size-9 items-center justify-center rounded-full bg-primary text-white">
-                      <Bot className="size-5" />
-                    </span>
-                    <div>
-                      <p className="text-sm font-semibold">Lena · Beispielname</p>
-                      <p className="text-xs text-emerald-600">● Online · Name frei wählbar</p>
-                    </div>
-                  </div>
-                  <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
-                    Website-Chat
-                  </span>
-                </div>
-
-                <div className="space-y-4 bg-slate-50/70 p-5 sm:p-6">
-                  <div className="max-w-[85%] rounded-2xl rounded-tl-md border border-slate-200 bg-white p-3 text-sm leading-6 text-slate-700 shadow-sm">
-                    Guten Tag! Wie kann ich Ihnen heute helfen?
-                  </div>
-                  <div className="ml-auto max-w-[88%] rounded-2xl rounded-tr-md bg-primary p-3 text-sm leading-6 text-white shadow-sm">
-                    Unsere Heizung ist ausgefallen. Können Sie morgen nach Berlin-Neukölln kommen?
-                  </div>
-                  <div className="max-w-[88%] rounded-2xl rounded-tl-md border border-slate-200 bg-white p-3 text-sm leading-6 text-slate-700 shadow-sm">
-                    Gern. Damit der Betrieb Sie erreichen kann: Wie lautet Ihr Name und Ihre
-                    Telefonnummer?
-                  </div>
-                </div>
-
-                <div className="grid gap-3 border-t border-slate-200 p-4 sm:grid-cols-2">
-                  <div className="rounded-xl bg-emerald-50 p-3">
-                    <div className="flex items-center gap-2 text-sm font-semibold text-emerald-900">
-                      <UserCheck className="size-4" /> Lead qualifiziert
-                    </div>
-                    <p className="mt-1 text-xs text-emerald-800/75">Kontaktdaten & Einsatzort</p>
-                  </div>
-                  <div className="rounded-xl bg-sky-50 p-3">
-                    <div className="flex items-center gap-2 text-sm font-semibold text-sky-900">
-                      <CalendarCheck className="size-4" /> Terminwunsch erfasst
-                    </div>
-                    <p className="mt-1 text-xs text-sky-800/75">Dienstag · Vormittag</p>
-                  </div>
-                </div>
-              </div>
+              <InteractiveChatDemo />
 
               <div className="absolute -right-4 -bottom-7 hidden items-center gap-3 rounded-xl border border-slate-200 bg-white p-3 shadow-xl sm:flex">
                 <span className="flex size-10 items-center justify-center rounded-lg bg-orange-100 text-orange-700">

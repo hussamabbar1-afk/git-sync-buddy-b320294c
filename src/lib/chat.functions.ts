@@ -35,6 +35,38 @@ const metadataKeys = [
   "utm_term",
 ] as const;
 
+type QuickReply = { label: string; value: string };
+
+function normalizeQuickReplies(...sources: unknown[]): QuickReply[] {
+  const replies: QuickReply[] = [];
+
+  for (const source of sources) {
+    if (!Array.isArray(source)) continue;
+    for (const item of source) {
+      let label = "";
+      let value = "";
+
+      if (typeof item === "string") {
+        label = item.trim();
+        value = label;
+      } else if (item && typeof item === "object") {
+        const entry = item as Record<string, unknown>;
+        const rawLabel = entry["label"] ?? entry["title"] ?? entry["time"] ?? entry["start"];
+        const rawValue = entry["value"] ?? entry["message"] ?? rawLabel;
+        label = typeof rawLabel === "string" ? rawLabel.trim() : "";
+        value = typeof rawValue === "string" ? rawValue.trim() : "";
+      }
+
+      if (!label || !value || label.length > 120 || value.length > 500) continue;
+      if (replies.some((reply) => reply.label === label)) continue;
+      replies.push({ label, value });
+      if (replies.length === 6) return replies;
+    }
+  }
+
+  return replies;
+}
+
 export const sendChatMessage = createServerFn({ method: "POST" })
   .validator((data: unknown) => schema.parse(data))
   .handler(async ({ data }) => {
@@ -106,6 +138,12 @@ export const sendChatMessage = createServerFn({ method: "POST" })
       conversation_id?: unknown;
       assistant_message_id?: unknown;
       language?: unknown;
+      quick_replies?: unknown;
+      suggested_replies?: unknown;
+      appointment_slots?: unknown;
+      progress_percent?: unknown;
+      progress?: unknown;
+      summary?: unknown;
     };
 
     const supportedFields = ["message", "output", "text", "reply"] as const;
@@ -117,6 +155,12 @@ export const sendChatMessage = createServerFn({ method: "POST" })
       throw new Error("Ungültige Antwort vom Chat-Backend: Keine verwertbare Nachricht gefunden.");
     }
 
+    const rawProgress = responseBody.progress_percent ?? responseBody.progress;
+    const progress =
+      typeof rawProgress === "number" && Number.isFinite(rawProgress)
+        ? Math.max(0, Math.min(100, Math.round(rawProgress)))
+        : null;
+
     return {
       message: messageText,
       conversation_id:
@@ -127,5 +171,15 @@ export const sendChatMessage = createServerFn({ method: "POST" })
           ? responseBody.assistant_message_id
           : null,
       language: typeof responseBody.language === "string" ? responseBody.language : null,
+      quick_replies: normalizeQuickReplies(
+        responseBody.quick_replies,
+        responseBody.suggested_replies,
+        responseBody.appointment_slots,
+      ),
+      progress_percent: progress,
+      summary:
+        typeof responseBody.summary === "string" && responseBody.summary.trim()
+          ? responseBody.summary.trim().slice(0, 2000)
+          : null,
     };
   });

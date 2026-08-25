@@ -1,8 +1,18 @@
 import { useServerFn } from "@tanstack/react-start";
-import { Loader2, Send, ThumbsDown, ThumbsUp } from "lucide-react";
+import {
+  CheckCircle2,
+  Loader2,
+  Mail,
+  Phone,
+  RefreshCw,
+  Send,
+  ThumbsDown,
+  ThumbsUp,
+} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 import { Textarea } from "@/components/ui/textarea";
 import { SUPABASE_FUNCTIONS_URL } from "@/lib/supabase-urls";
 import { sendChatMessage } from "@/lib/chat.functions";
@@ -26,40 +36,115 @@ type ChatMessage = {
   assistant_message_id?: string | null;
   language?: string | null;
   rating?: 1 | -1 | null;
+  quick_replies?: QuickReply[];
+  progress_percent?: number | null;
+  summary?: string | null;
 };
 
-const storageKey = (widgetKey: string) => `zunftecho_chat_${widgetKey}`;
+export type QuickReply = { label: string; value: string };
+
+const conversationStorageKey = (widgetKey: string) => `zunftecho_chat_${widgetKey}`;
+const transcriptStorageKey = (widgetKey: string) => `zunftecho_chat_messages_${widgetKey}`;
+
+function restoreMessages(widgetKey: string): ChatMessage[] {
+  try {
+    const stored = sessionStorage.getItem(transcriptStorageKey(widgetKey));
+    if (!stored) return [];
+    const parsed = JSON.parse(stored) as unknown;
+    if (!Array.isArray(parsed)) return [];
+
+    return parsed.slice(-40).flatMap((item): ChatMessage[] => {
+      if (!item || typeof item !== "object") return [];
+      const value = item as Record<string, unknown>;
+      const role = value["role"];
+      const content = value["content"];
+      if ((role !== "user" && role !== "assistant") || typeof content !== "string") return [];
+
+      const quickReplies = Array.isArray(value["quick_replies"])
+        ? value["quick_replies"]
+            .flatMap((reply): QuickReply[] => {
+              if (!reply || typeof reply !== "object") return [];
+              const candidate = reply as Record<string, unknown>;
+              const label = candidate["label"];
+              const replyValue = candidate["value"];
+              if (typeof label !== "string" || typeof replyValue !== "string") return [];
+              return [{ label: label.slice(0, 120), value: replyValue.slice(0, 500) }];
+            })
+            .slice(0, 6)
+        : undefined;
+      const rawProgress = value["progress_percent"];
+
+      return [
+        {
+          role,
+          content: content.slice(0, 20_000),
+          assistant_message_id:
+            typeof value["assistant_message_id"] === "string"
+              ? value["assistant_message_id"]
+              : null,
+          language: typeof value["language"] === "string" ? value["language"].slice(0, 20) : null,
+          rating: value["rating"] === 1 || value["rating"] === -1 ? value["rating"] : null,
+          quick_replies: quickReplies,
+          progress_percent:
+            typeof rawProgress === "number" && Number.isFinite(rawProgress)
+              ? Math.max(0, Math.min(100, Math.round(rawProgress)))
+              : null,
+          summary: typeof value["summary"] === "string" ? value["summary"].slice(0, 2000) : null,
+        },
+      ];
+    });
+  } catch {
+    return [];
+  }
+}
 
 export function ChatWidget({
   widgetKey,
   welcomeMessage,
   metadata,
   maxMessageLength = 4000,
+  initialQuickReplies = [],
+  fallbackMessage,
+  contactPhone,
+  contactEmail,
 }: {
   widgetKey: string;
   welcomeMessage?: string | null;
   metadata?: ChatMetadata;
   maxMessageLength?: number;
+  initialQuickReplies?: QuickReply[];
+  fallbackMessage?: string | null;
+  contactPhone?: string | null;
+  contactEmail?: string | null;
 }) {
   const send = useServerFn(sendChatMessage);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [retryText, setRetryText] = useState<string | null>(null);
+  const [restored, setRestored] = useState(false);
   const conversationId = useRef<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    conversationId.current = sessionStorage.getItem(storageKey(widgetKey));
+    conversationId.current = sessionStorage.getItem(conversationStorageKey(widgetKey));
+    setMessages(restoreMessages(widgetKey));
+    setRestored(true);
   }, [widgetKey]);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !restored) return;
+    sessionStorage.setItem(transcriptStorageKey(widgetKey), JSON.stringify(messages.slice(-40)));
+  }, [messages, restored, widgetKey]);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight });
   }, [messages, pending]);
 
-  const handleSend = async () => {
-    const text = input.trim();
+  const handleSend = async (suggestedText?: string, appendUser = true) => {
+    const text = (suggestedText ?? input).trim();
     if (!text || pending) return;
     if (text.length > maxMessageLength) {
       setError(
@@ -69,9 +154,10 @@ export function ChatWidget({
     }
 
     setError(null);
+    setRetryText(null);
     setPending(true);
     setInput("");
-    setMessages((m) => [...m, { role: "user", content: text }]);
+    if (appendUser) setMessages((m) => [...m, { role: "user", content: text }]);
 
     try {
       const result = await send({
@@ -85,7 +171,7 @@ export function ChatWidget({
 
       if (result.conversation_id) {
         conversationId.current = result.conversation_id;
-        sessionStorage.setItem(storageKey(widgetKey), result.conversation_id);
+        sessionStorage.setItem(conversationStorageKey(widgetKey), result.conversation_id);
       }
 
       setMessages((m) => [
@@ -96,10 +182,17 @@ export function ChatWidget({
           assistant_message_id: result.assistant_message_id,
           language: result.language,
           rating: null,
+          quick_replies: result.quick_replies,
+          progress_percent: result.progress_percent,
+          summary: result.summary,
         },
       ]);
     } catch {
-      setError("Die Nachricht konnte nicht gesendet werden. Bitte erneut versuchen.");
+      setRetryText(text);
+      setError(
+        fallbackMessage?.trim() ||
+          "Die Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut.",
+      );
     } finally {
       setPending(false);
     }
@@ -176,8 +269,59 @@ export function ChatWidget({
                 </button>
               </div>
             ) : null}
+            {message.role === "assistant" &&
+            message.progress_percent !== null &&
+            message.progress_percent !== undefined ? (
+              <div className="max-w-[85%] space-y-1 px-1">
+                <div className="flex items-center justify-between text-[10px] text-muted-foreground">
+                  <span>Anfragefortschritt</span>
+                  <span>{message.progress_percent}%</span>
+                </div>
+                <Progress value={message.progress_percent} className="h-1.5" />
+              </div>
+            ) : null}
+            {message.role === "assistant" && message.summary ? (
+              <div className="max-w-[90%] rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-xs text-emerald-950">
+                <p className="flex items-center gap-1.5 font-medium">
+                  <CheckCircle2 className="size-3.5" /> Zusammenfassung
+                </p>
+                <p className="mt-1 whitespace-pre-line leading-5">{message.summary}</p>
+              </div>
+            ) : null}
+            {message.role === "assistant" &&
+            index === messages.length - 1 &&
+            message.quick_replies?.length ? (
+              <div className="flex flex-wrap gap-1.5 pt-1">
+                {message.quick_replies.map((reply) => (
+                  <button
+                    key={`${reply.label}-${reply.value}`}
+                    type="button"
+                    onClick={() => void handleSend(reply.value)}
+                    disabled={pending}
+                    className="rounded-full border border-primary/30 bg-background px-3 py-1.5 text-left text-[11px] font-medium text-primary transition-colors hover:bg-primary/5 disabled:opacity-50"
+                  >
+                    {reply.label}
+                  </button>
+                ))}
+              </div>
+            ) : null}
           </div>
         ))}
+        {!messages.length && initialQuickReplies.length ? (
+          <div className="grid gap-1.5 sm:grid-cols-2">
+            {initialQuickReplies.map((reply) => (
+              <button
+                key={`${reply.label}-${reply.value}`}
+                type="button"
+                onClick={() => void handleSend(reply.value)}
+                disabled={pending}
+                className="rounded-lg border bg-background px-3 py-2 text-left text-xs font-medium transition-colors hover:border-primary/40 hover:bg-primary/5 disabled:opacity-50"
+              >
+                {reply.label}
+              </button>
+            ))}
+          </div>
+        ) : null}
         {pending ? (
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <Loader2 className="size-3 animate-spin" /> Antwort wird geladen …
@@ -185,7 +329,35 @@ export function ChatWidget({
         ) : null}
       </div>
 
-      {error ? <p className="border-t px-3 py-2 text-xs text-destructive">{error}</p> : null}
+      {error ? (
+        <div className="space-y-2 border-t px-3 py-2 text-xs text-destructive" role="alert">
+          <p>{error}</p>
+          <div className="flex flex-wrap items-center gap-2">
+            {retryText ? (
+              <button
+                type="button"
+                onClick={() => void handleSend(retryText, false)}
+                className="inline-flex items-center gap-1 rounded border border-destructive/30 px-2 py-1 font-medium"
+              >
+                <RefreshCw className="size-3" /> Erneut senden
+              </button>
+            ) : null}
+            {contactPhone ? (
+              <a className="inline-flex items-center gap-1 underline" href={`tel:${contactPhone}`}>
+                <Phone className="size-3" /> Anrufen
+              </a>
+            ) : null}
+            {contactEmail ? (
+              <a
+                className="inline-flex items-center gap-1 underline"
+                href={`mailto:${contactEmail}`}
+              >
+                <Mail className="size-3" /> E-Mail
+              </a>
+            ) : null}
+          </div>
+        </div>
+      ) : null}
 
       <div className="border-t p-2">
         <div className="flex items-end gap-2">
@@ -204,7 +376,11 @@ export function ChatWidget({
             disabled={pending}
             aria-describedby="chat-character-count"
           />
-          <Button onClick={() => void handleSend()} disabled={pending || !input.trim()}>
+          <Button
+            aria-label="Nachricht senden"
+            onClick={() => void handleSend()}
+            disabled={pending || !input.trim()}
+          >
             {pending ? <Loader2 className="size-4 animate-spin" /> : <Send className="size-4" />}
           </Button>
         </div>

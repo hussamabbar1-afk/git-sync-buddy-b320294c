@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 
-import { ChatWidget, type ChatMetadata } from "@/components/chat-widget";
+import { ChatWidget, type ChatMetadata, type QuickReply } from "@/components/chat-widget";
 import { SUPABASE_FUNCTIONS_URL } from "@/lib/supabase-urls";
 
 type WidgetSearch = {
@@ -65,6 +65,10 @@ type WidgetConfig = {
   launcher_label?: string;
   show_branding?: boolean;
   max_message_length?: number;
+  fallback_message?: string | null;
+  contact_phone?: string | null;
+  contact_email?: string | null;
+  service_options?: unknown;
 };
 
 function WidgetPage() {
@@ -139,6 +143,20 @@ function WidgetPage() {
     ...(search.utm_term ? { utm_term: search.utm_term } : {}),
   };
 
+  const initialQuickReplies: QuickReply[] = [
+    ...(Array.isArray(config?.service_options) ? config.service_options : [])
+      .filter(
+        (service): service is string => typeof service === "string" && service.trim().length > 0,
+      )
+      .slice(0, 4)
+      .map((service) => ({
+        label: service,
+        value: `Ich interessiere mich für ${service}.`,
+      })),
+    { label: "Termin anfragen", value: "Ich möchte einen Termin anfragen." },
+    { label: "Rückruf anfordern", value: "Ich möchte einen Rückruf anfordern." },
+  ].slice(0, 6);
+
   return (
     <div className="flex min-h-screen flex-col bg-background p-3">
       {status === "loading" ? (
@@ -160,6 +178,10 @@ function WidgetPage() {
               welcomeMessage={config?.welcome_message ?? null}
               metadata={metadata}
               maxMessageLength={config?.max_message_length ?? 4000}
+              initialQuickReplies={initialQuickReplies}
+              fallbackMessage={config?.fallback_message ?? null}
+              contactPhone={config?.contact_phone ?? null}
+              contactEmail={config?.contact_email ?? null}
             />
           </div>
           {config?.show_branding ? (
