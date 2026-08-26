@@ -16,8 +16,13 @@ dist-ssr
 .nitro
 *.local
 
+# Private migration backups (may contain credential references)
+.private/
+
 # Wrangler / Cloudflare
 .wrangler/
+.wrangler-logs/
+.npm-cache/
 .dev.vars
 
 # Editor directories and files
