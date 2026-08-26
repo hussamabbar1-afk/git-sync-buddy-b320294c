@@ -1,7 +1,8 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
-const FALLBACK_CHAT_ENDPOINT = "https://mohamad-alabar.app.n8n.cloud/webhook/chat";
+const FALLBACK_CHAT_ENDPOINT =
+  "https://srufegisweghdswdsdxb.supabase.co/functions/v1/chat-orchestrator";
 
 const optionalText = z.string().trim().min(1).max(2000).optional();
 
@@ -70,9 +71,9 @@ function normalizeQuickReplies(...sources: unknown[]): QuickReply[] {
 export const sendChatMessage = createServerFn({ method: "POST" })
   .validator((data: unknown) => schema.parse(data))
   .handler(async ({ data }) => {
-    const endpoint = process.env["N8N_CHAT_ENDPOINT"] || FALLBACK_CHAT_ENDPOINT;
+    const endpoint = process.env["CHAT_ENDPOINT"] || FALLBACK_CHAT_ENDPOINT;
 
-    // Live v3 required payload stays exactly as before; optional fields are additive.
+    // Keep the public widget contract stable while the backend remains replaceable.
     const body: Record<string, string> = {
       widget_key: data.widget_key,
       message: data.message,
@@ -183,3 +184,4 @@ export const sendChatMessage = createServerFn({ method: "POST" })
           : null,
     };
   });
+
