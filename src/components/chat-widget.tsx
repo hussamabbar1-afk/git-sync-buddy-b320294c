@@ -1,4 +1,3 @@
-import { useServerFn } from "@tanstack/react-start";
 import {
   CheckCircle2,
   Loader2,
@@ -117,7 +116,6 @@ export function ChatWidget({
   contactPhone?: string | null;
   contactEmail?: string | null;
 }) {
-  const send = useServerFn(sendChatMessage);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [pending, setPending] = useState(false);
@@ -160,13 +158,11 @@ export function ChatWidget({
     if (appendUser) setMessages((m) => [...m, { role: "user", content: text }]);
 
     try {
-      const result = await send({
-        data: {
-          widget_key: widgetKey,
-          message: text,
-          ...(conversationId.current ? { conversation_id: conversationId.current } : {}),
-          ...(metadata ?? {}),
-        },
+      const result = await sendChatMessage({
+        widget_key: widgetKey,
+        message: text,
+        ...(conversationId.current ? { conversation_id: conversationId.current } : {}),
+        ...(metadata ?? {}),
       });
 
       if (result.conversation_id) {

@@ -1,8 +1,8 @@
-import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
 const FALLBACK_CHAT_ENDPOINT =
   "https://srufegisweghdswdsdxb.supabase.co/functions/v1/chat-orchestrator";
+const CHAT_ENDPOINT = import.meta.env.VITE_CHAT_ENDPOINT || FALLBACK_CHAT_ENDPOINT;
 
 const optionalText = z.string().trim().min(1).max(2000).optional();
 
@@ -68,119 +68,117 @@ function normalizeQuickReplies(...sources: unknown[]): QuickReply[] {
   return replies;
 }
 
-export const sendChatMessage = createServerFn({ method: "POST" })
-  .validator((data: unknown) => schema.parse(data))
-  .handler(async ({ data }) => {
-    const endpoint = process.env["CHAT_ENDPOINT"] || FALLBACK_CHAT_ENDPOINT;
+export async function sendChatMessage(input: unknown) {
+  const data = schema.parse(input);
 
-    // Keep the public widget contract stable while the backend remains replaceable.
-    const body: Record<string, string> = {
-      widget_key: data.widget_key,
-      message: data.message,
-    };
-    if (data.conversation_id) body["conversation_id"] = data.conversation_id;
-    for (const key of metadataKeys) {
-      const value = data[key];
-      if (value) body[key] = value;
-    }
+  // Keep the public widget contract stable while the backend remains replaceable.
+  const body: Record<string, string> = {
+    widget_key: data.widget_key,
+    message: data.message,
+  };
+  if (data.conversation_id) body["conversation_id"] = data.conversation_id;
+  for (const key of metadataKeys) {
+    const value = data[key];
+    if (value) body[key] = value;
+  }
 
-    const res = await fetch(endpoint, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(body),
-    });
-
-    if (!res.ok) {
-      throw new Error(`Chat-Backend antwortete mit Status ${res.status}`);
-    }
-
-    const text = await res.text();
-    if (!text.trim()) {
-      throw new Error("Ungültige Antwort vom Chat-Backend: Leere Antwort erhalten.");
-    }
-
-    let raw: unknown;
-    try {
-      raw = JSON.parse(text);
-    } catch {
-      raw = { message: text };
-    }
-
-    let payload: unknown;
-    if (Array.isArray(raw)) {
-      payload = raw.find((item) => {
-        if (typeof item === "string") return item.trim().length > 0;
-        if (item && typeof item === "object") {
-          const candidate = item as Record<string, unknown>;
-          return ["message", "output", "text", "reply"].some(
-            (key) =>
-              typeof candidate[key] === "string" && candidate[key].toString().trim().length > 0,
-          );
-        }
-        return false;
-      });
-    } else {
-      payload = raw;
-    }
-
-    if (typeof payload === "string") {
-      payload = { message: payload };
-    }
-
-    if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
-      throw new Error("Ungültige Antwort vom Chat-Backend: Keine verwertbare Nachricht gefunden.");
-    }
-
-    const responseBody = payload as {
-      message?: unknown;
-      output?: unknown;
-      text?: unknown;
-      reply?: unknown;
-      conversation_id?: unknown;
-      assistant_message_id?: unknown;
-      language?: unknown;
-      quick_replies?: unknown;
-      suggested_replies?: unknown;
-      appointment_slots?: unknown;
-      progress_percent?: unknown;
-      progress?: unknown;
-      summary?: unknown;
-    };
-
-    const supportedFields = ["message", "output", "text", "reply"] as const;
-    const messageText = supportedFields
-      .map((key) => responseBody[key])
-      .find((value) => typeof value === "string" && value.trim().length > 0);
-
-    if (typeof messageText !== "string") {
-      throw new Error("Ungültige Antwort vom Chat-Backend: Keine verwertbare Nachricht gefunden.");
-    }
-
-    const rawProgress = responseBody.progress_percent ?? responseBody.progress;
-    const progress =
-      typeof rawProgress === "number" && Number.isFinite(rawProgress)
-        ? Math.max(0, Math.min(100, Math.round(rawProgress)))
-        : null;
-
-    return {
-      message: messageText,
-      conversation_id:
-        typeof responseBody.conversation_id === "string" ? responseBody.conversation_id : null,
-      // Present from prepared v11 onwards; live v3 omits these.
-      assistant_message_id:
-        typeof responseBody.assistant_message_id === "string"
-          ? responseBody.assistant_message_id
-          : null,
-      language: typeof responseBody.language === "string" ? responseBody.language : null,
-      quick_replies: normalizeQuickReplies(
-        responseBody.quick_replies,
-        responseBody.suggested_replies,
-        responseBody.appointment_slots,
-      ),
-      progress_percent: progress,
-      summary:
-        typeof responseBody.summary === "string" && responseBody.summary.trim()
-          ? responseBody.summary.trim().slice(0, 2000)
-          : null,
-    };
+  const res = await fetch(CHAT_ENDPOINT, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(body),
   });
+
+  if (!res.ok) {
+    throw new Error(`Chat-Backend antwortete mit Status ${res.status}`);
+  }
+
+  const text = await res.text();
+  if (!text.trim()) {
+    throw new Error("Ungültige Antwort vom Chat-Backend: Leere Antwort erhalten.");
+  }
+
+  let raw: unknown;
+  try {
+    raw = JSON.parse(text);
+  } catch {
+    raw = { message: text };
+  }
+
+  let payload: unknown;
+  if (Array.isArray(raw)) {
+    payload = raw.find((item) => {
+      if (typeof item === "string") return item.trim().length > 0;
+      if (item && typeof item === "object") {
+        const candidate = item as Record<string, unknown>;
+        return ["message", "output", "text", "reply"].some(
+          (key) =>
+            typeof candidate[key] === "string" && candidate[key].toString().trim().length > 0,
+        );
+      }
+      return false;
+    });
+  } else {
+    payload = raw;
+  }
+
+  if (typeof payload === "string") {
+    payload = { message: payload };
+  }
+
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+    throw new Error("Ungültige Antwort vom Chat-Backend: Keine verwertbare Nachricht gefunden.");
+  }
+
+  const responseBody = payload as {
+    message?: unknown;
+    output?: unknown;
+    text?: unknown;
+    reply?: unknown;
+    conversation_id?: unknown;
+    assistant_message_id?: unknown;
+    language?: unknown;
+    quick_replies?: unknown;
+    suggested_replies?: unknown;
+    appointment_slots?: unknown;
+    progress_percent?: unknown;
+    progress?: unknown;
+    summary?: unknown;
+  };
+
+  const supportedFields = ["message", "output", "text", "reply"] as const;
+  const messageText = supportedFields
+    .map((key) => responseBody[key])
+    .find((value) => typeof value === "string" && value.trim().length > 0);
+
+  if (typeof messageText !== "string") {
+    throw new Error("Ungültige Antwort vom Chat-Backend: Keine verwertbare Nachricht gefunden.");
+  }
+
+  const rawProgress = responseBody.progress_percent ?? responseBody.progress;
+  const progress =
+    typeof rawProgress === "number" && Number.isFinite(rawProgress)
+      ? Math.max(0, Math.min(100, Math.round(rawProgress)))
+      : null;
+
+  return {
+    message: messageText,
+    conversation_id:
+      typeof responseBody.conversation_id === "string" ? responseBody.conversation_id : null,
+    // Present from prepared v11 onwards; live v3 omits these.
+    assistant_message_id:
+      typeof responseBody.assistant_message_id === "string"
+        ? responseBody.assistant_message_id
+        : null,
+    language: typeof responseBody.language === "string" ? responseBody.language : null,
+    quick_replies: normalizeQuickReplies(
+      responseBody.quick_replies,
+      responseBody.suggested_replies,
+      responseBody.appointment_slots,
+    ),
+    progress_percent: progress,
+    summary:
+      typeof responseBody.summary === "string" && responseBody.summary.trim()
+        ? responseBody.summary.trim().slice(0, 2000)
+        : null,
+  };
+}
