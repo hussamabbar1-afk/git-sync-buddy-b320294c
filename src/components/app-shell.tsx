@@ -11,6 +11,7 @@ import {
   LayoutDashboard,
   LogOut,
   MessageSquare,
+  PlugZap,
   Receipt,
   Settings,
   Users,
@@ -28,6 +29,7 @@ const navigation = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/unternehmen", label: "Unternehmensprofil", icon: Building2 },
   { to: "/ki-mitarbeiter", label: "KI-Mitarbeiter", icon: Bot },
+  { to: "/installation", label: "Widget installieren", icon: PlugZap },
   { to: "/konversationen", label: "Konversationen", icon: MessageSquare },
   { to: "/leads", label: "Leads", icon: Users },
   { to: "/kunden", label: "Kunden", icon: Contact },
@@ -60,7 +62,12 @@ const navigationSections = [
   },
   {
     label: "Konfiguration",
-    items: [byPath("/unternehmen"), byPath("/ki-mitarbeiter"), byPath("/einstellungen")],
+    items: [
+      byPath("/unternehmen"),
+      byPath("/ki-mitarbeiter"),
+      byPath("/installation"),
+      byPath("/einstellungen"),
+    ],
   },
 ] as const;
 

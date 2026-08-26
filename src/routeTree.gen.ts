@@ -24,6 +24,7 @@ import { Route as AuthenticatedAuftraegeRouteImport } from './routes/_authentica
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedEinrichtungRouteImport } from './routes/_authenticated/einrichtung'
 import { Route as AuthenticatedEinstellungenRouteImport } from './routes/_authenticated/einstellungen'
+import { Route as AuthenticatedInstallationRouteImport } from './routes/_authenticated/installation'
 import { Route as AuthenticatedKiMitarbeiterRouteImport } from './routes/_authenticated/ki-mitarbeiter'
 import { Route as AuthenticatedKonversationenRouteImport } from './routes/_authenticated/konversationen'
 import { Route as AuthenticatedKundenRouteImport } from './routes/_authenticated/kunden'
@@ -108,6 +109,12 @@ const AuthenticatedEinstellungenRoute =
     path: '/einstellungen',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedInstallationRoute =
+  AuthenticatedInstallationRouteImport.update({
+    id: '/installation',
+    path: '/installation',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedKiMitarbeiterRoute =
   AuthenticatedKiMitarbeiterRouteImport.update({
     id: '/ki-mitarbeiter',
@@ -162,6 +169,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/einrichtung': typeof AuthenticatedEinrichtungRoute
   '/einstellungen': typeof AuthenticatedEinstellungenRoute
+  '/installation': typeof AuthenticatedInstallationRoute
   '/ki-mitarbeiter': typeof AuthenticatedKiMitarbeiterRoute
   '/konversationen': typeof AuthenticatedKonversationenRoute
   '/kunden': typeof AuthenticatedKundenRoute
@@ -185,6 +193,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/einrichtung': typeof AuthenticatedEinrichtungRoute
   '/einstellungen': typeof AuthenticatedEinstellungenRoute
+  '/installation': typeof AuthenticatedInstallationRoute
   '/ki-mitarbeiter': typeof AuthenticatedKiMitarbeiterRoute
   '/konversationen': typeof AuthenticatedKonversationenRoute
   '/kunden': typeof AuthenticatedKundenRoute
@@ -210,6 +219,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/einrichtung': typeof AuthenticatedEinrichtungRoute
   '/_authenticated/einstellungen': typeof AuthenticatedEinstellungenRoute
+  '/_authenticated/installation': typeof AuthenticatedInstallationRoute
   '/_authenticated/ki-mitarbeiter': typeof AuthenticatedKiMitarbeiterRoute
   '/_authenticated/konversationen': typeof AuthenticatedKonversationenRoute
   '/_authenticated/kunden': typeof AuthenticatedKundenRoute
@@ -235,6 +245,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/einrichtung'
     | '/einstellungen'
+    | '/installation'
     | '/ki-mitarbeiter'
     | '/konversationen'
     | '/kunden'
@@ -258,6 +269,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/einrichtung'
     | '/einstellungen'
+    | '/installation'
     | '/ki-mitarbeiter'
     | '/konversationen'
     | '/kunden'
@@ -282,6 +294,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard'
     | '/_authenticated/einrichtung'
     | '/_authenticated/einstellungen'
+    | '/_authenticated/installation'
     | '/_authenticated/ki-mitarbeiter'
     | '/_authenticated/konversationen'
     | '/_authenticated/kunden'
@@ -410,6 +423,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedEinstellungenRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/installation': {
+      id: '/_authenticated/installation'
+      path: '/installation'
+      fullPath: '/installation'
+      preLoaderRoute: typeof AuthenticatedInstallationRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/ki-mitarbeiter': {
       id: '/_authenticated/ki-mitarbeiter'
       path: '/ki-mitarbeiter'
@@ -469,6 +489,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedEinrichtungRoute: typeof AuthenticatedEinrichtungRoute
   AuthenticatedEinstellungenRoute: typeof AuthenticatedEinstellungenRoute
+  AuthenticatedInstallationRoute: typeof AuthenticatedInstallationRoute
   AuthenticatedKiMitarbeiterRoute: typeof AuthenticatedKiMitarbeiterRoute
   AuthenticatedKonversationenRoute: typeof AuthenticatedKonversationenRoute
   AuthenticatedKundenRoute: typeof AuthenticatedKundenRoute
@@ -485,6 +506,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedEinrichtungRoute: AuthenticatedEinrichtungRoute,
   AuthenticatedEinstellungenRoute: AuthenticatedEinstellungenRoute,
+  AuthenticatedInstallationRoute: AuthenticatedInstallationRoute,
   AuthenticatedKiMitarbeiterRoute: AuthenticatedKiMitarbeiterRoute,
   AuthenticatedKonversationenRoute: AuthenticatedKonversationenRoute,
   AuthenticatedKundenRoute: AuthenticatedKundenRoute,

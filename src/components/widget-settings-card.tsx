@@ -1,4 +1,5 @@
-import { AlertTriangle, Check, Code2, Copy, Loader2, ShieldCheck } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { AlertTriangle, ArrowRight, Check, Code2, Copy, Loader2, ShieldCheck } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
 import { ChatWidget } from "@/components/chat-widget";
@@ -294,6 +295,11 @@ export function WidgetSettingsCard({
           <Badge variant={published ? "secondary" : "outline"}>
             {published ? "Veröffentlicht" : "Noch nicht veröffentlicht"}
           </Badge>
+          <Button variant="outline" size="sm" className="sm:ml-auto" asChild>
+            <Link to="/installation">
+              Geführte Installation <ArrowRight className="size-3.5" />
+            </Link>
+          </Button>
         </div>
 
         {!canManage ? (
