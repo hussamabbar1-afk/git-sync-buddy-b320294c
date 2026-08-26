@@ -26,6 +26,10 @@ The OpenAI Responses API is used only for structured language understanding, gen
 replies, and non-German localization. It is not allowed to create appointment IDs, mutate rows, or
 override slot checks.
 
+The public widget calls the Edge Function directly. No secret is exposed in the browser: access is
+gated by the public widget key, the configured origin allow-list, message limits, and
+`consume_widget_request` rate limiting.
+
 ## Cutover gates
 
 - [x] Export and inventory every active n8n workflow
@@ -33,15 +37,14 @@ override slot checks.
 - [x] Unit-test date/time, service resolution, appointment targeting, and emergency detection
 - [x] Deploy an isolated `chat-orchestrator` endpoint
 - [x] Verify health and fail-closed widget security
-- [ ] Store `OPENAI_API_KEY` in Supabase Edge Function secrets
-- [ ] Run German and multilingual end-to-end chat tests
-- [ ] Run booking, cancellation, rescheduling, waitlist, and emergency scenarios
-- [ ] Deploy the frontend endpoint switch
-- [ ] Observe production logs and compare database results
+- [x] Store `OPENAI_API_KEY` in Supabase Edge Function secrets
+- [x] Run German and multilingual end-to-end chat tests
+- [x] Run booking, cancellation, rescheduling, waitlist, and emergency scenarios
+- [x] Deploy the frontend endpoint switch
+- [x] Verify the production widget response and database result
 - [ ] Archive n8n only after the rollback window
 
 ## Rollback
 
 Until final verification, n8n remains published. A frontend rollback only requires restoring the old
 chat endpoint; no database rollback is needed because both implementations use the same schema.
-
