@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "strict": true
+  },
+  "tasks": {
+    "test": "deno test --allow-env orchestrator.test.ts"
+  }
+}
+
+
