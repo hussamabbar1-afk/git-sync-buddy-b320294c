@@ -7,13 +7,16 @@ import {
   CheckSquare,
   ClipboardList,
   Contact,
+  CreditCard,
   FileText,
+  CircleHelp,
   LayoutDashboard,
   LogOut,
   MessageSquare,
   PlugZap,
   Receipt,
   Settings,
+  UserRoundCog,
   Users,
 } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
@@ -30,12 +33,15 @@ const navigation = [
   { to: "/unternehmen", label: "Unternehmensprofil", icon: Building2 },
   { to: "/ki-mitarbeiter", label: "KI-Mitarbeiter", icon: Bot },
   { to: "/installation", label: "Widget installieren", icon: PlugZap },
+  { to: "/team", label: "Team und Benutzer", icon: UserRoundCog },
+  { to: "/hilfe", label: "Hilfe und Support", icon: CircleHelp },
   { to: "/konversationen", label: "Konversationen", icon: MessageSquare },
   { to: "/leads", label: "Leads", icon: Users },
   { to: "/kunden", label: "Kunden", icon: Contact },
   { to: "/angebote", label: "Angebote", icon: FileText },
   { to: "/auftraege", label: "Aufträge", icon: ClipboardList },
   { to: "/rechnungen", label: "Rechnungen", icon: Receipt },
+  { to: "/abonnement", label: "Abo und Zahlungen", icon: CreditCard },
   { to: "/aufgaben", label: "Aufgaben", icon: CheckSquare },
   { to: "/termine", label: "Termine", icon: Calendar },
   { to: "/einstellungen", label: "Einstellungen", icon: Settings },
@@ -56,6 +62,7 @@ const navigationSections = [
       byPath("/angebote"),
       byPath("/auftraege"),
       byPath("/rechnungen"),
+      byPath("/abonnement"),
       byPath("/aufgaben"),
       byPath("/termine"),
     ],
@@ -66,7 +73,9 @@ const navigationSections = [
       byPath("/unternehmen"),
       byPath("/ki-mitarbeiter"),
       byPath("/installation"),
+      byPath("/team"),
       byPath("/einstellungen"),
+      byPath("/hilfe"),
     ],
   },
 ] as const;
@@ -98,7 +107,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="flex min-h-screen bg-background">
-      <aside className="hidden w-64 shrink-0 flex-col bg-sidebar text-sidebar-foreground lg:flex">
+      <aside className="sticky top-0 hidden h-screen w-64 shrink-0 self-start flex-col overflow-y-auto bg-sidebar text-sidebar-foreground lg:flex">
         <div className="flex h-16 items-center gap-2 border-b border-sidebar-border px-5">
           <span className="flex size-8 items-center justify-center rounded-md bg-sidebar-primary text-sidebar-primary-foreground">
             <Bot className="size-4" />
@@ -166,6 +175,9 @@ export function AppShell({ children }: { children: ReactNode }) {
           </Link>
           <Link to="/datenschutz" className="hover:text-foreground">
             Datenschutz
+          </Link>
+          <Link to="/agb" className="hover:text-foreground">
+            AGB
           </Link>
         </footer>
 

@@ -170,6 +170,9 @@ function LandingPage() {
             <a className="transition-colors hover:text-slate-950" href="#pilot">
               Pilotangebot
             </a>
+            <Link className="transition-colors hover:text-slate-950" to="/preise">
+              Preise
+            </Link>
           </nav>
 
           <div className="flex items-center gap-2">
@@ -565,11 +568,17 @@ function LandingPage() {
             <Link className="hover:text-slate-950" to="/login">
               Kundenlogin
             </Link>
+            <Link className="hover:text-slate-950" to="/preise">
+              Preise
+            </Link>
             <Link className="hover:text-slate-950" to="/impressum">
               Impressum
             </Link>
             <Link className="hover:text-slate-950" to="/datenschutz">
               Datenschutz
+            </Link>
+            <Link className="hover:text-slate-950" to="/agb">
+              AGB
             </Link>
           </div>
           <p>© {new Date().getFullYear()} ZunftEcho</p>

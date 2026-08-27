@@ -7,6 +7,7 @@ import {
   cleanText,
   computeProgress,
   containsAcuteDanger,
+  shouldEscalateSentiment,
   formatAppointment,
   isQuestionWorthRecording,
   normalizeLanguage,
@@ -194,6 +195,7 @@ const analysisSchema: JsonObject = {
   required: [
     "user_language",
     "intent",
+    "customer_sentiment",
     "human_handoff",
     "human_handoff_reason",
     "name",
@@ -213,6 +215,7 @@ const analysisSchema: JsonObject = {
   properties: {
     user_language: { type: "string" },
     intent: { type: "string", enum: ["general", "booking", "cancel", "reschedule", "waitlist"] },
+    customer_sentiment: { type: "string", enum: ["neutral", "frustrated", "angry"] },
     human_handoff: { type: "boolean" },
     human_handoff_reason: { type: "string" },
     name: { type: "string" },
@@ -280,6 +283,9 @@ function asAnalysis(value: JsonObject): ChatAnalysis {
   const urgency = ["low", "normal", "high", "emergency"].includes(String(value.urgency))
     ? (String(value.urgency) as ChatAnalysis["urgency"])
     : "normal";
+  const sentiment = ["neutral", "frustrated", "angry"].includes(String(value.customer_sentiment))
+    ? (String(value.customer_sentiment) as ChatAnalysis["customer_sentiment"])
+    : "neutral";
   const contact = ["phone", "email", "unknown"].includes(String(value.preferred_contact_method))
     ? (String(value.preferred_contact_method) as ChatAnalysis["preferred_contact_method"])
     : "unknown";
@@ -297,6 +303,7 @@ function asAnalysis(value: JsonObject): ChatAnalysis {
   return {
     user_language: normalizeLanguage(value.user_language),
     intent,
+    customer_sentiment: sentiment,
     human_handoff: value.human_handoff === true,
     human_handoff_reason: cleanText(value.human_handoff_reason, 300),
     name: cleanText(value.name, 120),
@@ -376,6 +383,7 @@ async function analyzeChat(args: {
 Analysiere hauptsächlich current_message; nutze den Verlauf nur für ausstehende Bestätigungen und bereits genannte Daten.
 Gib interne Kategorien und reply_de immer auf Deutsch zurück. Erkenne user_language als ISO-639-1-Code.
 intent: booking für neue Terminwünsche, cancel für Absagen, reschedule für Verschiebungen, waitlist nur bei ausdrücklicher Wartelistenbitte, sonst general.
+customer_sentiment ist angry nur bei klar erkennbarer starker Verärgerung, wiederholten Beschwerden oder ausdrücklicher Eskalation. Ein dringendes technisches Problem allein ist neutral oder frustrated. frustrated löst keine automatische Übergabe aus.
 Setze Bestätigungsfelder nur bei einer eindeutigen Bestätigung des zuletzt angebotenen Vorgangs. Das Wort "buchen" in einem neuen Wunsch ist keine Bestätigung.
 target_appointment_id darf nur exakt eine ID aus future_appointments sein; sonst leer lassen. Erfinde niemals IDs.
 appointment.service darf nur exakt der Name einer konfigurierten Dienstleistung sein; sonst leer. Erfinde keine Leistungen, Termine, Preise oder Unternehmensdaten.
@@ -1035,11 +1043,17 @@ Deno.serve(async (request: Request) => {
     let lead = await upsertLead(existingLead, companyId, conversationId, analysis);
 
     const danger = containsAcuteDanger(message) || analysis.urgency === "emergency";
+    const angryCustomer = shouldEscalateSentiment(analysis.customer_sentiment);
     let internalResult: ActionResult;
-    if (danger || (analysis.human_handoff && agent.human_handoff_enabled !== false)) {
+    if (
+      danger ||
+      ((analysis.human_handoff || angryCustomer) && agent.human_handoff_enabled !== false)
+    ) {
       const reason = danger
         ? "Akute Gefahr"
-        : analysis.human_handoff_reason || "Kunde verlangt Mitarbeiter";
+        : angryCustomer
+          ? "Verärgerter Kunde – sofortige Rückmeldung empfohlen"
+          : analysis.human_handoff_reason || "Kunde verlangt Mitarbeiter";
       await Promise.all([
         patchRows("conversations", `id=eq.${encodeURIComponent(conversationId)}`, {
           status: "needs_human",

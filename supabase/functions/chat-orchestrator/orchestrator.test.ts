@@ -6,6 +6,7 @@ import {
   resolveAppointmentTarget,
   resolveConfiguredService,
   securityReply,
+  shouldEscalateSentiment,
   validIsoDate,
   validTime,
 } from "./orchestrator.ts";
@@ -64,4 +65,10 @@ Deno.test("danger and customer-safe fallback messages", () => {
   if (!securityReply("rate_limited").includes("später")) throw new Error("rate message missing");
   if (!availabilityReply("conflict").includes("nicht mehr verfügbar"))
     throw new Error("conflict message missing");
+});
+
+Deno.test("escalates only unmistakably angry customers", () => {
+  if (!shouldEscalateSentiment("angry")) throw new Error("angry customer not escalated");
+  if (shouldEscalateSentiment("frustrated")) throw new Error("frustration escalated too early");
+  if (shouldEscalateSentiment("neutral")) throw new Error("neutral customer escalated");
 });

@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { AlertCircle, Bot, LockKeyhole } from "lucide-react";
-import { useEffect, useState, type FormEvent } from "react";
+import { useCallback, useEffect, useState, type FormEvent } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -38,15 +38,24 @@ function LoginPage() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
+  const navigateAfterLogin = useCallback(() => {
+    const pendingInvite = window.localStorage.getItem("zunftecho_pending_invite");
+    if (pendingInvite && /^[a-f0-9]{64}$/i.test(pendingInvite)) {
+      navigate({ to: "/einladung", search: { token: pendingInvite }, replace: true });
+      return;
+    }
+    navigate({ to: "/dashboard", replace: true });
+  }, [navigate]);
+
   useEffect(() => {
     let active = true;
     supabase.auth.getSession().then(({ data }) => {
-      if (active && data.session) navigate({ to: "/dashboard", replace: true });
+      if (active && data.session) navigateAfterLogin();
     });
     return () => {
       active = false;
     };
-  }, [navigate]);
+  }, [navigateAfterLogin]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -73,7 +82,7 @@ function LoginPage() {
       return;
     }
 
-    navigate({ to: "/dashboard", replace: true });
+    navigateAfterLogin();
   }
 
   return (

@@ -38,7 +38,7 @@ function DatenschutzPage() {
       <main className="mx-auto max-w-4xl px-5 py-12 sm:px-8 sm:py-16">
         <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
           <h1 className="font-display text-4xl font-semibold">Datenschutzhinweise</h1>
-          <p className="mt-3 text-sm text-slate-500">Stand: 24. August 2026</p>
+          <p className="mt-3 text-sm text-slate-500">Stand: 27. August 2026</p>
 
           <div className="mt-10 space-y-9 leading-7 text-slate-700">
             <section>
@@ -94,13 +94,14 @@ function DatenschutzPage() {
               </h2>
               <p className="mt-3">
                 Für eingerichtete Kundenkonten verarbeiten wir Anmeldedaten, Unternehmensprofil,
-                Konfigurationen, Kundenanfragen, Leads, Termine sowie die im Arbeitsbereich
-                angelegten Geschäftsdokumente. Dies ist für Bereitstellung, Sicherheit und Support
-                der Plattform erforderlich und beruht auf Art. 6 Abs. 1 lit. b und lit. f DSGVO.
+                Teamrollen und Einladungen, Konfigurationen, Kundenanfragen, Leads, Termine,
+                Qualitätsbewertungen sowie die im Arbeitsbereich angelegten Geschäftsdokumente. Dies
+                ist für Bereitstellung, Sicherheit und Support der Plattform erforderlich und beruht
+                auf Art. 6 Abs. 1 lit. b und lit. f DSGVO.
               </p>
               <p className="mt-3">
-                Authentifizierung und Datenbank werden über Supabase bereitgestellt. Dienstleister
-                ist Supabase, Inc., 970 Toa Payoh North #07-04, Singapore 318992. Zugriff erhalten
+                Authentifizierung, Datenbank und serverseitige Funktionen werden über Supabase
+                bereitgestellt. Das Projekt wird in der Region Frankfurt betrieben. Zugriff erhalten
                 nur berechtigte Nutzer des jeweiligen Betriebs und eingesetzte Auftragsverarbeiter.
               </p>
             </section>
@@ -111,12 +112,19 @@ function DatenschutzPage() {
               </h2>
               <p className="mt-3">
                 Wenn ein Betrieb den ZunftEcho-Chat einsetzt, werden Chatnachrichten, Kontaktdaten
-                und Angaben zum Anliegen zur Beantwortung und Lead-Qualifizierung verarbeitet. Für
-                Automatisierungen nutzen wir n8n Cloud der n8n GmbH, Novalisstraße 10, 10115 Berlin.
-                Abhängig von der Kundenkonfiguration kann zusätzlich ein KI-Dienst eingebunden sein;
-                der jeweilige Betrieb informiert seine Websitebesucher über den konkret eingesetzten
-                Anbieter. ZunftEcho verarbeitet diese Daten im Regelfall als Auftragsverarbeiter des
-                jeweiligen Betriebs.
+                und Angaben zum Anliegen zur Beantwortung, Lead-Qualifizierung, Terminvorbereitung,
+                Gefahrenerkennung und menschlichen Übergabe verarbeitet. Die technische
+                Orchestrierung erfolgt in Supabase Edge Functions. Für die Sprach- und
+                Inhaltsanalyse verwenden wir die OpenAI API. Inhalte aus der API werden nach den
+                Bedingungen für Geschäftskunden standardmäßig nicht zum Training der Modelle
+                verwendet.
+              </p>
+              <p className="mt-3">
+                Die KI bereitet Anfragen und Vorschläge vor; rechtsverbindliche Entscheidungen mit
+                vergleichbarer erheblicher Wirkung trifft sie nicht allein. Kritische oder eindeutig
+                verärgerte Anfragen werden an einen Menschen übergeben. ZunftEcho verarbeitet
+                Chatdaten im Regelfall als Auftragsverarbeiter des jeweiligen Betriebs; der Betrieb
+                bleibt für die Information seiner Websitebesucher verantwortlich.
               </p>
             </section>
 
@@ -139,8 +147,9 @@ function DatenschutzPage() {
               <p className="mt-3">
                 Wir verwenden derzeit keine Werbe- oder Reichweitenmessungs-Cookies. Für Anmeldung,
                 Sicherheit und die Fortsetzung einer Chat-Sitzung können technisch erforderliche
-                Cookies oder Browser-Speicher eingesetzt werden. Diese Funktionen sind für den
-                angeforderten Dienst erforderlich.
+                Cookies oder Browser-Speicher eingesetzt werden. Dazu gehört auch die lokale
+                Zwischenspeicherung eines Team-Einladungstokens bis zur Anmeldung. Diese Funktionen
+                sind für den angeforderten Dienst erforderlich.
               </p>
             </section>
 
@@ -150,9 +159,11 @@ function DatenschutzPage() {
               </h2>
               <p className="mt-3">
                 Daten erhalten nur Personen und Dienstleister, die sie für Betrieb, Support oder
-                Vertragserfüllung benötigen. Soweit Anbieter Daten außerhalb des Europäischen
-                Wirtschaftsraums verarbeiten, erfolgt die Übermittlung auf Grundlage eines
-                Angemessenheitsbeschlusses oder geeigneter Garantien wie
+                Vertragserfüllung benötigen. Dazu gehören insbesondere Cloudflare für Hosting und
+                Schutz, Supabase für Datenbank und serverseitige Funktionen, OpenAI für die
+                KI-Analyse und Brevo für E-Mail-Versand. Soweit Anbieter Daten außerhalb des
+                Europäischen Wirtschaftsraums verarbeiten, erfolgt die Übermittlung auf Grundlage
+                eines Angemessenheitsbeschlusses oder geeigneter Garantien wie
                 EU-Standardvertragsklauseln.
               </p>
             </section>

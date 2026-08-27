@@ -11,25 +11,32 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AgbRouteImport } from './routes/agb'
 import { Route as DatenschutzRouteImport } from './routes/datenschutz'
+import { Route as EinladungRouteImport } from './routes/einladung'
 import { Route as ImpressumRouteImport } from './routes/impressum'
+import { Route as KundenportalRouteImport } from './routes/kundenportal'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as PasswortVergessenRouteImport } from './routes/passwort-vergessen'
 import { Route as PasswortZuruecksetzenRouteImport } from './routes/passwort-zuruecksetzen'
+import { Route as PreiseRouteImport } from './routes/preise'
 import { Route as RegistrierenRouteImport } from './routes/registrieren'
 import { Route as WidgetRouteImport } from './routes/widget'
+import { Route as AuthenticatedAbonnementRouteImport } from './routes/_authenticated/abonnement'
 import { Route as AuthenticatedAngeboteRouteImport } from './routes/_authenticated/angebote'
 import { Route as AuthenticatedAufgabenRouteImport } from './routes/_authenticated/aufgaben'
 import { Route as AuthenticatedAuftraegeRouteImport } from './routes/_authenticated/auftraege'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedEinrichtungRouteImport } from './routes/_authenticated/einrichtung'
 import { Route as AuthenticatedEinstellungenRouteImport } from './routes/_authenticated/einstellungen'
+import { Route as AuthenticatedHilfeRouteImport } from './routes/_authenticated/hilfe'
 import { Route as AuthenticatedInstallationRouteImport } from './routes/_authenticated/installation'
 import { Route as AuthenticatedKiMitarbeiterRouteImport } from './routes/_authenticated/ki-mitarbeiter'
 import { Route as AuthenticatedKonversationenRouteImport } from './routes/_authenticated/konversationen'
 import { Route as AuthenticatedKundenRouteImport } from './routes/_authenticated/kunden'
 import { Route as AuthenticatedLeadsRouteImport } from './routes/_authenticated/leads'
 import { Route as AuthenticatedRechnungenRouteImport } from './routes/_authenticated/rechnungen'
+import { Route as AuthenticatedTeamRouteImport } from './routes/_authenticated/team'
 import { Route as AuthenticatedTermineRouteImport } from './routes/_authenticated/termine'
 import { Route as AuthenticatedUnternehmenRouteImport } from './routes/_authenticated/unternehmen'
 
@@ -42,14 +49,29 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AgbRoute = AgbRouteImport.update({
+  id: '/agb',
+  path: '/agb',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DatenschutzRoute = DatenschutzRouteImport.update({
   id: '/datenschutz',
   path: '/datenschutz',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EinladungRoute = EinladungRouteImport.update({
+  id: '/einladung',
+  path: '/einladung',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ImpressumRoute = ImpressumRouteImport.update({
   id: '/impressum',
   path: '/impressum',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KundenportalRoute = KundenportalRouteImport.update({
+  id: '/kundenportal',
+  path: '/kundenportal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -67,6 +89,11 @@ const PasswortZuruecksetzenRoute = PasswortZuruecksetzenRouteImport.update({
   path: '/passwort-zuruecksetzen',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PreiseRoute = PreiseRouteImport.update({
+  id: '/preise',
+  path: '/preise',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RegistrierenRoute = RegistrierenRouteImport.update({
   id: '/registrieren',
   path: '/registrieren',
@@ -76,6 +103,11 @@ const WidgetRoute = WidgetRouteImport.update({
   id: '/widget',
   path: '/widget',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAbonnementRoute = AuthenticatedAbonnementRouteImport.update({
+  id: '/abonnement',
+  path: '/abonnement',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedAngeboteRoute = AuthenticatedAngeboteRouteImport.update({
   id: '/angebote',
@@ -109,6 +141,11 @@ const AuthenticatedEinstellungenRoute =
     path: '/einstellungen',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedHilfeRoute = AuthenticatedHilfeRouteImport.update({
+  id: '/hilfe',
+  path: '/hilfe',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedInstallationRoute =
   AuthenticatedInstallationRouteImport.update({
     id: '/installation',
@@ -142,6 +179,11 @@ const AuthenticatedRechnungenRoute = AuthenticatedRechnungenRouteImport.update({
   path: '/rechnungen',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedTeamRoute = AuthenticatedTeamRouteImport.update({
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedTermineRoute = AuthenticatedTermineRouteImport.update({
   id: '/termine',
   path: '/termine',
@@ -156,49 +198,63 @@ const AuthenticatedUnternehmenRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/agb': typeof AgbRoute
   '/datenschutz': typeof DatenschutzRoute
+  '/einladung': typeof EinladungRoute
   '/impressum': typeof ImpressumRoute
+  '/kundenportal': typeof KundenportalRoute
   '/login': typeof LoginRoute
   '/passwort-vergessen': typeof PasswortVergessenRoute
   '/passwort-zuruecksetzen': typeof PasswortZuruecksetzenRoute
+  '/preise': typeof PreiseRoute
   '/registrieren': typeof RegistrierenRoute
   '/widget': typeof WidgetRoute
+  '/abonnement': typeof AuthenticatedAbonnementRoute
   '/angebote': typeof AuthenticatedAngeboteRoute
   '/aufgaben': typeof AuthenticatedAufgabenRoute
   '/auftraege': typeof AuthenticatedAuftraegeRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/einrichtung': typeof AuthenticatedEinrichtungRoute
   '/einstellungen': typeof AuthenticatedEinstellungenRoute
+  '/hilfe': typeof AuthenticatedHilfeRoute
   '/installation': typeof AuthenticatedInstallationRoute
   '/ki-mitarbeiter': typeof AuthenticatedKiMitarbeiterRoute
   '/konversationen': typeof AuthenticatedKonversationenRoute
   '/kunden': typeof AuthenticatedKundenRoute
   '/leads': typeof AuthenticatedLeadsRoute
   '/rechnungen': typeof AuthenticatedRechnungenRoute
+  '/team': typeof AuthenticatedTeamRoute
   '/termine': typeof AuthenticatedTermineRoute
   '/unternehmen': typeof AuthenticatedUnternehmenRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/agb': typeof AgbRoute
   '/datenschutz': typeof DatenschutzRoute
+  '/einladung': typeof EinladungRoute
   '/impressum': typeof ImpressumRoute
+  '/kundenportal': typeof KundenportalRoute
   '/login': typeof LoginRoute
   '/passwort-vergessen': typeof PasswortVergessenRoute
   '/passwort-zuruecksetzen': typeof PasswortZuruecksetzenRoute
+  '/preise': typeof PreiseRoute
   '/registrieren': typeof RegistrierenRoute
   '/widget': typeof WidgetRoute
+  '/abonnement': typeof AuthenticatedAbonnementRoute
   '/angebote': typeof AuthenticatedAngeboteRoute
   '/aufgaben': typeof AuthenticatedAufgabenRoute
   '/auftraege': typeof AuthenticatedAuftraegeRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/einrichtung': typeof AuthenticatedEinrichtungRoute
   '/einstellungen': typeof AuthenticatedEinstellungenRoute
+  '/hilfe': typeof AuthenticatedHilfeRoute
   '/installation': typeof AuthenticatedInstallationRoute
   '/ki-mitarbeiter': typeof AuthenticatedKiMitarbeiterRoute
   '/konversationen': typeof AuthenticatedKonversationenRoute
   '/kunden': typeof AuthenticatedKundenRoute
   '/leads': typeof AuthenticatedLeadsRoute
   '/rechnungen': typeof AuthenticatedRechnungenRoute
+  '/team': typeof AuthenticatedTeamRoute
   '/termine': typeof AuthenticatedTermineRoute
   '/unternehmen': typeof AuthenticatedUnternehmenRoute
 }
@@ -206,25 +262,32 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/agb': typeof AgbRoute
   '/datenschutz': typeof DatenschutzRoute
+  '/einladung': typeof EinladungRoute
   '/impressum': typeof ImpressumRoute
+  '/kundenportal': typeof KundenportalRoute
   '/login': typeof LoginRoute
   '/passwort-vergessen': typeof PasswortVergessenRoute
   '/passwort-zuruecksetzen': typeof PasswortZuruecksetzenRoute
+  '/preise': typeof PreiseRoute
   '/registrieren': typeof RegistrierenRoute
   '/widget': typeof WidgetRoute
+  '/_authenticated/abonnement': typeof AuthenticatedAbonnementRoute
   '/_authenticated/angebote': typeof AuthenticatedAngeboteRoute
   '/_authenticated/aufgaben': typeof AuthenticatedAufgabenRoute
   '/_authenticated/auftraege': typeof AuthenticatedAuftraegeRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/einrichtung': typeof AuthenticatedEinrichtungRoute
   '/_authenticated/einstellungen': typeof AuthenticatedEinstellungenRoute
+  '/_authenticated/hilfe': typeof AuthenticatedHilfeRoute
   '/_authenticated/installation': typeof AuthenticatedInstallationRoute
   '/_authenticated/ki-mitarbeiter': typeof AuthenticatedKiMitarbeiterRoute
   '/_authenticated/konversationen': typeof AuthenticatedKonversationenRoute
   '/_authenticated/kunden': typeof AuthenticatedKundenRoute
   '/_authenticated/leads': typeof AuthenticatedLeadsRoute
   '/_authenticated/rechnungen': typeof AuthenticatedRechnungenRoute
+  '/_authenticated/team': typeof AuthenticatedTeamRoute
   '/_authenticated/termine': typeof AuthenticatedTermineRoute
   '/_authenticated/unternehmen': typeof AuthenticatedUnternehmenRoute
 }
@@ -232,74 +295,95 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/agb'
     | '/datenschutz'
+    | '/einladung'
     | '/impressum'
+    | '/kundenportal'
     | '/login'
     | '/passwort-vergessen'
     | '/passwort-zuruecksetzen'
+    | '/preise'
     | '/registrieren'
     | '/widget'
+    | '/abonnement'
     | '/angebote'
     | '/aufgaben'
     | '/auftraege'
     | '/dashboard'
     | '/einrichtung'
     | '/einstellungen'
+    | '/hilfe'
     | '/installation'
     | '/ki-mitarbeiter'
     | '/konversationen'
     | '/kunden'
     | '/leads'
     | '/rechnungen'
+    | '/team'
     | '/termine'
     | '/unternehmen'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/agb'
     | '/datenschutz'
+    | '/einladung'
     | '/impressum'
+    | '/kundenportal'
     | '/login'
     | '/passwort-vergessen'
     | '/passwort-zuruecksetzen'
+    | '/preise'
     | '/registrieren'
     | '/widget'
+    | '/abonnement'
     | '/angebote'
     | '/aufgaben'
     | '/auftraege'
     | '/dashboard'
     | '/einrichtung'
     | '/einstellungen'
+    | '/hilfe'
     | '/installation'
     | '/ki-mitarbeiter'
     | '/konversationen'
     | '/kunden'
     | '/leads'
     | '/rechnungen'
+    | '/team'
     | '/termine'
     | '/unternehmen'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
+    | '/agb'
     | '/datenschutz'
+    | '/einladung'
     | '/impressum'
+    | '/kundenportal'
     | '/login'
     | '/passwort-vergessen'
     | '/passwort-zuruecksetzen'
+    | '/preise'
     | '/registrieren'
     | '/widget'
+    | '/_authenticated/abonnement'
     | '/_authenticated/angebote'
     | '/_authenticated/aufgaben'
     | '/_authenticated/auftraege'
     | '/_authenticated/dashboard'
     | '/_authenticated/einrichtung'
     | '/_authenticated/einstellungen'
+    | '/_authenticated/hilfe'
     | '/_authenticated/installation'
     | '/_authenticated/ki-mitarbeiter'
     | '/_authenticated/konversationen'
     | '/_authenticated/kunden'
     | '/_authenticated/leads'
     | '/_authenticated/rechnungen'
+    | '/_authenticated/team'
     | '/_authenticated/termine'
     | '/_authenticated/unternehmen'
   fileRoutesById: FileRoutesById
@@ -307,11 +391,15 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AgbRoute: typeof AgbRoute
   DatenschutzRoute: typeof DatenschutzRoute
+  EinladungRoute: typeof EinladungRoute
   ImpressumRoute: typeof ImpressumRoute
+  KundenportalRoute: typeof KundenportalRoute
   LoginRoute: typeof LoginRoute
   PasswortVergessenRoute: typeof PasswortVergessenRoute
   PasswortZuruecksetzenRoute: typeof PasswortZuruecksetzenRoute
+  PreiseRoute: typeof PreiseRoute
   RegistrierenRoute: typeof RegistrierenRoute
   WidgetRoute: typeof WidgetRoute
 }
@@ -332,6 +420,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/agb': {
+      id: '/agb'
+      path: '/agb'
+      fullPath: '/agb'
+      preLoaderRoute: typeof AgbRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/datenschutz': {
       id: '/datenschutz'
       path: '/datenschutz'
@@ -339,11 +434,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DatenschutzRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/einladung': {
+      id: '/einladung'
+      path: '/einladung'
+      fullPath: '/einladung'
+      preLoaderRoute: typeof EinladungRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/impressum': {
       id: '/impressum'
       path: '/impressum'
       fullPath: '/impressum'
       preLoaderRoute: typeof ImpressumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kundenportal': {
+      id: '/kundenportal'
+      path: '/kundenportal'
+      fullPath: '/kundenportal'
+      preLoaderRoute: typeof KundenportalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -367,6 +476,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PasswortZuruecksetzenRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/preise': {
+      id: '/preise'
+      path: '/preise'
+      fullPath: '/preise'
+      preLoaderRoute: typeof PreiseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/registrieren': {
       id: '/registrieren'
       path: '/registrieren'
@@ -380,6 +496,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/widget'
       preLoaderRoute: typeof WidgetRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/abonnement': {
+      id: '/_authenticated/abonnement'
+      path: '/abonnement'
+      fullPath: '/abonnement'
+      preLoaderRoute: typeof AuthenticatedAbonnementRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/angebote': {
       id: '/_authenticated/angebote'
@@ -421,6 +544,13 @@ declare module '@tanstack/react-router' {
       path: '/einstellungen'
       fullPath: '/einstellungen'
       preLoaderRoute: typeof AuthenticatedEinstellungenRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/hilfe': {
+      id: '/_authenticated/hilfe'
+      path: '/hilfe'
+      fullPath: '/hilfe'
+      preLoaderRoute: typeof AuthenticatedHilfeRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/installation': {
@@ -465,6 +595,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRechnungenRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/team': {
+      id: '/_authenticated/team'
+      path: '/team'
+      fullPath: '/team'
+      preLoaderRoute: typeof AuthenticatedTeamRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/termine': {
       id: '/_authenticated/termine'
       path: '/termine'
@@ -483,35 +620,41 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAbonnementRoute: typeof AuthenticatedAbonnementRoute
   AuthenticatedAngeboteRoute: typeof AuthenticatedAngeboteRoute
   AuthenticatedAufgabenRoute: typeof AuthenticatedAufgabenRoute
   AuthenticatedAuftraegeRoute: typeof AuthenticatedAuftraegeRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedEinrichtungRoute: typeof AuthenticatedEinrichtungRoute
   AuthenticatedEinstellungenRoute: typeof AuthenticatedEinstellungenRoute
+  AuthenticatedHilfeRoute: typeof AuthenticatedHilfeRoute
   AuthenticatedInstallationRoute: typeof AuthenticatedInstallationRoute
   AuthenticatedKiMitarbeiterRoute: typeof AuthenticatedKiMitarbeiterRoute
   AuthenticatedKonversationenRoute: typeof AuthenticatedKonversationenRoute
   AuthenticatedKundenRoute: typeof AuthenticatedKundenRoute
   AuthenticatedLeadsRoute: typeof AuthenticatedLeadsRoute
   AuthenticatedRechnungenRoute: typeof AuthenticatedRechnungenRoute
+  AuthenticatedTeamRoute: typeof AuthenticatedTeamRoute
   AuthenticatedTermineRoute: typeof AuthenticatedTermineRoute
   AuthenticatedUnternehmenRoute: typeof AuthenticatedUnternehmenRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAbonnementRoute: AuthenticatedAbonnementRoute,
   AuthenticatedAngeboteRoute: AuthenticatedAngeboteRoute,
   AuthenticatedAufgabenRoute: AuthenticatedAufgabenRoute,
   AuthenticatedAuftraegeRoute: AuthenticatedAuftraegeRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedEinrichtungRoute: AuthenticatedEinrichtungRoute,
   AuthenticatedEinstellungenRoute: AuthenticatedEinstellungenRoute,
+  AuthenticatedHilfeRoute: AuthenticatedHilfeRoute,
   AuthenticatedInstallationRoute: AuthenticatedInstallationRoute,
   AuthenticatedKiMitarbeiterRoute: AuthenticatedKiMitarbeiterRoute,
   AuthenticatedKonversationenRoute: AuthenticatedKonversationenRoute,
   AuthenticatedKundenRoute: AuthenticatedKundenRoute,
   AuthenticatedLeadsRoute: AuthenticatedLeadsRoute,
   AuthenticatedRechnungenRoute: AuthenticatedRechnungenRoute,
+  AuthenticatedTeamRoute: AuthenticatedTeamRoute,
   AuthenticatedTermineRoute: AuthenticatedTermineRoute,
   AuthenticatedUnternehmenRoute: AuthenticatedUnternehmenRoute,
 }
@@ -522,11 +665,15 @@ const AuthenticatedRouteRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AgbRoute: AgbRoute,
   DatenschutzRoute: DatenschutzRoute,
+  EinladungRoute: EinladungRoute,
   ImpressumRoute: ImpressumRoute,
+  KundenportalRoute: KundenportalRoute,
   LoginRoute: LoginRoute,
   PasswortVergessenRoute: PasswortVergessenRoute,
   PasswortZuruecksetzenRoute: PasswortZuruecksetzenRoute,
+  PreiseRoute: PreiseRoute,
   RegistrierenRoute: RegistrierenRoute,
   WidgetRoute: WidgetRoute,
 }

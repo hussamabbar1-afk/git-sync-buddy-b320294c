@@ -16,6 +16,7 @@ export type AppointmentAnalysis = {
 export type ChatAnalysis = {
   user_language: string;
   intent: "general" | "booking" | "cancel" | "reschedule" | "waitlist";
+  customer_sentiment: "neutral" | "frustrated" | "angry";
   human_handoff: boolean;
   human_handoff_reason: string;
   name: string;
@@ -32,6 +33,10 @@ export type ChatAnalysis = {
   knowledge_supported: boolean;
   quick_replies: QuickReply[];
 };
+
+export function shouldEscalateSentiment(sentiment: unknown): boolean {
+  return sentiment === "angry";
+}
 
 export type AppointmentRow = {
   id: string;

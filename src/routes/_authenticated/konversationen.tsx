@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Loader2 } from "lucide-react";
+import { CircleCheckBig, Loader2, MessageSquareWarning } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { AppShell, PageHeader } from "@/components/app-shell";
@@ -65,6 +65,11 @@ type MessageRow = {
   role: string;
   content: string;
   created_at: string;
+};
+
+type MessageFeedbackRow = {
+  message_id: string;
+  rating: number;
 };
 
 const dateTimeFormatter = new Intl.DateTimeFormat("de-DE", {
@@ -158,6 +163,10 @@ function ConversationsPage() {
   const [messages, setMessages] = useState<MessageRow[]>([]);
   const [messagesLoading, setMessagesLoading] = useState(false);
   const [messagesError, setMessagesError] = useState<string | null>(null);
+  const [feedbackByMessage, setFeedbackByMessage] = useState<Record<string, number>>({});
+  const [feedbackSubmitting, setFeedbackSubmitting] = useState(false);
+  const [feedbackError, setFeedbackError] = useState<string | null>(null);
+  const [feedbackSuccess, setFeedbackSuccess] = useState<string | null>(null);
   const [resolving, setResolving] = useState(false);
   const [resolveError, setResolveError] = useState<string | null>(null);
   const [resolveSuccess, setResolveSuccess] = useState<string | null>(null);
@@ -290,6 +299,7 @@ function ConversationsPage() {
   useEffect(() => {
     if (!selectedId) {
       setMessages([]);
+      setFeedbackByMessage({});
       setMessagesError(null);
       setMessagesLoading(false);
       return;
@@ -311,8 +321,25 @@ function ConversationsPage() {
       if (messagesLoadError) {
         setMessagesError("Der Gesprächsverlauf konnte nicht geladen werden.");
         setMessages([]);
+        setFeedbackByMessage({});
       } else {
-        setMessages(data ?? []);
+        const loadedMessages = data ?? [];
+        setMessages(loadedMessages);
+
+        const { data: feedbackData } = await supabase
+          .from("message_feedback")
+          .select("message_id, rating")
+          .eq("conversation_id", conversationId);
+
+        if (cancelled) return;
+        setFeedbackByMessage(
+          Object.fromEntries(
+            ((feedbackData ?? []) as MessageFeedbackRow[]).map((item) => [
+              item.message_id,
+              item.rating,
+            ]),
+          ),
+        );
       }
       setMessagesLoading(false);
     }
@@ -329,6 +356,52 @@ function ConversationsPage() {
   }, [conversations]);
 
   const selectedConversation = conversations.find((item) => item.id === selectedId) ?? null;
+  const latestAssistantMessage = useMemo(
+    () => [...messages].reverse().find((message) => message.role === "assistant") ?? null,
+    [messages],
+  );
+  const currentFeedback = latestAssistantMessage
+    ? (feedbackByMessage[latestAssistantMessage.id] ?? null)
+    : null;
+
+  const handleConversationFeedback = async (rating: -1 | 1) => {
+    if (!selectedConversation || !latestAssistantMessage || feedbackSubmitting) return;
+
+    setFeedbackSubmitting(true);
+    setFeedbackError(null);
+    setFeedbackSuccess(null);
+
+    const { data, error: submitError } = await supabase.rpc("submit_chat_feedback", {
+      p_widget_key: selectedConversation.widget_key,
+      p_conversation_id: selectedConversation.id,
+      p_message_id: latestAssistantMessage.id,
+      p_rating: rating,
+      p_comment:
+        rating === 1
+          ? "Im Dashboard als erfolgreich markiert."
+          : "Im Dashboard zur Prüfung markiert.",
+    });
+
+    setFeedbackSubmitting(false);
+
+    const accepted =
+      !submitError && data && typeof data === "object" && !Array.isArray(data) && data.ok === true;
+    if (!accepted) {
+      setFeedbackError(
+        submitError
+          ? `Bewertung konnte nicht gespeichert werden: ${submitError.message}`
+          : "Bewertung konnte nicht gespeichert werden.",
+      );
+      return;
+    }
+
+    setFeedbackByMessage((current) => ({ ...current, [latestAssistantMessage.id]: rating }));
+    setFeedbackSuccess(
+      rating === 1
+        ? "Konversation als erfolgreich markiert."
+        : "Konversation wurde zur Prüfung vorgemerkt.",
+    );
+  };
 
   const handleResolve = async () => {
     if (!selectedConversation || resolving) return;
@@ -484,6 +557,49 @@ function ConversationsPage() {
               <p className="mt-3 rounded-md border border-primary/40 bg-primary/10 p-2 text-xs text-primary">
                 {resolveSuccess}
               </p>
+            ) : null}
+
+            {selectedConversation && latestAssistantMessage ? (
+              <div className="mt-3 rounded-md border bg-muted/40 p-3">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <div>
+                    <p className="text-sm font-medium">Qualität dieser Konversation</p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      Markieren Sie die letzte KI-Antwort für die kontinuierliche Verbesserung.
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <Button
+                      size="sm"
+                      variant={currentFeedback === 1 ? "default" : "outline"}
+                      disabled={feedbackSubmitting}
+                      onClick={() => void handleConversationFeedback(1)}
+                    >
+                      {feedbackSubmitting ? (
+                        <Loader2 className="size-4 animate-spin" />
+                      ) : (
+                        <CircleCheckBig className="size-4" />
+                      )}
+                      Erfolgreich
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant={currentFeedback === -1 ? "destructive" : "outline"}
+                      disabled={feedbackSubmitting}
+                      onClick={() => void handleConversationFeedback(-1)}
+                    >
+                      <MessageSquareWarning className="size-4" />
+                      Prüfung nötig
+                    </Button>
+                  </div>
+                </div>
+                {feedbackError ? (
+                  <p className="mt-2 text-xs text-destructive">{feedbackError}</p>
+                ) : null}
+                {feedbackSuccess ? (
+                  <p className="mt-2 text-xs text-primary">{feedbackSuccess}</p>
+                ) : null}
+              </div>
             ) : null}
           </CardHeader>
           <CardContent className="space-y-4 pt-6">

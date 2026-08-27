@@ -22,7 +22,10 @@ dist-ssr
 # Wrangler / Cloudflare
 .wrangler/
 .wrangler-logs/
+.wrangler-home/
 .npm-cache/
+.tmp-npm-cache/
+.tmp-deno-cache/
 .dev.vars
 
 # Editor directories and files

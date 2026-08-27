@@ -583,6 +583,162 @@ export type Database = {
           },
         ]
       }
+      billing_accounts: {
+        Row: {
+          company_id: string
+          created_at: string
+          stripe_customer_id: string
+          test_mode: boolean
+          updated_at: string
+        }
+        Insert: {
+          company_id: string
+          created_at?: string
+          stripe_customer_id: string
+          test_mode?: boolean
+          updated_at?: string
+        }
+        Update: {
+          company_id?: string
+          created_at?: string
+          stripe_customer_id?: string
+          test_mode?: boolean
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "billing_accounts_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: true
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      company_subscriptions: {
+        Row: {
+          amount_cents: number
+          cancel_at_period_end: boolean
+          company_id: string
+          created_at: string
+          currency: string
+          current_period_end: string | null
+          current_period_start: string | null
+          plan: string
+          status: string
+          stripe_subscription_id: string | null
+          test_mode: boolean
+          updated_at: string
+        }
+        Insert: {
+          amount_cents: number
+          cancel_at_period_end?: boolean
+          company_id: string
+          created_at?: string
+          currency?: string
+          current_period_end?: string | null
+          current_period_start?: string | null
+          plan: string
+          status: string
+          stripe_subscription_id?: string | null
+          test_mode?: boolean
+          updated_at?: string
+        }
+        Update: {
+          amount_cents?: number
+          cancel_at_period_end?: boolean
+          company_id?: string
+          created_at?: string
+          currency?: string
+          current_period_end?: string | null
+          current_period_start?: string | null
+          plan?: string
+          status?: string
+          stripe_subscription_id?: string | null
+          test_mode?: boolean
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "company_subscriptions_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: true
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      subscription_invoices: {
+        Row: {
+          amount_due_cents: number
+          amount_paid_cents: number
+          company_id: string
+          created_at: string
+          currency: string
+          hosted_invoice_url: string | null
+          id: string
+          invoice_number: string | null
+          invoice_pdf: string | null
+          paid_at: string | null
+          period_end: string | null
+          period_start: string | null
+          status: string
+          stripe_invoice_id: string
+          stripe_subscription_id: string | null
+          tax_cents: number
+          test_mode: boolean
+          updated_at: string
+        }
+        Insert: {
+          amount_due_cents?: number
+          amount_paid_cents?: number
+          company_id: string
+          created_at?: string
+          currency?: string
+          hosted_invoice_url?: string | null
+          id?: string
+          invoice_number?: string | null
+          invoice_pdf?: string | null
+          paid_at?: string | null
+          period_end?: string | null
+          period_start?: string | null
+          status: string
+          stripe_invoice_id: string
+          stripe_subscription_id?: string | null
+          tax_cents?: number
+          test_mode?: boolean
+          updated_at?: string
+        }
+        Update: {
+          amount_due_cents?: number
+          amount_paid_cents?: number
+          company_id?: string
+          created_at?: string
+          currency?: string
+          hosted_invoice_url?: string | null
+          id?: string
+          invoice_number?: string | null
+          invoice_pdf?: string | null
+          paid_at?: string | null
+          period_end?: string | null
+          period_start?: string | null
+          status?: string
+          stripe_invoice_id?: string
+          stripe_subscription_id?: string | null
+          tax_cents?: number
+          test_mode?: boolean
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "subscription_invoices_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       companies: {
         Row: {
           address: string | null
@@ -4151,6 +4307,10 @@ export type Database = {
         Args: { p_email: string; p_expires_days?: number; p_role?: string }
         Returns: Json
       }
+      create_customer_portal_link: {
+        Args: { p_customer_id: string; p_expires_days?: number }
+        Returns: Json
+      }
       create_feedback_link: {
         Args: {
           p_appointment_id?: string
@@ -4282,6 +4442,7 @@ export type Database = {
       get_data_retention_preview: { Args: never; Returns: Json }
       get_feedback_metrics: { Args: { p_days?: number }; Returns: Json }
       get_field_service_metrics: { Args: { p_days?: number }; Returns: Json }
+      get_growth_analytics: { Args: { p_days?: number }; Returns: Json }
       get_integration_catalog: { Args: never; Returns: Json }
       get_integration_health: { Args: never; Returns: Json }
       get_integration_runtime_config_backend: {
@@ -4445,6 +4606,7 @@ export type Database = {
         Returns: Json
       }
       resolve_feedback_link: { Args: { p_token_hash: string }; Returns: Json }
+      resolve_customer_portal: { Args: { p_token: string }; Returns: Json }
       resolve_invoice_share: { Args: { p_token_hash: string }; Returns: Json }
       resolve_job_report_share: {
         Args: { p_token_hash: string }
