@@ -116,7 +116,7 @@ function restoreMessages(widgetKey: string): ChatMessage[] {
               : null,
           language: typeof value["language"] === "string" ? value["language"].slice(0, 20) : null,
           rating: value["rating"] === 1 || value["rating"] === -1 ? value["rating"] : null,
-          quick_replies: quickReplies,
+          ...(quickReplies ? { quick_replies: quickReplies } : {}),
           progress_percent:
             typeof rawProgress === "number" && Number.isFinite(rawProgress)
               ? Math.max(0, Math.min(100, Math.round(rawProgress)))

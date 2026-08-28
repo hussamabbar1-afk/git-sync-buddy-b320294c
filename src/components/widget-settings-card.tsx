@@ -454,6 +454,11 @@ export function WidgetSettingsCard({
                 Eine Origin pro Zeile, einschließlich https://. Pfade werden beim Speichern
                 entfernt.
               </p>
+              <p className="rounded-md border bg-muted/35 p-3 text-xs leading-5 text-muted-foreground">
+                Lokaler Test: HTML-Datei mit <code>python -m http.server 5500</code> bereitstellen
+                und <code>http://localhost:5500</code> vorübergehend als Origin eintragen. Direktes
+                <code>file://</code> bleibt aus Sicherheitsgründen gesperrt.
+              </p>
               {!allowedOrigins.trim() ? (
                 <p className="flex items-start gap-2 rounded-md border border-amber-500/40 bg-amber-500/10 p-3 text-xs text-amber-800 dark:text-amber-200">
                   <AlertTriangle className="mt-0.5 size-4 shrink-0" /> Ohne Domain-Liste bleibt das

@@ -2,7 +2,7 @@ import { z } from "zod";
 
 const FALLBACK_CHAT_ENDPOINT =
   "https://srufegisweghdswdsdxb.supabase.co/functions/v1/chat-orchestrator";
-const CHAT_ENDPOINT = import.meta.env.VITE_CHAT_ENDPOINT || FALLBACK_CHAT_ENDPOINT;
+const CHAT_ENDPOINT = import.meta.env["VITE_CHAT_ENDPOINT"] || FALLBACK_CHAT_ENDPOINT;
 
 const optionalText = z.string().trim().min(1).max(2000).optional();
 

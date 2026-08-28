@@ -2683,6 +2683,7 @@ export type Database = {
           appointment_reason: string | null;
           booking_confirmation_received: boolean | null;
           cancellation_selection_pending: boolean;
+          cancellation_target_appointment_id: string | null;
           company_id: string;
           contacted_at: string | null;
           conversation_id: string | null;
@@ -2742,6 +2743,7 @@ export type Database = {
           appointment_reason?: string | null;
           booking_confirmation_received?: boolean | null;
           cancellation_selection_pending?: boolean;
+          cancellation_target_appointment_id?: string | null;
           company_id: string;
           contacted_at?: string | null;
           conversation_id?: string | null;
@@ -2801,6 +2803,7 @@ export type Database = {
           appointment_reason?: string | null;
           booking_confirmation_received?: boolean | null;
           cancellation_selection_pending?: boolean;
+          cancellation_target_appointment_id?: string | null;
           company_id?: string;
           contacted_at?: string | null;
           conversation_id?: string | null;
@@ -2856,6 +2859,13 @@ export type Database = {
           won_at?: string | null;
         };
         Relationships: [
+          {
+            foreignKeyName: "leads_cancellation_target_appointment_id_fkey";
+            columns: ["cancellation_target_appointment_id"];
+            isOneToOne: false;
+            referencedRelation: "appointments";
+            referencedColumns: ["id"];
+          },
           {
             foreignKeyName: "leads_company_id_fkey";
             columns: ["company_id"];

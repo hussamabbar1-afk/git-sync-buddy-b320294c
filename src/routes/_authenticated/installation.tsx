@@ -483,6 +483,33 @@ function InstallationPage() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
+                <Code2 className="size-5 text-primary" /> Lokale HTML-Datei testen
+              </CardTitle>
+              <CardDescription>
+                Sicherer Vorschauweg für eine selbst erstellte Testdatei – ohne sie öffentlich zu
+                veröffentlichen.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3 text-sm">
+              <p className="leading-6 text-muted-foreground">
+                Eine direkt geöffnete <code>file://</code>-Datei besitzt keine prüfbare Domain und
+                wird deshalb bewusst blockiert. Öffnen Sie ein Terminal im Ordner der HTML-Datei und
+                starten Sie stattdessen:
+              </p>
+              <pre className="overflow-x-auto rounded-xl border bg-muted p-3 font-mono text-xs">
+                python -m http.server 5500
+              </pre>
+              <p className="text-xs leading-5 text-muted-foreground">
+                Danach <strong>http://localhost:5500</strong> öffnen und diese Origin während des
+                Tests unter „KI-Mitarbeiter → Erlaubte Website-Domains“ freigeben. Für den
+                ZunftEcho-Demobetrieb ist sie bereits vorkonfiguriert.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
                 <Code2 className="size-5 text-primary" /> 2. Persönlichen Code kopieren
               </CardTitle>
               <CardDescription>

@@ -164,7 +164,10 @@ export function CreateCustomerDialog({ companyId, open, onOpenChange, onCreated 
           <Button variant="outline" onClick={() => onOpenChange(false)} disabled={saving}>
             Abbrechen
           </Button>
-          <Button onClick={() => void handleSubmit()} disabled={saving || !form.display_name.trim()}>
+          <Button
+            onClick={() => void handleSubmit()}
+            disabled={saving || !form.display_name.trim()}
+          >
             {saving ? "Wird angelegt …" : "Kunde anlegen"}
           </Button>
         </DialogFooter>

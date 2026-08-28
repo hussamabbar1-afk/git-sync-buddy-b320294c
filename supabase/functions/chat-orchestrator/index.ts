@@ -1,6 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 
 import {
+  appointmentActionSummary,
   appointmentChoices,
   availabilityReply,
   buildSummary,
@@ -15,6 +16,7 @@ import {
   resolveConfiguredService,
   rescheduleMutationSucceeded,
   securityReply,
+  stripInternalIdentifiers,
   validIsoDate,
   validTime,
   UUID_RE,
@@ -419,7 +421,7 @@ async function localize(language: string, result: ActionResult): Promise<ActionR
   };
   const translated = await openAIJson(
     "zunftecho_localized_reply",
-    `Übersetze die Kundennachricht, die Zusammenfassung und alle Quick Replies natürlich in die Sprache ${language}. Bewahre Daten, Uhrzeiten, Telefonnummern, E-Mail-Adressen, UUIDs und Fakten exakt. Füge nichts hinzu.`,
+    `Übersetze die Kundennachricht, die Zusammenfassung und alle Quick Replies natürlich in die Sprache ${language}. Bewahre Daten, Uhrzeiten, Telefonnummern, E-Mail-Adressen und Fakten exakt. Gib niemals interne IDs, UUIDs, Datenbankschlüssel oder technische Metadaten aus. Füge nichts hinzu.`,
     JSON.stringify({
       message: result.text,
       summary: result.summary ?? "",
@@ -443,6 +445,22 @@ async function localize(language: string, result: ActionResult): Promise<ActionR
     ...result,
     text: cleanText(translated.message, 4_000) || result.text,
     summary: cleanText(translated.summary, 2_000) || result.summary,
+    quickReplies,
+  };
+}
+
+function sanitizeActionResult(result: ActionResult): ActionResult {
+  const quickReplies = result.quickReplies
+    ?.map((reply) => ({
+      label: stripInternalIdentifiers(reply.label).slice(0, 120),
+      value: stripInternalIdentifiers(reply.value).slice(0, 500),
+    }))
+    .filter((reply) => reply.label && reply.value)
+    .slice(0, 6);
+  return {
+    ...result,
+    text: stripInternalIdentifiers(result.text),
+    summary: result.summary ? stripInternalIdentifiers(result.summary) : result.summary,
     quickReplies,
   };
 }
@@ -557,9 +575,15 @@ async function routeAction(args: {
         text: "Ich habe keinen zukünftigen Termin gefunden, den ich absagen könnte.",
         progress: computeProgress(lead, analysis),
       };
+    const storedTarget = cleanText(lead.cancellation_target_appointment_id, 80);
     const target = resolveAppointmentTarget(
-      analysis.appointment.target_appointment_id,
+      analysis.appointment.target_appointment_id || storedTarget,
       appointments,
+      {
+        date: analysis.appointment.date,
+        start_time: analysis.appointment.start_time,
+        service: analysis.appointment.service,
+      },
     );
     if (!target) {
       return {
@@ -568,21 +592,40 @@ async function routeAction(args: {
         progress: computeProgress(lead, analysis),
       };
     }
-    if (analysis.appointment.rejected)
+    if (analysis.appointment.rejected) {
+      await patchRows("leads", `id=eq.${encodeURIComponent(leadId)}`, {
+        cancellation_selection_pending: false,
+        cancellation_target_appointment_id: null,
+      });
       return {
         text: "Alles klar. Der Termin bleibt bestehen.",
+        summary: appointmentActionSummary({
+          status: "Unverändert",
+          appointment: target,
+          nextStep: "Der Termin bleibt wie geplant bestehen.",
+        }),
         progress: computeProgress(lead, analysis),
       };
-    if (!analysis.appointment.cancel_confirmed) {
+    }
+    if (!analysis.appointment.cancel_confirmed || storedTarget !== target.id) {
+      await patchRows("leads", `id=eq.${encodeURIComponent(leadId)}`, {
+        cancellation_selection_pending: true,
+        cancellation_target_appointment_id: target.id,
+      });
       return {
         text: `Möchten Sie den Termin ${formatAppointment(target)} wirklich verbindlich absagen?`,
         quickReplies: [
           {
             label: "Ja, Termin absagen",
-            value: `Ja, bitte den Termin ${formatAppointment(target)} absagen. Termin-ID: ${target.id}`,
+            value: "Ja, bitte diesen Termin verbindlich absagen.",
           },
           { label: "Nein, behalten", value: "Nein, der Termin soll bestehen bleiben." },
         ],
+        summary: appointmentActionSummary({
+          status: "Bestätigung ausstehend",
+          appointment: target,
+          nextStep: "Absage bestätigen oder den Termin behalten.",
+        }),
         progress: computeProgress(lead, analysis),
       };
     }
@@ -591,7 +634,19 @@ async function routeAction(args: {
       p_appointment_id: target.id,
     })) as JsonObject;
     if (cancelled?.cancelled === true) {
-      return { text: `Der Termin ${formatAppointment(target)} wurde abgesagt.`, progress: 100 };
+      await patchRows("leads", `id=eq.${encodeURIComponent(leadId)}`, {
+        cancellation_selection_pending: false,
+        cancellation_target_appointment_id: null,
+      });
+      return {
+        text: `Der Termin ${formatAppointment(target)} wurde abgesagt.`,
+        summary: appointmentActionSummary({
+          status: "Abgesagt",
+          appointment: target,
+          nextStep: "Es ist nichts weiter erforderlich.",
+        }),
+        progress: 100,
+      };
     }
     return {
       text: "Der Termin konnte nicht abgesagt werden. Ich habe die Anfrage zur Prüfung vorgemerkt.",
@@ -609,6 +664,11 @@ async function routeAction(args: {
     const target = resolveAppointmentTarget(
       analysis.appointment.target_appointment_id || storedTarget,
       appointments,
+      {
+        date: analysis.appointment.date,
+        start_time: analysis.appointment.start_time,
+        service: analysis.appointment.service,
+      },
     );
     if (!target) {
       return {
@@ -627,6 +687,11 @@ async function routeAction(args: {
       });
       return {
         text: "Alles klar. Der bestehende Termin bleibt unverändert.",
+        summary: appointmentActionSummary({
+          status: "Unverändert",
+          appointment: target,
+          nextStep: "Der Termin bleibt wie geplant bestehen.",
+        }),
         progress: computeProgress(lead, analysis),
       };
     }
@@ -639,6 +704,11 @@ async function routeAction(args: {
       });
       return {
         text: "Auf welches neue Datum und welche Uhrzeit möchten Sie den Termin verschieben?",
+        summary: appointmentActionSummary({
+          status: "Neuer Zeitpunkt erforderlich",
+          appointment: target,
+          nextStep: "Bitte nennen Sie das gewünschte neue Datum und die Uhrzeit.",
+        }),
         progress: computeProgress(lead, analysis),
       };
     }
@@ -665,6 +735,12 @@ async function routeAction(args: {
         });
         return {
           text: `Der Termin wurde auf den ${newDate.split("-").reverse().join(".")} um ${newTime.slice(0, 5)} Uhr verschoben.`,
+          summary: appointmentActionSummary({
+            status: "Verbindlich verschoben",
+            previousAppointment: target,
+            appointment: { ...target, appointment_date: newDate, start_time: newTime },
+            nextStep: "Der neue Termin ist bestätigt.",
+          }),
           progress: 100,
           appointment: { ...target, appointment_date: newDate, start_time: newTime },
         };
@@ -695,10 +771,16 @@ async function routeAction(args: {
       quickReplies: [
         {
           label: "Verschiebung bestätigen",
-          value: `Ja, bitte auf den ${newDate.split("-").reverse().join(".")} um ${newTime.slice(0, 5)} Uhr verschieben. Termin-ID: ${target.id}`,
+          value: `Ja, bitte auf den ${newDate.split("-").reverse().join(".")} um ${newTime.slice(0, 5)} Uhr verschieben.`,
         },
         { label: "Abbrechen", value: "Nein, der bestehende Termin soll unverändert bleiben." },
       ],
+      summary: appointmentActionSummary({
+        status: "Bestätigung ausstehend",
+        previousAppointment: target,
+        appointment: { ...target, appointment_date: newDate, start_time: newTime },
+        nextStep: "Verschiebung bestätigen oder abbrechen.",
+      }),
       progress: Math.max(85, computeProgress(lead, analysis)),
     };
   }
@@ -744,6 +826,17 @@ async function routeAction(args: {
         waitlist?.already_exists === true
           ? `Sie stehen für ${resolvedService} am ${when} bereits auf der Warteliste. Wir melden uns, sobald ein passender Termin frei wird.`
           : `Ich habe Sie für ${resolvedService} am ${when} auf die Warteliste gesetzt. Wir melden uns, sobald ein passender Termin frei wird.`,
+      summary: appointmentActionSummary({
+        status:
+          waitlist?.already_exists === true ? "Bereits auf der Warteliste" : "Warteliste bestätigt",
+        appointment: {
+          id: "",
+          appointment_date: date,
+          start_time: time,
+          service_type: resolvedService,
+        },
+        nextStep: "Wir melden uns, sobald ein passender Termin frei wird.",
+      }),
       progress: Math.max(80, computeProgress(lead, analysis)),
     };
   }
@@ -854,6 +947,17 @@ async function routeAction(args: {
         });
         return {
           text: `Ihr Termin für ${resolvedService} am ${date.split("-").reverse().join(".")} um ${time.slice(0, 5)} Uhr ist bestätigt.`,
+          summary: appointmentActionSummary({
+            status: "Verbindlich bestätigt",
+            appointment: {
+              id: "",
+              appointment_date: date,
+              start_time: time,
+              end_time: cleanText(created.end_time, 20),
+              service_type: resolvedService,
+            },
+            nextStep: "Der Betrieb meldet sich, falls weitere Informationen erforderlich sind.",
+          }),
           progress: 100,
           appointment: {
             appointment_date: date,
@@ -909,6 +1013,16 @@ async function routeAction(args: {
         },
         { label: "Anderen Termin wählen", value: "Ich möchte einen anderen Termin wählen." },
       ],
+      summary: appointmentActionSummary({
+        status: "Bestätigung ausstehend",
+        appointment: {
+          id: "",
+          appointment_date: date,
+          start_time: time,
+          service_type: resolvedService,
+        },
+        nextStep: "Termin verbindlich buchen oder einen anderen Zeitpunkt wählen.",
+      }),
       progress: Math.max(90, computeProgress(lead, analysis)),
     };
   }
@@ -1203,6 +1317,7 @@ Deno.serve(async (request: Request) => {
     lead = refreshed[0] ?? lead;
     internalResult.summary =
       internalResult.summary ?? buildSummary(lead, internalResult.appointment);
+    internalResult = sanitizeActionResult(internalResult);
     const supportedLanguages = Array.isArray(agent.supported_languages)
       ? agent.supported_languages.map((value) => normalizeLanguage(value)).filter(Boolean)
       : ["de"];
@@ -1221,6 +1336,7 @@ Deno.serve(async (request: Request) => {
         customerResult = internalResult;
       }
     }
+    customerResult = sanitizeActionResult(customerResult);
     const assistantMessageId = await saveAssistant(
       conversationId,
       internalResult.text,

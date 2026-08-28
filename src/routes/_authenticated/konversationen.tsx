@@ -427,7 +427,11 @@ function ConversationsPage() {
     setFeedbackSubmitting(false);
 
     const accepted =
-      !submitError && data && typeof data === "object" && !Array.isArray(data) && data.ok === true;
+      !submitError &&
+      data &&
+      typeof data === "object" &&
+      !Array.isArray(data) &&
+      data["ok"] === true;
     if (!accepted) {
       setFeedbackError(
         submitError

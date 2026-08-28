@@ -435,10 +435,7 @@ export function LeadDetailSheet({
                   </div>
                   <div className="space-y-1">
                     <Label htmlFor="lead-urgency">Dringlichkeit</Label>
-                    <Select
-                      value={form.urgency}
-                      onValueChange={(next) => update("urgency", next)}
-                    >
+                    <Select value={form.urgency} onValueChange={(next) => update("urgency", next)}>
                       <SelectTrigger id="lead-urgency">
                         <SelectValue />
                       </SelectTrigger>

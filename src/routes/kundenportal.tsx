@@ -13,7 +13,9 @@ import { asArray, asRecord, str } from "@/lib/crm";
 export const Route = createFileRoute("/kundenportal")({
   validateSearch: (search: Record<string, unknown>) => ({
     token:
-      typeof search.token === "string" && /^[a-f0-9]{64}$/i.test(search.token) ? search.token : "",
+      typeof search["token"] === "string" && /^[a-f0-9]{64}$/i.test(search["token"])
+        ? search["token"]
+        : "",
   }),
   head: () => ({
     meta: [{ title: "Kundenportal – ZunftEcho" }, { name: "robots", content: "noindex,nofollow" }],
@@ -177,7 +179,7 @@ function CustomerPortalPage() {
       const item = asRecord(value);
       const startTime = str(item["start_time"]);
       const endTime = str(item["end_time"]);
-      return startTime ? [{ startTime, endTime }] : [];
+      return startTime && endTime ? [{ startTime, endTime }] : [];
     });
     setAvailableSlots(slots);
     setAppointmentNotice(

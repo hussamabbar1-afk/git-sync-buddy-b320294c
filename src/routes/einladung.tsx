@@ -12,7 +12,9 @@ import { germanAuthError } from "@/lib/auth-errors";
 export const Route = createFileRoute("/einladung")({
   validateSearch: (search: Record<string, unknown>) => ({
     token:
-      typeof search.token === "string" && /^[a-f0-9]{64}$/i.test(search.token) ? search.token : "",
+      typeof search["token"] === "string" && /^[a-f0-9]{64}$/i.test(search["token"])
+        ? search["token"]
+        : "",
   }),
   head: () => ({
     meta: [{ title: "Teameinladung – ZunftEcho" }, { name: "robots", content: "noindex,nofollow" }],

@@ -114,7 +114,7 @@ function TeamPage() {
     }
 
     const payload = asRecord(data);
-    setInviteUrl(str(payload["invite_url"]));
+    setInviteUrl(str(payload["invite_url"]) ?? "");
     setSuccess("Einladung wurde erstellt und per E-Mail in die Versandwarteschlange gestellt.");
     setInviteEmail("");
   }
