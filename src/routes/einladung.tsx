@@ -1,14 +1,13 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { AlertCircle, Bot, CheckCircle2, Loader2, LogIn, UserPlus } from "lucide-react";
+import { AlertCircle, CheckCircle2, Loader2, LogIn, UserPlus } from "lucide-react";
 import { useEffect, useState, type FormEvent } from "react";
 
 import { Button } from "@/components/ui/button";
+import { BrandMark } from "@/components/brand-mark";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { germanAuthError } from "@/lib/auth-errors";
-
-const PENDING_INVITE_KEY = "zunftecho_pending_invite";
 
 export const Route = createFileRoute("/einladung")({
   validateSearch: (search: Record<string, unknown>) => ({
@@ -43,7 +42,6 @@ function InvitationPage() {
       setError(`Einladung konnte nicht angenommen werden: ${acceptError.message}`);
       return false;
     }
-    window.localStorage.removeItem(PENDING_INVITE_KEY);
     await navigate({ to: "/dashboard", replace: true });
     return true;
   }
@@ -58,7 +56,6 @@ function InvitationPage() {
         return;
       }
 
-      window.localStorage.setItem(PENDING_INVITE_KEY, token);
       const { data } = await supabase.auth.getSession();
       if (!active) return;
       if (data.session) {
@@ -100,7 +97,10 @@ function InvitationPage() {
     const { data, error: signUpError } = await supabase.auth.signUp({
       email: email.trim(),
       password,
-      options: { data: { full_name: fullName.trim() } },
+      options: {
+        data: { full_name: fullName.trim() },
+        emailRedirectTo: `${window.location.origin}/einladung?token=${encodeURIComponent(token)}`,
+      },
     });
     if (signUpError) {
       setSubmitting(false);
@@ -116,7 +116,7 @@ function InvitationPage() {
 
     setSubmitting(false);
     setNotice(
-      "Bitte bestätigen Sie jetzt Ihre E-Mail-Adresse und melden Sie sich danach an. Die Einladung bleibt in diesem Browser vorgemerkt.",
+      "Bitte bestätigen Sie jetzt Ihre E-Mail-Adresse. Der Bestätigungslink führt Sie sicher zu genau dieser Einladung zurück.",
     );
     setMode("login");
   }
@@ -126,7 +126,7 @@ function InvitationPage() {
       <main className="w-full max-w-md rounded-3xl border border-slate-200 bg-white p-7 shadow-xl sm:p-9">
         <Link to="/" className="mb-8 flex items-center gap-2.5">
           <span className="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-            <Bot className="size-5" />
+            <BrandMark className="size-9" />
           </span>
           <span className="font-display text-lg font-semibold">ZunftEcho</span>
         </Link>
@@ -215,6 +215,12 @@ function InvitationPage() {
             >
               {mode === "register" ? "Ich habe bereits ein Konto" : "Neues Konto erstellen"}
             </button>
+            <Link
+              to="/login"
+              className="mt-3 block w-full text-center text-sm text-slate-500 hover:text-slate-950 hover:underline"
+            >
+              Ohne Einladung normal anmelden
+            </Link>
           </>
         )}
       </main>

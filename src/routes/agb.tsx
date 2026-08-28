@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Bot } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+
+import { BrandMark } from "@/components/brand-mark";
 
 export const Route = createFileRoute("/agb")({
   head: () => ({
@@ -19,7 +21,7 @@ function TermsPage() {
         <div className="mx-auto flex h-16 max-w-4xl items-center justify-between px-5 sm:px-8">
           <Link to="/" className="flex items-center gap-2.5">
             <span className="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <Bot className="size-5" />
+              <BrandMark className="size-9" />
             </span>
             <span className="font-display text-lg font-semibold">ZunftEcho</span>
           </Link>

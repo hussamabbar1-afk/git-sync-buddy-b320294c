@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
-  Bot,
   Check,
   CheckCircle2,
   ChevronRight,
@@ -9,6 +8,7 @@ import {
   Clock3,
   Code2,
   MessageSquareText,
+  Menu,
   PhoneCall,
   PlugZap,
   SearchCheck,
@@ -18,7 +18,16 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { BrandMark } from "@/components/brand-mark";
 import { InteractiveChatDemo } from "@/components/interactive-chat-demo";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 const benefits = [
   {
@@ -94,7 +103,10 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://zunftecho.de/" },
       { property: "og:locale", content: "de_DE" },
+      { property: "og:image", content: "https://zunftecho.de/zunftecho-mark.png" },
+      { property: "og:image:alt", content: "ZunftEcho Markenzeichen" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://zunftecho.de/zunftecho-mark.png" },
     ],
     links: [{ rel: "canonical", href: "https://zunftecho.de/" }],
     scripts: [
@@ -140,8 +152,8 @@ export const Route = createFileRoute("/")({
 function Brand() {
   return (
     <span className="flex items-center gap-2.5">
-      <span className="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
-        <Bot className="size-5" />
+      <span className="flex size-10 items-center justify-center overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-slate-200">
+        <BrandMark className="size-10" />
       </span>
       <span className="font-display text-lg font-semibold tracking-tight">ZunftEcho</span>
     </span>
@@ -175,7 +187,7 @@ function LandingPage() {
             </Link>
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="hidden items-center gap-2 md:flex">
             <Button asChild variant="ghost" className="hidden sm:inline-flex">
               <Link to="/login">Anmelden</Link>
             </Button>
@@ -185,6 +197,51 @@ function LandingPage() {
               </Link>
             </Button>
           </div>
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline" size="icon" className="md:hidden" aria-label="Menü öffnen">
+                <Menu className="size-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[min(22rem,88vw)] p-0">
+              <SheetHeader className="border-b p-5 text-left">
+                <SheetTitle>
+                  <Brand />
+                </SheetTitle>
+              </SheetHeader>
+              <nav className="flex flex-col p-4 text-base font-medium text-slate-700">
+                {[
+                  ["#vorteile", "Vorteile"],
+                  ["#ablauf", "Ablauf"],
+                  ["#integration", "Installation"],
+                  ["#pilot", "Pilotangebot"],
+                ].map(([href, label]) => (
+                  <SheetClose key={href} asChild>
+                    <a className="flex min-h-12 items-center border-b" href={href}>
+                      {label}
+                    </a>
+                  </SheetClose>
+                ))}
+                <SheetClose asChild>
+                  <Link className="flex min-h-12 items-center border-b" to="/preise">
+                    Preise
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link className="flex min-h-12 items-center border-b" to="/login">
+                    Kundenlogin
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Button asChild size="lg" className="mt-6">
+                    <Link to="/registrieren">
+                      Pilot anfragen <ArrowRight />
+                    </Link>
+                  </Button>
+                </SheetClose>
+              </nav>
+            </SheetContent>
+          </Sheet>
         </div>
       </header>
 

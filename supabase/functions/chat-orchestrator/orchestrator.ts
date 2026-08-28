@@ -219,6 +219,10 @@ export function availabilityReply(reason: unknown): string {
       return "An diesem Tag ist der Betrieb geschlossen. Bitte wählen Sie einen anderen Werktag.";
     case "outside_opening_hours":
       return "Diese Uhrzeit liegt außerhalb der Öffnungszeiten. Bitte wählen Sie eine andere Uhrzeit.";
+    case "outside_configured_slots":
+      return "Dieser Zeitpunkt wird für die gewählte Leistung nicht angeboten. Bitte wählen Sie einen der freien Termine.";
+    case "outside_booking_window":
+      return "Dieser Termin liegt außerhalb des aktuell freigegebenen Buchungszeitraums. Bitte wählen Sie einen früheren Zeitpunkt.";
     case "minimum_notice":
       return "Dieser Termin liegt zu kurzfristig. Bitte wählen Sie einen späteren Zeitpunkt.";
     case "conflict":

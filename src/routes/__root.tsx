@@ -92,7 +92,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content: "Die KI-Mitarbeiter-Plattform für Heizung, Sanitär und Klima.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://zunftecho.de/zunftecho-mark.png" },
+      { property: "og:image:alt", content: "ZunftEcho Markenzeichen" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://zunftecho.de/zunftecho-mark.png" },
     ],
     links: [
       {
@@ -121,10 +124,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 // logged or exposed; the whole fragment is forwarded as-is.
 const RECOVERY_REDIRECT_SCRIPT = `(function(){try{var h=location.hash;if(!h||h.charAt(0)!=="#")return;var p=new URLSearchParams(h.slice(1));if(p.get("type")!=="recovery")return;if(!p.get("access_token")&&!p.get("refresh_token"))return;if(location.pathname==="/passwort-zuruecksetzen")return;location.replace("/passwort-zuruecksetzen"+location.search+h);}catch(e){}})();`;
 
+// Apply the saved dashboard theme before CSS paints. Restricting it to the
+// authenticated workspace keeps the public marketing and auth pages neutral.
+const THEME_BOOTSTRAP_SCRIPT = `(function(){try{var t=localStorage.getItem("zunftecho_theme");var p=location.pathname;var a=/^\\/(dashboard|unternehmen|ki-mitarbeiter|installation|team|hilfe|konversationen|leads|kunden|angebote|auftraege|rechnungen|abonnement|aufgaben|termine|einstellungen|einrichtung)(\\/|$)/.test(p);var d=a&&t==="dark";document.documentElement.classList.toggle("dark",d);document.documentElement.style.colorScheme=d?"dark":"light";}catch(e){}})();`;
+
 function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="de">
       <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_BOOTSTRAP_SCRIPT }} />
         <script dangerouslySetInnerHTML={{ __html: RECOVERY_REDIRECT_SCRIPT }} />
         <HeadContent />
       </head>

@@ -69,7 +69,7 @@ function escapeHtml(value: string): string {
 }
 
 function emailHtml(subject: string, body: string): string {
-  return `<!doctype html><html lang="de"><body style="margin:0;background:#f5f5f5;font-family:Arial,sans-serif;color:#202124"><div style="max-width:640px;margin:0 auto;padding:32px 20px"><div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:32px"><h1 style="font-size:22px;margin:0 0 24px">${escapeHtml(subject)}</h1><p style="white-space:pre-line;line-height:1.55;margin:0">${escapeHtml(body)}</p></div><p style="font-size:12px;color:#6b7280;text-align:center">Sicher versendet über ZunftEcho.</p></div></body></html>`;
+  return `<!doctype html><html lang="de"><body style="margin:0;background:#f3f7fb;font-family:Arial,sans-serif;color:#102033"><div style="max-width:640px;margin:0 auto;padding:32px 20px"><div style="display:flex;align-items:center;gap:12px;margin:0 0 18px"><img src="https://zunftecho.de/zunftecho-mark.png" width="44" height="44" alt="ZunftEcho" style="display:block;border-radius:12px"><strong style="font-size:20px;color:#102033">ZunftEcho</strong></div><div style="background:#fff;border:1px solid #dbe5ef;border-radius:16px;padding:32px;box-shadow:0 8px 30px rgba(16,32,51,.06)"><div style="width:52px;height:4px;background:#e97824;border-radius:99px;margin-bottom:22px"></div><h1 style="font-size:22px;margin:0 0 24px">${escapeHtml(subject)}</h1><p style="white-space:pre-line;line-height:1.65;margin:0">${escapeHtml(body)}</p></div><p style="font-size:12px;color:#64748b;text-align:center">Sicher versendet über ZunftEcho.</p></div></body></html>`;
 }
 
 async function sendBrevoEmail(

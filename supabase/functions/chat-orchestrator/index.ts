@@ -501,6 +501,35 @@ function serviceQuickReplies(context: JsonObject): QuickReply[] {
   });
 }
 
+function slotQuickReplies(value: unknown, service: string): QuickReply[] {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return [];
+  const slots = Array.isArray((value as JsonObject).slots)
+    ? ((value as JsonObject).slots as unknown[])
+    : [];
+  return slots.slice(0, 6).flatMap((entry): QuickReply[] => {
+    if (!entry || typeof entry !== "object" || Array.isArray(entry)) return [];
+    const slot = entry as JsonObject;
+    const date = validIsoDate(slot.date);
+    const time = validTime(slot.start_time);
+    if (!date || !time) return [];
+    const parsed = new Date(`${date}T12:00:00Z`);
+    const labelDate = Number.isNaN(parsed.getTime())
+      ? date.split("-").reverse().join(".")
+      : new Intl.DateTimeFormat("de-DE", {
+          weekday: "short",
+          day: "2-digit",
+          month: "2-digit",
+          timeZone: "UTC",
+        }).format(parsed);
+    return [
+      {
+        label: `${labelDate} · ${time.slice(0, 5)} Uhr`,
+        value: `Ich wähle für ${service} den ${date.split("-").reverse().join(".")} um ${time.slice(0, 5)} Uhr.`,
+      },
+    ];
+  });
+}
+
 async function routeAction(args: {
   widgetKey: string;
   message: string;
@@ -738,6 +767,41 @@ async function routeAction(args: {
     if (Object.keys(draft).length)
       await patchRows("leads", `id=eq.${encodeURIComponent(leadId)}`, draft);
 
+    if (context.company && typeof context.company === "object") {
+      const bookingCompany = context.company as JsonObject;
+      if (bookingCompany.dynamic_booking_enabled === true && resolvedService && (!date || !time)) {
+        const available = await rpc("get_next_available_slots", {
+          p_widget_key: widgetKey,
+          p_service_name: resolvedService,
+          p_from_date: date || null,
+          p_days: Number(bookingCompany.booking_window_days ?? 62),
+          p_limit: 8,
+        });
+        const replies = slotQuickReplies(available, resolvedService);
+        if (replies.length) {
+          return {
+            text: "Diese Termine sind aktuell frei. Bitte wählen Sie den passenden Zeitpunkt:",
+            quickReplies: replies,
+            progress: computeProgress(lead, analysis),
+          };
+        }
+        return {
+          text: "Im freigegebenen Zeitraum ist aktuell kein freier Online-Termin verfügbar. Ich kann Ihre Anfrage an einen Mitarbeiter weitergeben oder Sie auf die Warteliste setzen.",
+          quickReplies: [
+            {
+              label: "Mitarbeiter kontaktieren",
+              value: "Bitte geben Sie meine Anfrage an einen Mitarbeiter weiter.",
+            },
+            {
+              label: "Auf Warteliste",
+              value: `Bitte setzen Sie mich für ${resolvedService} auf die Warteliste.`,
+            },
+          ],
+          progress: computeProgress(lead, analysis),
+        };
+      }
+    }
+
     const missing: string[] = [];
     if (!resolvedService) missing.push("Dienstleistung");
     if (!reason) missing.push("Anliegen");
@@ -964,6 +1028,12 @@ Deno.serve(async (request: Request) => {
     conversationId = rpcUuid(conversationRaw);
     if (!companyId || !conversationId) throw new Error("chat_context_unavailable");
 
+    const bookingConfig = await selectRows<JsonObject>(
+      "companies",
+      `id=eq.${encodeURIComponent(companyId)}&select=dynamic_booking_enabled,booking_window_days&limit=1`,
+    );
+    if (bookingConfig[0]) Object.assign(company, bookingConfig[0]);
+
     await Promise.all([
       rpc("set_conversation_context", {
         p_widget_key: widgetKey,
@@ -1041,6 +1111,39 @@ Deno.serve(async (request: Request) => {
       terminology,
     });
     let lead = await upsertLead(existingLead, companyId, conversationId, analysis);
+    const suppliedLocation =
+      body.location && typeof body.location === "object" && !Array.isArray(body.location)
+        ? (body.location as JsonObject)
+        : null;
+    if (suppliedLocation) {
+      const locationAddress = cleanText(suppliedLocation.address, 500);
+      const locationSource =
+        suppliedLocation.source === "browser_geolocation" ? "browser_geolocation" : "manual";
+      const latitude = Number(suppliedLocation.latitude);
+      const longitude = Number(suppliedLocation.longitude);
+      const validCoordinates =
+        locationSource === "browser_geolocation" &&
+        Number.isFinite(latitude) &&
+        latitude >= -90 &&
+        latitude <= 90 &&
+        Number.isFinite(longitude) &&
+        longitude >= -180 &&
+        longitude <= 180;
+      if (locationAddress) {
+        const locationPatch: JsonObject = {
+          address: locationAddress,
+          location_source: locationSource,
+          location_confirmed_at: new Date().toISOString(),
+          ...(validCoordinates ? { latitude, longitude } : { latitude: null, longitude: null }),
+        };
+        const updated = await patchRows<JsonObject>(
+          "leads",
+          `id=eq.${encodeURIComponent(cleanText(lead.id, 80))}`,
+          locationPatch,
+        );
+        lead = { ...lead, ...(updated[0] ?? locationPatch) };
+      }
+    }
 
     const danger = containsAcuteDanger(message) || analysis.urgency === "emergency";
     const angryCustomer = shouldEscalateSentiment(analysis.customer_sentiment);

@@ -1,8 +1,9 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { AlertCircle, Bot, LockKeyhole } from "lucide-react";
-import { useCallback, useEffect, useState, type FormEvent } from "react";
+import { AlertCircle, LockKeyhole } from "lucide-react";
+import { useEffect, useState, type FormEvent } from "react";
 
 import { Button } from "@/components/ui/button";
+import { BrandMark } from "@/components/brand-mark";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -38,24 +39,15 @@ function LoginPage() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const navigateAfterLogin = useCallback(() => {
-    const pendingInvite = window.localStorage.getItem("zunftecho_pending_invite");
-    if (pendingInvite && /^[a-f0-9]{64}$/i.test(pendingInvite)) {
-      navigate({ to: "/einladung", search: { token: pendingInvite }, replace: true });
-      return;
-    }
-    navigate({ to: "/dashboard", replace: true });
-  }, [navigate]);
-
   useEffect(() => {
     let active = true;
     supabase.auth.getSession().then(({ data }) => {
-      if (active && data.session) navigateAfterLogin();
+      if (active && data.session) navigate({ to: "/dashboard", replace: true });
     });
     return () => {
       active = false;
     };
-  }, [navigateAfterLogin]);
+  }, [navigate]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -82,7 +74,7 @@ function LoginPage() {
       return;
     }
 
-    navigateAfterLogin();
+    navigate({ to: "/dashboard", replace: true });
   }
 
   return (
@@ -90,8 +82,8 @@ function LoginPage() {
       <div className="flex items-center justify-center px-6 py-12">
         <div className="w-full max-w-sm">
           <div className="mb-8 flex items-center gap-2">
-            <span className="flex size-9 items-center justify-center rounded-md bg-primary text-primary-foreground">
-              <Bot className="size-5" />
+            <span className="flex size-10 items-center justify-center overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-border">
+              <BrandMark className="size-10" />
             </span>
             <span className="font-display text-xl font-semibold">ZunftEcho</span>
           </div>

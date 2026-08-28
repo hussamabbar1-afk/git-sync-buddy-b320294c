@@ -79,6 +79,7 @@ function SubscriptionPage() {
   const [role, setRole] = useState("member");
   const [loading, setLoading] = useState(true);
   const [checkoutPlan, setCheckoutPlan] = useState<"pilot" | "monthly" | null>(null);
+  const [portalPending, setPortalPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   async function loadBilling() {
@@ -145,6 +146,24 @@ function SubscriptionPage() {
       setError(
         str(payload["message"]) ||
           "Stripe ist noch nicht mit Testschlüsseln verbunden. Es wurde keine Zahlung ausgelöst.",
+      );
+      return;
+    }
+    window.location.assign(url);
+  }
+
+  async function openBillingPortal() {
+    if (portalPending) return;
+    setPortalPending(true);
+    setError(null);
+    const { data, error: functionError } = await supabase.functions.invoke("stripe-portal");
+    setPortalPending(false);
+    const payload = asRecord(data);
+    const url = str(payload["url"]);
+    if (functionError || !url) {
+      setError(
+        str(payload["message"]) ||
+          "Das Stripe-Kundenportal steht erst nach einem erfolgreichen Test-Checkout zur Verfügung.",
       );
       return;
     }
@@ -227,6 +246,21 @@ function SubscriptionPage() {
                     <dd>{subscription.test_mode ? "Test" : "Live"}</dd>
                   </div>
                 </dl>
+                {canPurchase ? (
+                  <Button
+                    variant="outline"
+                    className="w-full"
+                    onClick={() => void openBillingPortal()}
+                    disabled={portalPending}
+                  >
+                    {portalPending ? (
+                      <Loader2 className="size-4 animate-spin" />
+                    ) : (
+                      <ExternalLink className="size-4" />
+                    )}
+                    Stripe-Kundenportal öffnen
+                  </Button>
+                ) : null}
               </div>
             ) : (
               <p className="text-sm text-muted-foreground">Noch kein Testtarif verknüpft.</p>

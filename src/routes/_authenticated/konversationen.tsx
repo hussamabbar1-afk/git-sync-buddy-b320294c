@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { CircleCheckBig, Loader2, MessageSquareWarning } from "lucide-react";
+import { CircleCheckBig, ImageIcon, Loader2, MessageSquareWarning, Send } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { AppShell, PageHeader } from "@/components/app-shell";
@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { detailSearchSchema } from "@/lib/deep-link";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -65,6 +66,14 @@ type MessageRow = {
   role: string;
   content: string;
   created_at: string;
+  source_channel?: string | null;
+};
+
+type LeadAttachment = {
+  id: string;
+  file_name: string;
+  storage_path: string;
+  signed_url: string;
 };
 
 type MessageFeedbackRow = {
@@ -170,6 +179,10 @@ function ConversationsPage() {
   const [resolving, setResolving] = useState(false);
   const [resolveError, setResolveError] = useState<string | null>(null);
   const [resolveSuccess, setResolveSuccess] = useState<string | null>(null);
+  const [reply, setReply] = useState("");
+  const [replying, setReplying] = useState(false);
+  const [replyNotice, setReplyNotice] = useState<string | null>(null);
+  const [attachments, setAttachments] = useState<LeadAttachment[]>([]);
 
   useEffect(() => {
     let cancelled = false;
@@ -312,7 +325,7 @@ function ConversationsPage() {
     async function loadMessages(conversationId: string) {
       const { data, error: messagesLoadError } = await supabase
         .from("messages")
-        .select("id, conversation_id, role, content, created_at")
+        .select("id, conversation_id, role, content, created_at, source_channel")
         .eq("conversation_id", conversationId)
         .order("created_at", { ascending: true });
 
@@ -349,6 +362,35 @@ function ConversationsPage() {
       cancelled = true;
     };
   }, [selectedId]);
+
+  useEffect(() => {
+    let cancelled = false;
+    setAttachments([]);
+    const lead = selectedId ? leadByConversation.get(selectedId) : null;
+    if (!lead) return;
+
+    void (async () => {
+      const { data } = await supabase
+        .from("attachments")
+        .select("id, file_name, storage_path")
+        .eq("entity_type", "lead")
+        .eq("entity_id", lead.id)
+        .order("created_at", { ascending: true });
+      if (cancelled || !data?.length) return;
+      const resolved = await Promise.all(
+        data.map(async (item) => {
+          const { data: signed } = await supabase.storage
+            .from("company-files")
+            .createSignedUrl(item.storage_path, 900);
+          return signed?.signedUrl ? { ...item, signed_url: signed.signedUrl } : null;
+        }),
+      );
+      if (!cancelled) setAttachments(resolved.filter(Boolean) as LeadAttachment[]);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [leadByConversation, selectedId]);
 
   const recentCount = useMemo(() => {
     const threshold = Date.now() - 7 * 24 * 60 * 60 * 1000;
@@ -429,6 +471,47 @@ function ConversationsPage() {
       ),
     );
     setResolveSuccess("Übergabe als erledigt markiert.");
+  };
+
+  const handleReply = async () => {
+    const message = reply.trim();
+    if (!selectedConversation || !message || replying) return;
+    setReplying(true);
+    setReplyNotice(null);
+    const { data, error: invokeError } = await supabase.functions.invoke("staff-chat-reply", {
+      body: { conversation_id: selectedConversation.id, message },
+    });
+    setReplying(false);
+    if (invokeError || !data?.ok || !data.message) {
+      setReplyNotice("Die Antwort konnte nicht gesendet werden. Bitte versuchen Sie es erneut.");
+      return;
+    }
+    setMessages((current) => [
+      ...current,
+      {
+        id: data.message.id,
+        conversation_id: selectedConversation.id,
+        role: "assistant",
+        content: message,
+        created_at: data.message.created_at,
+        source_channel: "manual",
+      },
+    ]);
+    setConversations((current) =>
+      sortConversations(
+        current.map((item) =>
+          item.id === selectedConversation.id
+            ? { ...item, status: "open", updated_at: data.message.created_at }
+            : item,
+        ),
+      ),
+    );
+    setReply("");
+    setReplyNotice(
+      data.email_queued
+        ? "Antwort im Chat veröffentlicht und zusätzlich per E-Mail angekündigt."
+        : "Antwort direkt im Kundenchat veröffentlicht.",
+    );
   };
 
   const selectedLead = selectedConversation
@@ -603,6 +686,30 @@ function ConversationsPage() {
             ) : null}
           </CardHeader>
           <CardContent className="space-y-4 pt-6">
+            {attachments.length ? (
+              <div className="rounded-lg border bg-muted/30 p-3">
+                <p className="mb-2 flex items-center gap-2 text-sm font-medium">
+                  <ImageIcon className="size-4" /> Kundenfotos ({attachments.length})
+                </p>
+                <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                  {attachments.map((attachment) => (
+                    <a
+                      key={attachment.id}
+                      href={attachment.signed_url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="overflow-hidden rounded-md border bg-background"
+                    >
+                      <img
+                        src={attachment.signed_url}
+                        alt={attachment.file_name}
+                        className="h-28 w-full object-cover"
+                      />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ) : null}
             {messagesLoading ? (
               <div className="flex items-center justify-center gap-2 py-10 text-sm text-muted-foreground">
                 <Loader2 className="h-4 w-4 animate-spin" />
@@ -620,8 +727,9 @@ function ConversationsPage() {
               </p>
             ) : (
               messages.map((message) => {
-                const label = roleLabel(message.role);
-                const isAssistant = label === "KI";
+                const label =
+                  message.source_channel === "manual" ? "Mitarbeiter" : roleLabel(message.role);
+                const isAssistant = message.role === "assistant";
                 return (
                   <div
                     key={message.id}
@@ -651,9 +759,36 @@ function ConversationsPage() {
               })
             )}
 
-            <p className="border-t pt-4 text-xs text-muted-foreground">
-              Direkte Antworten aus dem Dashboard sind noch nicht aktiviert.
-            </p>
+            {selectedConversation ? (
+              <div className="space-y-2 border-t pt-4">
+                <p className="text-sm font-medium">Direkt antworten</p>
+                <Textarea
+                  value={reply}
+                  onChange={(event) => setReply(event.target.value)}
+                  maxLength={4000}
+                  rows={3}
+                  placeholder="Antwort an den Kunden schreiben …"
+                  disabled={replying}
+                />
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <p className="text-xs text-muted-foreground">
+                    Die Antwort erscheint im offenen Kundenchat. Bei hinterlegter E-Mail erhält der
+                    Kunde zusätzlich einen Hinweis.
+                  </p>
+                  <Button onClick={() => void handleReply()} disabled={replying || !reply.trim()}>
+                    {replying ? (
+                      <Loader2 className="size-4 animate-spin" />
+                    ) : (
+                      <Send className="size-4" />
+                    )}
+                    Senden
+                  </Button>
+                </div>
+                {replyNotice ? (
+                  <p className="text-xs text-muted-foreground">{replyNotice}</p>
+                ) : null}
+              </div>
+            ) : null}
           </CardContent>
         </Card>
       </div>
