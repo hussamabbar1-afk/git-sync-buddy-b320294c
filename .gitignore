@@ -15,6 +15,7 @@ dist-ssr
 .tanstack/**
 .nitro
 *.local
+tmp/
 
 # Private migration backups (may contain credential references)
 .private/
