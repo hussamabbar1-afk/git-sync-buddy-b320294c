@@ -99,3 +99,14 @@ The next engineering package is a public, zero-cost interactive sales demo that
 connects the prospect's chat scenario to the resulting lead, alert and
 appointment views without writing to production data.
 
+## Post-acceptance delivery
+
+The planned package was completed and deployed on 29 August 2026:
+
+- `/demo` provides three interactive SHK scenarios and connects customer chat,
+  lead qualification, external alert, human handoff and appointment confirmation;
+- the simulation performs no API calls and writes no production data;
+- desktop and 390 px mobile layouts passed visual and interaction checks;
+- campaign sources from printed-letter QR links are preserved through the demo
+  into the pilot request;
+- production release version: `e1d70e17-aeff-4341-bbef-c088f287bacb`.

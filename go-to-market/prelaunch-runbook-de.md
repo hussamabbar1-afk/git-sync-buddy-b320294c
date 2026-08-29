@@ -1,0 +1,112 @@
+# ZunftEcho - kostenfreier Vorbereitungsplan bis 10. September 2026
+
+Stand: 29. August 2026
+
+## Grundsatz
+
+Der technische Produktumfang ist für Demo und Pilotvorbereitung freigegeben. Bis Gewerbe,
+Steuerdaten und Stripe vollständig bereit sind, werden keine automatische Abrechnung und keine
+formelle Rechnung aktiviert. Die verbleibende Zeit dient nicht mehr dem wahllosen Ausbau, sondern
+einer kontrollierten Vorbereitung auf den ersten zahlenden Pilotkunden.
+
+## Bereits abgeschlossen
+
+- technische Produktionsabnahme einschließlich Auth, Mobilansicht, Widget, Chat, Termine,
+  Benachrichtigungen, Teamzugang und Automationen;
+- öffentliche interaktive Demo unter `https://zunftecho.de/demo`;
+- Kampagnen-Weitergabe von Brief-QR bis zur Pilotanfrage;
+- drei personalisierte, druckfertige A4-Briefe für die erste Welle;
+- Pilotangebot: 30 Tage für 99 EUR netto, anschließend optional 149 EUR netto monatlich;
+- rechtliche Seiten, technisches Monitoring und sichere Deaktivierung der Abrechnung.
+
+## 29.-31. August: Verkaufsablauf festziehen
+
+- Den 15-Minuten-Demo-Leitfaden zweimal laut durchspielen.
+- Für jeden der drei Zielbetriebe ein passendes Demo-Szenario festlegen.
+- Die Briefe einmal auf Normalpapier drucken und QR, Ränder, Faltung und Fensterposition prüfen.
+- Keine Briefe oder Werbe-E-Mails vorzeitig versenden.
+
+**Ergebnis:** Die Demo ist in maximal 15 Minuten verständlich und der Brief führt ohne Anmeldung
+zur passenden Produktansicht.
+
+## 1.-3. September: Pilot-Onboarding proben
+
+- Mit dem Demo-Betrieb einen vollständigen Self-Service-Onboarding-Durchlauf ausführen.
+- Leistungen, Gebiete, Zeiten und Assistentennamen einmal ändern und wieder zurücksetzen.
+- Widget-Einbau anhand der HTML-Vorschau und der Installationsseite proben.
+- Einen Lead, eine menschliche Übergabe und einen Termin ausschließlich mit gekennzeichneten
+  Testdaten durchspielen; danach Testdaten kontrolliert entfernen oder als Test markieren.
+
+**Ergebnis:** Ein echter Betrieb kann ohne Improvisation eingerichtet werden.
+
+## 4.-5. September: Reaktionsprozess vorbereiten
+
+- Pilotanfragen im Supabase-Dashboard und die zugehörige Benachrichtigungs-E-Mail prüfen.
+- Für eine neue Anfrage eine Reaktionszeit von maximal einem Werktag festlegen.
+- Ein kurzes internes Gesprächsprotokoll vorbereiten: Bedarf, Einwand, nächster Schritt, Termin.
+- Keine automatisierte Werbe-Nachfassserie aktivieren; vorhandene Re-Engagement-Automation gilt
+  nur für freiwillig eingegangene Pilotanfragen.
+
+**Ergebnis:** Keine echte Anfrage bleibt unbeantwortet oder ohne klaren nächsten Schritt.
+
+## 6.-7. September: Druck und erste Welle
+
+- Endgültige PDFs auf dem bestellten Papier drucken.
+- QR jedes einzelnen Ausdrucks mit dem Telefon testen.
+- Nur RO-DO, BOLOWSKI und Grelak für Welle 1 vorbereiten.
+- Woermann & Söhne bleibt wegen des dokumentierten Werbewiderspruchs ausgeschlossen.
+- Umschläge adressieren, aber Versanddatum und Gewerbe-Status vor Einwurf erneut prüfen.
+
+**Ergebnis:** Drei fehlerfreie, individuell adressierte Sendungen liegen bereit.
+
+## 8.-9. September: Go/No-Go-Abnahme
+
+Technik:
+
+- `/`, `/demo`, `/registrieren`, `/preise`, `/login` und Widget einmal von Mobilfunk statt nur vom
+  Heimnetz öffnen;
+- Testmodus auf der Abonnementseite bestätigen;
+- Health-Check, Cron-Jobs und ausgehende Nachrichten auf Fehler prüfen;
+- keine neuen Fehler in den letzten 24 Stunden akzeptieren.
+
+Geschäft:
+
+- korrekte Gewerbe-Tätigkeitsbeschreibung bereithalten;
+- Geschäftsname ZunftEcho verwenden, sofern die Anmeldung dies in dieser Form zulässt;
+- vollständigen Namen nur in Gewerbe-, Steuer-, Vertrags- und Impressumsangaben einsetzen;
+- separates Geschäftskonto beziehungsweise Zahlungskonto vorbereiten, ohne kostenpflichtige
+  Zusatzdienste vorschnell zu buchen.
+
+**Ergebnis:** Am 10. September fehlt nur die behördliche beziehungsweise externe Freigabe.
+
+## 10. September: Aktivierungsreihenfolge
+
+1. Aufenthaltstitel erhalten und Angaben prüfen.
+2. Gewerbeanmeldung einreichen.
+3. Steuerliche Erfassung in ELSTER vervollständigen, sobald die dafür nötigen Daten vorliegen.
+4. Stripe-Unternehmensdaten im Testkonto ergänzen; Live-Modus erst nach Verifikation aktivieren.
+5. Impressum, AGB, Datenschutzerklärung und Rechnungsangaben mit den tatsächlich erteilten Daten
+   aktualisieren.
+6. Einen vollständigen Testkauf mit Stripe-Testdaten ausführen.
+7. Erst nach erfolgreicher Prüfung Live-Zahlungen und automatische Rechnungsausgabe freigeben.
+8. Die drei Briefe versenden oder persönlich einwerfen.
+
+## Stop-Kriterien
+
+Nicht live verkaufen oder abrechnen, wenn einer dieser Punkte offen ist:
+
+- Gewerbe- oder Steuerangaben sind widersprüchlich oder unvollständig;
+- Stripe-Verifikation oder Webhook-Test schlägt fehl;
+- Rechnung enthält nicht die tatsächlich gültigen Pflichtangaben;
+- Produktions-Health-Check zeigt einen wiederholten Fehler;
+- QR oder Pilotformular überträgt die Kampagnenquelle nicht korrekt;
+- der Betrieb hat der Werbeansprache widersprochen.
+
+## Erfolgskriterium für die erste Welle
+
+- drei personalisierte Briefe;
+- mindestens ein freiwilliger Demo-/Pilotkontakt;
+- mindestens ein qualifiziertes 15-Minuten-Gespräch;
+- Ziel: ein bezahlter 30-Tage-Pilot, ohne Preisnachlass oder Funktionsversprechen außerhalb des
+  veröffentlichten Umfangs.
+
