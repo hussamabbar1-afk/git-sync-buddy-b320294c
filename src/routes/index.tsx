@@ -133,7 +133,6 @@ export const Route = createFileRoute("/")({
             "@type": "Organization",
             name: "ZunftEcho",
             url: "https://zunftecho.de/",
-            email: "hussamabbar4@gmail.com",
             address: {
               "@type": "PostalAddress",
               streetAddress: "Coloniaallee 34",

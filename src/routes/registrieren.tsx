@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, Check, CircleCheck, LoaderCircle, Send } from "lucide-react";
+import { ArrowLeft, Check, CircleCheck, LoaderCircle, Send } from "lucide-react";
 import { useState, type FormEvent } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -8,8 +8,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
-
-const PILOT_EMAIL = "hussamabbar4@gmail.com";
 
 type PilotRequestResponse = {
   ok?: boolean;
@@ -171,12 +169,8 @@ function PilotRequestPage() {
               role="alert"
               className="mb-6 rounded-xl border border-red-200 bg-red-50 p-4 text-sm leading-6 text-red-950"
             >
-              Die Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es erneut oder
-              schreiben Sie an{" "}
-              <a className="font-semibold underline" href={`mailto:${PILOT_EMAIL}`}>
-                {PILOT_EMAIL}
-              </a>
-              .
+              Die Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es in wenigen
+              Minuten erneut.
             </div>
           ) : null}
 
@@ -242,14 +236,6 @@ function PilotRequestPage() {
               </p>
             </div>
           </form>
-
-          <div className="mt-7 border-t border-slate-200 pt-6 text-sm text-slate-600">
-            Sie möchten lieber eine E-Mail schreiben? Erreichen Sie uns direkt unter{" "}
-            <a className="font-medium text-primary hover:underline" href={`mailto:${PILOT_EMAIL}`}>
-              {PILOT_EMAIL}
-            </a>
-            <ArrowRight className="ml-1 inline size-3.5" />
-          </div>
         </section>
       </main>
       <footer className="border-t border-slate-200 bg-white px-5 py-6 text-center text-sm text-slate-500">
