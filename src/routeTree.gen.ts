@@ -12,17 +12,21 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AgbRouteImport } from './routes/agb'
+import { Route as ChatbotFuerHandwerksbetriebeRouteImport } from './routes/chatbot-fuer-handwerksbetriebe'
 import { Route as DatenschutzRouteImport } from './routes/datenschutz'
 import { Route as DemoRouteImport } from './routes/demo'
 import { Route as EinladungRouteImport } from './routes/einladung'
 import { Route as ImpressumRouteImport } from './routes/impressum'
 import { Route as KundenportalRouteImport } from './routes/kundenportal'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as PartnerRouteImport } from './routes/partner'
 import { Route as PasswortVergessenRouteImport } from './routes/passwort-vergessen'
 import { Route as PasswortZuruecksetzenRouteImport } from './routes/passwort-zuruecksetzen'
 import { Route as PreiseRouteImport } from './routes/preise'
 import { Route as RegistrierenRouteImport } from './routes/registrieren'
+import { Route as ShkAnfragenAutomatisierenRouteImport } from './routes/shk-anfragen-automatisieren'
 import { Route as WidgetRouteImport } from './routes/widget'
+import { Route as WissenRouteImport } from './routes/wissen'
 import { Route as AuthenticatedAbonnementRouteImport } from './routes/_authenticated/abonnement'
 import { Route as AuthenticatedAngeboteRouteImport } from './routes/_authenticated/angebote'
 import { Route as AuthenticatedAufgabenRouteImport } from './routes/_authenticated/aufgaben'
@@ -55,6 +59,12 @@ const AgbRoute = AgbRouteImport.update({
   path: '/agb',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ChatbotFuerHandwerksbetriebeRoute =
+  ChatbotFuerHandwerksbetriebeRouteImport.update({
+    id: '/chatbot-fuer-handwerksbetriebe',
+    path: '/chatbot-fuer-handwerksbetriebe',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DatenschutzRoute = DatenschutzRouteImport.update({
   id: '/datenschutz',
   path: '/datenschutz',
@@ -85,6 +95,11 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PartnerRoute = PartnerRouteImport.update({
+  id: '/partner',
+  path: '/partner',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PasswortVergessenRoute = PasswortVergessenRouteImport.update({
   id: '/passwort-vergessen',
   path: '/passwort-vergessen',
@@ -105,9 +120,20 @@ const RegistrierenRoute = RegistrierenRouteImport.update({
   path: '/registrieren',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ShkAnfragenAutomatisierenRoute =
+  ShkAnfragenAutomatisierenRouteImport.update({
+    id: '/shk-anfragen-automatisieren',
+    path: '/shk-anfragen-automatisieren',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const WidgetRoute = WidgetRouteImport.update({
   id: '/widget',
   path: '/widget',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WissenRoute = WissenRouteImport.update({
+  id: '/wissen',
+  path: '/wissen',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAbonnementRoute = AuthenticatedAbonnementRouteImport.update({
@@ -205,17 +231,21 @@ const AuthenticatedUnternehmenRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agb': typeof AgbRoute
+  '/chatbot-fuer-handwerksbetriebe': typeof ChatbotFuerHandwerksbetriebeRoute
   '/datenschutz': typeof DatenschutzRoute
   '/demo': typeof DemoRoute
   '/einladung': typeof EinladungRoute
   '/impressum': typeof ImpressumRoute
   '/kundenportal': typeof KundenportalRoute
   '/login': typeof LoginRoute
+  '/partner': typeof PartnerRoute
   '/passwort-vergessen': typeof PasswortVergessenRoute
   '/passwort-zuruecksetzen': typeof PasswortZuruecksetzenRoute
   '/preise': typeof PreiseRoute
   '/registrieren': typeof RegistrierenRoute
+  '/shk-anfragen-automatisieren': typeof ShkAnfragenAutomatisierenRoute
   '/widget': typeof WidgetRoute
+  '/wissen': typeof WissenRoute
   '/abonnement': typeof AuthenticatedAbonnementRoute
   '/angebote': typeof AuthenticatedAngeboteRoute
   '/aufgaben': typeof AuthenticatedAufgabenRoute
@@ -237,17 +267,21 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/agb': typeof AgbRoute
+  '/chatbot-fuer-handwerksbetriebe': typeof ChatbotFuerHandwerksbetriebeRoute
   '/datenschutz': typeof DatenschutzRoute
   '/demo': typeof DemoRoute
   '/einladung': typeof EinladungRoute
   '/impressum': typeof ImpressumRoute
   '/kundenportal': typeof KundenportalRoute
   '/login': typeof LoginRoute
+  '/partner': typeof PartnerRoute
   '/passwort-vergessen': typeof PasswortVergessenRoute
   '/passwort-zuruecksetzen': typeof PasswortZuruecksetzenRoute
   '/preise': typeof PreiseRoute
   '/registrieren': typeof RegistrierenRoute
+  '/shk-anfragen-automatisieren': typeof ShkAnfragenAutomatisierenRoute
   '/widget': typeof WidgetRoute
+  '/wissen': typeof WissenRoute
   '/abonnement': typeof AuthenticatedAbonnementRoute
   '/angebote': typeof AuthenticatedAngeboteRoute
   '/aufgaben': typeof AuthenticatedAufgabenRoute
@@ -271,17 +305,21 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/agb': typeof AgbRoute
+  '/chatbot-fuer-handwerksbetriebe': typeof ChatbotFuerHandwerksbetriebeRoute
   '/datenschutz': typeof DatenschutzRoute
   '/demo': typeof DemoRoute
   '/einladung': typeof EinladungRoute
   '/impressum': typeof ImpressumRoute
   '/kundenportal': typeof KundenportalRoute
   '/login': typeof LoginRoute
+  '/partner': typeof PartnerRoute
   '/passwort-vergessen': typeof PasswortVergessenRoute
   '/passwort-zuruecksetzen': typeof PasswortZuruecksetzenRoute
   '/preise': typeof PreiseRoute
   '/registrieren': typeof RegistrierenRoute
+  '/shk-anfragen-automatisieren': typeof ShkAnfragenAutomatisierenRoute
   '/widget': typeof WidgetRoute
+  '/wissen': typeof WissenRoute
   '/_authenticated/abonnement': typeof AuthenticatedAbonnementRoute
   '/_authenticated/angebote': typeof AuthenticatedAngeboteRoute
   '/_authenticated/aufgaben': typeof AuthenticatedAufgabenRoute
@@ -305,17 +343,21 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/agb'
+    | '/chatbot-fuer-handwerksbetriebe'
     | '/datenschutz'
     | '/demo'
     | '/einladung'
     | '/impressum'
     | '/kundenportal'
     | '/login'
+    | '/partner'
     | '/passwort-vergessen'
     | '/passwort-zuruecksetzen'
     | '/preise'
     | '/registrieren'
+    | '/shk-anfragen-automatisieren'
     | '/widget'
+    | '/wissen'
     | '/abonnement'
     | '/angebote'
     | '/aufgaben'
@@ -337,17 +379,21 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/agb'
+    | '/chatbot-fuer-handwerksbetriebe'
     | '/datenschutz'
     | '/demo'
     | '/einladung'
     | '/impressum'
     | '/kundenportal'
     | '/login'
+    | '/partner'
     | '/passwort-vergessen'
     | '/passwort-zuruecksetzen'
     | '/preise'
     | '/registrieren'
+    | '/shk-anfragen-automatisieren'
     | '/widget'
+    | '/wissen'
     | '/abonnement'
     | '/angebote'
     | '/aufgaben'
@@ -370,17 +416,21 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/agb'
+    | '/chatbot-fuer-handwerksbetriebe'
     | '/datenschutz'
     | '/demo'
     | '/einladung'
     | '/impressum'
     | '/kundenportal'
     | '/login'
+    | '/partner'
     | '/passwort-vergessen'
     | '/passwort-zuruecksetzen'
     | '/preise'
     | '/registrieren'
+    | '/shk-anfragen-automatisieren'
     | '/widget'
+    | '/wissen'
     | '/_authenticated/abonnement'
     | '/_authenticated/angebote'
     | '/_authenticated/aufgaben'
@@ -404,17 +454,21 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AgbRoute: typeof AgbRoute
+  ChatbotFuerHandwerksbetriebeRoute: typeof ChatbotFuerHandwerksbetriebeRoute
   DatenschutzRoute: typeof DatenschutzRoute
   DemoRoute: typeof DemoRoute
   EinladungRoute: typeof EinladungRoute
   ImpressumRoute: typeof ImpressumRoute
   KundenportalRoute: typeof KundenportalRoute
   LoginRoute: typeof LoginRoute
+  PartnerRoute: typeof PartnerRoute
   PasswortVergessenRoute: typeof PasswortVergessenRoute
   PasswortZuruecksetzenRoute: typeof PasswortZuruecksetzenRoute
   PreiseRoute: typeof PreiseRoute
   RegistrierenRoute: typeof RegistrierenRoute
+  ShkAnfragenAutomatisierenRoute: typeof ShkAnfragenAutomatisierenRoute
   WidgetRoute: typeof WidgetRoute
+  WissenRoute: typeof WissenRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -438,6 +492,13 @@ declare module '@tanstack/react-router' {
       path: '/agb'
       fullPath: '/agb'
       preLoaderRoute: typeof AgbRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chatbot-fuer-handwerksbetriebe': {
+      id: '/chatbot-fuer-handwerksbetriebe'
+      path: '/chatbot-fuer-handwerksbetriebe'
+      fullPath: '/chatbot-fuer-handwerksbetriebe'
+      preLoaderRoute: typeof ChatbotFuerHandwerksbetriebeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/datenschutz': {
@@ -482,6 +543,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/partner': {
+      id: '/partner'
+      path: '/partner'
+      fullPath: '/partner'
+      preLoaderRoute: typeof PartnerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/passwort-vergessen': {
       id: '/passwort-vergessen'
       path: '/passwort-vergessen'
@@ -510,11 +578,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegistrierenRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/shk-anfragen-automatisieren': {
+      id: '/shk-anfragen-automatisieren'
+      path: '/shk-anfragen-automatisieren'
+      fullPath: '/shk-anfragen-automatisieren'
+      preLoaderRoute: typeof ShkAnfragenAutomatisierenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/widget': {
       id: '/widget'
       path: '/widget'
       fullPath: '/widget'
       preLoaderRoute: typeof WidgetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wissen': {
+      id: '/wissen'
+      path: '/wissen'
+      fullPath: '/wissen'
+      preLoaderRoute: typeof WissenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/abonnement': {
@@ -686,17 +768,21 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AgbRoute: AgbRoute,
+  ChatbotFuerHandwerksbetriebeRoute: ChatbotFuerHandwerksbetriebeRoute,
   DatenschutzRoute: DatenschutzRoute,
   DemoRoute: DemoRoute,
   EinladungRoute: EinladungRoute,
   ImpressumRoute: ImpressumRoute,
   KundenportalRoute: KundenportalRoute,
   LoginRoute: LoginRoute,
+  PartnerRoute: PartnerRoute,
   PasswortVergessenRoute: PasswortVergessenRoute,
   PasswortZuruecksetzenRoute: PasswortZuruecksetzenRoute,
   PreiseRoute: PreiseRoute,
   RegistrierenRoute: RegistrierenRoute,
+  ShkAnfragenAutomatisierenRoute: ShkAnfragenAutomatisierenRoute,
   WidgetRoute: WidgetRoute,
+  WissenRoute: WissenRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

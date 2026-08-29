@@ -130,7 +130,7 @@ const THEME_BOOTSTRAP_SCRIPT = `(function(){try{var t=localStorage.getItem("zunf
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="de">
+    <html lang="de" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_BOOTSTRAP_SCRIPT }} />
         <script dangerouslySetInnerHTML={{ __html: RECOVERY_REDIRECT_SCRIPT }} />

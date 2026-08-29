@@ -16,6 +16,8 @@ einer kontrollierten Vorbereitung auf den ersten zahlenden Pilotkunden.
 - öffentliche interaktive Demo unter `https://zunftecho.de/demo`;
 - Kampagnen-Weitergabe von Brief-QR bis zur Pilotanfrage;
 - drei personalisierte, druckfertige A4-Briefe für die erste Welle;
+- organische 30-Tage-Kampagne mit Wissenszentrum, zwei Fachartikeln, Partnerseite, zwölf
+  LinkedIn-Beiträgen und vier kurzen Videoskripten;
 - Pilotangebot: 30 Tage für 99 EUR netto, anschließend optional 149 EUR netto monatlich;
 - rechtliche Seiten, technisches Monitoring und sichere Deaktivierung der Abrechnung.
 
@@ -81,6 +83,8 @@ Technik:
 - Testmodus auf der Abonnementseite bestätigen;
 - Health-Check, Cron-Jobs und ausgehende Nachrichten auf Fehler prüfen;
 - keine neuen Fehler in den letzten 24 Stunden akzeptieren.
+- vorbereitete Marketingseiten erst nach der Gewerbeanmeldung veröffentlichen und anschließend die
+  Sitemap bei den Suchmaschinen einreichen.
 
 Geschäft:
 

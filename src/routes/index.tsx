@@ -168,7 +168,7 @@ function LandingPage() {
             <Brand />
           </Link>
 
-          <nav className="hidden items-center gap-7 text-sm font-medium text-slate-600 md:flex">
+          <nav className="hidden items-center gap-5 text-sm font-medium text-slate-600 lg:flex">
             <a className="transition-colors hover:text-slate-950" href="#vorteile">
               Vorteile
             </a>
@@ -187,9 +187,15 @@ function LandingPage() {
             <Link className="transition-colors hover:text-slate-950" to="/preise">
               Preise
             </Link>
+            <Link className="transition-colors hover:text-slate-950" to="/wissen">
+              Wissen
+            </Link>
+            <Link className="transition-colors hover:text-slate-950" to="/partner">
+              Partner
+            </Link>
           </nav>
 
-          <div className="hidden items-center gap-2 md:flex">
+          <div className="hidden items-center gap-2 lg:flex">
             <Button asChild variant="ghost" className="hidden sm:inline-flex">
               <Link to="/login">Anmelden</Link>
             </Button>
@@ -201,7 +207,7 @@ function LandingPage() {
           </div>
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="outline" size="icon" className="md:hidden" aria-label="Menü öffnen">
+              <Button variant="outline" size="icon" className="lg:hidden" aria-label="Menü öffnen">
                 <Menu className="size-5" />
               </Button>
             </SheetTrigger>
@@ -232,6 +238,16 @@ function LandingPage() {
                 <SheetClose asChild>
                   <Link className="flex min-h-12 items-center border-b" to="/preise">
                     Preise
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link className="flex min-h-12 items-center border-b" to="/wissen">
+                    Wissen
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link className="flex min-h-12 items-center border-b" to="/partner">
+                    Partner
                   </Link>
                 </SheetClose>
                 <SheetClose asChild>
@@ -634,6 +650,12 @@ function LandingPage() {
             </Link>
             <Link className="hover:text-slate-950" to="/preise">
               Preise
+            </Link>
+            <Link className="hover:text-slate-950" to="/wissen">
+              Wissen
+            </Link>
+            <Link className="hover:text-slate-950" to="/partner">
+              Partner
             </Link>
             <Link className="hover:text-slate-950" to="/impressum">
               Impressum
