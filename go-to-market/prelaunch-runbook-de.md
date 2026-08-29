@@ -86,6 +86,8 @@ Technik:
 
 - den reproduzierbaren Basistest mit `npm run check:prelaunch` ausführen; erst nach der
   Gewerbeanmeldung und bewussten Kampagnenfreigabe `-- --marketing=live` verwenden;
+- neue Cloudflare-Versionen vor der Freigabe mit
+  `npm run check:prelaunch -- --version=<VERSION-ID>` bei 0 Prozent Traffic prüfen;
 - `/`, `/demo`, `/registrieren`, `/preise`, `/login` und Widget einmal von Mobilfunk statt nur vom
   Heimnetz öffnen;
 - Testmodus auf der Abonnementseite bestätigen;

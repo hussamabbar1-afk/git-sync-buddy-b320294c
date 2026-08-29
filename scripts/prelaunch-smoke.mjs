@@ -9,6 +9,8 @@ const args = new Map(
 
 const baseUrl = (args.get("base") ?? "https://zunftecho.de").replace(/\/$/, "");
 const marketingState = args.get("marketing") ?? "held";
+const versionId = args.get("version");
+const workerName = "hussamabbar1-afk-git-sync-buddy-b320294c";
 
 if (!new Set(["held", "live"]).has(marketingState)) {
   console.error("--marketing must be either held or live");
@@ -21,7 +23,12 @@ const responses = new Map();
 
 async function request(path) {
   const response = await fetch(`${baseUrl}${path}`, {
-    headers: { "user-agent": "ZunftEcho-Prelaunch-Smoke/1.0" },
+    headers: {
+      "user-agent": "ZunftEcho-Prelaunch-Smoke/1.0",
+      ...(versionId
+        ? { "Cloudflare-Workers-Version-Overrides": `${workerName}="${versionId}"` }
+        : {}),
+    },
     redirect: "follow",
     signal: AbortSignal.timeout(15_000),
   });
@@ -49,6 +56,7 @@ const publicRoutes = [
 
 console.log(`ZunftEcho prelaunch smoke check: ${baseUrl}`);
 console.log(`Marketing state: ${marketingState}\n`);
+if (versionId) console.log(`Worker version override: ${versionId}\n`);
 
 for (const path of publicRoutes) {
   try {
