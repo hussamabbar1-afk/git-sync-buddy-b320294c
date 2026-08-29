@@ -231,6 +231,11 @@ function LandingPage() {
                   </SheetClose>
                 ))}
                 <SheetClose asChild>
+                  <Link className="flex min-h-12 items-center border-b" to="/anfrage-check">
+                    Anfrage-Check
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
                   <Link className="flex min-h-12 items-center border-b" to="/demo">
                     Live-Demo
                   </Link>
@@ -301,6 +306,12 @@ function LandingPage() {
                   <Link to="/demo">Live-Demo ansehen</Link>
                 </Button>
               </div>
+              <Link
+                to="/anfrage-check"
+                className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+              >
+                <SearchCheck className="size-4" /> Kostenloser Website-Anfrage-Check
+              </Link>
 
               <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-slate-600">
                 <span className="flex items-center gap-2">
@@ -650,6 +661,9 @@ function LandingPage() {
             </Link>
             <Link className="hover:text-slate-950" to="/preise">
               Preise
+            </Link>
+            <Link className="hover:text-slate-950" to="/anfrage-check">
+              Anfrage-Check
             </Link>
             <Link className="hover:text-slate-950" to="/wissen">
               Wissen

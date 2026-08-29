@@ -28,8 +28,10 @@ nach der Gewerbeanmeldung und der Aktualisierung der rechtlichen Angaben.
 ### 1. Eigene Website und Suchmaschinen
 
 - Wissenszentrum: `https://zunftecho.de/wissen`
+- kostenloser Website-Anfrage-Check: `https://zunftecho.de/anfrage-check`
 - Leitfaden: `https://zunftecho.de/shk-anfragen-automatisieren`
 - Leitfaden: `https://zunftecho.de/chatbot-fuer-handwerksbetriebe`
+- Vergleich: `https://zunftecho.de/kontaktformular-oder-chatbot`
 - Partnerseite: `https://zunftecho.de/partner`
 - interaktive Demo: `https://zunftecho.de/demo`
 - Sitemap nach Freigabe in Google Search Console und Bing Webmaster Tools einreichen.
@@ -65,9 +67,9 @@ und Gesprächsqualität dieser Welle ausgewertet wurden.
 
 ### Woche 1 – Problem sichtbar machen
 
-- Montag: Beitrag 01 – unvollständige Website-Anfragen
+- Montag: kostenlosen Website-Anfrage-Check und Check-Beitrag 01 veröffentlichen
 - Mittwoch: Leitfaden „SHK-Anfragen automatisieren“ veröffentlichen
-- Freitag: Video 01 – vom Kundentext zur vollständigen Anfrage
+- Freitag: Video A – acht Fragen und die persönliche Auswertung
 - täglicher Aufwand: höchstens 30 Minuten für Antworten und echte Fachdiskussionen
 
 ### Woche 2 – Sicherheit und Übergabe erklären

@@ -12,11 +12,13 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AgbRouteImport } from './routes/agb'
+import { Route as AnfrageCheckRouteImport } from './routes/anfrage-check'
 import { Route as ChatbotFuerHandwerksbetriebeRouteImport } from './routes/chatbot-fuer-handwerksbetriebe'
 import { Route as DatenschutzRouteImport } from './routes/datenschutz'
 import { Route as DemoRouteImport } from './routes/demo'
 import { Route as EinladungRouteImport } from './routes/einladung'
 import { Route as ImpressumRouteImport } from './routes/impressum'
+import { Route as KontaktformularOderChatbotRouteImport } from './routes/kontaktformular-oder-chatbot'
 import { Route as KundenportalRouteImport } from './routes/kundenportal'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as PartnerRouteImport } from './routes/partner'
@@ -59,6 +61,11 @@ const AgbRoute = AgbRouteImport.update({
   path: '/agb',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AnfrageCheckRoute = AnfrageCheckRouteImport.update({
+  id: '/anfrage-check',
+  path: '/anfrage-check',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ChatbotFuerHandwerksbetriebeRoute =
   ChatbotFuerHandwerksbetriebeRouteImport.update({
     id: '/chatbot-fuer-handwerksbetriebe',
@@ -85,6 +92,12 @@ const ImpressumRoute = ImpressumRouteImport.update({
   path: '/impressum',
   getParentRoute: () => rootRouteImport,
 } as any)
+const KontaktformularOderChatbotRoute =
+  KontaktformularOderChatbotRouteImport.update({
+    id: '/kontaktformular-oder-chatbot',
+    path: '/kontaktformular-oder-chatbot',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const KundenportalRoute = KundenportalRouteImport.update({
   id: '/kundenportal',
   path: '/kundenportal',
@@ -231,11 +244,13 @@ const AuthenticatedUnternehmenRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agb': typeof AgbRoute
+  '/anfrage-check': typeof AnfrageCheckRoute
   '/chatbot-fuer-handwerksbetriebe': typeof ChatbotFuerHandwerksbetriebeRoute
   '/datenschutz': typeof DatenschutzRoute
   '/demo': typeof DemoRoute
   '/einladung': typeof EinladungRoute
   '/impressum': typeof ImpressumRoute
+  '/kontaktformular-oder-chatbot': typeof KontaktformularOderChatbotRoute
   '/kundenportal': typeof KundenportalRoute
   '/login': typeof LoginRoute
   '/partner': typeof PartnerRoute
@@ -267,11 +282,13 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/agb': typeof AgbRoute
+  '/anfrage-check': typeof AnfrageCheckRoute
   '/chatbot-fuer-handwerksbetriebe': typeof ChatbotFuerHandwerksbetriebeRoute
   '/datenschutz': typeof DatenschutzRoute
   '/demo': typeof DemoRoute
   '/einladung': typeof EinladungRoute
   '/impressum': typeof ImpressumRoute
+  '/kontaktformular-oder-chatbot': typeof KontaktformularOderChatbotRoute
   '/kundenportal': typeof KundenportalRoute
   '/login': typeof LoginRoute
   '/partner': typeof PartnerRoute
@@ -305,11 +322,13 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/agb': typeof AgbRoute
+  '/anfrage-check': typeof AnfrageCheckRoute
   '/chatbot-fuer-handwerksbetriebe': typeof ChatbotFuerHandwerksbetriebeRoute
   '/datenschutz': typeof DatenschutzRoute
   '/demo': typeof DemoRoute
   '/einladung': typeof EinladungRoute
   '/impressum': typeof ImpressumRoute
+  '/kontaktformular-oder-chatbot': typeof KontaktformularOderChatbotRoute
   '/kundenportal': typeof KundenportalRoute
   '/login': typeof LoginRoute
   '/partner': typeof PartnerRoute
@@ -343,11 +362,13 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/agb'
+    | '/anfrage-check'
     | '/chatbot-fuer-handwerksbetriebe'
     | '/datenschutz'
     | '/demo'
     | '/einladung'
     | '/impressum'
+    | '/kontaktformular-oder-chatbot'
     | '/kundenportal'
     | '/login'
     | '/partner'
@@ -379,11 +400,13 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/agb'
+    | '/anfrage-check'
     | '/chatbot-fuer-handwerksbetriebe'
     | '/datenschutz'
     | '/demo'
     | '/einladung'
     | '/impressum'
+    | '/kontaktformular-oder-chatbot'
     | '/kundenportal'
     | '/login'
     | '/partner'
@@ -416,11 +439,13 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/agb'
+    | '/anfrage-check'
     | '/chatbot-fuer-handwerksbetriebe'
     | '/datenschutz'
     | '/demo'
     | '/einladung'
     | '/impressum'
+    | '/kontaktformular-oder-chatbot'
     | '/kundenportal'
     | '/login'
     | '/partner'
@@ -454,11 +479,13 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AgbRoute: typeof AgbRoute
+  AnfrageCheckRoute: typeof AnfrageCheckRoute
   ChatbotFuerHandwerksbetriebeRoute: typeof ChatbotFuerHandwerksbetriebeRoute
   DatenschutzRoute: typeof DatenschutzRoute
   DemoRoute: typeof DemoRoute
   EinladungRoute: typeof EinladungRoute
   ImpressumRoute: typeof ImpressumRoute
+  KontaktformularOderChatbotRoute: typeof KontaktformularOderChatbotRoute
   KundenportalRoute: typeof KundenportalRoute
   LoginRoute: typeof LoginRoute
   PartnerRoute: typeof PartnerRoute
@@ -494,6 +521,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AgbRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/anfrage-check': {
+      id: '/anfrage-check'
+      path: '/anfrage-check'
+      fullPath: '/anfrage-check'
+      preLoaderRoute: typeof AnfrageCheckRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/chatbot-fuer-handwerksbetriebe': {
       id: '/chatbot-fuer-handwerksbetriebe'
       path: '/chatbot-fuer-handwerksbetriebe'
@@ -527,6 +561,13 @@ declare module '@tanstack/react-router' {
       path: '/impressum'
       fullPath: '/impressum'
       preLoaderRoute: typeof ImpressumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kontaktformular-oder-chatbot': {
+      id: '/kontaktformular-oder-chatbot'
+      path: '/kontaktformular-oder-chatbot'
+      fullPath: '/kontaktformular-oder-chatbot'
+      preLoaderRoute: typeof KontaktformularOderChatbotRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/kundenportal': {
@@ -768,11 +809,13 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AgbRoute: AgbRoute,
+  AnfrageCheckRoute: AnfrageCheckRoute,
   ChatbotFuerHandwerksbetriebeRoute: ChatbotFuerHandwerksbetriebeRoute,
   DatenschutzRoute: DatenschutzRoute,
   DemoRoute: DemoRoute,
   EinladungRoute: EinladungRoute,
   ImpressumRoute: ImpressumRoute,
+  KontaktformularOderChatbotRoute: KontaktformularOderChatbotRoute,
   KundenportalRoute: KundenportalRoute,
   LoginRoute: LoginRoute,
   PartnerRoute: PartnerRoute,

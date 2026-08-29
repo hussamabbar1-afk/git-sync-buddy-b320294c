@@ -1,11 +1,27 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, Bot, ClipboardCheck, Clock3, Wrench } from "lucide-react";
+import {
+  ArrowRight,
+  Bot,
+  ClipboardCheck,
+  Clock3,
+  MessageSquareText,
+  SearchCheck,
+  Wrench,
+} from "lucide-react";
 
 import { PublicMarketingShell } from "@/components/public-marketing-shell";
 import { Button } from "@/components/ui/button";
 import { useCampaignSource } from "@/lib/campaign-source";
 
 const guides = [
+  {
+    to: "/anfrage-check" as const,
+    icon: SearchCheck,
+    label: "Kostenloses Werkzeug",
+    title: "Website-Anfrage-Check für SHK-Betriebe",
+    description:
+      "Acht Fragen, eine sofortige Auswertung und drei konkrete Verbesserungen – anonym und ohne Anmeldung.",
+  },
   {
     to: "/shk-anfragen-automatisieren" as const,
     icon: ClipboardCheck,
@@ -21,6 +37,14 @@ const guides = [
     title: "Chatbot für Handwerksbetriebe: Was er können muss – und was nicht",
     description:
       "Qualifizierung, Notfälle, Übergaben und Datenschutz aus Sicht eines Handwerksbetriebs.",
+  },
+  {
+    to: "/kontaktformular-oder-chatbot" as const,
+    icon: MessageSquareText,
+    label: "Vergleich",
+    title: "Kontaktformular oder Chatbot: Was passt zum Betrieb?",
+    description:
+      "Eine praktische Entscheidungshilfe für Mobilansicht, Dringlichkeit, Übergabe und Bestätigung.",
   },
 ];
 

@@ -28,6 +28,9 @@ export function PublicMarketingShell({ children, source }: PublicMarketingShellP
           </Link>
 
           <nav className="order-3 flex w-full items-center gap-4 overflow-x-auto pb-1 text-sm font-medium text-slate-600 sm:order-2 sm:w-auto sm:pb-0">
+            <a className="shrink-0 hover:text-slate-950" href={`/anfrage-check?${sourceQuery}`}>
+              Anfrage-Check
+            </a>
             <a className="shrink-0 hover:text-slate-950" href={`/demo?${sourceQuery}`}>
               Live-Demo
             </a>
@@ -67,6 +70,9 @@ export function PublicMarketingShell({ children, source }: PublicMarketingShellP
             </p>
           </div>
           <div className="flex flex-wrap content-start gap-x-5 gap-y-3 text-sm">
+            <a className="hover:text-white" href={`/anfrage-check?${sourceQuery}`}>
+              Anfrage-Check
+            </a>
             <a className="hover:text-white" href={`/wissen?${sourceQuery}`}>
               Wissen
             </a>
