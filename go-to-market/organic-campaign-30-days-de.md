@@ -93,11 +93,11 @@ und Gesprächsqualität dieser Welle ausgewertet wurden.
 
 ### Beitrag 01 – Unvollständige Anfragen
 
-> „Heizung kaputt. Bitte melden.“  
+> „Heizung kaputt. Bitte melden.“
 > Für einen SHK-Betrieb fehlen damit fast alle Angaben, die für die Einsatzplanung wichtig sind:
 > Ort, Rückrufnummer, Gerät, Dringlichkeit und ein passender Zeitraum. ZunftEcho führt den Kunden
 > Schritt für Schritt durch genau diese Angaben und übergibt dem Betrieb eine strukturierte
-> Anfrage. Ohne Anmeldung in zwei Minuten ausprobieren:  
+> Anfrage. Ohne Anmeldung in zwei Minuten ausprobieren:
 > https://zunftecho.de/demo?source=linkedin-post-01
 
 ### Beitrag 02 – Menschliche Übergabe
@@ -105,77 +105,77 @@ und Gesprächsqualität dieser Welle ausgewertet wurden.
 > Gute Automatisierung erkennt ihre Grenzen. Bei Gasgeruch, Wasserschaden, verärgerten Kunden oder
 > ungewöhnlichen Anliegen muss ein Mensch übernehmen. ZunftEcho markiert solche Fälle und hält die
 > bisher erfassten Informationen für das Team bereit. Wie ein sinnvoll begrenzter Chatbot im
-> Handwerk aufgebaut ist:  
+> Handwerk aufgebaut ist:
 > https://zunftecho.de/chatbot-fuer-handwerksbetriebe?source=linkedin-post-02
 
 ### Beitrag 03 – Kein neues Website-Projekt
 
 > Für einen digitalen Anfrageassistenten muss eine bestehende Handwerker-Website nicht neu gebaut
 > werden. Das ZunftEcho-Widget wird über einen kurzen Einbettungscode ergänzt und kann farblich an
-> den Betrieb angepasst werden. Die öffentliche Demo zeigt den Ablauf ohne Registrierung:  
+> den Betrieb angepasst werden. Die öffentliche Demo zeigt den Ablauf ohne Registrierung:
 > https://zunftecho.de/demo?source=linkedin-post-03
 
 ### Beitrag 04 – Anfrage statt Smalltalk
 
 > Ein Website-Chat ist nur dann nützlich, wenn am Ende eine bearbeitbare Anfrage entsteht. Deshalb
 > erfasst ZunftEcho nicht nur Freitext, sondern auch Kontaktdaten, Einsatzort, Leistung,
-> Dringlichkeit und Terminwunsch. Der Leitfaden zeigt den vollständigen Ablauf:  
+> Dringlichkeit und Terminwunsch. Der Leitfaden zeigt den vollständigen Ablauf:
 > https://zunftecho.de/shk-anfragen-automatisieren?source=linkedin-post-04
 
 ### Beitrag 05 – Was Automatisierung nicht ersetzt
 
 > Ein digitaler Assistent ersetzt weder die fachliche Diagnose noch den Monteur. Er sorgt dafür,
 > dass der Betrieb vor dem Rückruf bereits weiß, worum es geht. Das spart Nachfragen und macht die
-> Übergabe ruhiger – ohne falsche Versprechen an den Endkunden.  
+> Übergabe ruhiger – ohne falsche Versprechen an den Endkunden.
 > https://zunftecho.de/wissen?source=linkedin-post-05
 
 ### Beitrag 06 – Terminwünsche
 
 > „Wann können Sie kommen?“ ist häufig der nächste Schritt nach einer Anfrage. ZunftEcho kann
 > verfügbare Zeitfenster anzeigen, Doppelbuchungen verhindern und bestätigte Termine strukturiert
-> dokumentieren. In der Demo lässt sich der Ablauf direkt durchspielen:  
+> dokumentieren. In der Demo lässt sich der Ablauf direkt durchspielen:
 > https://zunftecho.de/demo?source=linkedin-post-06
 
 ### Beitrag 07 – Für kleine Teams
 
 > Kleine SHK-Teams brauchen keine zusätzliche komplizierte Software. Sie brauchen vollständige
 > Anfragen, klare Zuständigkeiten und sichtbare dringende Fälle. Genau darauf ist ZunftEcho
-> ausgerichtet.  
+> ausgerichtet.
 > https://zunftecho.de/shk-anfragen-automatisieren?source=linkedin-post-07
 
 ### Beitrag 08 – Transparenter Pilot
 
 > ZunftEcho startet mit einem betreuten 30-Tage-Pilot: persönliche Einrichtung, Website-Widget,
 > Anfragequalifizierung, Terminwünsche und ein gemeinsamer Optimierungstermin. Einmalig 99 Euro
-> netto, ohne Jahresvertrag. Erst danach entscheidet der Betrieb über eine Fortsetzung.  
+> netto, ohne Jahresvertrag. Erst danach entscheidet der Betrieb über eine Fortsetzung.
 > https://zunftecho.de/registrieren?source=linkedin-post-08
 
 ### Beitrag 09 – Frage an Betriebe
 
 > Welche Information fehlt Ihnen bei neuen Website-Anfragen am häufigsten: Telefonnummer,
 > Einsatzort, Foto, Gerätetyp oder Terminwunsch? Wir bauen ZunftEcho so, dass aus einer kurzen
-> Nachricht eine planbare Anfrage wird. Die Demo ist offen und benötigt kein Konto:  
+> Nachricht eine planbare Anfrage wird. Die Demo ist offen und benötigt kein Konto:
 > https://zunftecho.de/demo?source=linkedin-post-09
 
 ### Beitrag 10 – Datenschutz durch Begrenzung
 
 > Ein verantwortungsvoller Anfrageassistent fragt nur Daten ab, die für Bearbeitung und Rückruf
 > erforderlich sind. Standort und Fotos bleiben freiwillig und werden transparent erklärt. Der
-> Fachartikel beschreibt die wichtigsten Produktentscheidungen:  
+> Fachartikel beschreibt die wichtigsten Produktentscheidungen:
 > https://zunftecho.de/chatbot-fuer-handwerksbetriebe?source=linkedin-post-10
 
 ### Beitrag 11 – Partner für Handwerker-Websites
 
 > Sie betreuen Websites für Handwerksbetriebe? ZunftEcho ergänzt bestehende Seiten um eine
 > strukturierte Anfrageaufnahme, ohne das Webprojekt neu aufzusetzen. Wir suchen keine anonyme
-> Reseller-Masse, sondern verlässliche Partner mit klarer Rollenverteilung.  
+> Reseller-Masse, sondern verlässliche Partner mit klarer Rollenverteilung.
 > https://zunftecho.de/partner?source=linkedin-post-11
 
 ### Beitrag 12 – Einladung zur Live-Demo
 
 > Eine echte Kundenanfrage sagt mehr als jede Funktionsliste. In einer kurzen Demo spielen wir ein
 > Beispiel aus dem Betrieb durch – vom ersten Satz bis zur strukturierten Übergabe. Die öffentliche
-> Zwei-Minuten-Version ist hier verfügbar:  
+> Zwei-Minuten-Version ist hier verfügbar:
 > https://zunftecho.de/demo?source=linkedin-post-12
 
 ## Vier kurze Videoskripte
