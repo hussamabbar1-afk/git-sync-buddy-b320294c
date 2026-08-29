@@ -31,6 +31,10 @@ zur passenden Produktansicht.
 
 ## 1.-3. September: Pilot-Onboarding proben
 
+**Vorzeitig am 29. August abgeschlossen.** Der vollständige Produktionsdurchlauf ist in
+`docs/operational-rehearsal-2026-08-29.md` dokumentiert; sämtliche gekennzeichneten Testdaten
+wurden danach kontrolliert entfernt.
+
 - Mit dem Demo-Betrieb einen vollständigen Self-Service-Onboarding-Durchlauf ausführen.
 - Leistungen, Gebiete, Zeiten und Assistentennamen einmal ändern und wieder zurücksetzen.
 - Widget-Einbau anhand der HTML-Vorschau und der Installationsseite proben.
@@ -41,6 +45,11 @@ zur passenden Produktansicht.
 
 ## 4.-5. September: Reaktionsprozess vorbereiten
 
+**Vorzeitig am 29. August abgeschlossen.** Das öffentliche Pilotformular, die
+Quellenübernahme und die Benachrichtigung wurden mit gekennzeichneten Testdaten geprüft. Der
+verbindliche interne Ablauf steht in `go-to-market/pilot-anfrage-prozess-de.md`; der Testdatensatz
+wurde anschließend entfernt.
+
 - Pilotanfragen im Supabase-Dashboard und die zugehörige Benachrichtigungs-E-Mail prüfen.
 - Für eine neue Anfrage eine Reaktionszeit von maximal einem Werktag festlegen.
 - Ein kurzes internes Gesprächsprotokoll vorbereiten: Bedarf, Einwand, nächster Schritt, Termin.
@@ -50,6 +59,10 @@ zur passenden Produktansicht.
 **Ergebnis:** Keine echte Anfrage bleibt unbeantwortet oder ohne klaren nächsten Schritt.
 
 ## 6.-7. September: Druck und erste Welle
+
+**Technischer Preflight am 29. August abgeschlossen.** Die drei finalen Dateien sind einseitige
+A4-PDFs, enthalten keine alte Marke und verweisen kampagnenspezifisch auf die Demo. Die physische
+Freigabe nach Ankunft des Materials folgt `go-to-market/druckfreigabe-checkliste-de.md`.
 
 - Endgültige PDFs auf dem bestellten Papier drucken.
 - QR jedes einzelnen Ausdrucks mit dem Telefon testen.
@@ -109,4 +122,3 @@ Nicht live verkaufen oder abrechnen, wenn einer dieser Punkte offen ist:
 - mindestens ein qualifiziertes 15-Minuten-Gespräch;
 - Ziel: ein bezahlter 30-Tage-Pilot, ohne Preisnachlass oder Funktionsversprechen außerhalb des
   veröffentlichten Umfangs.
-
