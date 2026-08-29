@@ -15,7 +15,7 @@ einer kontrollierten Vorbereitung auf den ersten zahlenden Pilotkunden.
   Benachrichtigungen, Teamzugang und Automationen;
 - öffentliche interaktive Demo unter `https://zunftecho.de/demo`;
 - Kampagnen-Weitergabe von Brief-QR bis zur Pilotanfrage;
-- drei personalisierte, druckfertige A4-Briefe für die erste Welle;
+- zehn personalisierte, druckfertige A4-Briefe für die erste Welle;
 - organische 30-Tage-Kampagne mit Wissenszentrum, zwei Fachartikeln, Partnerseite, zwölf
   LinkedIn-Beiträgen und vier kurzen Videoskripten;
 - Pilotangebot: 30 Tage für 99 EUR netto, anschließend optional 149 EUR netto monatlich;
@@ -24,7 +24,7 @@ einer kontrollierten Vorbereitung auf den ersten zahlenden Pilotkunden.
 ## 29.-31. August: Verkaufsablauf festziehen
 
 - Den 15-Minuten-Demo-Leitfaden zweimal laut durchspielen.
-- Für jeden der drei Zielbetriebe ein passendes Demo-Szenario festlegen.
+- Für jeden der zehn Zielbetriebe ein passendes Demo-Szenario festlegen.
 - Die Briefe einmal auf Normalpapier drucken und QR, Ränder, Faltung und Fensterposition prüfen.
 - Keine Briefe oder Werbe-E-Mails vorzeitig versenden.
 
@@ -62,17 +62,18 @@ wurde anschließend entfernt.
 
 ## 6.-7. September: Druck und erste Welle
 
-**Technischer Preflight am 29. August abgeschlossen.** Die drei finalen Dateien sind einseitige
+**Technischer Preflight am 29. August abgeschlossen.** Die zehn finalen Dateien sind einseitige
 A4-PDFs, enthalten keine alte Marke und verweisen kampagnenspezifisch auf die Demo. Die physische
 Freigabe nach Ankunft des Materials folgt `go-to-market/druckfreigabe-checkliste-de.md`.
 
 - Endgültige PDFs auf dem bestellten Papier drucken.
 - QR jedes einzelnen Ausdrucks mit dem Telefon testen.
-- Nur RO-DO, BOLOWSKI und Grelak für Welle 1 vorbereiten.
+- Nur die zehn in `go-to-market/erste-briefwelle-10-de.md` freigegebenen Betriebe für Welle 1
+  vorbereiten.
 - Woermann & Söhne bleibt wegen des dokumentierten Werbewiderspruchs ausgeschlossen.
 - Umschläge adressieren, aber Versanddatum und Gewerbe-Status vor Einwurf erneut prüfen.
 
-**Ergebnis:** Drei fehlerfreie, individuell adressierte Sendungen liegen bereit.
+**Ergebnis:** Zehn fehlerfreie, individuell adressierte Sendungen liegen bereit.
 
 ## 8.-9. September: Go/No-Go-Abnahme
 
@@ -106,7 +107,7 @@ Geschäft:
    aktualisieren.
 6. Einen vollständigen Testkauf mit Stripe-Testdaten ausführen.
 7. Erst nach erfolgreicher Prüfung Live-Zahlungen und automatische Rechnungsausgabe freigeben.
-8. Die drei Briefe versenden oder persönlich einwerfen.
+8. Die zehn Briefe versenden oder persönlich einwerfen.
 
 ## Stop-Kriterien
 
@@ -121,7 +122,7 @@ Nicht live verkaufen oder abrechnen, wenn einer dieser Punkte offen ist:
 
 ## Erfolgskriterium für die erste Welle
 
-- drei personalisierte Briefe;
+- zehn personalisierte Briefe;
 - mindestens ein freiwilliger Demo-/Pilotkontakt;
 - mindestens ein qualifiziertes 15-Minuten-Gespräch;
 - Ziel: ein bezahlter 30-Tage-Pilot, ohne Preisnachlass oder Funktionsversprechen außerhalb des

@@ -7,8 +7,15 @@ Stand: 29. August 2026
 - `zunftecho-anschreiben-ro-do.pdf` → Quelle `brief-ro-do`
 - `zunftecho-anschreiben-bolowski.pdf` → Quelle `brief-bolowski`
 - `zunftecho-anschreiben-grelak.pdf` → Quelle `brief-grelak`
+- `zunftecho-anschreiben-koblitz.pdf` → Quelle `brief-koblitz`
+- `zunftecho-anschreiben-wilcks.pdf` → Quelle `brief-wilcks`
+- `zunftecho-anschreiben-tim-gaertner.pdf` → Quelle `brief-tim-gaertner`
+- `zunftecho-anschreiben-roesch.pdf` → Quelle `brief-roesch`
+- `zunftecho-anschreiben-tschichholz.pdf` → Quelle `brief-tschichholz`
+- `zunftecho-anschreiben-protoss.pdf` → Quelle `brief-protoss`
+- `zunftecho-anschreiben-a-m.pdf` → Quelle `brief-a-m`
 
-Alle drei Dateien sind einseitige A4-PDFs (210 × 297 mm), verwenden die
+Alle zehn Dateien sind einseitige A4-PDFs (210 × 297 mm), verwenden die
 ZunftEcho-Identität, enthalten keine alte HandwerkAI-Bezeichnung und führen über
 den QR-Code zur interaktiven Demo. Der Inhabername steht ausschließlich klein
 in der Absenderzeile; die eigentliche Unterschrift lautet `Ihr ZunftEcho-Team`.
@@ -44,6 +51,8 @@ Versand erst, wenn alle Punkte erfüllt sind:
 - Website, Demo und Pilotformular sind erreichbar;
 - rechtliche Angaben entsprechen dem dann tatsächlich registrierten Stand;
 - kein Werbewiderspruch des Empfängers liegt vor;
+- Anschrift, Ansprechpartner und öffentlich sichtbarer Bedarf wurden höchstens
+  48 Stunden vor dem Versand nochmals auf der offiziellen Website geprüft;
 - Datum des Einwurfs beziehungsweise Versands wird intern notiert.
 
 Woermann & Söhne bleibt aufgrund des dokumentierten Werbewiderspruchs von der

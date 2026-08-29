@@ -36,7 +36,7 @@ function DemoPage() {
     typeof rawSource === "string"
       ? rawSource.replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 60) || undefined
       : undefined;
-  const registrationSource = source ? `demo-${source}`.slice(0, 80) : "live-demo";
+  const registrationSource = source ?? "live-demo";
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-[linear-gradient(145deg,#f8fbff_0%,#ffffff_52%,#fff8ed_100%)] text-slate-950">
@@ -53,7 +53,7 @@ function DemoPage() {
               <Link to="/preise">Preise</Link>
             </Button>
             <Button asChild>
-              <Link to="/registrieren">
+              <Link to="/registrieren" search={{ source: registrationSource } as never}>
                 Pilot anfragen <ArrowRight className="size-4" />
               </Link>
             </Button>
