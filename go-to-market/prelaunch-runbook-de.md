@@ -84,6 +84,8 @@ Freigabe nach Ankunft des Materials folgt `go-to-market/druckfreigabe-checkliste
 
 Technik:
 
+- den reproduzierbaren Basistest mit `npm run check:prelaunch` ausführen; erst nach der
+  Gewerbeanmeldung und bewussten Kampagnenfreigabe `-- --marketing=live` verwenden;
 - `/`, `/demo`, `/registrieren`, `/preise`, `/login` und Widget einmal von Mobilfunk statt nur vom
   Heimnetz öffnen;
 - Testmodus auf der Abonnementseite bestätigen;
