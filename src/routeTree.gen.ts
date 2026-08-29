@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AgbRouteImport } from './routes/agb'
 import { Route as DatenschutzRouteImport } from './routes/datenschutz'
+import { Route as DemoRouteImport } from './routes/demo'
 import { Route as EinladungRouteImport } from './routes/einladung'
 import { Route as ImpressumRouteImport } from './routes/impressum'
 import { Route as KundenportalRouteImport } from './routes/kundenportal'
@@ -57,6 +58,11 @@ const AgbRoute = AgbRouteImport.update({
 const DatenschutzRoute = DatenschutzRouteImport.update({
   id: '/datenschutz',
   path: '/datenschutz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoRoute = DemoRouteImport.update({
+  id: '/demo',
+  path: '/demo',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EinladungRoute = EinladungRouteImport.update({
@@ -200,6 +206,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agb': typeof AgbRoute
   '/datenschutz': typeof DatenschutzRoute
+  '/demo': typeof DemoRoute
   '/einladung': typeof EinladungRoute
   '/impressum': typeof ImpressumRoute
   '/kundenportal': typeof KundenportalRoute
@@ -231,6 +238,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/agb': typeof AgbRoute
   '/datenschutz': typeof DatenschutzRoute
+  '/demo': typeof DemoRoute
   '/einladung': typeof EinladungRoute
   '/impressum': typeof ImpressumRoute
   '/kundenportal': typeof KundenportalRoute
@@ -264,6 +272,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/agb': typeof AgbRoute
   '/datenschutz': typeof DatenschutzRoute
+  '/demo': typeof DemoRoute
   '/einladung': typeof EinladungRoute
   '/impressum': typeof ImpressumRoute
   '/kundenportal': typeof KundenportalRoute
@@ -297,6 +306,7 @@ export interface FileRouteTypes {
     | '/'
     | '/agb'
     | '/datenschutz'
+    | '/demo'
     | '/einladung'
     | '/impressum'
     | '/kundenportal'
@@ -328,6 +338,7 @@ export interface FileRouteTypes {
     | '/'
     | '/agb'
     | '/datenschutz'
+    | '/demo'
     | '/einladung'
     | '/impressum'
     | '/kundenportal'
@@ -360,6 +371,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/agb'
     | '/datenschutz'
+    | '/demo'
     | '/einladung'
     | '/impressum'
     | '/kundenportal'
@@ -393,6 +405,7 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AgbRoute: typeof AgbRoute
   DatenschutzRoute: typeof DatenschutzRoute
+  DemoRoute: typeof DemoRoute
   EinladungRoute: typeof EinladungRoute
   ImpressumRoute: typeof ImpressumRoute
   KundenportalRoute: typeof KundenportalRoute
@@ -432,6 +445,13 @@ declare module '@tanstack/react-router' {
       path: '/datenschutz'
       fullPath: '/datenschutz'
       preLoaderRoute: typeof DatenschutzRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo': {
+      id: '/demo'
+      path: '/demo'
+      fullPath: '/demo'
+      preLoaderRoute: typeof DemoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/einladung': {
@@ -667,6 +687,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AgbRoute: AgbRoute,
   DatenschutzRoute: DatenschutzRoute,
+  DemoRoute: DemoRoute,
   EinladungRoute: EinladungRoute,
   ImpressumRoute: ImpressumRoute,
   KundenportalRoute: KundenportalRoute,

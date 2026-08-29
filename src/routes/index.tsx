@@ -181,6 +181,9 @@ function LandingPage() {
             <a className="transition-colors hover:text-slate-950" href="#pilot">
               Pilotangebot
             </a>
+            <Link className="transition-colors hover:text-slate-950" to="/demo">
+              Live-Demo
+            </Link>
             <Link className="transition-colors hover:text-slate-950" to="/preise">
               Preise
             </Link>
@@ -221,6 +224,11 @@ function LandingPage() {
                     </a>
                   </SheetClose>
                 ))}
+                <SheetClose asChild>
+                  <Link className="flex min-h-12 items-center border-b" to="/demo">
+                    Live-Demo
+                  </Link>
+                </SheetClose>
                 <SheetClose asChild>
                   <Link className="flex min-h-12 items-center border-b" to="/preise">
                     Preise
@@ -274,7 +282,7 @@ function LandingPage() {
                   size="lg"
                   className="h-12 border-slate-300 bg-white px-6 text-base"
                 >
-                  <a href="#ablauf">So funktioniert es</a>
+                  <Link to="/demo">Live-Demo ansehen</Link>
                 </Button>
               </div>
 
