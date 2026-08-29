@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useSearch } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react";
 
 import { BrandMark } from "@/components/brand-mark";
@@ -30,6 +30,14 @@ export const Route = createFileRoute("/demo")({
 });
 
 function DemoPage() {
+  const search = useSearch({ strict: false }) as Record<string, unknown>;
+  const rawSource = search["source"];
+  const source =
+    typeof rawSource === "string"
+      ? rawSource.replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 60) || undefined
+      : undefined;
+  const registrationSource = source ? `demo-${source}`.slice(0, 80) : "live-demo";
+
   return (
     <div className="min-h-screen overflow-x-hidden bg-[linear-gradient(145deg,#f8fbff_0%,#ffffff_52%,#fff8ed_100%)] text-slate-950">
       <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl">
@@ -98,7 +106,7 @@ function DemoPage() {
               Ihrem Betrieb ein. Kein Jahresvertrag und kein automatischer Übergang.
             </p>
             <Button asChild size="lg" className="mt-7">
-              <Link to="/registrieren" search={{ source: "live-demo" } as never}>
+              <Link to="/registrieren" search={{ source: registrationSource } as never}>
                 Pilot unverbindlich anfragen <ArrowRight className="size-4" />
               </Link>
             </Button>
