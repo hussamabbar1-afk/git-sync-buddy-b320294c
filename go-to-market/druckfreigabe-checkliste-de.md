@@ -4,6 +4,10 @@ Stand: 29. August 2026
 
 ## Freigegebene Dateien
 
+Für den Stapeldruck ist `zunftecho-erste-briefwelle-10-drucksatz.pdf` die
+maßgebliche Datei. Sie enthält genau zehn A4-Seiten in der unten dokumentierten
+Reihenfolge. Die Einzeldateien bleiben für Nachdruck und Einzelprüfung erhalten.
+
 - `zunftecho-anschreiben-ro-do.pdf` → Quelle `brief-ro-do`
 - `zunftecho-anschreiben-bolowski.pdf` → Quelle `brief-bolowski`
 - `zunftecho-anschreiben-grelak.pdf` → Quelle `brief-grelak`
@@ -20,17 +24,31 @@ ZunftEcho-Identität, enthalten keine alte HandwerkAI-Bezeichnung und führen ü
 den QR-Code zur interaktiven Demo. Der Inhabername steht ausschließlich klein
 in der Absenderzeile; die eigentliche Unterschrift lautet `Ihr ZunftEcho-Team`.
 
+## Reihenfolge im Drucksatz
+
+1. RO-DO
+2. BOLOWSKI
+3. Grelak
+4. Jörg Koblitz GmbH
+5. Wilcks Heizung & Sanitär
+6. Tim Gärtner
+7. Ing. Rolf Roesch GmbH
+8. Andrea Tschichholz
+9. PROTOSS Haustechnik
+10. A + M Heizung-Sanitär
+
 ## Einmaliger Probedruck
 
 1. Druckmaßstab auf `100 %` beziehungsweise `Tatsächliche Größe` setzen.
 2. Automatische Optionen wie `An Seite anpassen`, Broschürendruck oder
    randloses Vergrößern deaktivieren.
-3. Ein Exemplar auf Normalpapier drucken.
+3. Zunächst nur Seite 1 des Drucksatzes auf Normalpapier drucken.
 4. Prüfen, dass keine Zeile, kein Logo und kein QR-Code beschnitten ist.
 5. Blatt wie vorgesehen falten und die Position im bestellten Umschlag prüfen.
 6. QR-Code mit dem Telefon scannen; Ziel muss `/demo?source=brief-…` enthalten.
 7. Von der Demo auf `Pilot anfragen` wechseln; die Quelle muss im Link erhalten
    bleiben.
+8. Erst nach erfolgreichem Probedruck die Seiten 2 bis 10 freigeben.
 
 ## Enddruck
 

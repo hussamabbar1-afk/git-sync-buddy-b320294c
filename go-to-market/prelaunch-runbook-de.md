@@ -23,6 +23,11 @@ einer kontrollierten Vorbereitung auf den ersten zahlenden Pilotkunden.
 
 ## 29.-31. August: Verkaufsablauf festziehen
 
+**Digital am 29. August abgeschlossen.** Zehn betriebsspezifische
+Demo-Szenarien und ein visuell geprüfter zehnseitiger Drucksatz sind vorbereitet.
+Offen bleiben nur das laute persönliche Durchspielen und der physische
+Probedruck mit dem gelieferten Papier und Umschlag.
+
 - Den 15-Minuten-Demo-Leitfaden zweimal laut durchspielen.
 - Für jeden der zehn Zielbetriebe ein passendes Demo-Szenario festlegen.
 - Die Briefe einmal auf Normalpapier drucken und QR, Ränder, Faltung und Fensterposition prüfen.
