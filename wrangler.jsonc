@@ -1,0 +1,19 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "hussamabbar1-afk-git-sync-buddy-b320294c",
+  "main": ".output/server/index.mjs",
+  "compatibility_date": "2026-08-26",
+  "compatibility_flags": ["nodejs_compat"],
+  "no_bundle": true,
+  "assets": {
+    "binding": "ASSETS",
+    "directory": ".output/public",
+    "run_worker_first": ["/anfrage-check*"]
+  },
+  "rules": [
+    {
+      "type": "ESModule",
+      "globs": ["**/*.mjs", "**/*.js"]
+    }
+  ]
+}

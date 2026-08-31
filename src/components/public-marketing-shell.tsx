@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import { BrandMark } from "@/components/brand-mark";
 import { Button } from "@/components/ui/button";
 import { useCampaignSource } from "@/lib/campaign-source";
+import { acquisitionCampaignLive } from "@/lib/launch-flags";
 
 type PublicMarketingShellProps = {
   children: ReactNode;
@@ -28,9 +29,11 @@ export function PublicMarketingShell({ children, source }: PublicMarketingShellP
           </Link>
 
           <nav className="hidden items-center gap-5 text-sm font-medium text-slate-600 lg:flex">
-            <a className="shrink-0 hover:text-slate-950" href={`/anfrage-check?${sourceQuery}`}>
-              Anfrage-Check
-            </a>
+            {acquisitionCampaignLive ? (
+              <a className="shrink-0 hover:text-slate-950" href={`/anfrage-check?${sourceQuery}`}>
+                Anfrage-Check
+              </a>
+            ) : null}
             <a className="shrink-0 hover:text-slate-950" href={`/demo?${sourceQuery}`}>
               Live-Demo
             </a>
@@ -61,12 +64,14 @@ export function PublicMarketingShell({ children, source }: PublicMarketingShellP
                 <span className="sr-only">Navigation öffnen</span>
               </summary>
               <nav className="absolute top-[calc(100%+0.75rem)] right-0 z-50 grid w-[min(19rem,calc(100vw-2.5rem))] gap-1 rounded-2xl border border-slate-200 bg-white p-3 text-sm font-medium text-slate-700 shadow-xl">
-                <a
-                  className="rounded-lg px-3 py-2.5 hover:bg-slate-50"
-                  href={`/anfrage-check?${sourceQuery}`}
-                >
-                  Anfrage-Check
-                </a>
+                {acquisitionCampaignLive ? (
+                  <a
+                    className="rounded-lg px-3 py-2.5 hover:bg-slate-50"
+                    href={`/anfrage-check?${sourceQuery}`}
+                  >
+                    Anfrage-Check
+                  </a>
+                ) : null}
                 <a
                   className="rounded-lg px-3 py-2.5 hover:bg-slate-50"
                   href={`/demo?${sourceQuery}`}
@@ -126,9 +131,11 @@ export function PublicMarketingShell({ children, source }: PublicMarketingShellP
             </p>
           </div>
           <div className="flex flex-wrap content-start gap-x-5 gap-y-3 text-sm">
-            <a className="hover:text-white" href={`/anfrage-check?${sourceQuery}`}>
-              Anfrage-Check
-            </a>
+            {acquisitionCampaignLive ? (
+              <a className="hover:text-white" href={`/anfrage-check?${sourceQuery}`}>
+                Anfrage-Check
+              </a>
+            ) : null}
             <a className="hover:text-white" href={`/wissen?${sourceQuery}`}>
               Wissen
             </a>
