@@ -48,6 +48,7 @@ const publicRoutes = [
   `/demo?source=${source}`,
   `/registrieren?source=${source}`,
   "/preise",
+  "/vertrauen",
   "/login",
   "/impressum",
   "/datenschutz",
@@ -86,6 +87,17 @@ record(
 const publicCopy = [...responses.values()].map(({ body }) => body).join("\n");
 record("public pages contain the ZunftEcho brand", publicCopy.includes("ZunftEcho"));
 record("public pages contain no legacy HandwerkAI name", !publicCopy.includes("HandwerkAI"));
+
+const trust = responses.get("/vertrauen")?.body ?? "";
+record(
+  "trust center states the AI boundary",
+  trust.includes("Automatisieren, ohne Verantwortung zu verstecken") &&
+    trust.includes("Preise, fachliche Zusagen"),
+);
+record(
+  "trust center rejects fabricated social proof",
+  trust.includes("Keine erfundenen Referenzen"),
+);
 
 try {
   const { response, body } = await request("/anfrage-check");

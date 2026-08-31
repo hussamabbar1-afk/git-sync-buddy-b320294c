@@ -27,6 +27,7 @@ import { Route as PasswortZuruecksetzenRouteImport } from './routes/passwort-zur
 import { Route as PreiseRouteImport } from './routes/preise'
 import { Route as RegistrierenRouteImport } from './routes/registrieren'
 import { Route as ShkAnfragenAutomatisierenRouteImport } from './routes/shk-anfragen-automatisieren'
+import { Route as VertrauenRouteImport } from './routes/vertrauen'
 import { Route as WidgetRouteImport } from './routes/widget'
 import { Route as WissenRouteImport } from './routes/wissen'
 import { Route as AuthenticatedAbonnementRouteImport } from './routes/_authenticated/abonnement'
@@ -139,6 +140,11 @@ const ShkAnfragenAutomatisierenRoute =
     path: '/shk-anfragen-automatisieren',
     getParentRoute: () => rootRouteImport,
   } as any)
+const VertrauenRoute = VertrauenRouteImport.update({
+  id: '/vertrauen',
+  path: '/vertrauen',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WidgetRoute = WidgetRouteImport.update({
   id: '/widget',
   path: '/widget',
@@ -259,6 +265,7 @@ export interface FileRoutesByFullPath {
   '/preise': typeof PreiseRoute
   '/registrieren': typeof RegistrierenRoute
   '/shk-anfragen-automatisieren': typeof ShkAnfragenAutomatisierenRoute
+  '/vertrauen': typeof VertrauenRoute
   '/widget': typeof WidgetRoute
   '/wissen': typeof WissenRoute
   '/abonnement': typeof AuthenticatedAbonnementRoute
@@ -297,6 +304,7 @@ export interface FileRoutesByTo {
   '/preise': typeof PreiseRoute
   '/registrieren': typeof RegistrierenRoute
   '/shk-anfragen-automatisieren': typeof ShkAnfragenAutomatisierenRoute
+  '/vertrauen': typeof VertrauenRoute
   '/widget': typeof WidgetRoute
   '/wissen': typeof WissenRoute
   '/abonnement': typeof AuthenticatedAbonnementRoute
@@ -337,6 +345,7 @@ export interface FileRoutesById {
   '/preise': typeof PreiseRoute
   '/registrieren': typeof RegistrierenRoute
   '/shk-anfragen-automatisieren': typeof ShkAnfragenAutomatisierenRoute
+  '/vertrauen': typeof VertrauenRoute
   '/widget': typeof WidgetRoute
   '/wissen': typeof WissenRoute
   '/_authenticated/abonnement': typeof AuthenticatedAbonnementRoute
@@ -377,6 +386,7 @@ export interface FileRouteTypes {
     | '/preise'
     | '/registrieren'
     | '/shk-anfragen-automatisieren'
+    | '/vertrauen'
     | '/widget'
     | '/wissen'
     | '/abonnement'
@@ -415,6 +425,7 @@ export interface FileRouteTypes {
     | '/preise'
     | '/registrieren'
     | '/shk-anfragen-automatisieren'
+    | '/vertrauen'
     | '/widget'
     | '/wissen'
     | '/abonnement'
@@ -454,6 +465,7 @@ export interface FileRouteTypes {
     | '/preise'
     | '/registrieren'
     | '/shk-anfragen-automatisieren'
+    | '/vertrauen'
     | '/widget'
     | '/wissen'
     | '/_authenticated/abonnement'
@@ -494,6 +506,7 @@ export interface RootRouteChildren {
   PreiseRoute: typeof PreiseRoute
   RegistrierenRoute: typeof RegistrierenRoute
   ShkAnfragenAutomatisierenRoute: typeof ShkAnfragenAutomatisierenRoute
+  VertrauenRoute: typeof VertrauenRoute
   WidgetRoute: typeof WidgetRoute
   WissenRoute: typeof WissenRoute
 }
@@ -624,6 +637,13 @@ declare module '@tanstack/react-router' {
       path: '/shk-anfragen-automatisieren'
       fullPath: '/shk-anfragen-automatisieren'
       preLoaderRoute: typeof ShkAnfragenAutomatisierenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vertrauen': {
+      id: '/vertrauen'
+      path: '/vertrauen'
+      fullPath: '/vertrauen'
+      preLoaderRoute: typeof VertrauenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/widget': {
@@ -824,6 +844,7 @@ const rootRouteChildren: RootRouteChildren = {
   PreiseRoute: PreiseRoute,
   RegistrierenRoute: RegistrierenRoute,
   ShkAnfragenAutomatisierenRoute: ShkAnfragenAutomatisierenRoute,
+  VertrauenRoute: VertrauenRoute,
   WidgetRoute: WidgetRoute,
   WissenRoute: WissenRoute,
 }

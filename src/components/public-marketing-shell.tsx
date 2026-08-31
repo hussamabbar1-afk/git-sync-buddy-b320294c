@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Menu } from "lucide-react";
 import type { ReactNode } from "react";
 
 import { BrandMark } from "@/components/brand-mark";
@@ -19,7 +19,7 @@ export function PublicMarketingShell({ children, source }: PublicMarketingShellP
   return (
     <div className="min-h-screen overflow-x-hidden bg-white text-slate-950">
       <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl">
-        <div className="mx-auto flex min-h-16 max-w-7xl flex-wrap items-center justify-between gap-3 px-5 py-3 sm:px-8 lg:px-10">
+        <div className="relative mx-auto flex min-h-16 max-w-7xl items-center justify-between gap-3 px-5 py-3 sm:px-8 lg:px-10">
           <Link to="/" className="flex items-center gap-2.5" aria-label="ZunftEcho Startseite">
             <span className="flex size-10 items-center justify-center overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-slate-200">
               <BrandMark className="size-10" />
@@ -27,7 +27,7 @@ export function PublicMarketingShell({ children, source }: PublicMarketingShellP
             <span className="font-display text-lg font-semibold tracking-tight">ZunftEcho</span>
           </Link>
 
-          <nav className="order-3 flex w-full items-center gap-4 overflow-x-auto pb-1 text-sm font-medium text-slate-600 sm:order-2 sm:w-auto sm:pb-0">
+          <nav className="hidden items-center gap-5 text-sm font-medium text-slate-600 lg:flex">
             <a className="shrink-0 hover:text-slate-950" href={`/anfrage-check?${sourceQuery}`}>
               Anfrage-Check
             </a>
@@ -43,13 +43,69 @@ export function PublicMarketingShell({ children, source }: PublicMarketingShellP
             <a className="shrink-0 hover:text-slate-950" href={`/preise?${sourceQuery}`}>
               Preise
             </a>
+            <a className="shrink-0 hover:text-slate-950" href={`/vertrauen?${sourceQuery}`}>
+              Vertrauen
+            </a>
           </nav>
 
-          <Button asChild size="sm" className="order-2 sm:order-3">
-            <a href={requestHref}>
-              Pilot anfragen <ArrowRight />
-            </a>
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button asChild size="sm" className="hidden sm:inline-flex">
+              <a href={requestHref}>
+                Pilot anfragen <ArrowRight />
+              </a>
+            </Button>
+
+            <details className="group relative lg:hidden">
+              <summary className="flex size-10 cursor-pointer list-none items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none [&::-webkit-details-marker]:hidden">
+                <Menu className="size-5" aria-hidden="true" />
+                <span className="sr-only">Navigation öffnen</span>
+              </summary>
+              <nav className="absolute top-[calc(100%+0.75rem)] right-0 z-50 grid w-[min(19rem,calc(100vw-2.5rem))] gap-1 rounded-2xl border border-slate-200 bg-white p-3 text-sm font-medium text-slate-700 shadow-xl">
+                <a
+                  className="rounded-lg px-3 py-2.5 hover:bg-slate-50"
+                  href={`/anfrage-check?${sourceQuery}`}
+                >
+                  Anfrage-Check
+                </a>
+                <a
+                  className="rounded-lg px-3 py-2.5 hover:bg-slate-50"
+                  href={`/demo?${sourceQuery}`}
+                >
+                  Live-Demo
+                </a>
+                <a
+                  className="rounded-lg px-3 py-2.5 hover:bg-slate-50"
+                  href={`/wissen?${sourceQuery}`}
+                >
+                  Wissen
+                </a>
+                <a
+                  className="rounded-lg px-3 py-2.5 hover:bg-slate-50"
+                  href={`/partner?${sourceQuery}`}
+                >
+                  Partner
+                </a>
+                <a
+                  className="rounded-lg px-3 py-2.5 hover:bg-slate-50"
+                  href={`/preise?${sourceQuery}`}
+                >
+                  Preise
+                </a>
+                <a
+                  className="rounded-lg px-3 py-2.5 hover:bg-slate-50"
+                  href={`/vertrauen?${sourceQuery}`}
+                >
+                  Vertrauen & Sicherheit
+                </a>
+                <a
+                  className="mt-1 flex items-center justify-between rounded-lg bg-primary px-3 py-2.5 font-semibold text-white sm:hidden"
+                  href={requestHref}
+                >
+                  Pilot anfragen <ArrowRight className="size-4" />
+                </a>
+              </nav>
+            </details>
+          </div>
         </div>
       </header>
 
@@ -81,6 +137,9 @@ export function PublicMarketingShell({ children, source }: PublicMarketingShellP
             </a>
             <a className="hover:text-white" href={`/preise?${sourceQuery}`}>
               Preise
+            </a>
+            <a className="hover:text-white" href={`/vertrauen?${sourceQuery}`}>
+              Vertrauen & Sicherheit
             </a>
             <Link className="hover:text-white" to="/impressum">
               Impressum

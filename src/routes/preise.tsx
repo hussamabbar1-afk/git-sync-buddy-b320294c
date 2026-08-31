@@ -140,6 +140,10 @@ function PricingPage() {
         <Link to="/agb" className="hover:text-slate-950">
           AGB
         </Link>
+        <span className="mx-3">·</span>
+        <Link to="/vertrauen" className="hover:text-slate-950">
+          Vertrauen & Sicherheit
+        </Link>
       </footer>
     </div>
   );

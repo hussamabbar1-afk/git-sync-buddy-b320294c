@@ -1,6 +1,6 @@
 # ZunftEcho - kostenfreier Vorbereitungsplan bis 10. September 2026
 
-Stand: 29. August 2026
+Stand: 31. August 2026
 
 Video-Freigabe: Seit 31. August 2026 ist die letzte vor Runway produzierte ElevenLabs-Fassung das
 offizielle Hauptvideo. Runway-Fassungen bleiben unveröffentlicht; Details stehen in
@@ -24,6 +24,10 @@ einer kontrollierten Vorbereitung auf den ersten zahlenden Pilotkunden.
   LinkedIn-Beiträgen und vier kurzen Videoskripten;
 - Pilotangebot: 30 Tage für 99 EUR netto, anschließend optional 149 EUR netto monatlich;
 - rechtliche Seiten, technisches Monitoring und sichere Deaktivierung der Abrechnung.
+- öffentliches Vertrauenszentrum mit prüfbaren Zusagen, klaren KI-Grenzen und ohne erfundene
+  Referenzen;
+- Vertrauensnachweis als einseitiges PDF sowie Vorlagen für Pilot-Ergebnisprotokoll und
+  Referenzfreigabe.
 
 ## 29.-31. August: Verkaufsablauf festziehen
 
@@ -98,8 +102,8 @@ Technik:
   Gewerbeanmeldung und bewussten Kampagnenfreigabe `-- --marketing=live` verwenden;
 - neue Cloudflare-Versionen vor der Freigabe mit
   `npm run check:prelaunch -- --version=<VERSION-ID>` bei 0 Prozent Traffic prüfen;
-- `/`, `/demo`, `/registrieren`, `/preise`, `/login` und Widget einmal von Mobilfunk statt nur vom
-  Heimnetz öffnen;
+- `/`, `/demo`, `/registrieren`, `/preise`, `/vertrauen`, `/login` und Widget einmal von Mobilfunk
+  statt nur vom Heimnetz öffnen;
 - Testmodus auf der Abonnementseite bestätigen;
 - Health-Check, Cron-Jobs und ausgehende Nachrichten auf Fehler prüfen;
 - keine neuen Fehler in den letzten 24 Stunden akzeptieren.

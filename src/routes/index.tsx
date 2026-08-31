@@ -187,6 +187,9 @@ function LandingPage() {
             <Link className="transition-colors hover:text-slate-950" to="/preise">
               Preise
             </Link>
+            <Link className="transition-colors hover:text-slate-950" to="/vertrauen">
+              Vertrauen
+            </Link>
             <Link className="transition-colors hover:text-slate-950" to="/wissen">
               Wissen
             </Link>
@@ -243,6 +246,9 @@ function LandingPage() {
                 <SheetClose asChild>
                   <Link className="flex min-h-12 items-center border-b" to="/preise">
                     Preise
+                  </Link>
+                  <Link className="flex min-h-12 items-center border-b" to="/vertrauen">
+                    Vertrauen & Sicherheit
                   </Link>
                 </SheetClose>
                 <SheetClose asChild>
@@ -324,6 +330,12 @@ function LandingPage() {
                   <CheckCircle2 className="size-4 text-emerald-600" /> Persönlich eingerichtet
                 </span>
               </div>
+              <Link
+                to="/vertrauen"
+                className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-primary"
+              >
+                <ShieldAlert className="size-4" /> Vertrauen, Datenschutz und KI-Grenzen prüfen
+              </Link>
             </div>
 
             <div className="relative mx-auto w-full max-w-xl lg:mx-0">
@@ -670,6 +682,9 @@ function LandingPage() {
             </Link>
             <Link className="hover:text-slate-950" to="/partner">
               Partner
+            </Link>
+            <Link className="hover:text-slate-950" to="/vertrauen">
+              Vertrauen & Sicherheit
             </Link>
             <Link className="hover:text-slate-950" to="/impressum">
               Impressum
