@@ -2,6 +2,10 @@
 
 Stand: 29. August 2026
 
+Video-Freigabe: Seit 31. August 2026 ist die letzte vor Runway produzierte ElevenLabs-Fassung das
+offizielle Hauptvideo. Runway-Fassungen bleiben unveröffentlicht; Details stehen in
+`docs/marketing-video-status-2026-08-31.md`.
+
 ## Grundsatz
 
 Der technische Produktumfang ist für Demo und Pilotvorbereitung freigegeben. Bis Gewerbe,
@@ -81,6 +85,12 @@ Freigabe nach Ankunft des Materials folgt `go-to-market/druckfreigabe-checkliste
 **Ergebnis:** Zehn fehlerfreie, individuell adressierte Sendungen liegen bereit.
 
 ## 8.-9. September: Go/No-Go-Abnahme
+
+**Vorabkontrolle am 31. August bestanden.** Produktions-Build und ESLint liefen ohne Fehler. Der
+Live-Smoke-Test bestätigte alle öffentlichen und rechtlichen Seiten, die unveränderte
+Kampagnenquelle auf beiden Demo-CTAs, die ZunftEcho-Marke ohne `HandwerkAI`-Altbestand sowie den
+weiterhin unveröffentlichten Anfrage-Check (`HTTP 404`). Diese Vorabkontrolle ersetzt nicht die
+abschließende Prüfung am 8. oder 9. September.
 
 Technik:
 
