@@ -51,9 +51,9 @@ function DatenschutzPage() {
                 E-Mail:{" "}
                 <a
                   className="font-medium text-primary hover:underline"
-                  href="mailto:hussamabbar4@gmail.com"
+                  href="mailto:datenschutz@zunftecho.de"
                 >
-                  hussamabbar4@gmail.com
+                  datenschutz@zunftecho.de
                 </a>
               </p>
             </section>

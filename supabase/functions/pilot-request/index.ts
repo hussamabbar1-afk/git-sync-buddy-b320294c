@@ -166,7 +166,7 @@ export default {
       const brevoApiKey = Deno.env.get("BREVO_API_KEY")?.trim();
       const senderEmail = Deno.env.get("BREVO_SENDER_EMAIL")?.trim();
       const notificationEmail =
-        Deno.env.get("PILOT_NOTIFICATION_EMAIL")?.trim() || "hussamabbar4@gmail.com";
+        Deno.env.get("PILOT_NOTIFICATION_EMAIL")?.trim() || "kontakt@zunftecho.de";
 
       if (brevoApiKey && senderEmail && isEmail(senderEmail) && isEmail(notificationEmail)) {
         const details = [

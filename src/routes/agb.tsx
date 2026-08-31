@@ -157,9 +157,9 @@ function TermsPage() {
                 E-Mail:{" "}
                 <a
                   className="font-medium text-primary hover:underline"
-                  href="mailto:hussamabbar4@gmail.com"
+                  href="mailto:kontakt@zunftecho.de"
                 >
-                  hussamabbar4@gmail.com
+                  kontakt@zunftecho.de
                 </a>
               </p>
             </section>

@@ -148,7 +148,7 @@ function HelpPage() {
             </CardHeader>
             <CardContent>
               <Button className="w-full" asChild>
-                <a href="mailto:hussamabbar4@gmail.com?subject=ZunftEcho%20Support">
+                <a href="mailto:support@zunftecho.de?subject=ZunftEcho%20Support">
                   <Mail className="size-4" /> Support per E-Mail
                 </a>
               </Button>

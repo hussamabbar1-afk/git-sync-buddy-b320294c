@@ -69,7 +69,7 @@ export default {
       url.searchParams.set("addressdetails", "1");
       url.searchParams.set("accept-language", "de");
       const response = await fetch(url, {
-        headers: { "User-Agent": "ZunftEcho/1.0 (https://zunftecho.de; hussamabbar4@gmail.com)" },
+        headers: { "User-Agent": "ZunftEcho/1.0 (https://zunftecho.de; kontakt@zunftecho.de)" },
         signal: AbortSignal.timeout(8_000),
       });
       if (!response.ok) throw new Error(`nominatim_${response.status}`);

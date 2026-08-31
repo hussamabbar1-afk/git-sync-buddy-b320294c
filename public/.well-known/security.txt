@@ -1,3 +1,4 @@
+Contact: mailto:sicherheit@zunftecho.de
 Contact: https://zunftecho.de/impressum
 Policy: https://zunftecho.de/vertrauen
 Preferred-Languages: de, en
