@@ -1,14 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, Bot, Check, CircleCheck, LoaderCircle, Send } from "lucide-react";
+import { ArrowLeft, Check, CircleCheck, LoaderCircle, Send } from "lucide-react";
 import { useState, type FormEvent } from "react";
 
 import { Button } from "@/components/ui/button";
+import { BrandMark } from "@/components/brand-mark";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
-
-const PILOT_EMAIL = "hussamabbar4@gmail.com";
 
 type PilotRequestResponse = {
   ok?: boolean;
@@ -90,7 +89,7 @@ function PilotRequestPage() {
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
           <Link to="/" className="flex items-center gap-2.5">
             <span className="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <Bot className="size-5" />
+              <BrandMark className="size-9" />
             </span>
             <span className="font-display text-lg font-semibold">ZunftEcho</span>
           </Link>
@@ -170,12 +169,8 @@ function PilotRequestPage() {
               role="alert"
               className="mb-6 rounded-xl border border-red-200 bg-red-50 p-4 text-sm leading-6 text-red-950"
             >
-              Die Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es erneut oder
-              schreiben Sie an{" "}
-              <a className="font-semibold underline" href={`mailto:${PILOT_EMAIL}`}>
-                {PILOT_EMAIL}
-              </a>
-              .
+              Die Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es in wenigen
+              Minuten erneut.
             </div>
           ) : null}
 
@@ -241,14 +236,6 @@ function PilotRequestPage() {
               </p>
             </div>
           </form>
-
-          <div className="mt-7 border-t border-slate-200 pt-6 text-sm text-slate-600">
-            Sie möchten lieber eine E-Mail schreiben? Erreichen Sie uns direkt unter{" "}
-            <a className="font-medium text-primary hover:underline" href={`mailto:${PILOT_EMAIL}`}>
-              {PILOT_EMAIL}
-            </a>
-            <ArrowRight className="ml-1 inline size-3.5" />
-          </div>
         </section>
       </main>
       <footer className="border-t border-slate-200 bg-white px-5 py-6 text-center text-sm text-slate-500">

@@ -1,12 +1,14 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 
 import {
+  appointmentActionSummary,
   appointmentChoices,
   availabilityReply,
   buildSummary,
   cleanText,
   computeProgress,
   containsAcuteDanger,
+  shouldEscalateSentiment,
   formatAppointment,
   isQuestionWorthRecording,
   normalizeLanguage,
@@ -14,6 +16,7 @@ import {
   resolveConfiguredService,
   rescheduleMutationSucceeded,
   securityReply,
+  stripInternalIdentifiers,
   validIsoDate,
   validTime,
   UUID_RE,
@@ -194,6 +197,7 @@ const analysisSchema: JsonObject = {
   required: [
     "user_language",
     "intent",
+    "customer_sentiment",
     "human_handoff",
     "human_handoff_reason",
     "name",
@@ -213,6 +217,7 @@ const analysisSchema: JsonObject = {
   properties: {
     user_language: { type: "string" },
     intent: { type: "string", enum: ["general", "booking", "cancel", "reschedule", "waitlist"] },
+    customer_sentiment: { type: "string", enum: ["neutral", "frustrated", "angry"] },
     human_handoff: { type: "boolean" },
     human_handoff_reason: { type: "string" },
     name: { type: "string" },
@@ -280,6 +285,9 @@ function asAnalysis(value: JsonObject): ChatAnalysis {
   const urgency = ["low", "normal", "high", "emergency"].includes(String(value.urgency))
     ? (String(value.urgency) as ChatAnalysis["urgency"])
     : "normal";
+  const sentiment = ["neutral", "frustrated", "angry"].includes(String(value.customer_sentiment))
+    ? (String(value.customer_sentiment) as ChatAnalysis["customer_sentiment"])
+    : "neutral";
   const contact = ["phone", "email", "unknown"].includes(String(value.preferred_contact_method))
     ? (String(value.preferred_contact_method) as ChatAnalysis["preferred_contact_method"])
     : "unknown";
@@ -297,6 +305,7 @@ function asAnalysis(value: JsonObject): ChatAnalysis {
   return {
     user_language: normalizeLanguage(value.user_language),
     intent,
+    customer_sentiment: sentiment,
     human_handoff: value.human_handoff === true,
     human_handoff_reason: cleanText(value.human_handoff_reason, 300),
     name: cleanText(value.name, 120),
@@ -376,6 +385,7 @@ async function analyzeChat(args: {
 Analysiere hauptsächlich current_message; nutze den Verlauf nur für ausstehende Bestätigungen und bereits genannte Daten.
 Gib interne Kategorien und reply_de immer auf Deutsch zurück. Erkenne user_language als ISO-639-1-Code.
 intent: booking für neue Terminwünsche, cancel für Absagen, reschedule für Verschiebungen, waitlist nur bei ausdrücklicher Wartelistenbitte, sonst general.
+customer_sentiment ist angry nur bei klar erkennbarer starker Verärgerung, wiederholten Beschwerden oder ausdrücklicher Eskalation. Ein dringendes technisches Problem allein ist neutral oder frustrated. frustrated löst keine automatische Übergabe aus.
 Setze Bestätigungsfelder nur bei einer eindeutigen Bestätigung des zuletzt angebotenen Vorgangs. Das Wort "buchen" in einem neuen Wunsch ist keine Bestätigung.
 target_appointment_id darf nur exakt eine ID aus future_appointments sein; sonst leer lassen. Erfinde niemals IDs.
 appointment.service darf nur exakt der Name einer konfigurierten Dienstleistung sein; sonst leer. Erfinde keine Leistungen, Termine, Preise oder Unternehmensdaten.
@@ -411,7 +421,7 @@ async function localize(language: string, result: ActionResult): Promise<ActionR
   };
   const translated = await openAIJson(
     "zunftecho_localized_reply",
-    `Übersetze die Kundennachricht, die Zusammenfassung und alle Quick Replies natürlich in die Sprache ${language}. Bewahre Daten, Uhrzeiten, Telefonnummern, E-Mail-Adressen, UUIDs und Fakten exakt. Füge nichts hinzu.`,
+    `Übersetze die Kundennachricht, die Zusammenfassung und alle Quick Replies natürlich in die Sprache ${language}. Bewahre Daten, Uhrzeiten, Telefonnummern, E-Mail-Adressen und Fakten exakt. Gib niemals interne IDs, UUIDs, Datenbankschlüssel oder technische Metadaten aus. Füge nichts hinzu.`,
     JSON.stringify({
       message: result.text,
       summary: result.summary ?? "",
@@ -435,6 +445,22 @@ async function localize(language: string, result: ActionResult): Promise<ActionR
     ...result,
     text: cleanText(translated.message, 4_000) || result.text,
     summary: cleanText(translated.summary, 2_000) || result.summary,
+    quickReplies,
+  };
+}
+
+function sanitizeActionResult(result: ActionResult): ActionResult {
+  const quickReplies = result.quickReplies
+    ?.map((reply) => ({
+      label: stripInternalIdentifiers(reply.label).slice(0, 120),
+      value: stripInternalIdentifiers(reply.value).slice(0, 500),
+    }))
+    .filter((reply) => reply.label && reply.value)
+    .slice(0, 6);
+  return {
+    ...result,
+    text: stripInternalIdentifiers(result.text),
+    summary: result.summary ? stripInternalIdentifiers(result.summary) : result.summary,
     quickReplies,
   };
 }
@@ -493,6 +519,35 @@ function serviceQuickReplies(context: JsonObject): QuickReply[] {
   });
 }
 
+function slotQuickReplies(value: unknown, service: string): QuickReply[] {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return [];
+  const slots = Array.isArray((value as JsonObject).slots)
+    ? ((value as JsonObject).slots as unknown[])
+    : [];
+  return slots.slice(0, 6).flatMap((entry): QuickReply[] => {
+    if (!entry || typeof entry !== "object" || Array.isArray(entry)) return [];
+    const slot = entry as JsonObject;
+    const date = validIsoDate(slot.date);
+    const time = validTime(slot.start_time);
+    if (!date || !time) return [];
+    const parsed = new Date(`${date}T12:00:00Z`);
+    const labelDate = Number.isNaN(parsed.getTime())
+      ? date.split("-").reverse().join(".")
+      : new Intl.DateTimeFormat("de-DE", {
+          weekday: "short",
+          day: "2-digit",
+          month: "2-digit",
+          timeZone: "UTC",
+        }).format(parsed);
+    return [
+      {
+        label: `${labelDate} · ${time.slice(0, 5)} Uhr`,
+        value: `Ich wähle für ${service} den ${date.split("-").reverse().join(".")} um ${time.slice(0, 5)} Uhr.`,
+      },
+    ];
+  });
+}
+
 async function routeAction(args: {
   widgetKey: string;
   message: string;
@@ -520,9 +575,15 @@ async function routeAction(args: {
         text: "Ich habe keinen zukünftigen Termin gefunden, den ich absagen könnte.",
         progress: computeProgress(lead, analysis),
       };
+    const storedTarget = cleanText(lead.cancellation_target_appointment_id, 80);
     const target = resolveAppointmentTarget(
-      analysis.appointment.target_appointment_id,
+      analysis.appointment.target_appointment_id || storedTarget,
       appointments,
+      {
+        date: analysis.appointment.date,
+        start_time: analysis.appointment.start_time,
+        service: analysis.appointment.service,
+      },
     );
     if (!target) {
       return {
@@ -531,21 +592,40 @@ async function routeAction(args: {
         progress: computeProgress(lead, analysis),
       };
     }
-    if (analysis.appointment.rejected)
+    if (analysis.appointment.rejected) {
+      await patchRows("leads", `id=eq.${encodeURIComponent(leadId)}`, {
+        cancellation_selection_pending: false,
+        cancellation_target_appointment_id: null,
+      });
       return {
         text: "Alles klar. Der Termin bleibt bestehen.",
+        summary: appointmentActionSummary({
+          status: "Unverändert",
+          appointment: target,
+          nextStep: "Der Termin bleibt wie geplant bestehen.",
+        }),
         progress: computeProgress(lead, analysis),
       };
-    if (!analysis.appointment.cancel_confirmed) {
+    }
+    if (!analysis.appointment.cancel_confirmed || storedTarget !== target.id) {
+      await patchRows("leads", `id=eq.${encodeURIComponent(leadId)}`, {
+        cancellation_selection_pending: true,
+        cancellation_target_appointment_id: target.id,
+      });
       return {
         text: `Möchten Sie den Termin ${formatAppointment(target)} wirklich verbindlich absagen?`,
         quickReplies: [
           {
             label: "Ja, Termin absagen",
-            value: `Ja, bitte den Termin ${formatAppointment(target)} absagen. Termin-ID: ${target.id}`,
+            value: "Ja, bitte diesen Termin verbindlich absagen.",
           },
           { label: "Nein, behalten", value: "Nein, der Termin soll bestehen bleiben." },
         ],
+        summary: appointmentActionSummary({
+          status: "Bestätigung ausstehend",
+          appointment: target,
+          nextStep: "Absage bestätigen oder den Termin behalten.",
+        }),
         progress: computeProgress(lead, analysis),
       };
     }
@@ -554,7 +634,19 @@ async function routeAction(args: {
       p_appointment_id: target.id,
     })) as JsonObject;
     if (cancelled?.cancelled === true) {
-      return { text: `Der Termin ${formatAppointment(target)} wurde abgesagt.`, progress: 100 };
+      await patchRows("leads", `id=eq.${encodeURIComponent(leadId)}`, {
+        cancellation_selection_pending: false,
+        cancellation_target_appointment_id: null,
+      });
+      return {
+        text: `Der Termin ${formatAppointment(target)} wurde abgesagt.`,
+        summary: appointmentActionSummary({
+          status: "Abgesagt",
+          appointment: target,
+          nextStep: "Es ist nichts weiter erforderlich.",
+        }),
+        progress: 100,
+      };
     }
     return {
       text: "Der Termin konnte nicht abgesagt werden. Ich habe die Anfrage zur Prüfung vorgemerkt.",
@@ -572,6 +664,11 @@ async function routeAction(args: {
     const target = resolveAppointmentTarget(
       analysis.appointment.target_appointment_id || storedTarget,
       appointments,
+      {
+        date: analysis.appointment.date,
+        start_time: analysis.appointment.start_time,
+        service: analysis.appointment.service,
+      },
     );
     if (!target) {
       return {
@@ -590,6 +687,11 @@ async function routeAction(args: {
       });
       return {
         text: "Alles klar. Der bestehende Termin bleibt unverändert.",
+        summary: appointmentActionSummary({
+          status: "Unverändert",
+          appointment: target,
+          nextStep: "Der Termin bleibt wie geplant bestehen.",
+        }),
         progress: computeProgress(lead, analysis),
       };
     }
@@ -602,6 +704,11 @@ async function routeAction(args: {
       });
       return {
         text: "Auf welches neue Datum und welche Uhrzeit möchten Sie den Termin verschieben?",
+        summary: appointmentActionSummary({
+          status: "Neuer Zeitpunkt erforderlich",
+          appointment: target,
+          nextStep: "Bitte nennen Sie das gewünschte neue Datum und die Uhrzeit.",
+        }),
         progress: computeProgress(lead, analysis),
       };
     }
@@ -628,6 +735,12 @@ async function routeAction(args: {
         });
         return {
           text: `Der Termin wurde auf den ${newDate.split("-").reverse().join(".")} um ${newTime.slice(0, 5)} Uhr verschoben.`,
+          summary: appointmentActionSummary({
+            status: "Verbindlich verschoben",
+            previousAppointment: target,
+            appointment: { ...target, appointment_date: newDate, start_time: newTime },
+            nextStep: "Der neue Termin ist bestätigt.",
+          }),
           progress: 100,
           appointment: { ...target, appointment_date: newDate, start_time: newTime },
         };
@@ -658,10 +771,16 @@ async function routeAction(args: {
       quickReplies: [
         {
           label: "Verschiebung bestätigen",
-          value: `Ja, bitte auf den ${newDate.split("-").reverse().join(".")} um ${newTime.slice(0, 5)} Uhr verschieben. Termin-ID: ${target.id}`,
+          value: `Ja, bitte auf den ${newDate.split("-").reverse().join(".")} um ${newTime.slice(0, 5)} Uhr verschieben.`,
         },
         { label: "Abbrechen", value: "Nein, der bestehende Termin soll unverändert bleiben." },
       ],
+      summary: appointmentActionSummary({
+        status: "Bestätigung ausstehend",
+        previousAppointment: target,
+        appointment: { ...target, appointment_date: newDate, start_time: newTime },
+        nextStep: "Verschiebung bestätigen oder abbrechen.",
+      }),
       progress: Math.max(85, computeProgress(lead, analysis)),
     };
   }
@@ -707,6 +826,17 @@ async function routeAction(args: {
         waitlist?.already_exists === true
           ? `Sie stehen für ${resolvedService} am ${when} bereits auf der Warteliste. Wir melden uns, sobald ein passender Termin frei wird.`
           : `Ich habe Sie für ${resolvedService} am ${when} auf die Warteliste gesetzt. Wir melden uns, sobald ein passender Termin frei wird.`,
+      summary: appointmentActionSummary({
+        status:
+          waitlist?.already_exists === true ? "Bereits auf der Warteliste" : "Warteliste bestätigt",
+        appointment: {
+          id: "",
+          appointment_date: date,
+          start_time: time,
+          service_type: resolvedService,
+        },
+        nextStep: "Wir melden uns, sobald ein passender Termin frei wird.",
+      }),
       progress: Math.max(80, computeProgress(lead, analysis)),
     };
   }
@@ -729,6 +859,41 @@ async function routeAction(args: {
     if (reason) draft.appointment_reason = reason;
     if (Object.keys(draft).length)
       await patchRows("leads", `id=eq.${encodeURIComponent(leadId)}`, draft);
+
+    if (context.company && typeof context.company === "object") {
+      const bookingCompany = context.company as JsonObject;
+      if (bookingCompany.dynamic_booking_enabled === true && resolvedService && (!date || !time)) {
+        const available = await rpc("get_next_available_slots", {
+          p_widget_key: widgetKey,
+          p_service_name: resolvedService,
+          p_from_date: date || null,
+          p_days: Number(bookingCompany.booking_window_days ?? 62),
+          p_limit: 8,
+        });
+        const replies = slotQuickReplies(available, resolvedService);
+        if (replies.length) {
+          return {
+            text: "Diese Termine sind aktuell frei. Bitte wählen Sie den passenden Zeitpunkt:",
+            quickReplies: replies,
+            progress: computeProgress(lead, analysis),
+          };
+        }
+        return {
+          text: "Im freigegebenen Zeitraum ist aktuell kein freier Online-Termin verfügbar. Ich kann Ihre Anfrage an einen Mitarbeiter weitergeben oder Sie auf die Warteliste setzen.",
+          quickReplies: [
+            {
+              label: "Mitarbeiter kontaktieren",
+              value: "Bitte geben Sie meine Anfrage an einen Mitarbeiter weiter.",
+            },
+            {
+              label: "Auf Warteliste",
+              value: `Bitte setzen Sie mich für ${resolvedService} auf die Warteliste.`,
+            },
+          ],
+          progress: computeProgress(lead, analysis),
+        };
+      }
+    }
 
     const missing: string[] = [];
     if (!resolvedService) missing.push("Dienstleistung");
@@ -782,6 +947,17 @@ async function routeAction(args: {
         });
         return {
           text: `Ihr Termin für ${resolvedService} am ${date.split("-").reverse().join(".")} um ${time.slice(0, 5)} Uhr ist bestätigt.`,
+          summary: appointmentActionSummary({
+            status: "Verbindlich bestätigt",
+            appointment: {
+              id: "",
+              appointment_date: date,
+              start_time: time,
+              end_time: cleanText(created.end_time, 20),
+              service_type: resolvedService,
+            },
+            nextStep: "Der Betrieb meldet sich, falls weitere Informationen erforderlich sind.",
+          }),
           progress: 100,
           appointment: {
             appointment_date: date,
@@ -837,6 +1013,16 @@ async function routeAction(args: {
         },
         { label: "Anderen Termin wählen", value: "Ich möchte einen anderen Termin wählen." },
       ],
+      summary: appointmentActionSummary({
+        status: "Bestätigung ausstehend",
+        appointment: {
+          id: "",
+          appointment_date: date,
+          start_time: time,
+          service_type: resolvedService,
+        },
+        nextStep: "Termin verbindlich buchen oder einen anderen Zeitpunkt wählen.",
+      }),
       progress: Math.max(90, computeProgress(lead, analysis)),
     };
   }
@@ -956,6 +1142,12 @@ Deno.serve(async (request: Request) => {
     conversationId = rpcUuid(conversationRaw);
     if (!companyId || !conversationId) throw new Error("chat_context_unavailable");
 
+    const bookingConfig = await selectRows<JsonObject>(
+      "companies",
+      `id=eq.${encodeURIComponent(companyId)}&select=dynamic_booking_enabled,booking_window_days&limit=1`,
+    );
+    if (bookingConfig[0]) Object.assign(company, bookingConfig[0]);
+
     await Promise.all([
       rpc("set_conversation_context", {
         p_widget_key: widgetKey,
@@ -1033,13 +1225,52 @@ Deno.serve(async (request: Request) => {
       terminology,
     });
     let lead = await upsertLead(existingLead, companyId, conversationId, analysis);
+    const suppliedLocation =
+      body.location && typeof body.location === "object" && !Array.isArray(body.location)
+        ? (body.location as JsonObject)
+        : null;
+    if (suppliedLocation) {
+      const locationAddress = cleanText(suppliedLocation.address, 500);
+      const locationSource =
+        suppliedLocation.source === "browser_geolocation" ? "browser_geolocation" : "manual";
+      const latitude = Number(suppliedLocation.latitude);
+      const longitude = Number(suppliedLocation.longitude);
+      const validCoordinates =
+        locationSource === "browser_geolocation" &&
+        Number.isFinite(latitude) &&
+        latitude >= -90 &&
+        latitude <= 90 &&
+        Number.isFinite(longitude) &&
+        longitude >= -180 &&
+        longitude <= 180;
+      if (locationAddress) {
+        const locationPatch: JsonObject = {
+          address: locationAddress,
+          location_source: locationSource,
+          location_confirmed_at: new Date().toISOString(),
+          ...(validCoordinates ? { latitude, longitude } : { latitude: null, longitude: null }),
+        };
+        const updated = await patchRows<JsonObject>(
+          "leads",
+          `id=eq.${encodeURIComponent(cleanText(lead.id, 80))}`,
+          locationPatch,
+        );
+        lead = { ...lead, ...(updated[0] ?? locationPatch) };
+      }
+    }
 
     const danger = containsAcuteDanger(message) || analysis.urgency === "emergency";
+    const angryCustomer = shouldEscalateSentiment(analysis.customer_sentiment);
     let internalResult: ActionResult;
-    if (danger || (analysis.human_handoff && agent.human_handoff_enabled !== false)) {
+    if (
+      danger ||
+      ((analysis.human_handoff || angryCustomer) && agent.human_handoff_enabled !== false)
+    ) {
       const reason = danger
         ? "Akute Gefahr"
-        : analysis.human_handoff_reason || "Kunde verlangt Mitarbeiter";
+        : angryCustomer
+          ? "Verärgerter Kunde – sofortige Rückmeldung empfohlen"
+          : analysis.human_handoff_reason || "Kunde verlangt Mitarbeiter";
       await Promise.all([
         patchRows("conversations", `id=eq.${encodeURIComponent(conversationId)}`, {
           status: "needs_human",
@@ -1086,6 +1317,7 @@ Deno.serve(async (request: Request) => {
     lead = refreshed[0] ?? lead;
     internalResult.summary =
       internalResult.summary ?? buildSummary(lead, internalResult.appointment);
+    internalResult = sanitizeActionResult(internalResult);
     const supportedLanguages = Array.isArray(agent.supported_languages)
       ? agent.supported_languages.map((value) => normalizeLanguage(value)).filter(Boolean)
       : ["de"];
@@ -1104,6 +1336,7 @@ Deno.serve(async (request: Request) => {
         customerResult = internalResult;
       }
     }
+    customerResult = sanitizeActionResult(customerResult);
     const assistantMessageId = await saveAssistant(
       conversationId,
       internalResult.text,
@@ -1130,4 +1363,3 @@ Deno.serve(async (request: Request) => {
     return jsonResponse({ error: "temporary_failure" }, 503);
   }
 });
-

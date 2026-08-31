@@ -1,7 +1,10 @@
 import {
   CheckCircle2,
   Loader2,
+  LocateFixed,
   Mail,
+  MapPin,
+  Paperclip,
   Phone,
   RefreshCw,
   Send,
@@ -40,10 +43,40 @@ type ChatMessage = {
   summary?: string | null;
 };
 
+type ConfirmedLocation = {
+  address: string;
+  latitude?: number;
+  longitude?: number;
+  source: "manual" | "browser_geolocation";
+};
+
 export type QuickReply = { label: string; value: string };
 
 const conversationStorageKey = (widgetKey: string) => `zunftecho_chat_${widgetKey}`;
 const transcriptStorageKey = (widgetKey: string) => `zunftecho_chat_messages_${widgetKey}`;
+
+async function compressChatImage(file: File): Promise<File> {
+  if (file.size > 10 * 1024 * 1024) throw new Error("original_too_large");
+  if (!file.type.startsWith("image/")) throw new Error("invalid_image");
+
+  const bitmap = await createImageBitmap(file);
+  const scale = Math.min(1, 1600 / Math.max(bitmap.width, bitmap.height));
+  const canvas = document.createElement("canvas");
+  canvas.width = Math.max(1, Math.round(bitmap.width * scale));
+  canvas.height = Math.max(1, Math.round(bitmap.height * scale));
+  const context = canvas.getContext("2d", { alpha: false });
+  if (!context) throw new Error("compression_failed");
+  context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+  bitmap.close();
+
+  const blob = await new Promise<Blob | null>((resolve) =>
+    canvas.toBlob(resolve, "image/webp", 0.8),
+  );
+  if (!blob || blob.size > 1_500_000) throw new Error("compressed_too_large");
+  return new File([blob], `${file.name.replace(/\.[^.]+$/, "") || "kundenfoto"}.webp`, {
+    type: "image/webp",
+  });
+}
 
 function restoreMessages(widgetKey: string): ChatMessage[] {
   try {
@@ -83,7 +116,7 @@ function restoreMessages(widgetKey: string): ChatMessage[] {
               : null,
           language: typeof value["language"] === "string" ? value["language"].slice(0, 20) : null,
           rating: value["rating"] === 1 || value["rating"] === -1 ? value["rating"] : null,
-          quick_replies: quickReplies,
+          ...(quickReplies ? { quick_replies: quickReplies } : {}),
           progress_percent:
             typeof rawProgress === "number" && Number.isFinite(rawProgress)
               ? Math.max(0, Math.min(100, Math.round(rawProgress)))
@@ -122,12 +155,24 @@ export function ChatWidget({
   const [error, setError] = useState<string | null>(null);
   const [retryText, setRetryText] = useState<string | null>(null);
   const [restored, setRestored] = useState(false);
+  const [activeConversationId, setActiveConversationId] = useState<string | null>(null);
+  const [locationOpen, setLocationOpen] = useState(false);
+  const [locationAddress, setLocationAddress] = useState("");
+  const [confirmedLocation, setConfirmedLocation] = useState<ConfirmedLocation | null>(null);
+  const [locationPending, setLocationPending] = useState(false);
+  const [locationNotice, setLocationNotice] = useState<string | null>(null);
+  const [photoCount, setPhotoCount] = useState(0);
+  const [photoPending, setPhotoPending] = useState(false);
+  const [photoNotice, setPhotoNotice] = useState<string | null>(null);
   const conversationId = useRef<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    conversationId.current = sessionStorage.getItem(conversationStorageKey(widgetKey));
+    const storedConversationId = sessionStorage.getItem(conversationStorageKey(widgetKey));
+    conversationId.current = storedConversationId;
+    setActiveConversationId(storedConversationId);
     setMessages(restoreMessages(widgetKey));
     setRestored(true);
   }, [widgetKey]);
@@ -141,7 +186,58 @@ export function ChatWidget({
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight });
   }, [messages, pending]);
 
-  const handleSend = async (suggestedText?: string, appendUser = true) => {
+  useEffect(() => {
+    if (!activeConversationId) return;
+    let cancelled = false;
+
+    const loadStaffReplies = async () => {
+      try {
+        const response = await fetch(`${SUPABASE_FUNCTIONS_URL}/chat-transcript`, {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ widget_key: widgetKey, conversation_id: activeConversationId }),
+        });
+        if (!response.ok) return;
+        const payload = (await response.json()) as {
+          messages?: { id?: unknown; content?: unknown; source_channel?: unknown }[];
+        };
+        if (cancelled || !Array.isArray(payload.messages)) return;
+        const incoming = payload.messages.flatMap((item): ChatMessage[] => {
+          if (typeof item.id !== "string" || typeof item.content !== "string") return [];
+          return [
+            {
+              role: "assistant",
+              content: item.content,
+              assistant_message_id: item.id,
+              rating: null,
+            },
+          ];
+        });
+        setMessages((current) => {
+          const existing = new Set(
+            current.map((message) => message.assistant_message_id).filter(Boolean),
+          );
+          const missing = incoming.filter((message) => !existing.has(message.assistant_message_id));
+          return missing.length ? [...current, ...missing] : current;
+        });
+      } catch {
+        // Polling is best-effort; the regular chat remains fully usable.
+      }
+    };
+
+    void loadStaffReplies();
+    const interval = window.setInterval(() => void loadStaffReplies(), 8_000);
+    return () => {
+      cancelled = true;
+      window.clearInterval(interval);
+    };
+  }, [activeConversationId, widgetKey]);
+
+  const handleSend = async (
+    suggestedText?: string,
+    appendUser = true,
+    location: ConfirmedLocation | null = confirmedLocation,
+  ) => {
     const text = (suggestedText ?? input).trim();
     if (!text || pending) return;
     if (text.length > maxMessageLength) {
@@ -163,10 +259,12 @@ export function ChatWidget({
         message: text,
         ...(conversationId.current ? { conversation_id: conversationId.current } : {}),
         ...(metadata ?? {}),
+        ...(location ? { location } : {}),
       });
 
       if (result.conversation_id) {
         conversationId.current = result.conversation_id;
+        setActiveConversationId(result.conversation_id);
         sessionStorage.setItem(conversationStorageKey(widgetKey), result.conversation_id);
       }
 
@@ -191,6 +289,129 @@ export function ChatWidget({
       );
     } finally {
       setPending(false);
+    }
+  };
+
+  const requestBrowserLocation = () => {
+    setLocationNotice(null);
+    if (!("geolocation" in navigator)) {
+      setLocationNotice(
+        "Ihr Browser unterstützt die Standortfreigabe nicht. Bitte Adresse eingeben.",
+      );
+      setLocationOpen(true);
+      return;
+    }
+
+    setLocationPending(true);
+    navigator.geolocation.getCurrentPosition(
+      async ({ coords }) => {
+        try {
+          const response = await fetch(`${SUPABASE_FUNCTIONS_URL}/reverse-geocode`, {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+              widget_key: widgetKey,
+              latitude: coords.latitude,
+              longitude: coords.longitude,
+            }),
+          });
+          const payload = (await response.json()) as { ok?: boolean; address?: unknown };
+          if (!response.ok || payload.ok !== true || typeof payload.address !== "string") {
+            throw new Error("reverse_failed");
+          }
+          setLocationAddress(payload.address);
+          setConfirmedLocation({
+            address: payload.address,
+            latitude: coords.latitude,
+            longitude: coords.longitude,
+            source: "browser_geolocation",
+          });
+          setLocationOpen(true);
+          setLocationNotice("Standort gefunden. Bitte prüfen und anschließend bestätigen.");
+        } catch {
+          setLocationOpen(true);
+          setLocationNotice(
+            "Der Standort konnte nicht in eine Adresse umgewandelt werden. Bitte Adresse eingeben.",
+          );
+        } finally {
+          setLocationPending(false);
+        }
+      },
+      () => {
+        setLocationPending(false);
+        setLocationOpen(true);
+        setLocationNotice(
+          "Keine Standortfreigabe erfolgt. Sie können die Adresse stattdessen manuell eingeben.",
+        );
+      },
+      { enableHighAccuracy: false, timeout: 10_000, maximumAge: 60_000 },
+    );
+  };
+
+  const confirmManualLocation = () => {
+    const address = locationAddress.trim();
+    if (address.length < 5) {
+      setLocationNotice("Bitte geben Sie eine vollständige Adresse ein.");
+      return;
+    }
+    const location: ConfirmedLocation =
+      confirmedLocation?.source === "browser_geolocation" && confirmedLocation.address === address
+        ? confirmedLocation
+        : { address, source: "manual" };
+    setConfirmedLocation(location);
+    setLocationOpen(false);
+    setLocationNotice("Adresse bestätigt und wird mit Ihrer Anfrage übermittelt.");
+    void handleSend(`Adresse bestätigt: ${address}`, true, location);
+  };
+
+  const uploadPhoto = async (file: File) => {
+    if (!conversationId.current) {
+      setPhotoNotice(
+        "Bitte senden Sie zuerst eine kurze Nachricht, damit das Foto Ihrer Anfrage zugeordnet werden kann.",
+      );
+      return;
+    }
+    if (photoCount >= 3) {
+      setPhotoNotice("Maximal drei optionale Fotos pro Anfrage.");
+      return;
+    }
+    setPhotoPending(true);
+    setPhotoNotice(null);
+    try {
+      const compressed = await compressChatImage(file);
+      const form = new FormData();
+      form.set("widget_key", widgetKey);
+      form.set("conversation_id", conversationId.current);
+      form.set("file", compressed);
+      const response = await fetch(`${SUPABASE_FUNCTIONS_URL}/chat-attachment`, {
+        method: "POST",
+        body: form,
+      });
+      const payload = (await response.json()) as {
+        ok?: boolean;
+        remaining?: unknown;
+        code?: unknown;
+      };
+      if (!response.ok || payload.ok !== true)
+        throw new Error(String(payload.code ?? "upload_failed"));
+      setPhotoCount((current) => current + 1);
+      setPhotoNotice("Foto sicher hochgeladen und Ihrer Anfrage zugeordnet.");
+      setMessages((current) => [
+        ...current,
+        { role: "user", content: "📎 Optionales Foto hochgeladen" },
+      ]);
+    } catch (uploadError) {
+      const code = uploadError instanceof Error ? uploadError.message : "";
+      setPhotoNotice(
+        code === "original_too_large"
+          ? "Das Originalfoto darf höchstens 10 MB groß sein."
+          : code === "compressed_too_large"
+            ? "Das Foto ist nach der Komprimierung noch zu groß. Bitte wählen Sie ein anderes Bild."
+            : "Das Foto konnte nicht hochgeladen werden. Bitte versuchen Sie es erneut.",
+      );
+    } finally {
+      setPhotoPending(false);
+      if (fileInputRef.current) fileInputRef.current.value = "";
     }
   };
 
@@ -356,6 +577,88 @@ export function ChatWidget({
       ) : null}
 
       <div className="border-t p-2">
+        <div className="mb-2 flex flex-wrap items-center gap-2">
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={requestBrowserLocation}
+            disabled={pending || locationPending}
+          >
+            {locationPending ? (
+              <Loader2 className="mr-1.5 size-3.5 animate-spin" />
+            ) : (
+              <LocateFixed className="mr-1.5 size-3.5" />
+            )}
+            Meinen Standort teilen
+          </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            onClick={() => setLocationOpen((open) => !open)}
+            disabled={pending}
+          >
+            <MapPin className="mr-1.5 size-3.5" /> Adresse eingeben
+          </Button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            className="hidden"
+            onChange={(event) => {
+              const file = event.target.files?.[0];
+              if (file) void uploadPhoto(file);
+            }}
+          />
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            onClick={() => fileInputRef.current?.click()}
+            disabled={pending || photoPending || photoCount >= 3}
+          >
+            {photoPending ? (
+              <Loader2 className="mr-1.5 size-3.5 animate-spin" />
+            ) : (
+              <Paperclip className="mr-1.5 size-3.5" />
+            )}
+            Foto anhängen (optional)
+          </Button>
+        </div>
+        {locationOpen ? (
+          <div className="mb-2 rounded-md border bg-muted/30 p-2">
+            <p className="mb-1.5 text-[11px] text-muted-foreground">
+              Der Browser fragt nur nach Ihrer ausdrücklichen Zustimmung. Prüfen Sie die Adresse vor
+              dem Senden.
+            </p>
+            <div className="flex gap-2">
+              <input
+                value={locationAddress}
+                onChange={(event) => {
+                  setLocationAddress(event.target.value);
+                  if (confirmedLocation?.address !== event.target.value) setConfirmedLocation(null);
+                }}
+                placeholder="Straße, Hausnummer, PLZ und Ort"
+                className="min-w-0 flex-1 rounded-md border bg-background px-3 py-2 text-xs"
+              />
+              <Button type="button" size="sm" onClick={confirmManualLocation}>
+                Bestätigen
+              </Button>
+            </div>
+            {confirmedLocation?.source === "browser_geolocation" ? (
+              <p className="mt-1 text-[10px] text-muted-foreground">
+                Kartendaten © OpenStreetMap-Mitwirkende
+              </p>
+            ) : null}
+          </div>
+        ) : null}
+        {locationNotice ? (
+          <p className="mb-2 text-[11px] text-muted-foreground">{locationNotice}</p>
+        ) : null}
+        {photoNotice ? (
+          <p className="mb-2 text-[11px] text-muted-foreground">{photoNotice}</p>
+        ) : null}
         <div className="flex items-end gap-2">
           <Textarea
             rows={2}

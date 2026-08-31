@@ -1,21 +1,33 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
-  Bot,
   Check,
   CheckCircle2,
   ChevronRight,
   ClipboardCheck,
   Clock3,
+  Code2,
   MessageSquareText,
+  Menu,
   PhoneCall,
+  PlugZap,
+  SearchCheck,
   ShieldAlert,
   Sparkles,
   Wrench,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { BrandMark } from "@/components/brand-mark";
 import { InteractiveChatDemo } from "@/components/interactive-chat-demo";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 const benefits = [
   {
@@ -61,6 +73,16 @@ const pilotIncludes = [
   "Gemeinsame Inbetriebnahme und ein Optimierungstermin",
 ];
 
+const integrationPlatforms = [
+  "WordPress",
+  "Wix",
+  "Shopify",
+  "Webflow",
+  "Squarespace",
+  "Jimdo",
+  "HTML",
+];
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -81,7 +103,10 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://zunftecho.de/" },
       { property: "og:locale", content: "de_DE" },
+      { property: "og:image", content: "https://zunftecho.de/zunftecho-mark.png" },
+      { property: "og:image:alt", content: "ZunftEcho Markenzeichen" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://zunftecho.de/zunftecho-mark.png" },
     ],
     links: [{ rel: "canonical", href: "https://zunftecho.de/" }],
     scripts: [
@@ -108,7 +133,6 @@ export const Route = createFileRoute("/")({
             "@type": "Organization",
             name: "ZunftEcho",
             url: "https://zunftecho.de/",
-            email: "hussamabbar4@gmail.com",
             address: {
               "@type": "PostalAddress",
               streetAddress: "Coloniaallee 34",
@@ -127,8 +151,8 @@ export const Route = createFileRoute("/")({
 function Brand() {
   return (
     <span className="flex items-center gap-2.5">
-      <span className="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
-        <Bot className="size-5" />
+      <span className="flex size-10 items-center justify-center overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-slate-200">
+        <BrandMark className="size-10" />
       </span>
       <span className="font-display text-lg font-semibold tracking-tight">ZunftEcho</span>
     </span>
@@ -144,19 +168,37 @@ function LandingPage() {
             <Brand />
           </Link>
 
-          <nav className="hidden items-center gap-7 text-sm font-medium text-slate-600 md:flex">
+          <nav className="hidden items-center gap-5 text-sm font-medium text-slate-600 lg:flex">
             <a className="transition-colors hover:text-slate-950" href="#vorteile">
               Vorteile
             </a>
             <a className="transition-colors hover:text-slate-950" href="#ablauf">
               Ablauf
             </a>
+            <a className="transition-colors hover:text-slate-950" href="#integration">
+              Installation
+            </a>
             <a className="transition-colors hover:text-slate-950" href="#pilot">
               Pilotangebot
             </a>
+            <Link className="transition-colors hover:text-slate-950" to="/demo">
+              Live-Demo
+            </Link>
+            <Link className="transition-colors hover:text-slate-950" to="/preise">
+              Preise
+            </Link>
+            <Link className="transition-colors hover:text-slate-950" to="/vertrauen">
+              Vertrauen
+            </Link>
+            <Link className="transition-colors hover:text-slate-950" to="/wissen">
+              Wissen
+            </Link>
+            <Link className="transition-colors hover:text-slate-950" to="/partner">
+              Partner
+            </Link>
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="hidden items-center gap-2 lg:flex">
             <Button asChild variant="ghost" className="hidden sm:inline-flex">
               <Link to="/login">Anmelden</Link>
             </Button>
@@ -166,6 +208,74 @@ function LandingPage() {
               </Link>
             </Button>
           </div>
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline" size="icon" className="lg:hidden" aria-label="Menü öffnen">
+                <Menu className="size-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[min(22rem,88vw)] p-0">
+              <SheetHeader className="border-b p-5 text-left">
+                <SheetTitle>
+                  <Brand />
+                </SheetTitle>
+              </SheetHeader>
+              <nav className="flex flex-col p-4 text-base font-medium text-slate-700">
+                {[
+                  ["#vorteile", "Vorteile"],
+                  ["#ablauf", "Ablauf"],
+                  ["#integration", "Installation"],
+                  ["#pilot", "Pilotangebot"],
+                ].map(([href, label]) => (
+                  <SheetClose key={href} asChild>
+                    <a className="flex min-h-12 items-center border-b" href={href}>
+                      {label}
+                    </a>
+                  </SheetClose>
+                ))}
+                <SheetClose asChild>
+                  <Link className="flex min-h-12 items-center border-b" to="/anfrage-check">
+                    Anfrage-Check
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link className="flex min-h-12 items-center border-b" to="/demo">
+                    Live-Demo
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link className="flex min-h-12 items-center border-b" to="/preise">
+                    Preise
+                  </Link>
+                  <Link className="flex min-h-12 items-center border-b" to="/vertrauen">
+                    Vertrauen & Sicherheit
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link className="flex min-h-12 items-center border-b" to="/wissen">
+                    Wissen
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link className="flex min-h-12 items-center border-b" to="/partner">
+                    Partner
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link className="flex min-h-12 items-center border-b" to="/login">
+                    Kundenlogin
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Button asChild size="lg" className="mt-6">
+                    <Link to="/registrieren">
+                      Pilot anfragen <ArrowRight />
+                    </Link>
+                  </Button>
+                </SheetClose>
+              </nav>
+            </SheetContent>
+          </Sheet>
         </div>
       </header>
 
@@ -199,9 +309,15 @@ function LandingPage() {
                   size="lg"
                   className="h-12 border-slate-300 bg-white px-6 text-base"
                 >
-                  <a href="#ablauf">So funktioniert es</a>
+                  <Link to="/demo">Live-Demo ansehen</Link>
                 </Button>
               </div>
+              <Link
+                to="/anfrage-check"
+                className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+              >
+                <SearchCheck className="size-4" /> Kostenloser Website-Anfrage-Check
+              </Link>
 
               <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-slate-600">
                 <span className="flex items-center gap-2">
@@ -214,6 +330,12 @@ function LandingPage() {
                   <CheckCircle2 className="size-4 text-emerald-600" /> Persönlich eingerichtet
                 </span>
               </div>
+              <Link
+                to="/vertrauen"
+                className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-primary"
+              >
+                <ShieldAlert className="size-4" /> Vertrauen, Datenschutz und KI-Grenzen prüfen
+              </Link>
             </div>
 
             <div className="relative mx-auto w-full max-w-xl lg:mx-0">
@@ -325,6 +447,124 @@ function LandingPage() {
           </div>
         </section>
 
+        <section
+          id="integration"
+          className="scroll-mt-20 overflow-hidden bg-slate-950 py-20 text-white sm:py-24"
+        >
+          <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:px-10">
+            <div>
+              <p className="text-sm font-semibold tracking-wide text-sky-400 uppercase">
+                Einbau ohne Systemwechsel
+              </p>
+              <h2 className="mt-3 text-3xl leading-tight font-semibold sm:text-4xl">
+                In wenigen Minuten auf Ihrer Website.
+              </h2>
+              <p className="mt-5 max-w-xl text-lg leading-8 text-slate-300">
+                Ein persönlicher Code-Schnipsel verbindet Ihre bestehende Website mit ZunftEcho. Das
+                Dashboard führt Schritt für Schritt durch die passende Plattform und erkennt die
+                erfolgreiche Installation automatisch.
+              </p>
+
+              <div className="mt-8 grid gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+                {[
+                  {
+                    icon: Code2,
+                    title: "1 Code",
+                    text: "Einmal websiteweit einfügen",
+                  },
+                  {
+                    icon: PlugZap,
+                    title: "7 Plattformen",
+                    text: "Geführte Einbauwege",
+                  },
+                  {
+                    icon: SearchCheck,
+                    title: "Live-Prüfung",
+                    text: "Verbindung automatisch erkannt",
+                  },
+                ].map(({ icon: Icon, title, text }) => (
+                  <div key={title} className="rounded-xl border border-white/10 bg-white/5 p-4">
+                    <Icon className="size-5 text-sky-400" />
+                    <p className="mt-3 text-sm font-semibold">{title}</p>
+                    <p className="mt-1 text-xs leading-5 text-slate-400">{text}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-7 flex flex-wrap gap-2">
+                {integrationPlatforms.map((platform) => (
+                  <span
+                    key={platform}
+                    className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-slate-300"
+                  >
+                    {platform}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative">
+              <div className="absolute -inset-16 -z-0 rounded-full bg-sky-500/15 blur-3xl" />
+              <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900 shadow-2xl">
+                <div className="flex items-center justify-between border-b border-white/10 px-5 py-3">
+                  <div className="flex items-center gap-1.5">
+                    <span className="size-2.5 rounded-full bg-red-400" />
+                    <span className="size-2.5 rounded-full bg-amber-400" />
+                    <span className="size-2.5 rounded-full bg-emerald-400" />
+                  </div>
+                  <span className="text-xs text-slate-500">ZunftEcho · Installation</span>
+                </div>
+                <div className="p-5 sm:p-7">
+                  <div className="flex items-center justify-between gap-4">
+                    <div>
+                      <p className="text-sm font-semibold">Persönlicher Website-Code</p>
+                      <p className="mt-1 text-xs text-slate-400">
+                        Sicher, asynchron und updatefähig
+                      </p>
+                    </div>
+                    <span className="rounded-full bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-300">
+                      Bereit
+                    </span>
+                  </div>
+                  <div className="mt-5 overflow-x-auto rounded-xl border border-white/10 bg-slate-950 p-4 font-mono text-xs leading-6 text-sky-300">
+                    &lt;script async
+                    <br />
+                    &nbsp;&nbsp;src=&quot;https://.../widget-loader?key=••••&quot;
+                    <br />
+                    &gt;&lt;/script&gt;
+                  </div>
+                  <div className="mt-5 grid gap-3 sm:grid-cols-3">
+                    {[
+                      ["01", "Plattform wählen"],
+                      ["02", "Code einfügen"],
+                      ["03", "Website prüfen"],
+                    ].map(([number, label]) => (
+                      <div
+                        key={number}
+                        className="rounded-xl border border-white/10 bg-white/5 p-3"
+                      >
+                        <span className="text-xs font-semibold text-sky-400">{number}</span>
+                        <p className="mt-2 text-xs font-medium text-slate-200">{label}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-5 flex items-center gap-3 rounded-xl border border-emerald-400/20 bg-emerald-400/10 p-4">
+                    <CheckCircle2 className="size-5 shrink-0 text-emerald-400" />
+                    <div>
+                      <p className="text-sm font-semibold text-emerald-100">
+                        Installation automatisch erkannt
+                      </p>
+                      <p className="mt-1 text-xs text-emerald-200/65">
+                        Domain, letzter Aufruf und Verbindungsstatus werden sichtbar.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section id="pilot" className="scroll-mt-20 bg-white py-20 sm:py-24">
           <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:px-10">
             <div>
@@ -425,14 +665,35 @@ function LandingPage() {
             <a className="hover:text-slate-950" href="#pilot">
               Pilotangebot
             </a>
+            <a className="hover:text-slate-950" href="#integration">
+              Installation
+            </a>
             <Link className="hover:text-slate-950" to="/login">
               Kundenlogin
+            </Link>
+            <Link className="hover:text-slate-950" to="/preise">
+              Preise
+            </Link>
+            <Link className="hover:text-slate-950" to="/anfrage-check">
+              Anfrage-Check
+            </Link>
+            <Link className="hover:text-slate-950" to="/wissen">
+              Wissen
+            </Link>
+            <Link className="hover:text-slate-950" to="/partner">
+              Partner
+            </Link>
+            <Link className="hover:text-slate-950" to="/vertrauen">
+              Vertrauen & Sicherheit
             </Link>
             <Link className="hover:text-slate-950" to="/impressum">
               Impressum
             </Link>
             <Link className="hover:text-slate-950" to="/datenschutz">
               Datenschutz
+            </Link>
+            <Link className="hover:text-slate-950" to="/agb">
+              AGB
             </Link>
           </div>
           <p>© {new Date().getFullYear()} ZunftEcho</p>

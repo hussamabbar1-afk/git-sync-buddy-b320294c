@@ -1,4 +1,5 @@
-import { AlertTriangle, Check, Code2, Copy, Loader2, ShieldCheck } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { AlertTriangle, ArrowRight, Check, Code2, Copy, Loader2, ShieldCheck } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
 import { ChatWidget } from "@/components/chat-widget";
@@ -294,6 +295,11 @@ export function WidgetSettingsCard({
           <Badge variant={published ? "secondary" : "outline"}>
             {published ? "Veröffentlicht" : "Noch nicht veröffentlicht"}
           </Badge>
+          <Button variant="outline" size="sm" className="sm:ml-auto" asChild>
+            <Link to="/installation">
+              Geführte Installation <ArrowRight className="size-3.5" />
+            </Link>
+          </Button>
         </div>
 
         {!canManage ? (
@@ -447,6 +453,11 @@ export function WidgetSettingsCard({
               <p className="text-xs text-muted-foreground">
                 Eine Origin pro Zeile, einschließlich https://. Pfade werden beim Speichern
                 entfernt.
+              </p>
+              <p className="rounded-md border bg-muted/35 p-3 text-xs leading-5 text-muted-foreground">
+                Lokaler Test: HTML-Datei mit <code>python -m http.server 5500</code> bereitstellen
+                und <code>http://localhost:5500</code> vorübergehend als Origin eintragen. Direktes
+                <code>file://</code> bleibt aus Sicherheitsgründen gesperrt.
               </p>
               {!allowedOrigins.trim() ? (
                 <p className="flex items-start gap-2 rounded-md border border-amber-500/40 bg-amber-500/10 p-3 text-xs text-amber-800 dark:text-amber-200">

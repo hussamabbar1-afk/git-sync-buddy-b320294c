@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Bot, Check, Clock3, Globe, Languages, Loader2, ShieldCheck } from "lucide-react";
+import { Bot, Check, Clock3, Globe, History, Languages, Loader2, ShieldCheck } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { AiKnowledgeCard } from "@/components/ai-knowledge-card";
@@ -99,6 +99,74 @@ const languageOptions = [
   ["it", "Italienisch"],
 ] as const;
 
+type AuditEntry = {
+  id: string;
+  actor_type: string;
+  actor_user_id: string | null;
+  title: string;
+  details: unknown;
+  created_at: string;
+};
+
+const auditDateFormatter = new Intl.DateTimeFormat("de-DE", {
+  timeZone: "Europe/Berlin",
+  day: "2-digit",
+  month: "2-digit",
+  year: "numeric",
+  hour: "2-digit",
+  minute: "2-digit",
+});
+
+const auditFieldLabels: Record<string, string> = {
+  auto_detect_language: "Spracherkennung",
+  description: "Beschreibung",
+  fallback_message: "Fallback-Nachricht",
+  human_handoff_enabled: "Mitarbeiter-Übergabe",
+  is_active: "Status",
+  language: "Standardsprache",
+  name: "Name",
+  response_style: "Antwortstil",
+  staff_summary_language: "Team-Sprache",
+  supported_languages: "Kundensprachen",
+  translate_staff_summary: "Übersetzung der Team-Zusammenfassung",
+  welcome_message: "Begrüßungsnachricht",
+};
+
+function auditChangedFields(details: unknown): string[] {
+  if (!details || typeof details !== "object" || Array.isArray(details)) return [];
+  const value = (details as Record<string, unknown>)["changed_fields"];
+  if (!Array.isArray(value)) return [];
+  return value
+    .filter((field): field is string => typeof field === "string")
+    .map((field) => auditFieldLabels[field] ?? field);
+}
+
+async function fetchAiAudit(companyId: string) {
+  const [activityResult, teamResult] = await Promise.all([
+    supabase
+      .from("activity_log")
+      .select("id, actor_type, actor_user_id, title, details, created_at")
+      .eq("company_id", companyId)
+      .in("event_type", ["ai_agent_created", "ai_agent_settings_updated", "ai_handoff_sla_updated"])
+      .order("created_at", { ascending: false })
+      .limit(12),
+    supabase.rpc("get_team_members"),
+  ]);
+
+  const actors = Object.fromEntries(
+    (teamResult.data ?? []).map((member) => [
+      member.user_id,
+      member.full_name || member.email || "Teammitglied",
+    ]),
+  );
+
+  return {
+    entries: (activityResult.data ?? []) as AuditEntry[],
+    actors,
+    error: activityResult.error,
+  };
+}
+
 function AiEmployeePage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -112,6 +180,9 @@ function AiEmployeePage() {
   const [openingHoursCount, setOpeningHoursCount] = useState(0);
   const [agentId, setAgentId] = useState<string | null>(null);
   const [form, setForm] = useState<AgentForm>(emptyForm);
+  const [auditEntries, setAuditEntries] = useState<AuditEntry[]>([]);
+  const [auditActors, setAuditActors] = useState<Record<string, string>>({});
+  const [auditError, setAuditError] = useState<string | null>(null);
 
   const set = <K extends keyof AgentForm>(key: K, value: AgentForm[K]) =>
     setForm((f) => ({ ...f, [key]: value }));
@@ -156,7 +227,7 @@ function AiEmployeePage() {
       setCompanyId(profile.company_id);
       setCanManage(profile.role === "owner" || profile.role === "admin");
 
-      const [agentRes, companyRes, hoursRes] = await Promise.all([
+      const [agentRes, companyRes, hoursRes, auditRes] = await Promise.all([
         supabase.from("ai_agents").select("*").eq("company_id", profile.company_id).maybeSingle(),
         supabase
           .from("companies")
@@ -167,6 +238,7 @@ function AiEmployeePage() {
           .from("opening_hours")
           .select("id", { count: "exact", head: true })
           .eq("company_id", profile.company_id),
+        fetchAiAudit(profile.company_id),
       ]);
 
       if (cancelled) return;
@@ -182,6 +254,9 @@ function AiEmployeePage() {
       setHandoffSlaMinutes(companyRes.data?.handoff_sla_minutes ?? 15);
       setCompanyTimezone(companyRes.data?.timezone ?? "Europe/Berlin");
       setOpeningHoursCount(hoursRes.count ?? 0);
+      setAuditEntries(auditRes.entries);
+      setAuditActors(auditRes.actors);
+      setAuditError(auditRes.error ? "Das Änderungsprotokoll konnte nicht geladen werden." : null);
 
       if (agent) {
         setAgentId(agent.id);
@@ -276,6 +351,12 @@ function AiEmployeePage() {
 
       setForm((current) => ({ ...current, supported_languages: supportedLanguages }));
       setSuccess("KI-Mitarbeiter erfolgreich gespeichert.");
+      const audit = await fetchAiAudit(companyId);
+      setAuditEntries(audit.entries);
+      setAuditActors(audit.actors);
+      setAuditError(
+        audit.error ? "Das Änderungsprotokoll konnte nicht aktualisiert werden." : null,
+      );
       return;
     }
 
@@ -320,6 +401,10 @@ function AiEmployeePage() {
     setAgentId(data);
     setForm((current) => ({ ...current, supported_languages: supportedLanguages }));
     setSuccess("KI-Mitarbeiter erfolgreich gespeichert.");
+    const audit = await fetchAiAudit(companyId);
+    setAuditEntries(audit.entries);
+    setAuditActors(audit.actors);
+    setAuditError(audit.error ? "Das Änderungsprotokoll konnte nicht aktualisiert werden." : null);
   };
 
   if (loading) {
@@ -651,6 +736,52 @@ function AiEmployeePage() {
           />
         </div>
       ) : null}
+
+      <Card className="mt-4">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <History className="size-5" /> Änderungsprotokoll
+          </CardTitle>
+          <CardDescription>
+            Zeigt, wer zentrale Einstellungen des KI-Mitarbeiters wann geändert hat.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="divide-y">
+          {auditError ? (
+            <p className="py-6 text-sm text-destructive">{auditError}</p>
+          ) : auditEntries.length === 0 ? (
+            <p className="py-6 text-sm text-muted-foreground">
+              Ab jetzt werden Änderungen an den KI-Einstellungen hier protokolliert.
+            </p>
+          ) : (
+            auditEntries.map((entry) => {
+              const fields = auditChangedFields(entry.details);
+              const actor = entry.actor_user_id
+                ? (auditActors[entry.actor_user_id] ?? "Teammitglied")
+                : entry.actor_type === "system"
+                  ? "System"
+                  : "Unbekannt";
+              return (
+                <div
+                  key={entry.id}
+                  className="flex flex-col gap-1 py-3 sm:flex-row sm:justify-between"
+                >
+                  <div>
+                    <p className="text-sm font-medium">{entry.title}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {actor}
+                      {fields.length ? ` · ${fields.join(", ")}` : ""}
+                    </p>
+                  </div>
+                  <time className="shrink-0 text-xs text-muted-foreground">
+                    {auditDateFormatter.format(new Date(entry.created_at))} Uhr
+                  </time>
+                </div>
+              );
+            })
+          )}
+        </CardContent>
+      </Card>
 
       <Card className="mt-4">
         <CardHeader>

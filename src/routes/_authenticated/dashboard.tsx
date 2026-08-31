@@ -1,15 +1,20 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   AlertTriangle,
+  ArrowRight,
   Bot,
   CalendarClock,
+  ChartNoAxesColumnIncreasing,
   CheckSquare,
+  CircleCheckBig,
   ClipboardList,
+  Clock3,
   FileText,
   Flame,
   LifeBuoy,
   Loader2,
   MoonStar,
+  Siren,
   TrendingUp,
   Users,
 } from "lucide-react";
@@ -154,6 +159,21 @@ type PilotValueMetrics = {
   booking_conversion_rate_percent: number;
 };
 
+type GrowthMetric = {
+  current: number;
+  previous: number;
+  changePercent: number;
+};
+
+type GrowthAnalytics = {
+  days: number;
+  leads: GrowthMetric;
+  conversations: GrowthMetric;
+  appointments: GrowthMetric;
+  sources: Array<{ source: string; count: number }>;
+  busiestHours: Array<{ hour: number; count: number }>;
+};
+
 const itemTypeLabels: Record<string, string> = {
   handoff: "Übergabe",
   lead_sla: "Lead-Reaktion",
@@ -230,6 +250,35 @@ function parsePilotValue(payload: unknown): PilotValueMetrics {
   };
 }
 
+function parseGrowthAnalytics(payload: unknown): GrowthAnalytics {
+  const root = asRecord(payload);
+  const parseMetric = (value: unknown): GrowthMetric => {
+    const metric = asRecord(value);
+    return {
+      current: num(metric["current"]),
+      previous: num(metric["previous"]),
+      changePercent: num(metric["change_percent"]),
+    };
+  };
+  const sources = Array.isArray(root["sources"]) ? root["sources"] : [];
+  const busiestHours = Array.isArray(root["busiest_hours"]) ? root["busiest_hours"] : [];
+
+  return {
+    days: num(root["days"]),
+    leads: parseMetric(root["leads"]),
+    conversations: parseMetric(root["conversations"]),
+    appointments: parseMetric(root["appointments"]),
+    sources: sources.map((value) => {
+      const item = asRecord(value);
+      return { source: str(item["source"]) || "Direkt", count: num(item["count"]) };
+    }),
+    busiestHours: busiestHours.map((value) => {
+      const item = asRecord(value);
+      return { hour: num(item["hour"]), count: num(item["count"]) };
+    }),
+  };
+}
+
 const chartConfig = {
   conversations: { label: "Gespräche", color: "var(--chart-1)" },
   leads: { label: "Leads", color: "var(--chart-2)" },
@@ -242,10 +291,12 @@ function DashboardPage() {
   const [topLeads, setTopLeads] = useState<TopLead[]>([]);
   const [series, setSeries] = useState<SeriesPoint[]>([]);
   const [pilotValue, setPilotValue] = useState<PilotValueMetrics | null>(null);
+  const [growth, setGrowth] = useState<GrowthAnalytics | null>(null);
   const [queueError, setQueueError] = useState<string | null>(null);
   const [leadsError, setLeadsError] = useState<string | null>(null);
   const [seriesError, setSeriesError] = useState<string | null>(null);
   const [pilotValueError, setPilotValueError] = useState<string | null>(null);
+  const [growthError, setGrowthError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -259,14 +310,17 @@ function DashboardPage() {
       setLeadsError(null);
       setSeriesError(null);
       setPilotValueError(null);
+      setGrowthError(null);
 
-      const [overviewRes, queueRes, leadsRes, seriesRes, pilotValueRes] = await Promise.all([
-        supabase.rpc("get_business_overview", { p_days: 30 }),
-        supabase.rpc("get_attention_queue", { p_limit: 8 }),
-        supabase.rpc("get_top_leads", { p_limit: 5 }),
-        supabase.rpc("get_dashboard_series", { p_days: 14 }),
-        supabase.rpc("get_pilot_value_metrics", { p_days: 30 }),
-      ]);
+      const [overviewRes, queueRes, leadsRes, seriesRes, pilotValueRes, growthRes] =
+        await Promise.all([
+          supabase.rpc("get_business_overview", { p_days: 30 }),
+          supabase.rpc("get_attention_queue", { p_limit: 8 }),
+          supabase.rpc("get_top_leads", { p_limit: 5 }),
+          supabase.rpc("get_dashboard_series", { p_days: 14 }),
+          supabase.rpc("get_pilot_value_metrics", { p_days: 30 }),
+          supabase.rpc("get_growth_analytics", { p_days: 30 }),
+        ]);
 
       if (cancelled) return;
 
@@ -341,6 +395,13 @@ function DashboardPage() {
         setPilotValue(parsePilotValue(pilotValueRes.data));
       }
 
+      if (growthRes.error) {
+        setGrowthError("Der Periodenvergleich konnte nicht geladen werden.");
+        setGrowth(null);
+      } else {
+        setGrowth(parseGrowthAnalytics(growthRes.data));
+      }
+
       setLoading(false);
     }
 
@@ -382,6 +443,60 @@ function DashboardPage() {
   const d = overview.dashboard;
   const ai = overview.ai;
   const finance = overview.finance;
+
+  const nextStep =
+    d.overdue_handoffs > 0
+      ? {
+          tone: "critical" as const,
+          eyebrow: "Sofort handeln",
+          title: `${d.overdue_handoffs} menschliche ${d.overdue_handoffs === 1 ? "Übergabe wartet" : "Übergaben warten"} länger als vereinbart.`,
+          description:
+            "Öffnen Sie die Gespräche jetzt, damit dringende Kundenanfragen nicht verloren gehen.",
+          label: "Jetzt bearbeiten",
+          to: "/konversationen" as const,
+          icon: Siren,
+        }
+      : d.overdue_tasks > 0
+        ? {
+            tone: "warning" as const,
+            eyebrow: "Nächster Schritt",
+            title: `${d.overdue_tasks} ${d.overdue_tasks === 1 ? "Aufgabe ist" : "Aufgaben sind"} überfällig.`,
+            description: "Priorisieren Sie die fälligen Aufgaben, bevor Sie neue Arbeit einplanen.",
+            label: "Aufgaben prüfen",
+            to: "/aufgaben" as const,
+            icon: AlertTriangle,
+          }
+        : d.open_leads > 0
+          ? {
+              tone: "default" as const,
+              eyebrow: "Nächster Schritt",
+              title: `${d.open_leads} offene ${d.open_leads === 1 ? "Anfrage wartet" : "Anfragen warten"} auf Bearbeitung.`,
+              description: "Kontaktieren Sie zuerst die Leads mit hoher Priorität und kurzer SLA.",
+              label: "Leads bearbeiten",
+              to: "/leads" as const,
+              icon: Users,
+            }
+          : overview.setupScore < 100
+            ? {
+                tone: "default" as const,
+                eyebrow: "Nächster Schritt",
+                title: `Einrichtung zu ${overview.setupScore} % abgeschlossen.`,
+                description:
+                  "Vervollständigen Sie die fehlenden Angaben, damit der KI-Mitarbeiter zuverlässig antwortet.",
+                label: "Einrichtung fortsetzen",
+                to: "/einrichtung" as const,
+                icon: Bot,
+              }
+            : {
+                tone: "success" as const,
+                eyebrow: "Alles im Plan",
+                title: "Aktuell gibt es keine überfälligen Vorgänge.",
+                description:
+                  "ZunftEcho überwacht neue Anfragen und meldet sich bei Handlungsbedarf.",
+                label: "Gespräche ansehen",
+                to: "/konversationen" as const,
+                icon: CircleCheckBig,
+              };
 
   const cards = [
     {
@@ -460,6 +575,7 @@ function DashboardPage() {
   const hasSeriesData = series.some(
     (point) => point.conversations > 0 || point.leads > 0 || point.appointments > 0,
   );
+  const maxSourceCount = Math.max(1, ...(growth?.sources.map((source) => source.count) ?? []));
 
   return (
     <AppShell>
@@ -473,23 +589,118 @@ function DashboardPage() {
         }
       />
 
+      <Card
+        className={`mb-6 overflow-hidden ${
+          nextStep.tone === "critical"
+            ? "border-red-300 bg-red-50/80 dark:border-red-900 dark:bg-red-950/25"
+            : nextStep.tone === "warning"
+              ? "border-amber-300 bg-amber-50/80 dark:border-amber-900 dark:bg-amber-950/25"
+              : nextStep.tone === "success"
+                ? "border-emerald-300 bg-emerald-50/70 dark:border-emerald-900 dark:bg-emerald-950/20"
+                : "border-primary/25 bg-primary/[0.04]"
+        }`}
+      >
+        <CardContent className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex min-w-0 items-start gap-4">
+            <span
+              className={`flex size-11 shrink-0 items-center justify-center rounded-xl ${
+                nextStep.tone === "critical"
+                  ? "bg-red-600 text-white"
+                  : nextStep.tone === "warning"
+                    ? "bg-amber-500 text-white"
+                    : nextStep.tone === "success"
+                      ? "bg-emerald-600 text-white"
+                      : "bg-primary text-primary-foreground"
+              }`}
+            >
+              <nextStep.icon className="size-5" />
+            </span>
+            <div className="min-w-0">
+              <p className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+                {nextStep.eyebrow}
+              </p>
+              <h2 className="mt-1 text-lg font-semibold">{nextStep.title}</h2>
+              <p className="mt-1 text-sm text-muted-foreground">{nextStep.description}</p>
+            </div>
+          </div>
+          <Button
+            className="shrink-0"
+            variant={nextStep.tone === "success" ? "outline" : "default"}
+            asChild
+          >
+            <Link to={nextStep.to}>
+              {nextStep.label}
+              <ArrowRight className="size-4" />
+            </Link>
+          </Button>
+        </CardContent>
+      </Card>
+
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-        {cards.map((stat) => (
-          <Link key={stat.label} to={stat.to} className="block">
-            <Card className="h-full transition-colors hover:border-primary/40 hover:bg-muted/30">
+        {cards.map((stat) => {
+          const overdueHandoffCard =
+            stat.label === "Menschliche Übergaben" && d.overdue_handoffs > 0;
+          return (
+            <Card
+              key={stat.label}
+              className={`h-full transition-colors ${
+                overdueHandoffCard
+                  ? "border-red-300 bg-red-50/70 shadow-sm shadow-red-100 hover:border-red-400 dark:border-red-900 dark:bg-red-950/25 dark:shadow-none"
+                  : "hover:border-primary/40 hover:bg-muted/30"
+              }`}
+            >
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-muted-foreground">
+                <CardTitle
+                  className={`text-sm font-medium ${
+                    overdueHandoffCard ? "text-red-700 dark:text-red-300" : "text-muted-foreground"
+                  }`}
+                >
                   {stat.label}
                 </CardTitle>
-                <stat.icon className="size-4 text-muted-foreground" />
+                <stat.icon
+                  className={`size-4 ${
+                    overdueHandoffCard ? "text-red-600 dark:text-red-400" : "text-muted-foreground"
+                  }`}
+                />
               </CardHeader>
-              <CardContent>
-                <p className="text-3xl font-semibold">{stat.value}</p>
-                <p className="mt-1 text-xs text-muted-foreground">{stat.hint}</p>
+              <CardContent className="space-y-3">
+                <div>
+                  <p
+                    className={`text-3xl font-semibold ${
+                      overdueHandoffCard ? "text-red-700 dark:text-red-300" : ""
+                    }`}
+                  >
+                    {stat.value}
+                  </p>
+                  <p
+                    className={`mt-1 text-xs ${
+                      overdueHandoffCard
+                        ? "font-semibold text-red-700 dark:text-red-300"
+                        : "text-muted-foreground"
+                    }`}
+                  >
+                    {stat.hint}
+                  </p>
+                </div>
+                <Button
+                  size="sm"
+                  variant={overdueHandoffCard ? "default" : "ghost"}
+                  className={
+                    overdueHandoffCard
+                      ? "bg-red-600 text-white hover:bg-red-700"
+                      : "-ml-3 text-muted-foreground"
+                  }
+                  asChild
+                >
+                  <Link to={stat.to}>
+                    {overdueHandoffCard ? "Jetzt bearbeiten" : "Öffnen"}
+                    <ArrowRight className="size-3.5" />
+                  </Link>
+                </Button>
               </CardContent>
             </Card>
-          </Link>
-        ))}
+          );
+        })}
       </div>
 
       <div className="mt-6 grid gap-4 lg:grid-cols-3">
@@ -560,6 +771,99 @@ function DashboardPage() {
           </CardContent>
         </Card>
       </div>
+
+      <div className="mt-6 grid gap-4 lg:grid-cols-3">
+        <Card className="lg:col-span-2">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <ChartNoAxesColumnIncreasing className="size-5 text-primary" />
+              Entwicklung gegenüber dem vorherigen Zeitraum
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            {growthError ? (
+              <p className="py-6 text-center text-sm text-destructive">{growthError}</p>
+            ) : growth ? (
+              <div className="grid gap-4 sm:grid-cols-3">
+                {[
+                  { label: "Gespräche", metric: growth.conversations },
+                  { label: "Leads", metric: growth.leads },
+                  { label: "Termine", metric: growth.appointments },
+                ].map(({ label, metric }) => (
+                  <div key={label} className="rounded-lg border p-4">
+                    <p className="text-xs text-muted-foreground">{label}</p>
+                    <div className="mt-1 flex items-end justify-between gap-3">
+                      <p className="text-2xl font-semibold">{metric.current}</p>
+                      <Badge
+                        variant={metric.changePercent < 0 ? "destructive" : "secondary"}
+                        className={
+                          metric.changePercent > 0
+                            ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300"
+                            : ""
+                        }
+                      >
+                        {metric.changePercent > 0 ? "+" : ""}
+                        {metric.changePercent} %
+                      </Badge>
+                    </div>
+                    <p className="mt-2 text-xs text-muted-foreground">
+                      Vorher: {metric.previous} · je {growth.days} Tage
+                    </p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="py-6 text-center text-sm text-muted-foreground">
+                Noch keine Vergleichsdaten vorhanden.
+              </p>
+            )}
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Clock3 className="size-4" /> Stärkste Anfragezeiten
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {growth?.busiestHours.length ? (
+              growth.busiestHours.map((item) => (
+                <div key={item.hour} className="flex items-center justify-between gap-4 text-sm">
+                  <span>
+                    {String(item.hour).padStart(2, "0")}:00–
+                    {String((item.hour + 1) % 24).padStart(2, "0")}:00 Uhr
+                  </span>
+                  <Badge variant="outline">{item.count}</Badge>
+                </div>
+              ))
+            ) : (
+              <p className="text-sm text-muted-foreground">Noch keine Anfragezeiten verfügbar.</p>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+
+      <Card className="mt-6">
+        <CardHeader>
+          <CardTitle>Lead-Quellen der letzten 30 Tage</CardTitle>
+        </CardHeader>
+        <CardContent className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {growth?.sources.length ? (
+            growth.sources.map((source) => (
+              <div key={source.source} className="space-y-2 rounded-lg border p-4">
+                <div className="flex items-center justify-between gap-3 text-sm">
+                  <span className="truncate font-medium">{source.source}</span>
+                  <span>{source.count}</span>
+                </div>
+                <Progress value={(source.count / maxSourceCount) * 100} />
+              </div>
+            ))
+          ) : (
+            <p className="text-sm text-muted-foreground">Noch keine Lead-Quellen verfügbar.</p>
+          )}
+        </CardContent>
+      </Card>
 
       <Card className="mt-6 border-primary/25 bg-primary/[0.03]">
         <CardHeader>

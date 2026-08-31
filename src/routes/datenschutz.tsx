@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Bot } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+
+import { BrandMark } from "@/components/brand-mark";
 
 export const Route = createFileRoute("/datenschutz")({
   head: () => ({
@@ -22,7 +24,7 @@ function DatenschutzPage() {
         <div className="mx-auto flex h-16 max-w-4xl items-center justify-between px-5 sm:px-8">
           <Link to="/" className="flex items-center gap-2.5">
             <span className="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <Bot className="size-5" />
+              <BrandMark className="size-9" />
             </span>
             <span className="font-display text-lg font-semibold">ZunftEcho</span>
           </Link>
@@ -38,7 +40,7 @@ function DatenschutzPage() {
       <main className="mx-auto max-w-4xl px-5 py-12 sm:px-8 sm:py-16">
         <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
           <h1 className="font-display text-4xl font-semibold">Datenschutzhinweise</h1>
-          <p className="mt-3 text-sm text-slate-500">Stand: 24. August 2026</p>
+          <p className="mt-3 text-sm text-slate-500">Stand: 28. August 2026</p>
 
           <div className="mt-10 space-y-9 leading-7 text-slate-700">
             <section>
@@ -49,9 +51,9 @@ function DatenschutzPage() {
                 E-Mail:{" "}
                 <a
                   className="font-medium text-primary hover:underline"
-                  href="mailto:hussamabbar4@gmail.com"
+                  href="mailto:datenschutz@zunftecho.de"
                 >
-                  hussamabbar4@gmail.com
+                  datenschutz@zunftecho.de
                 </a>
               </p>
             </section>
@@ -94,13 +96,14 @@ function DatenschutzPage() {
               </h2>
               <p className="mt-3">
                 Für eingerichtete Kundenkonten verarbeiten wir Anmeldedaten, Unternehmensprofil,
-                Konfigurationen, Kundenanfragen, Leads, Termine sowie die im Arbeitsbereich
-                angelegten Geschäftsdokumente. Dies ist für Bereitstellung, Sicherheit und Support
-                der Plattform erforderlich und beruht auf Art. 6 Abs. 1 lit. b und lit. f DSGVO.
+                Teamrollen und Einladungen, Konfigurationen, Kundenanfragen, Leads, Termine,
+                Qualitätsbewertungen sowie die im Arbeitsbereich angelegten Geschäftsdokumente. Dies
+                ist für Bereitstellung, Sicherheit und Support der Plattform erforderlich und beruht
+                auf Art. 6 Abs. 1 lit. b und lit. f DSGVO.
               </p>
               <p className="mt-3">
-                Authentifizierung und Datenbank werden über Supabase bereitgestellt. Dienstleister
-                ist Supabase, Inc., 970 Toa Payoh North #07-04, Singapore 318992. Zugriff erhalten
+                Authentifizierung, Datenbank und serverseitige Funktionen werden über Supabase
+                bereitgestellt. Das Projekt wird in der Region Frankfurt betrieben. Zugriff erhalten
                 nur berechtigte Nutzer des jeweiligen Betriebs und eingesetzte Auftragsverarbeiter.
               </p>
             </section>
@@ -111,12 +114,35 @@ function DatenschutzPage() {
               </h2>
               <p className="mt-3">
                 Wenn ein Betrieb den ZunftEcho-Chat einsetzt, werden Chatnachrichten, Kontaktdaten
-                und Angaben zum Anliegen zur Beantwortung und Lead-Qualifizierung verarbeitet. Für
-                Automatisierungen nutzen wir n8n Cloud der n8n GmbH, Novalisstraße 10, 10115 Berlin.
-                Abhängig von der Kundenkonfiguration kann zusätzlich ein KI-Dienst eingebunden sein;
-                der jeweilige Betrieb informiert seine Websitebesucher über den konkret eingesetzten
-                Anbieter. ZunftEcho verarbeitet diese Daten im Regelfall als Auftragsverarbeiter des
-                jeweiligen Betriebs.
+                und Angaben zum Anliegen zur Beantwortung, Lead-Qualifizierung, Terminvorbereitung,
+                Gefahrenerkennung und menschlichen Übergabe verarbeitet. Die technische
+                Orchestrierung erfolgt in Supabase Edge Functions. Für die Sprach- und
+                Inhaltsanalyse verwenden wir die OpenAI API. Inhalte aus der API werden nach den
+                Bedingungen für Geschäftskunden standardmäßig nicht zum Training der Modelle
+                verwendet.
+              </p>
+              <p className="mt-3">
+                Die KI bereitet Anfragen und Vorschläge vor; rechtsverbindliche Entscheidungen mit
+                vergleichbarer erheblicher Wirkung trifft sie nicht allein. Kritische oder eindeutig
+                verärgerte Anfragen werden an einen Menschen übergeben. ZunftEcho verarbeitet
+                Chatdaten im Regelfall als Auftragsverarbeiter des jeweiligen Betriebs; der Betrieb
+                bleibt für die Information seiner Websitebesucher verantwortlich.
+              </p>
+              <p className="mt-3">
+                Besucher können ihren Standort ausschließlich nach einer ausdrücklichen Aktion im
+                Chat freigeben. Der Browser zeigt dabei seine eigene Berechtigungsabfrage; ohne
+                Zustimmung erfolgt kein Zugriff. Alternativ kann die Adresse manuell eingegeben
+                werden. Bei einer Standortfreigabe werden Koordinaten einmalig zur Ermittlung einer
+                lesbaren Adresse an den Dienst Nominatim der OpenStreetMap Foundation übermittelt
+                und anschließend zusammen mit der bestätigten Einsatzadresse zur Anfrage
+                gespeichert.
+              </p>
+              <p className="mt-3">
+                Optional hochgeladene Störungsfotos werden vor der Übertragung im Browser
+                komprimiert, in einem nicht öffentlichen Supabase-Speicher abgelegt und eindeutig
+                der jeweiligen Anfrage zugeordnet. Pro Anfrage sind höchstens drei Bilder möglich;
+                zugriffsberechtigt sind nur Nutzer des zuständigen Betriebs. Standortangaben und
+                Bilder sind für die Nutzung des Chats nicht verpflichtend.
               </p>
             </section>
 
@@ -139,8 +165,11 @@ function DatenschutzPage() {
               <p className="mt-3">
                 Wir verwenden derzeit keine Werbe- oder Reichweitenmessungs-Cookies. Für Anmeldung,
                 Sicherheit und die Fortsetzung einer Chat-Sitzung können technisch erforderliche
-                Cookies oder Browser-Speicher eingesetzt werden. Diese Funktionen sind für den
-                angeforderten Dienst erforderlich.
+                Cookies oder Browser-Speicher eingesetzt werden. Dazu gehört auch die lokale
+                Speicherung der gewählten Darstellung (hell oder dunkel) sowie einer anonymen
+                Chat-Sitzungskennung. Team-Einladungstokens verbleiben ausschließlich im jeweiligen
+                Einladungslink und werden nicht dauerhaft im Browser gespeichert. Diese Funktionen
+                sind für den angeforderten Dienst erforderlich.
               </p>
             </section>
 
@@ -150,9 +179,11 @@ function DatenschutzPage() {
               </h2>
               <p className="mt-3">
                 Daten erhalten nur Personen und Dienstleister, die sie für Betrieb, Support oder
-                Vertragserfüllung benötigen. Soweit Anbieter Daten außerhalb des Europäischen
-                Wirtschaftsraums verarbeiten, erfolgt die Übermittlung auf Grundlage eines
-                Angemessenheitsbeschlusses oder geeigneter Garantien wie
+                Vertragserfüllung benötigen. Dazu gehören insbesondere Cloudflare für Hosting und
+                Schutz, Supabase für Datenbank und serverseitige Funktionen, OpenAI für die
+                KI-Analyse und Brevo für E-Mail-Versand. Soweit Anbieter Daten außerhalb des
+                Europäischen Wirtschaftsraums verarbeiten, erfolgt die Übermittlung auf Grundlage
+                eines Angemessenheitsbeschlusses oder geeigneter Garantien wie
                 EU-Standardvertragsklauseln.
               </p>
             </section>

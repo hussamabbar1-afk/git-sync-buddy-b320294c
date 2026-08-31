@@ -19,8 +19,7 @@ export type CreatedCustomer = {
 };
 
 export type CreateCustomerResult =
-  | { ok: true; customer: CreatedCustomer }
-  | { ok: false; error: string };
+  { ok: true; customer: CreatedCustomer } | { ok: false; error: string };
 
 /**
  * Legt einen echten Kundenstammsatz in `public.customers` an.

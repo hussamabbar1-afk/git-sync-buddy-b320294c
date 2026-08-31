@@ -16,6 +16,7 @@ export type AppointmentAnalysis = {
 export type ChatAnalysis = {
   user_language: string;
   intent: "general" | "booking" | "cancel" | "reschedule" | "waitlist";
+  customer_sentiment: "neutral" | "frustrated" | "angry";
   human_handoff: boolean;
   human_handoff_reason: string;
   name: string;
@@ -32,6 +33,10 @@ export type ChatAnalysis = {
   knowledge_supported: boolean;
   quick_replies: QuickReply[];
 };
+
+export function shouldEscalateSentiment(sentiment: unknown): boolean {
+  return sentiment === "angry";
+}
 
 export type AppointmentRow = {
   id: string;
@@ -108,12 +113,31 @@ export function resolveConfiguredService(
 export function resolveAppointmentTarget(
   requestedId: unknown,
   appointments: AppointmentRow[],
+  criteria: {
+    date?: unknown;
+    start_time?: unknown;
+    service?: unknown;
+  } = {},
 ): AppointmentRow | null {
   const id = cleanText(requestedId, 80);
   if (id && UUID_RE.test(id)) {
     const exact = appointments.find((appointment) => appointment.id === id);
     if (exact) return exact;
   }
+
+  const date = validIsoDate(criteria.date);
+  const time = validTime(criteria.start_time);
+  const service = normalized(criteria.service);
+  if (date || time || service) {
+    const matches = appointments.filter((appointment) => {
+      if (date && validIsoDate(appointment.appointment_date) !== date) return false;
+      if (time && validTime(appointment.start_time) !== time) return false;
+      if (service && normalized(appointment.service_type) !== service) return false;
+      return true;
+    });
+    if (matches.length === 1) return matches[0] ?? null;
+  }
+
   return appointments.length === 1 ? (appointments[0] ?? null) : null;
 }
 
@@ -139,12 +163,42 @@ export function appointmentChoices(
 ): QuickReply[] {
   return appointments.slice(0, 6).map((appointment) => ({
     label: formatAppointment(appointment).slice(0, 120),
-    value:
-      `Ich möchte den Termin ${formatAppointment(appointment)} ${action}. Termin-ID: ${appointment.id}`.slice(
-        0,
-        500,
-      ),
+    value: `Ich möchte meinen Termin ${formatAppointment(appointment)} ${action}.`.slice(0, 500),
   }));
+}
+
+const UUID_ANY_RE = /[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/gi;
+
+export function stripInternalIdentifiers(value: unknown): string {
+  return cleanText(value, 4_000)
+    .replace(
+      /(?:Termin|Appointment)[\s_-]*(?:ID|UUID)\s*:?\s*[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/gi,
+      "",
+    )
+    .replace(UUID_ANY_RE, "")
+    .replace(/[ \t]{2,}/g, " ")
+    .replace(/[ \t]+([,.;!?])/g, "$1")
+    .trim();
+}
+
+export function appointmentActionSummary(args: {
+  status: string;
+  appointment?: AppointmentRow | Record<string, unknown> | null;
+  previousAppointment?: AppointmentRow | Record<string, unknown> | null;
+  nextStep?: string;
+}): string {
+  const lines = [`Status: ${cleanText(args.status, 160) || "Aktualisiert"}`];
+  if (args.previousAppointment) {
+    lines.push(`Bisher: ${formatAppointment(args.previousAppointment as AppointmentRow)}`);
+  }
+  if (args.appointment) {
+    lines.push(
+      `${args.previousAppointment ? "Neu" : "Termin"}: ${formatAppointment(args.appointment as AppointmentRow)}`,
+    );
+  }
+  const nextStep = cleanText(args.nextStep, 400);
+  if (nextStep) lines.push(`Nächster Schritt: ${nextStep}`);
+  return stripInternalIdentifiers(lines.join("\n")).slice(0, 2_000);
 }
 
 export function containsAcuteDanger(message: unknown): boolean {
@@ -214,6 +268,10 @@ export function availabilityReply(reason: unknown): string {
       return "An diesem Tag ist der Betrieb geschlossen. Bitte wählen Sie einen anderen Werktag.";
     case "outside_opening_hours":
       return "Diese Uhrzeit liegt außerhalb der Öffnungszeiten. Bitte wählen Sie eine andere Uhrzeit.";
+    case "outside_configured_slots":
+      return "Dieser Zeitpunkt wird für die gewählte Leistung nicht angeboten. Bitte wählen Sie einen der freien Termine.";
+    case "outside_booking_window":
+      return "Dieser Termin liegt außerhalb des aktuell freigegebenen Buchungszeitraums. Bitte wählen Sie einen früheren Zeitpunkt.";
     case "minimum_notice":
       return "Dieser Termin liegt zu kurzfristig. Bitte wählen Sie einen späteren Zeitpunkt.";
     case "conflict":
@@ -285,4 +343,3 @@ export function isQuestionWorthRecording(message: unknown): boolean {
     )
   );
 }
-

@@ -1,5 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Calendar as CalendarIcon, ChevronLeft, ChevronRight, Info, Loader2 } from "lucide-react";
+import {
+  Calendar as CalendarIcon,
+  ChevronLeft,
+  ChevronRight,
+  Info,
+  Loader2,
+  Plus,
+  Settings2,
+  Trash2,
+} from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
 import { AppShell, PageHeader } from "@/components/app-shell";
@@ -14,6 +23,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -21,6 +31,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
 import { detailSearchSchema, useDetailDeepLink } from "@/lib/deep-link";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -35,7 +46,7 @@ export const Route = createFileRoute("/_authenticated/termine")({
       { property: "og:title", content: "Termine – ZunftEcho" },
       {
         property: "og:description",
-        content: "Kundentermine Ihres Unternehmens als schreibgeschützte Kalenderansicht.",
+        content: "Kundentermine und verfügbare Buchungszeiten Ihres Unternehmens verwalten.",
       },
     ],
   }),
@@ -57,6 +68,28 @@ type AppointmentRow = {
   notes: string | null;
   status: string;
   updated_at: string;
+};
+
+type BookingRule = {
+  id: string;
+  service_id: string | null;
+  day_of_week: number;
+  start_time: string;
+  end_time: string;
+  slot_step_minutes: number;
+  is_active: boolean;
+};
+
+type BookingService = { id: string; name: string };
+
+const weekdayLabels: Record<number, string> = {
+  1: "Montag",
+  2: "Dienstag",
+  3: "Mittwoch",
+  4: "Donnerstag",
+  5: "Freitag",
+  6: "Samstag",
+  7: "Sonntag",
 };
 
 const SELECT_COLUMNS =
@@ -157,6 +190,20 @@ function TerminePage() {
   const [serviceFilter, setServiceFilter] = useState("alle");
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<AppointmentRow | null>(null);
+  const [canManageBooking, setCanManageBooking] = useState(false);
+  const [dynamicBookingEnabled, setDynamicBookingEnabled] = useState(false);
+  const [bookingWindowDays, setBookingWindowDays] = useState(62);
+  const [bookingRules, setBookingRules] = useState<BookingRule[]>([]);
+  const [bookingServices, setBookingServices] = useState<BookingService[]>([]);
+  const [bookingSaving, setBookingSaving] = useState(false);
+  const [bookingNotice, setBookingNotice] = useState<string | null>(null);
+  const [newRule, setNewRule] = useState({
+    serviceId: "all",
+    day: "1",
+    start: "08:00",
+    end: "17:00",
+    step: "30",
+  });
   const { id: deepLinkId } = Route.useSearch();
   const clearDeepLink = useDetailDeepLink("/termine", deepLinkId, () => undefined);
 
@@ -204,7 +251,7 @@ function TerminePage() {
 
       const { data: profile, error: profileError } = await supabase
         .from("profiles")
-        .select("company_id")
+        .select("company_id, role")
         .eq("id", userData.user.id)
         .maybeSingle();
 
@@ -223,6 +270,7 @@ function TerminePage() {
       }
 
       setCompanyId(profile.company_id);
+      setCanManageBooking(profile.role === "owner" || profile.role === "admin");
       setAuthState("ready");
     }
 
@@ -231,6 +279,42 @@ function TerminePage() {
       cancelled = true;
     };
   }, []);
+
+  useEffect(() => {
+    if (!companyId) return;
+    let cancelled = false;
+    void (async () => {
+      const [companyResult, rulesResult, servicesResult] = await Promise.all([
+        supabase
+          .from("companies")
+          .select("dynamic_booking_enabled, booking_window_days")
+          .eq("id", companyId)
+          .single(),
+        supabase
+          .from("booking_availability_rules")
+          .select("id, service_id, day_of_week, start_time, end_time, slot_step_minutes, is_active")
+          .eq("company_id", companyId)
+          .order("day_of_week")
+          .order("start_time"),
+        supabase
+          .from("services")
+          .select("id, name")
+          .eq("company_id", companyId)
+          .eq("booking_enabled", true)
+          .order("name"),
+      ]);
+      if (cancelled) return;
+      if (companyResult.data) {
+        setDynamicBookingEnabled(companyResult.data.dynamic_booking_enabled);
+        setBookingWindowDays(companyResult.data.booking_window_days);
+      }
+      setBookingRules((rulesResult.data ?? []) as BookingRule[]);
+      setBookingServices((servicesResult.data ?? []) as BookingService[]);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [companyId]);
 
   useEffect(() => {
     if (!companyId) return;
@@ -335,6 +419,90 @@ function TerminePage() {
     setCurrentDate(new Date(n.getFullYear(), n.getMonth(), 1));
   };
 
+  const saveBookingMode = async (enabled: boolean, days = bookingWindowDays) => {
+    if (!canManageBooking) return;
+    setBookingSaving(true);
+    setBookingNotice(null);
+    const { data, error: saveError } = await supabase.rpc("update_booking_settings", {
+      p_enabled: enabled,
+      p_booking_window_days: days,
+    });
+    setBookingSaving(false);
+    if (saveError || !data) {
+      setBookingNotice("Buchungseinstellungen konnten nicht gespeichert werden.");
+      return;
+    }
+    setDynamicBookingEnabled(enabled);
+    setBookingWindowDays(days);
+    setBookingNotice(
+      enabled
+        ? "Dynamische Terminvergabe ist aktiv. Nur konfigurierte freie Zeiten werden angeboten."
+        : "Dynamische Terminvergabe ist aus. Der KI-Mitarbeiter nutzt wieder die allgemeinen Öffnungszeiten.",
+    );
+    if (enabled && companyId) {
+      const { data: refreshed } = await supabase
+        .from("booking_availability_rules")
+        .select("id, service_id, day_of_week, start_time, end_time, slot_step_minutes, is_active")
+        .eq("company_id", companyId)
+        .order("day_of_week")
+        .order("start_time");
+      setBookingRules((refreshed ?? []) as BookingRule[]);
+    }
+  };
+
+  const addBookingRule = async () => {
+    if (!companyId || !canManageBooking) return;
+    if (newRule.start >= newRule.end) {
+      setBookingNotice("Die Endzeit muss nach der Startzeit liegen.");
+      return;
+    }
+    setBookingSaving(true);
+    setBookingNotice(null);
+    const { data, error: insertError } = await supabase
+      .from("booking_availability_rules")
+      .insert({
+        company_id: companyId,
+        service_id: newRule.serviceId === "all" ? null : newRule.serviceId,
+        day_of_week: Number(newRule.day),
+        start_time: newRule.start,
+        end_time: newRule.end,
+        slot_step_minutes: Number(newRule.step),
+      })
+      .select("id, service_id, day_of_week, start_time, end_time, slot_step_minutes, is_active")
+      .single();
+    setBookingSaving(false);
+    if (insertError || !data) {
+      setBookingNotice(
+        insertError?.code === "23505"
+          ? "Diese Verfügbarkeitsregel ist bereits vorhanden."
+          : "Die Verfügbarkeitsregel konnte nicht gespeichert werden.",
+      );
+      return;
+    }
+    setBookingRules((current) =>
+      [...current, data as BookingRule].sort(
+        (a, b) => a.day_of_week - b.day_of_week || a.start_time.localeCompare(b.start_time),
+      ),
+    );
+    setBookingNotice("Verfügbarkeitsregel gespeichert.");
+  };
+
+  const deleteBookingRule = async (id: string) => {
+    if (!canManageBooking) return;
+    setBookingSaving(true);
+    const { error: deleteError } = await supabase
+      .from("booking_availability_rules")
+      .delete()
+      .eq("id", id);
+    setBookingSaving(false);
+    if (deleteError) {
+      setBookingNotice("Die Regel konnte nicht gelöscht werden.");
+      return;
+    }
+    setBookingRules((current) => current.filter((rule) => rule.id !== id));
+    setBookingNotice("Verfügbarkeitsregel entfernt.");
+  };
+
   if (authState === "unauthenticated") {
     return (
       <AppShell>
@@ -370,6 +538,193 @@ function TerminePage() {
           <Info className="size-4 shrink-0" />
           Termine werden über den KI-Mitarbeiter gebucht, verschoben oder storniert.
         </div>
+
+        <Card>
+          <CardHeader className="pb-3">
+            <CardTitle className="flex items-center gap-2 text-base font-medium">
+              <Settings2 className="size-4 text-muted-foreground" /> Dynamische Verfügbarkeit
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex flex-col gap-4 rounded-lg border p-4 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="font-medium">Nur tatsächlich freie Zeiten anbieten</p>
+                <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
+                  Bei Aktivierung werden die Regeln unten geprüft und Doppelbuchungen atomar
+                  verhindert. Ausgeschaltet gelten die allgemeinen Öffnungszeiten.
+                </p>
+              </div>
+              <Switch
+                checked={dynamicBookingEnabled}
+                disabled={!canManageBooking || bookingSaving}
+                onCheckedChange={(checked) => void saveBookingMode(checked)}
+                aria-label="Dynamische Verfügbarkeit aktivieren"
+              />
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-[220px_1fr] sm:items-end">
+              <div className="space-y-1.5">
+                <Label htmlFor="booking-window">Buchungszeitraum</Label>
+                <Select
+                  value={String(bookingWindowDays)}
+                  onValueChange={(value) => setBookingWindowDays(Number(value))}
+                  disabled={!canManageBooking}
+                >
+                  <SelectTrigger id="booking-window">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="14">14 Tage</SelectItem>
+                    <SelectItem value="31">Aktueller Monat</SelectItem>
+                    <SelectItem value="62">Aktueller + nächster Monat</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <Button
+                className="w-fit"
+                variant="outline"
+                disabled={!canManageBooking || bookingSaving}
+                onClick={() => void saveBookingMode(dynamicBookingEnabled, bookingWindowDays)}
+              >
+                Zeitraum speichern
+              </Button>
+            </div>
+
+            {dynamicBookingEnabled ? (
+              <>
+                <div className="grid gap-2 rounded-lg bg-muted/30 p-3 md:grid-cols-[1.3fr_1fr_1fr_1fr_1fr_auto] md:items-end">
+                  <div className="space-y-1">
+                    <Label>Leistung</Label>
+                    <Select
+                      value={newRule.serviceId}
+                      onValueChange={(value) =>
+                        setNewRule((current) => ({ ...current, serviceId: value }))
+                      }
+                    >
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">Alle Leistungen</SelectItem>
+                        {bookingServices.map((service) => (
+                          <SelectItem key={service.id} value={service.id}>
+                            {service.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-1">
+                    <Label>Wochentag</Label>
+                    <Select
+                      value={newRule.day}
+                      onValueChange={(value) =>
+                        setNewRule((current) => ({ ...current, day: value }))
+                      }
+                    >
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {Object.entries(weekdayLabels).map(([day, label]) => (
+                          <SelectItem key={day} value={day}>
+                            {label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-1">
+                    <Label>Von</Label>
+                    <Input
+                      type="time"
+                      value={newRule.start}
+                      onChange={(event) =>
+                        setNewRule((current) => ({ ...current, start: event.target.value }))
+                      }
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <Label>Bis</Label>
+                    <Input
+                      type="time"
+                      value={newRule.end}
+                      onChange={(event) =>
+                        setNewRule((current) => ({ ...current, end: event.target.value }))
+                      }
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <Label>Takt</Label>
+                    <Select
+                      value={newRule.step}
+                      onValueChange={(value) =>
+                        setNewRule((current) => ({ ...current, step: value }))
+                      }
+                    >
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="15">15 Min.</SelectItem>
+                        <SelectItem value="30">30 Min.</SelectItem>
+                        <SelectItem value="60">60 Min.</SelectItem>
+                        <SelectItem value="90">90 Min.</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <Button
+                    disabled={!canManageBooking || bookingSaving}
+                    onClick={() => void addBookingRule()}
+                  >
+                    <Plus className="size-4" /> Hinzufügen
+                  </Button>
+                </div>
+
+                <div className="space-y-2">
+                  {bookingRules.map((rule) => {
+                    const service =
+                      bookingServices.find((item) => item.id === rule.service_id)?.name ??
+                      "Alle Leistungen";
+                    return (
+                      <div
+                        key={rule.id}
+                        className="flex flex-wrap items-center justify-between gap-3 rounded-lg border px-3 py-2 text-sm"
+                      >
+                        <div>
+                          <span className="font-medium">{weekdayLabels[rule.day_of_week]}</span>
+                          <span className="text-muted-foreground">
+                            {" "}
+                            · {formatTime(rule.start_time)}–{formatTime(rule.end_time)} Uhr · alle{" "}
+                            {rule.slot_step_minutes} Min. · {service}
+                          </span>
+                        </div>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          aria-label="Regel löschen"
+                          disabled={!canManageBooking || bookingSaving}
+                          onClick={() => void deleteBookingRule(rule.id)}
+                        >
+                          <Trash2 className="size-4 text-destructive" />
+                        </Button>
+                      </div>
+                    );
+                  })}
+                  {!bookingRules.length ? (
+                    <p className="text-sm text-muted-foreground">
+                      Noch keine Verfügbarkeitsregeln. Ohne Regel werden keine dynamischen Zeiten
+                      angeboten.
+                    </p>
+                  ) : null}
+                </div>
+              </>
+            ) : null}
+            {bookingNotice ? (
+              <p className="text-sm text-muted-foreground">{bookingNotice}</p>
+            ) : null}
+          </CardContent>
+        </Card>
 
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2">
@@ -434,57 +789,59 @@ function TerminePage() {
             ) : error ? (
               <p className="py-10 text-center text-sm text-destructive">{error}</p>
             ) : (
-              <div className="grid grid-cols-7 gap-px overflow-hidden rounded-md border bg-muted">
-                {days.map((d) => (
-                  <div
-                    key={d}
-                    className="bg-card p-2 text-center text-xs font-medium text-muted-foreground"
-                  >
-                    {d}
-                  </div>
-                ))}
-                {Array.from({ length: startDay }).map((_, i) => (
-                  <div key={`empty-${i}`} className="min-h-[96px] bg-card p-2" />
-                ))}
-                {Array.from({ length: totalDays }).map((_, i) => {
-                  const key = toDateKey(year, month, i + 1);
-                  const items = byDay.get(key) ?? [];
-                  return (
-                    <div key={key} className="min-h-[96px] space-y-1 bg-card p-2">
-                      <span
-                        className={
-                          key === todayKey
-                            ? "inline-flex size-5 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground"
-                            : "text-sm text-muted-foreground"
-                        }
-                      >
-                        {i + 1}
-                      </span>
-                      {items.map((a) => (
-                        <button
-                          key={a.id}
-                          type="button"
-                          onClick={() => setSelected(a)}
-                          className="block w-full rounded border bg-muted/50 p-1.5 text-left text-[11px] leading-tight transition-colors hover:bg-muted"
-                        >
-                          <span className="block font-medium">
-                            {formatTimeRange(a.start_time, a.end_time)}
-                          </span>
-                          <span className="block truncate">{customerName(a.customer_name)}</span>
-                          <span className="block truncate text-muted-foreground">
-                            {serviceType(a.service_type)}
-                          </span>
-                          <Badge
-                            variant={statusVariant(a.status)}
-                            className="mt-1 px-1 py-0 text-[10px]"
-                          >
-                            {statusLabel(a.status)}
-                          </Badge>
-                        </button>
-                      ))}
+              <div className="overflow-x-auto rounded-md border">
+                <div className="grid min-w-[700px] grid-cols-7 gap-px overflow-hidden bg-muted">
+                  {days.map((d) => (
+                    <div
+                      key={d}
+                      className="bg-card p-2 text-center text-xs font-medium text-muted-foreground"
+                    >
+                      {d}
                     </div>
-                  );
-                })}
+                  ))}
+                  {Array.from({ length: startDay }).map((_, i) => (
+                    <div key={`empty-${i}`} className="min-h-[96px] bg-card p-2" />
+                  ))}
+                  {Array.from({ length: totalDays }).map((_, i) => {
+                    const key = toDateKey(year, month, i + 1);
+                    const items = byDay.get(key) ?? [];
+                    return (
+                      <div key={key} className="min-h-[96px] space-y-1 bg-card p-2">
+                        <span
+                          className={
+                            key === todayKey
+                              ? "inline-flex size-5 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground"
+                              : "text-sm text-muted-foreground"
+                          }
+                        >
+                          {i + 1}
+                        </span>
+                        {items.map((a) => (
+                          <button
+                            key={a.id}
+                            type="button"
+                            onClick={() => setSelected(a)}
+                            className="block w-full rounded border bg-muted/50 p-1.5 text-left text-[11px] leading-tight transition-colors hover:bg-muted"
+                          >
+                            <span className="block font-medium">
+                              {formatTimeRange(a.start_time, a.end_time)}
+                            </span>
+                            <span className="block truncate">{customerName(a.customer_name)}</span>
+                            <span className="block truncate text-muted-foreground">
+                              {serviceType(a.service_type)}
+                            </span>
+                            <Badge
+                              variant={statusVariant(a.status)}
+                              className="mt-1 px-1 py-0 text-[10px]"
+                            >
+                              {statusLabel(a.status)}
+                            </Badge>
+                          </button>
+                        ))}
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             )}
           </CardContent>

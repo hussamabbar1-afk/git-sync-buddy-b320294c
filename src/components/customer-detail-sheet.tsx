@@ -1,7 +1,8 @@
-import { Loader2 } from "lucide-react";
+import { Check, Copy, ExternalLink, Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Sheet,
@@ -28,6 +29,7 @@ import {
 } from "@/lib/crm";
 
 type Customer = {
+  id: string | null;
   display_name: string | null;
   customer_number: string | null;
   customer_type: string | null;
@@ -190,6 +192,7 @@ function parse(payload: unknown): Customer360 {
   return {
     found: bool(root["found"]),
     customer: {
+      id: str(customer["id"]),
       display_name: str(customer["display_name"]),
       customer_number: str(customer["customer_number"]),
       customer_type: str(customer["customer_type"]),
@@ -284,6 +287,10 @@ export function CustomerDetailSheet({
   const [data, setData] = useState<Customer360 | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [portalUrl, setPortalUrl] = useState("");
+  const [portalLoading, setPortalLoading] = useState(false);
+  const [portalError, setPortalError] = useState<string | null>(null);
+  const [portalCopied, setPortalCopied] = useState(false);
 
   useEffect(() => {
     if (!open || !customerKey) return;
@@ -293,6 +300,8 @@ export function CustomerDetailSheet({
       setLoading(true);
       setError(null);
       setData(null);
+      setPortalUrl("");
+      setPortalError(null);
 
       const { data: payload, error: rpcError } = await supabase.rpc("get_customer_360", {
         p_customer_key: customerKey!,
@@ -323,6 +332,35 @@ export function CustomerDetailSheet({
     };
   }, [open, customerKey]);
 
+  async function createPortalLink() {
+    if (!data?.customer.id || portalLoading) return;
+    setPortalLoading(true);
+    setPortalError(null);
+    const { data: payload, error: linkError } = await supabase.rpc("create_customer_portal_link", {
+      p_customer_id: data.customer.id,
+      p_expires_days: 30,
+    });
+    setPortalLoading(false);
+
+    const url = str(asRecord(payload)["url"]);
+    if (linkError || !url) {
+      setPortalError(
+        linkError
+          ? `Kundenportal-Link konnte nicht erstellt werden: ${linkError.message}`
+          : "Kundenportal-Link konnte nicht erstellt werden.",
+      );
+      return;
+    }
+    setPortalUrl(url);
+  }
+
+  async function copyPortalLink() {
+    if (!portalUrl) return;
+    await navigator.clipboard.writeText(portalUrl);
+    setPortalCopied(true);
+    window.setTimeout(() => setPortalCopied(false), 1800);
+  }
+
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent className="w-full overflow-y-auto sm:max-w-2xl">
@@ -351,6 +389,46 @@ export function CustomerDetailSheet({
               </TabsList>
 
               <TabsContent value="uebersicht" className="space-y-5 pt-4">
+                <div className="rounded-lg border border-primary/25 bg-primary/[0.03] p-4">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <div>
+                      <p className="text-sm font-medium">Sicheres Kundenportal</p>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        Erstellt einen 30 Tage gültigen Link zu Anfragen und Terminen dieses Kunden.
+                      </p>
+                    </div>
+                    {portalUrl ? (
+                      <div className="flex gap-2">
+                        <Button size="sm" variant="outline" asChild>
+                          <a href={portalUrl} target="_blank" rel="noreferrer">
+                            <ExternalLink className="size-4" /> Öffnen
+                          </a>
+                        </Button>
+                        <Button size="sm" onClick={copyPortalLink}>
+                          {portalCopied ? (
+                            <Check className="size-4" />
+                          ) : (
+                            <Copy className="size-4" />
+                          )}
+                          {portalCopied ? "Kopiert" : "Link kopieren"}
+                        </Button>
+                      </div>
+                    ) : (
+                      <Button size="sm" onClick={createPortalLink} disabled={portalLoading}>
+                        {portalLoading ? (
+                          <Loader2 className="size-4 animate-spin" />
+                        ) : (
+                          <ExternalLink className="size-4" />
+                        )}
+                        Portal-Link erstellen
+                      </Button>
+                    )}
+                  </div>
+                  {portalError ? (
+                    <p className="mt-2 text-xs text-destructive">{portalError}</p>
+                  ) : null}
+                </div>
+
                 <div className="grid gap-4 sm:grid-cols-2">
                   <Field label="Kundennummer">{data.customer.customer_number ?? "—"}</Field>
                   <Field label="Kundentyp">{data.customer.customer_type ?? "—"}</Field>

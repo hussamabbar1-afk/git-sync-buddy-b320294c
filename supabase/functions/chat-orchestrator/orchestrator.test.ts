@@ -1,11 +1,14 @@
 import {
   appointmentChoices,
+  appointmentActionSummary,
   availabilityReply,
   containsAcuteDanger,
   rescheduleMutationSucceeded,
   resolveAppointmentTarget,
   resolveConfiguredService,
   securityReply,
+  shouldEscalateSentiment,
+  stripInternalIdentifiers,
   validIsoDate,
   validTime,
 } from "./orchestrator.ts";
@@ -35,15 +38,63 @@ Deno.test("resolves only configured services", () => {
 
 Deno.test("appointment target never trusts an unknown id", () => {
   const rows = [
-    { id: "11111111-1111-4111-8111-111111111111" },
-    { id: "22222222-2222-4222-8222-222222222222" },
+    {
+      id: "11111111-1111-4111-8111-111111111111",
+      appointment_date: "2026-09-10",
+      start_time: "08:00:00",
+      service_type: "Heizungsreparatur",
+    },
+    {
+      id: "22222222-2222-4222-8222-222222222222",
+      appointment_date: "2026-09-11",
+      start_time: "09:30:00",
+      service_type: "Rohrreinigung",
+    },
   ];
   if (resolveAppointmentTarget(rows[1]!.id, rows)?.id !== rows[1]!.id)
     throw new Error("target missed");
   if (resolveAppointmentTarget("33333333-3333-4333-8333-333333333333", rows) !== null) {
     throw new Error("unknown target trusted");
   }
-  if (appointmentChoices(rows, "absagen").length !== 2) throw new Error("choices missing");
+  if (
+    resolveAppointmentTarget("", rows, {
+      date: "2026-09-11",
+      start_time: "09:30",
+      service: "Rohrreinigung",
+    })?.id !== rows[1]!.id
+  ) {
+    throw new Error("human-readable appointment target not resolved");
+  }
+  const choices = appointmentChoices(rows, "absagen");
+  if (choices.length !== 2) throw new Error("choices missing");
+  if (
+    choices.some(
+      (choice) => choice.value.includes("Termin-ID") || /[0-9a-f-]{36}/i.test(choice.value),
+    )
+  ) {
+    throw new Error("appointment id leaked through quick reply");
+  }
+});
+
+Deno.test("appointment summaries are explicit and never expose internal ids", () => {
+  const appointment = {
+    id: "11111111-1111-4111-8111-111111111111",
+    appointment_date: "2026-09-10",
+    start_time: "08:00:00",
+    service_type: "Heizungsreparatur",
+  };
+  const summary = appointmentActionSummary({
+    status: "Verbindlich bestätigt",
+    appointment,
+    nextStep: "Der Betrieb meldet sich bei Änderungen.",
+  });
+  if (!summary.includes("Status: Verbindlich bestätigt") || !summary.includes("Termin:")) {
+    throw new Error("appointment summary incomplete");
+  }
+  if (summary.includes(appointment.id)) throw new Error("appointment summary leaked an id");
+  if (stripInternalIdentifiers(`Termin-ID: ${appointment.id} bestätigt`).includes(appointment.id)) {
+    throw new Error("identifier sanitizer failed");
+  }
 });
 
 Deno.test("accepts the atomic reschedule RPC success contract", () => {
@@ -66,3 +117,8 @@ Deno.test("danger and customer-safe fallback messages", () => {
     throw new Error("conflict message missing");
 });
 
+Deno.test("escalates only unmistakably angry customers", () => {
+  if (!shouldEscalateSentiment("angry")) throw new Error("angry customer not escalated");
+  if (shouldEscalateSentiment("frustrated")) throw new Error("frustration escalated too early");
+  if (shouldEscalateSentiment("neutral")) throw new Error("neutral customer escalated");
+});

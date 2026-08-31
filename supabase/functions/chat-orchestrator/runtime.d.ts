@@ -5,4 +5,3 @@ declare const Deno: {
   serve(handler: (request: Request) => Response | Promise<Response>): void;
   test(name: string, fn: () => void | Promise<void>): void;
 };
-

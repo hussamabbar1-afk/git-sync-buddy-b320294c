@@ -166,7 +166,7 @@ export default {
       const brevoApiKey = Deno.env.get("BREVO_API_KEY")?.trim();
       const senderEmail = Deno.env.get("BREVO_SENDER_EMAIL")?.trim();
       const notificationEmail =
-        Deno.env.get("PILOT_NOTIFICATION_EMAIL")?.trim() || "hussamabbar4@gmail.com";
+        Deno.env.get("PILOT_NOTIFICATION_EMAIL")?.trim() || "kontakt@zunftecho.de";
 
       if (brevoApiKey && senderEmail && isEmail(senderEmail) && isEmail(notificationEmail)) {
         const details = [
@@ -200,7 +200,7 @@ export default {
               to: [{ email: notificationEmail, name: "ZunftEcho" }],
               replyTo: { email, name: contactName.slice(0, 70) },
               subject: `Neue Pilotanfrage – ${company}`,
-              htmlContent: `<h2>Neue ZunftEcho-Pilotanfrage</h2>${details}`,
+              htmlContent: `<!doctype html><html lang="de"><body style="margin:0;background:#f3f7fb;font-family:Arial,sans-serif;color:#102033"><div style="max-width:640px;margin:0 auto;padding:32px 20px"><div style="display:flex;align-items:center;gap:12px;margin:0 0 18px"><img src="https://zunftecho.de/zunftecho-mark.png" width="44" height="44" alt="ZunftEcho" style="display:block;border-radius:12px"><strong style="font-size:20px">ZunftEcho</strong></div><div style="background:#fff;border:1px solid #dbe5ef;border-radius:16px;padding:32px"><div style="width:52px;height:4px;background:#e97824;border-radius:99px;margin-bottom:22px"></div><h2 style="margin:0 0 24px">Neue ZunftEcho-Pilotanfrage</h2>${details}</div></div></body></html>`,
               textContent: `Neue ZunftEcho-Pilotanfrage\n\nFirma: ${company}\nAnsprechpartner: ${contactName}\nE-Mail: ${email}\nTelefon: ${phone || "–"}\nWebsite: ${website || "–"}\nQuelle: ${source}\n\n${message || "–"}`,
             }),
             signal: AbortSignal.timeout(15_000),

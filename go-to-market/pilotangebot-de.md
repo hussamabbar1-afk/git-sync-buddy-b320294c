@@ -70,9 +70,9 @@ Kurze Variante:
 
 ## Call-to-Action
 
-**15-minütige Live-Demo vereinbaren**
+**Interaktive Zwei-Minuten-Demo öffnen oder 15-minütige persönliche Demo vereinbaren**
 
-In der Demo wird eine echte Kundenanfrage des Betriebs durchgespielt. Es werden keine erfundenen Umsatz- oder Einspargarantien verwendet.
+Die öffentliche Simulation ist unter `https://zunftecho.de/demo` ohne Anmeldung verfügbar. In der persönlichen Demo wird anschließend eine echte Kundenanfrage des Betriebs durchgespielt. Es werden keine erfundenen Umsatz- oder Einspargarantien verwendet.
 
 ## Voraussetzungen vor der Live-Schaltung
 

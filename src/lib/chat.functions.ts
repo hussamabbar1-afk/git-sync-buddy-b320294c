@@ -2,7 +2,7 @@ import { z } from "zod";
 
 const FALLBACK_CHAT_ENDPOINT =
   "https://srufegisweghdswdsdxb.supabase.co/functions/v1/chat-orchestrator";
-const CHAT_ENDPOINT = import.meta.env.VITE_CHAT_ENDPOINT || FALLBACK_CHAT_ENDPOINT;
+const CHAT_ENDPOINT = import.meta.env["VITE_CHAT_ENDPOINT"] || FALLBACK_CHAT_ENDPOINT;
 
 const optionalText = z.string().trim().min(1).max(2000).optional();
 
@@ -21,6 +21,14 @@ const schema = z.object({
   utm_campaign: optionalText,
   utm_content: optionalText,
   utm_term: optionalText,
+  location: z
+    .object({
+      address: z.string().trim().min(3).max(500),
+      latitude: z.number().min(-90).max(90).optional(),
+      longitude: z.number().min(-180).max(180).optional(),
+      source: z.enum(["manual", "browser_geolocation"]),
+    })
+    .optional(),
 });
 
 const metadataKeys = [
@@ -72,7 +80,7 @@ export async function sendChatMessage(input: unknown) {
   const data = schema.parse(input);
 
   // Keep the public widget contract stable while the backend remains replaceable.
-  const body: Record<string, string> = {
+  const body: Record<string, unknown> = {
     widget_key: data.widget_key,
     message: data.message,
   };
@@ -81,6 +89,7 @@ export async function sendChatMessage(input: unknown) {
     const value = data[key];
     if (value) body[key] = value;
   }
+  if (data.location) body["location"] = data.location;
 
   const res = await fetch(CHAT_ENDPOINT, {
     method: "POST",
