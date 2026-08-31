@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, notFound } from "@tanstack/react-router";
 import {
   ArrowLeft,
   ArrowRight,
@@ -13,6 +13,7 @@ import { useMemo, useState } from "react";
 import { PublicMarketingShell } from "@/components/public-marketing-shell";
 import { Button } from "@/components/ui/button";
 import { useCampaignSource } from "@/lib/campaign-source";
+import { acquisitionCampaignLive } from "@/lib/launch-flags";
 
 type AnswerOption = {
   label: string;
@@ -219,6 +220,11 @@ const questions: CheckQuestion[] = [
 const maxScore = questions.length * 2;
 
 export const Route = createFileRoute("/anfrage-check")({
+  beforeLoad: () => {
+    if (!acquisitionCampaignLive) {
+      throw notFound();
+    }
+  },
   head: () => ({
     meta: [
       { title: "Kostenloser Website-Anfrage-Check für SHK-Betriebe – ZunftEcho" },

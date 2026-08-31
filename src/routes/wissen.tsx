@@ -12,6 +12,7 @@ import {
 import { PublicMarketingShell } from "@/components/public-marketing-shell";
 import { Button } from "@/components/ui/button";
 import { useCampaignSource } from "@/lib/campaign-source";
+import { acquisitionCampaignLive } from "@/lib/launch-flags";
 
 const guides = [
   {
@@ -46,7 +47,7 @@ const guides = [
     description:
       "Eine praktische Entscheidungshilfe für Mobilansicht, Dringlichkeit, Übergabe und Bestätigung.",
   },
-];
+].filter((guide) => acquisitionCampaignLive || guide.to !== "/anfrage-check");
 
 const principles = [
   {
