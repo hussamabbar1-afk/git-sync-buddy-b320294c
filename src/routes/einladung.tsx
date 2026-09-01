@@ -124,16 +124,22 @@ function InvitationPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[linear-gradient(145deg,#f8fbff_0%,#ffffff_55%,#fff8ed_100%)] px-5 py-12">
-      <main className="w-full max-w-md rounded-3xl border border-slate-200 bg-white p-7 shadow-xl sm:p-9">
+    <div className="ze-auth-surface flex min-h-screen items-center justify-center px-5 py-12">
+      <main className="w-full max-w-md rounded-3xl border border-white/80 bg-white/88 p-7 shadow-[0_28px_80px_-44px_rgba(15,23,42,0.5)] backdrop-blur-sm sm:p-9">
         <Link to="/" className="mb-8 flex items-center gap-2.5">
-          <span className="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-            <BrandMark className="size-9" />
+          <span className="ze-mark-shell flex size-10 items-center justify-center bg-white">
+            <BrandMark className="size-10" />
           </span>
-          <span className="font-display text-lg font-semibold">ZunftEcho</span>
+          <div>
+            <span className="block font-display text-lg font-semibold">ZunftEcho</span>
+            <span className="block text-[10px] font-semibold tracking-[0.18em] text-slate-500 uppercase">
+              Teamzugang
+            </span>
+          </div>
         </Link>
 
-        <h1 className="text-2xl font-semibold">Teameinladung annehmen</h1>
+        <p className="ze-kicker">Gemeinsam arbeiten</p>
+        <h1 className="mt-3 font-display text-3xl font-semibold">Teameinladung annehmen</h1>
         <p className="mt-2 text-sm leading-6 text-slate-600">
           Melden Sie sich an oder erstellen Sie ein Konto mit genau der E-Mail-Adresse, an die die
           Einladung gesendet wurde.

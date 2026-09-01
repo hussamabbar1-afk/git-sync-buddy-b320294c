@@ -643,7 +643,7 @@ function DashboardPage() {
           return (
             <Card
               key={stat.label}
-              className={`h-full transition-colors ${
+              className={`group h-full overflow-hidden transition-[transform,border-color,background-color,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_22px_50px_-34px_rgba(15,23,42,0.5)] ${
                 overdueHandoffCard
                   ? "border-red-300 bg-red-50/70 shadow-sm shadow-red-100 hover:border-red-400 dark:border-red-900 dark:bg-red-950/25 dark:shadow-none"
                   : "hover:border-primary/40 hover:bg-muted/30"
@@ -657,16 +657,20 @@ function DashboardPage() {
                 >
                   {stat.label}
                 </CardTitle>
-                <stat.icon
-                  className={`size-4 ${
-                    overdueHandoffCard ? "text-red-600 dark:text-red-400" : "text-muted-foreground"
-                  }`}
-                />
+                <span className="flex size-8 items-center justify-center rounded-lg bg-muted/70 transition-colors group-hover:bg-primary/8">
+                  <stat.icon
+                    className={`size-4 ${
+                      overdueHandoffCard
+                        ? "text-red-600 dark:text-red-400"
+                        : "text-muted-foreground group-hover:text-primary"
+                    }`}
+                  />
+                </span>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div>
                   <p
-                    className={`text-3xl font-semibold ${
+                    className={`ze-metric-value text-3xl font-semibold ${
                       overdueHandoffCard ? "text-red-700 dark:text-red-300" : ""
                     }`}
                   >
@@ -704,7 +708,7 @@ function DashboardPage() {
       </div>
 
       <div className="mt-6 grid gap-4 lg:grid-cols-3">
-        <Card className="lg:col-span-2">
+        <Card className="overflow-hidden lg:col-span-2">
           <CardHeader>
             <CardTitle>Aktivität der letzten 14 Tage</CardTitle>
           </CardHeader>
@@ -790,10 +794,10 @@ function DashboardPage() {
                   { label: "Leads", metric: growth.leads },
                   { label: "Termine", metric: growth.appointments },
                 ].map(({ label, metric }) => (
-                  <div key={label} className="rounded-lg border p-4">
+                  <div key={label} className="rounded-xl border border-border/70 bg-muted/20 p-4">
                     <p className="text-xs text-muted-foreground">{label}</p>
                     <div className="mt-1 flex items-end justify-between gap-3">
-                      <p className="text-2xl font-semibold">{metric.current}</p>
+                      <p className="ze-metric-value text-2xl font-semibold">{metric.current}</p>
                       <Badge
                         variant={metric.changePercent < 0 ? "destructive" : "secondary"}
                         className={
@@ -851,7 +855,10 @@ function DashboardPage() {
         <CardContent className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {growth?.sources.length ? (
             growth.sources.map((source) => (
-              <div key={source.source} className="space-y-2 rounded-lg border p-4">
+              <div
+                key={source.source}
+                className="space-y-2 rounded-xl border border-border/70 bg-muted/20 p-4"
+              >
                 <div className="flex items-center justify-between gap-3 text-sm">
                   <span className="truncate font-medium">{source.source}</span>
                   <span>{source.count}</span>

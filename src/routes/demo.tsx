@@ -41,9 +41,10 @@ function DemoPage() {
   return (
     <div className="min-h-screen overflow-x-hidden bg-[#f7f9fc] text-slate-950">
       <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl">
+        <div className="h-0.5 bg-gradient-to-r from-primary via-sky-400 to-amber-400" />
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-10">
           <Link to="/" className="flex items-center gap-2.5" aria-label="ZunftEcho Startseite">
-            <span className="flex size-10 items-center justify-center overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-slate-200">
+            <span className="ze-mark-shell flex size-10 items-center justify-center bg-white">
               <BrandMark className="size-10" />
             </span>
             <span className="font-display text-lg font-semibold tracking-tight">ZunftEcho</span>

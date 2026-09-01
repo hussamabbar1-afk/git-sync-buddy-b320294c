@@ -152,10 +152,17 @@ export const Route = createFileRoute("/")({
 function Brand() {
   return (
     <span className="flex items-center gap-2.5">
-      <span className="flex size-10 items-center justify-center overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-slate-200">
+      <span className="ze-mark-shell flex size-10 items-center justify-center overflow-hidden rounded-xl bg-white">
         <BrandMark className="size-10" />
       </span>
-      <span className="font-display text-lg font-semibold tracking-tight">ZunftEcho</span>
+      <span>
+        <span className="block font-display text-lg leading-none font-semibold tracking-tight">
+          ZunftEcho
+        </span>
+        <span className="mt-1 hidden text-[9px] font-bold tracking-[0.13em] text-slate-400 uppercase sm:block">
+          Für SHK-Betriebe
+        </span>
+      </span>
     </span>
   );
 }
@@ -163,39 +170,30 @@ function Brand() {
 function LandingPage() {
   return (
     <div className="min-h-screen overflow-x-hidden bg-white text-slate-950">
-      <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-10">
+      <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/86 shadow-[0_12px_30px_-28px_rgba(15,23,42,0.55)] backdrop-blur-xl before:absolute before:inset-x-0 before:top-0 before:h-0.5 before:bg-[linear-gradient(90deg,#0284c7,#38bdf8_58%,#f59e0b)]">
+        <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-10">
           <Link to="/" aria-label="ZunftEcho Startseite">
             <Brand />
           </Link>
 
-          <nav className="hidden items-center gap-5 text-sm font-medium text-slate-600 lg:flex">
-            <a className="transition-colors hover:text-slate-950" href="#vorteile">
+          <nav className="hidden items-center gap-6 text-sm font-medium text-slate-600 lg:flex">
+            <a className="ze-public-nav-link hover:text-slate-950" href="#vorteile">
               Vorteile
             </a>
-            <a className="transition-colors hover:text-slate-950" href="#ablauf">
+            <a className="ze-public-nav-link hover:text-slate-950" href="#ablauf">
               Ablauf
             </a>
-            <a className="transition-colors hover:text-slate-950" href="#integration">
-              Installation
-            </a>
-            <a className="transition-colors hover:text-slate-950" href="#pilot">
-              Pilotangebot
-            </a>
-            <Link className="transition-colors hover:text-slate-950" to="/demo">
+            <Link className="ze-public-nav-link hover:text-slate-950" to="/demo">
               Live-Demo
             </Link>
-            <Link className="transition-colors hover:text-slate-950" to="/preise">
+            <Link className="ze-public-nav-link hover:text-slate-950" to="/preise">
               Preise
             </Link>
-            <Link className="transition-colors hover:text-slate-950" to="/vertrauen">
+            <Link className="ze-public-nav-link hover:text-slate-950" to="/vertrauen">
               Vertrauen
             </Link>
-            <Link className="transition-colors hover:text-slate-950" to="/wissen">
+            <Link className="ze-public-nav-link hover:text-slate-950" to="/wissen">
               Wissen
-            </Link>
-            <Link className="transition-colors hover:text-slate-950" to="/partner">
-              Partner
             </Link>
           </nav>
 
@@ -250,6 +248,8 @@ function LandingPage() {
                   <Link className="flex min-h-12 items-center border-b" to="/preise">
                     Preise
                   </Link>
+                </SheetClose>
+                <SheetClose asChild>
                   <Link className="flex min-h-12 items-center border-b" to="/vertrauen">
                     Vertrauen & Sicherheit
                   </Link>

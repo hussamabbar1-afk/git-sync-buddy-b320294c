@@ -15,9 +15,10 @@ import { supabase } from "@/integrations/supabase/client";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
+    <div className="ze-auth-surface flex min-h-screen items-center justify-center px-4">
+      <div className="max-w-md rounded-3xl border border-white/80 bg-white/85 p-9 text-center shadow-[0_28px_70px_-42px_rgba(15,23,42,0.55)]">
+        <p className="ze-kicker justify-center">Nicht gefunden</p>
+        <h1 className="mt-5 font-display text-7xl font-bold tracking-tighter text-primary">404</h1>
         <h2 className="mt-4 text-xl font-semibold text-foreground">Seite nicht gefunden</h2>
         <p className="mt-2 text-sm text-muted-foreground">
           Die gesuchte Seite existiert nicht oder wurde verschoben.
@@ -43,8 +44,8 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   }, [error]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
+    <div className="ze-auth-surface flex min-h-screen items-center justify-center px-4">
+      <div className="max-w-md rounded-3xl border border-white/80 bg-white/85 p-9 text-center shadow-[0_28px_70px_-42px_rgba(15,23,42,0.55)]">
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
           Diese Seite konnte nicht geladen werden
         </h1>

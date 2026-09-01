@@ -84,11 +84,11 @@ function PilotRequestPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[linear-gradient(145deg,#f8fbff_0%,#ffffff_55%,#fff8ed_100%)]">
-      <header className="border-b border-slate-200/80 bg-white/90">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
+    <div className="ze-auth-surface min-h-screen">
+      <header className="border-b border-slate-200/70 bg-white/86 backdrop-blur-xl">
+        <div className="mx-auto flex h-[4.5rem] max-w-6xl items-center justify-between px-5 sm:px-8">
           <Link to="/" className="flex items-center gap-2.5">
-            <span className="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+            <span className="ze-mark-shell flex size-9 items-center justify-center rounded-lg bg-white">
               <BrandMark className="size-9" />
             </span>
             <span className="font-display text-lg font-semibold">ZunftEcho</span>
@@ -108,9 +108,7 @@ function PilotRequestPage() {
             <ArrowLeft className="size-4" /> Zurück zur Startseite
           </Link>
 
-          <p className="mt-10 text-sm font-semibold tracking-wide text-primary uppercase">
-            30-Tage-Einführungspilot
-          </p>
+          <p className="ze-kicker mt-10">30-Tage-Einführungspilot</p>
           <h1 className="mt-3 text-4xl leading-tight font-semibold">
             Prüfen wir gemeinsam, ob ZunftEcho zu Ihrem Betrieb passt.
           </h1>
@@ -119,7 +117,8 @@ function PilotRequestPage() {
             Auftrag entsteht.
           </p>
 
-          <div className="mt-8 rounded-2xl bg-slate-950 p-6 text-white">
+          <div className="ze-dark-grid relative mt-8 overflow-hidden rounded-3xl border border-slate-800 bg-slate-950 p-6 text-white shadow-[0_28px_60px_-38px_rgba(15,23,42,0.8)]">
+            <div className="absolute top-0 right-0 h-24 w-24 rounded-bl-full bg-sky-400/8" />
             <div className="flex items-end gap-2">
               <span className="font-display text-4xl font-semibold">99 €</span>
               <span className="pb-1 text-sm text-slate-400">netto · einmalig</span>
@@ -142,7 +141,7 @@ function PilotRequestPage() {
           </div>
         </section>
 
-        <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_28px_70px_-38px_rgba(15,23,42,0.45)] sm:p-8">
+        <section className="rounded-3xl border border-white/90 bg-white/86 p-6 shadow-[0_32px_80px_-44px_rgba(15,23,42,0.5)] backdrop-blur sm:p-8">
           <div className="mb-7">
             <h2 className="text-2xl font-semibold">Pilot anfragen</h2>
             <p className="mt-2 text-sm leading-6 text-slate-600">

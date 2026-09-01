@@ -171,13 +171,20 @@ export function AppShell({ children }: { children: ReactNode }) {
   }
 
   return (
-    <div className="flex min-h-screen bg-background">
-      <aside className="sticky top-0 hidden h-screen w-64 shrink-0 self-start flex-col overflow-y-auto bg-sidebar text-sidebar-foreground lg:flex">
-        <div className="flex h-16 items-center gap-2 border-b border-sidebar-border px-5">
-          <span className="flex size-9 items-center justify-center overflow-hidden rounded-lg bg-white/95 p-0.5 shadow-sm">
+    <div className="ze-app-shell flex min-h-screen bg-background">
+      <aside className="ze-app-sidebar sticky top-0 hidden h-screen w-[17rem] shrink-0 self-start flex-col overflow-y-auto text-sidebar-foreground lg:flex">
+        <div className="flex h-[4.5rem] items-center gap-3 border-b border-sidebar-border/70 px-5">
+          <span className="ze-mark-shell flex size-10 items-center justify-center overflow-hidden rounded-xl bg-white/95 p-0.5">
             <BrandMark className="size-9" />
           </span>
-          <span className="font-display text-lg font-semibold tracking-tight">ZunftEcho</span>
+          <span>
+            <span className="block font-display text-lg leading-none font-semibold tracking-tight">
+              ZunftEcho
+            </span>
+            <span className="mt-1 block text-[9px] font-semibold tracking-[0.16em] text-sky-300/70 uppercase">
+              Anfrage-System
+            </span>
+          </span>
         </div>
 
         <nav className="flex-1 space-y-4 p-3">
@@ -192,13 +199,18 @@ export function AppShell({ children }: { children: ReactNode }) {
                   <Link
                     key={item.to}
                     to={item.to}
-                    className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+                    data-active={active}
+                    className={`ze-sidebar-link flex min-h-10 items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all ${
                       active
-                        ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                        : "text-sidebar-foreground/75 hover:bg-sidebar-accent/60 hover:text-sidebar-accent-foreground"
+                        ? "bg-white/[0.09] text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.07)]"
+                        : "text-sidebar-foreground/70 hover:bg-white/[0.055] hover:text-white"
                     }`}
                   >
-                    <item.icon className="size-4" />
+                    <span
+                      className={`flex size-7 items-center justify-center rounded-md ${active ? "bg-sky-400/15 text-sky-300" : "text-sidebar-foreground/55"}`}
+                    >
+                      <item.icon className="size-4" />
+                    </span>
                     {item.label}
                   </Link>
                 );
@@ -209,7 +221,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="sticky top-0 z-10 flex h-16 items-center gap-3 border-b bg-card/90 px-4 backdrop-blur lg:px-8">
+        <header className="sticky top-0 z-20 flex h-[4.5rem] items-center gap-3 border-b border-border/70 bg-card/82 px-4 shadow-[0_10px_30px_-28px_rgba(15,23,42,0.55)] backdrop-blur-xl lg:px-8">
           <Sheet>
             <SheetTrigger asChild>
               <Button
@@ -284,8 +296,11 @@ export function AppShell({ children }: { children: ReactNode }) {
           <div className="ml-auto flex items-center gap-3">
             <NotificationsBell />
 
-            <Badge variant="secondary" className="hidden sm:inline-flex">
-              KI aktiv
+            <Badge
+              variant="secondary"
+              className="hidden gap-1.5 border border-emerald-200/70 bg-emerald-50 text-emerald-800 sm:inline-flex dark:border-emerald-900 dark:bg-emerald-950/50 dark:text-emerald-300"
+            >
+              <span className="size-1.5 animate-pulse rounded-full bg-emerald-500" /> KI aktiv
             </Badge>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -344,7 +359,9 @@ export function AppShell({ children }: { children: ReactNode }) {
           </div>
         </header>
 
-        <main className="flex-1 px-4 pt-5 pb-24 sm:py-6 lg:px-8 lg:py-8">{children}</main>
+        <main className="ze-app-main flex-1 px-4 pt-5 pb-24 sm:py-7 lg:px-8 lg:py-9">
+          <div className="mx-auto w-full max-w-[96rem]">{children}</div>
+        </main>
 
         <footer className="hidden items-center justify-end gap-4 border-t bg-card px-8 py-3 text-xs text-muted-foreground lg:flex">
           <Link to="/impressum" className="hover:text-foreground">
@@ -385,10 +402,15 @@ export function PageHeader({
   action?: ReactNode;
 }) {
   return (
-    <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+    <div className="ze-page-header mb-7 flex flex-wrap items-end justify-between gap-4">
       <div>
-        <h1 className="text-2xl font-semibold">{title}</h1>
-        {description ? <p className="mt-1 text-sm text-muted-foreground">{description}</p> : null}
+        <p className="mb-1 text-[10px] font-semibold tracking-[0.14em] text-primary uppercase">
+          Arbeitsbereich
+        </p>
+        <h1 className="text-2xl font-semibold tracking-tight sm:text-[1.75rem]">{title}</h1>
+        {description ? (
+          <p className="mt-1.5 max-w-2xl text-sm leading-6 text-muted-foreground">{description}</p>
+        ) : null}
       </div>
       {action}
     </div>

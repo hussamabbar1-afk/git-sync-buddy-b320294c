@@ -19,34 +19,59 @@ export function PublicMarketingShell({ children, source }: PublicMarketingShellP
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-white text-slate-950">
-      <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl">
-        <div className="relative mx-auto flex min-h-16 max-w-7xl items-center justify-between gap-3 px-5 py-3 sm:px-8 lg:px-10">
+      <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/86 shadow-[0_12px_30px_-28px_rgba(15,23,42,0.55)] backdrop-blur-xl before:absolute before:inset-x-0 before:top-0 before:h-0.5 before:bg-[linear-gradient(90deg,#0284c7,#38bdf8_58%,#f59e0b)]">
+        <div className="relative mx-auto flex min-h-[4.5rem] max-w-7xl items-center justify-between gap-3 px-5 py-3 sm:px-8 lg:px-10">
           <Link to="/" className="flex items-center gap-2.5" aria-label="ZunftEcho Startseite">
-            <span className="flex size-10 items-center justify-center overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-slate-200">
+            <span className="ze-mark-shell flex size-10 items-center justify-center overflow-hidden rounded-xl bg-white">
               <BrandMark className="size-10" />
             </span>
-            <span className="font-display text-lg font-semibold tracking-tight">ZunftEcho</span>
+            <span>
+              <span className="block font-display text-lg leading-none font-semibold tracking-tight">
+                ZunftEcho
+              </span>
+              <span className="mt-1 hidden text-[9px] font-bold tracking-[0.13em] text-slate-400 uppercase sm:block">
+                Für SHK-Betriebe
+              </span>
+            </span>
           </Link>
 
           <nav className="hidden items-center gap-5 text-sm font-medium text-slate-600 lg:flex">
             {acquisitionCampaignLive ? (
-              <a className="shrink-0 hover:text-slate-950" href={`/anfrage-check?${sourceQuery}`}>
+              <a
+                className="ze-public-nav-link shrink-0 hover:text-slate-950"
+                href={`/anfrage-check?${sourceQuery}`}
+              >
                 Anfrage-Check
               </a>
             ) : null}
-            <a className="shrink-0 hover:text-slate-950" href={`/demo?${sourceQuery}`}>
+            <a
+              className="ze-public-nav-link shrink-0 hover:text-slate-950"
+              href={`/demo?${sourceQuery}`}
+            >
               Live-Demo
             </a>
-            <a className="shrink-0 hover:text-slate-950" href={`/wissen?${sourceQuery}`}>
+            <a
+              className="ze-public-nav-link shrink-0 hover:text-slate-950"
+              href={`/wissen?${sourceQuery}`}
+            >
               Wissen
             </a>
-            <a className="shrink-0 hover:text-slate-950" href={`/partner?${sourceQuery}`}>
+            <a
+              className="ze-public-nav-link shrink-0 hover:text-slate-950"
+              href={`/partner?${sourceQuery}`}
+            >
               Partner
             </a>
-            <a className="shrink-0 hover:text-slate-950" href={`/preise?${sourceQuery}`}>
+            <a
+              className="ze-public-nav-link shrink-0 hover:text-slate-950"
+              href={`/preise?${sourceQuery}`}
+            >
               Preise
             </a>
-            <a className="shrink-0 hover:text-slate-950" href={`/vertrauen?${sourceQuery}`}>
+            <a
+              className="ze-public-nav-link shrink-0 hover:text-slate-950"
+              href={`/vertrauen?${sourceQuery}`}
+            >
               Vertrauen
             </a>
           </nav>
@@ -116,11 +141,12 @@ export function PublicMarketingShell({ children, source }: PublicMarketingShellP
 
       {children}
 
-      <footer className="border-t border-slate-200 bg-slate-950 text-slate-300">
-        <div className="mx-auto grid max-w-7xl gap-8 px-5 py-10 sm:px-8 md:grid-cols-[1fr_auto] lg:px-10">
+      <footer className="ze-dark-grid relative overflow-hidden border-t border-slate-800 bg-slate-950 text-slate-300">
+        <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,#38bdf8_45%,#f59e0b_65%,transparent)] opacity-70" />
+        <div className="mx-auto grid max-w-7xl gap-10 px-5 py-12 sm:px-8 md:grid-cols-[1fr_auto] lg:px-10">
           <div>
             <div className="flex items-center gap-2.5 text-white">
-              <span className="flex size-9 items-center justify-center overflow-hidden rounded-lg bg-white">
+              <span className="ze-mark-shell flex size-9 items-center justify-center overflow-hidden rounded-lg bg-white">
                 <BrandMark className="size-9" />
               </span>
               <span className="font-display text-lg font-semibold">ZunftEcho</span>
@@ -130,7 +156,10 @@ export function PublicMarketingShell({ children, source }: PublicMarketingShellP
               priorisieren und vorbereitet ans Team übergeben.
             </p>
           </div>
-          <div className="flex flex-wrap content-start gap-x-5 gap-y-3 text-sm">
+          <div className="flex max-w-xl flex-wrap content-start gap-x-5 gap-y-3 text-sm">
+            <a className="hover:text-white" href={`/demo?${sourceQuery}`}>
+              Live-Demo
+            </a>
             {acquisitionCampaignLive ? (
               <a className="hover:text-white" href={`/anfrage-check?${sourceQuery}`}>
                 Anfrage-Check
@@ -156,6 +185,9 @@ export function PublicMarketingShell({ children, source }: PublicMarketingShellP
             </Link>
             <Link className="hover:text-white" to="/agb">
               AGB
+            </Link>
+            <Link className="hover:text-white" to="/login">
+              Kundenlogin
             </Link>
           </div>
         </div>

@@ -35,11 +35,11 @@ const sharedFeatures = [
 
 function PricingPage() {
   return (
-    <div className="min-h-screen bg-[linear-gradient(145deg,#f8fbff_0%,#ffffff_55%,#fff8ed_100%)] text-slate-950">
-      <header className="border-b border-slate-200/80 bg-white/90 backdrop-blur">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
+    <div className="ze-auth-surface min-h-screen text-slate-950">
+      <header className="border-b border-slate-200/70 bg-white/86 backdrop-blur-xl before:absolute before:inset-x-0 before:top-0 before:h-0.5 before:bg-[linear-gradient(90deg,#0284c7,#38bdf8_58%,#f59e0b)]">
+        <div className="mx-auto flex h-[4.5rem] max-w-6xl items-center justify-between px-5 sm:px-8">
           <Link to="/" className="flex items-center gap-2.5">
-            <span className="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+            <span className="ze-mark-shell flex size-9 items-center justify-center rounded-lg bg-white">
               <BrandMark className="size-9" />
             </span>
             <span className="font-display text-lg font-semibold">ZunftEcho</span>
@@ -57,7 +57,7 @@ function PricingPage() {
 
       <main className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-semibold tracking-wide text-primary uppercase">Klare Preise</p>
+          <p className="ze-kicker justify-center">Klare Preise</p>
           <h1 className="mt-3 text-4xl font-semibold sm:text-5xl">
             Erst im Betrieb beweisen, dann monatlich weiterführen.
           </h1>
@@ -68,7 +68,10 @@ function PricingPage() {
         </div>
 
         <div className="mx-auto mt-12 grid max-w-4xl gap-6 lg:grid-cols-2">
-          <section className="rounded-3xl border-2 border-primary bg-white p-7 shadow-xl shadow-primary/10 sm:p-9">
+          <section className="relative overflow-hidden rounded-3xl border-2 border-primary bg-white p-7 shadow-[0_30px_70px_-40px_rgba(3,105,161,0.55)] sm:p-9">
+            <div className="absolute top-0 right-0 rounded-bl-2xl bg-primary px-3 py-1.5 text-[10px] font-bold tracking-wide text-white uppercase">
+              Empfohlener Einstieg
+            </div>
             <p className="text-sm font-semibold text-primary">30-Tage-Pilot</p>
             <div className="mt-4 flex items-end gap-2">
               <span className="font-display text-5xl font-semibold">99 €</span>
@@ -96,7 +99,7 @@ function PricingPage() {
             </Button>
           </section>
 
-          <section className="rounded-3xl border border-slate-200 bg-slate-950 p-7 text-white shadow-xl sm:p-9">
+          <section className="ze-dark-grid rounded-3xl border border-slate-800 bg-slate-950 p-7 text-white shadow-xl sm:p-9">
             <p className="text-sm font-semibold text-sky-300">Regelbetrieb</p>
             <div className="mt-4 flex items-end gap-2">
               <span className="font-display text-5xl font-semibold">149 €</span>

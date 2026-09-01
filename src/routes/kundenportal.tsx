@@ -237,13 +237,18 @@ function CustomerPortalPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[linear-gradient(145deg,#f8fbff_0%,#ffffff_55%,#fff8ed_100%)] px-5 py-10 text-slate-950 sm:px-8">
+    <div className="ze-auth-surface min-h-screen px-5 py-10 text-slate-950 sm:px-8">
       <main className="mx-auto max-w-4xl">
         <Link to="/" className="inline-flex items-center gap-2.5">
-          <span className="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-            <BrandMark className="size-9" />
+          <span className="ze-mark-shell flex size-10 items-center justify-center bg-white">
+            <BrandMark className="size-10" />
           </span>
-          <span className="font-display text-lg font-semibold">ZunftEcho Kundenportal</span>
+          <div>
+            <span className="block font-display text-lg font-semibold">ZunftEcho</span>
+            <span className="block text-[10px] font-semibold tracking-[0.18em] text-slate-500 uppercase">
+              Kundenportal
+            </span>
+          </div>
         </Link>
 
         {loading ? (
@@ -256,7 +261,7 @@ function CustomerPortalPage() {
           </Card>
         ) : data ? (
           <>
-            <section className="mt-10 rounded-3xl bg-slate-950 p-7 text-white sm:p-10">
+            <section className="ze-dark-grid relative mt-10 overflow-hidden rounded-3xl bg-slate-950 p-7 text-white shadow-[0_28px_80px_-44px_rgba(15,23,42,0.75)] sm:p-10">
               <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
                 <div>
                   <p className="text-sm font-medium text-sky-300">
@@ -285,7 +290,10 @@ function CustomerPortalPage() {
                 <CardContent className="space-y-3">
                   {data.requests.length ? (
                     data.requests.map((request) => (
-                      <div key={request.id} className="rounded-xl border p-4">
+                      <div
+                        key={request.id}
+                        className="rounded-2xl border border-slate-200/80 bg-slate-50/55 p-4 transition-colors hover:bg-white"
+                      >
                         <div className="flex items-start justify-between gap-3">
                           <p className="font-medium">{request.title}</p>
                           <Badge variant="secondary">
@@ -319,7 +327,10 @@ function CustomerPortalPage() {
                 <CardContent className="space-y-3">
                   {data.appointments.length ? (
                     data.appointments.map((appointment) => (
-                      <div key={appointment.id} className="rounded-xl border p-4">
+                      <div
+                        key={appointment.id}
+                        className="rounded-2xl border border-slate-200/80 bg-slate-50/55 p-4 transition-colors hover:bg-white"
+                      >
                         <div className="flex items-start justify-between gap-3">
                           <div>
                             <p className="font-medium">{appointment.service || "Termin"}</p>
@@ -371,7 +382,7 @@ function CustomerPortalPage() {
                               </Button>
                             </div>
                             {editingAppointmentId === appointment.id ? (
-                              <div className="mt-3 space-y-3 rounded-lg bg-slate-50 p-3">
+                              <div className="mt-3 space-y-3 rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm">
                                 <div className="flex gap-2">
                                   <Input
                                     type="date"

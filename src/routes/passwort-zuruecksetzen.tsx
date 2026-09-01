@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { AlertCircle, Bot, CheckCircle2 } from "lucide-react";
+import { AlertCircle, CheckCircle2 } from "lucide-react";
 import { useEffect, useState, type FormEvent } from "react";
 
 import { Button } from "@/components/ui/button";
+import { BrandMark } from "@/components/brand-mark";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
@@ -109,13 +110,18 @@ function ResetPasswordPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center px-6 py-12">
-      <div className="w-full max-w-sm">
-        <div className="mb-8 flex items-center gap-2">
-          <span className="flex size-9 items-center justify-center rounded-md bg-primary text-primary-foreground">
-            <Bot className="size-5" />
+    <div className="ze-auth-surface flex min-h-screen items-center justify-center px-6 py-12">
+      <div className="w-full max-w-md rounded-3xl border border-white/80 bg-white/86 p-7 shadow-[0_28px_80px_-44px_rgba(15,23,42,0.5)] backdrop-blur-sm sm:p-9">
+        <div className="mb-8 flex items-center gap-2.5">
+          <span className="ze-mark-shell flex size-10 items-center justify-center bg-white">
+            <BrandMark className="size-10" />
           </span>
-          <span className="font-display text-xl font-semibold">ZunftEcho</span>
+          <div>
+            <span className="block font-display text-xl font-semibold">ZunftEcho</span>
+            <span className="block text-[10px] font-semibold tracking-[0.18em] text-slate-500 uppercase">
+              Sicherer Kontozugang
+            </span>
+          </div>
         </div>
 
         {done ? (
@@ -150,7 +156,8 @@ function ResetPasswordPage() {
           </div>
         ) : (
           <>
-            <h1 className="text-2xl font-semibold">Neues Passwort festlegen</h1>
+            <p className="ze-kicker">Kontowiederherstellung</p>
+            <h1 className="mt-3 font-display text-3xl font-semibold">Neues Passwort festlegen</h1>
             <p className="mt-2 text-sm text-muted-foreground">
               Verwenden Sie mindestens 8 Zeichen, Groß- und Kleinbuchstaben, eine Zahl und ein
               Sonderzeichen.

@@ -19,12 +19,13 @@ export const Route = createFileRoute("/datenschutz")({
 
 function DatenschutzPage() {
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-950">
-      <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex h-16 max-w-4xl items-center justify-between px-5 sm:px-8">
+    <div className="ze-auth-surface min-h-screen text-slate-950">
+      <header className="border-b border-slate-200/80 bg-white/86 backdrop-blur-xl">
+        <div className="h-0.5 bg-gradient-to-r from-primary via-sky-400 to-amber-400" />
+        <div className="mx-auto flex h-[4.5rem] max-w-4xl items-center justify-between px-5 sm:px-8">
           <Link to="/" className="flex items-center gap-2.5">
-            <span className="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <BrandMark className="size-9" />
+            <span className="ze-mark-shell flex size-10 items-center justify-center bg-white">
+              <BrandMark className="size-10" />
             </span>
             <span className="font-display text-lg font-semibold">ZunftEcho</span>
           </Link>
@@ -38,8 +39,9 @@ function DatenschutzPage() {
       </header>
 
       <main className="mx-auto max-w-4xl px-5 py-12 sm:px-8 sm:py-16">
-        <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
-          <h1 className="font-display text-4xl font-semibold">Datenschutzhinweise</h1>
+        <article className="rounded-3xl border border-white/90 bg-white/90 p-6 shadow-[0_28px_80px_-48px_rgba(15,23,42,0.45)] backdrop-blur-sm sm:p-10">
+          <p className="ze-kicker">Rechtliches</p>
+          <h1 className="mt-3 font-display text-4xl font-semibold">Datenschutzhinweise</h1>
           <p className="mt-3 text-sm text-slate-500">Stand: 28. August 2026</p>
 
           <div className="mt-10 space-y-9 leading-7 text-slate-700">
