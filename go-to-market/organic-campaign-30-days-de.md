@@ -2,6 +2,11 @@
 
 Stand: 29. August 2026
 
+Diese 30-Tage-Kampagne ist Phase 1 des erweiterten
+`go-to-market/wachstumsplan-90-tage-de.md`. Der 90-Tage-Plan ergänzt Vertiefung, Partner-Loop,
+Pilot-Proof und optionale Paid-Gates; die verbindlichen rechtlichen Leitplanken dieses Dokuments
+bleiben bestehen.
+
 ## Ziel und Freigabe
 
 Das Ziel der ersten Kampagne ist nicht möglichst viel Reichweite, sondern ein qualifiziertes
@@ -59,7 +64,7 @@ Eine konkrete Zusammenarbeit wird erst nach einem Gespräch schriftlich festgeha
 
 ### 5. Zielgerichtete Briefwelle
 
-Die bereits freigegebenen drei personalisierten Briefe bleiben die erste direkte Welle. Jeder QR
+Die bereits freigegebenen zehn personalisierten Briefe bleiben die erste direkte Welle. Jeder QR
 führt mit eigener Quellenkennung zur Demo. Weitere Betriebe werden erst ergänzt, nachdem Reaktion
 und Gesprächsqualität dieser Welle ausgewertet wurden.
 
