@@ -325,9 +325,10 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
 - Cloudflare account ID: `3bceebd97b02f714c649114469aeaabd`
 - Cloudflare zone ID: `2cb3ac449c41ea5f9eeef882c5501d12`
 - Worker: `hussamabbar1-afk-git-sync-buddy-b320294c`
-- Current production Worker version: `7fc7fa87-ffcd-45ba-9552-e34e8a29b361` at 100%
-- آخر Deployment موثق للنسخة السابقة: `4c4134d8-08a3-429e-a530-aa601eadd949`؛ معرّف نشر
-  النسخة الحالية لم يُعده `wrangler deployments list`، لذلك لا يُعامل المعرّف السابق كحالي.
+- Current production Worker version: `831c2212-424f-4214-b677-4f2ba59d4ca2` at 100%
+- آخر Deployment موثق أنشئ في `2026-09-01T12:37:01.410Z` برسالة
+  `Promote audited release after preview smoke and mobile QA`، وأكد `wrangler deployments status`
+  أن النسخة أعلاه تستقبل 100% من الحركة.
 - Supabase Edge Functions after the mobile Widget hardening: `chat-orchestrator` v8,
   `reverse-geocode` v2, and `chat-attachment` v3; all `ACTIVE` with `verify_jwt=false` because
   their public Widget contracts validate widget/origin/conversation capability internally.
@@ -374,12 +375,28 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
 - فحص Supabase المبكر: المشروع `ACTIVE_HEALTHY`، جميع وظائف Edge نشطة، كل مهام Cron التسع عشرة
   نشطة وتشغيلات 24 ساعة المسجلة `succeeded`، وإجمالي البريد بعد الاختبار 28 `sent` بلا فشل.
   لا توجد Billing accounts أو subscriptions أو subscription invoices أو Pilot requests مفتوحة.
-- بعد إعادة التصميم الشاملة نجح Production build و`tsc --noEmit` وESLint بلا أخطاء و`git
-diff --check`. فُحصت 18 وجهة محلية في Browser بلا أخطاء Console أو Horizontal overflow،
+- بعد إعادة التصميم الشاملة نجح Production build و`tsc --noEmit` وESLint بلا أخطاء و
+  `git diff --check`. فُحصت 18 وجهة محلية في Browser بلا أخطاء Console أو Horizontal overflow،
   واختُبر تبديل سيناريو الـLive Demo والانتقال إلى مرحلة Qualifizierung فعليًا.
 - اجتاز إصدار Cloudflare المعزول `7fc7fa87-ffcd-45ba-9552-e34e8a29b361` Go/No-Go في وضع
   `marketing=held` ثم رُقي إلى 100%. أعاد فحص `https://zunftecho.de` النتيجة الكاملة نفسها،
   وبقي `/anfrage-check` على HTTP 404.
+- في فحص الاستقرار الشامل اللاحق نجح Build وTypeScript وESLint بصفر أخطاء وصفر تحذيرات، ونجحت
+  الاختبارات الخمسة عشر عبر أمر `npm test` المحفوظ، ونجح `npm audit` المعزول على 521 اعتمادًا
+  بصفر ثغرات معروفة من كل الدرجات. بقي Git سليمًا وفق `git fsck --full` و`git diff --check`.
+- أصلح فحص Browser على عرض `390x844` انزياح العناوين الطويلة في `/datenschutz` و`/agb`، ثم أكد
+  عدم وجود Horizontal overflow أو أخطاء Console أو صور بلا `alt` في مسارات الهاتف المفحوصة.
+- أضيفت ترويسات HSTS و`nosniff` وReferrer/Permissions Policy إلى الملفات الساكنة أيضًا، وثبتت
+  حيًا على `robots.txt` و`sitemap.xml` و`security.txt` بعد النشر.
+- ألغت migration `20260901090000_revoke_unused_anon_table_privileges.sql` صلاحيات `anon` الزائدة
+  على جدولي الحجز وتفضيلات الإشعارات. تؤكد قاعدة الإنتاج عدم وجود صلاحيات باقية، وأن Storage خاص
+  بحد 10MB وسياسات `authenticated` فقط، وكل القيود Validated.
+- فحص التشغيل الحي: 19/19 Cron فعالة، 2930 تشغيلًا ناجحًا في 24 ساعة وصفر غير ناجح، وصفر
+  Workflow errors أو Outbound failures/pending. بقيت Pilot/Billing/Subscriptions/Invoices عند
+  الصفر حسب قرار التعليق. تحذيرات SECURITY DEFINER المتبقية تخص RPCs عامة/مسجلة مقصودة ومحمية
+  بمفاتيح Widget أو Tokens عالية العشوائية أو `auth.uid()` و`search_path` ثابت، وليست تسريبًا.
+- اجتاز إصدار Cloudflare المعزول `831c2212-424f-4214-b677-4f2ba59d4ca2` فحص المعاينة والهاتف، ثم
+  رُقي إلى 100%. أعاد فحص الإنتاج Go/No-Go كاملًا وبقي `/anfrage-check` على HTTP 404.
 
 ## 21. الديون والمعلقات المعروفة
 
@@ -403,7 +420,6 @@ diff --check`. فُحصت 18 وجهة محلية في Browser بلا أخطاء 
 - مراجعة اشتراكات Canva/ElevenLabs/Runway وإلغاء غير المطلوب: أكد المالك اكتمالها في 1 سبتمبر
   2026؛ لا تعد فتحها إلا إذا ظهرت رسوم أو طلب المالك مراجعة جديدة.
 - إصلاح سكربت Local preview أو توثيق بديل دائم.
-- تنظيف عشرة Fast Refresh warnings أولوية منخفضة.
 
 ### مرفوضة أو غير معتمدة
 
@@ -435,6 +451,10 @@ diff --check`. فُحصت 18 وجهة محلية في Browser بلا أخطاء 
 11. وُحدت الهوية البصرية والـDesign System عبر الموقع العام وصفحات الحساب والبوابة وApp Shell
     والمكوّنات التشغيلية، ثم نُشر إصدار Cloudflare `7fc7fa87-...` عند 100% بعد اجتياز Build
     وTypeScript وLint وفحص Browser وPreview/Production smoke، من دون تغيير التسعير أو الحملة.
+12. أُنجز فحص شامل للكود والاعتمادات وGit وSupabase وCloudflare والإنتاج؛ أصلح انزياح صفحتي
+    الخصوصية والشروط على الهاتف، أزيلت صلاحيات `anon` الزائدة وتحذيرات Fast Refresh المنظمة،
+    وأضيف `npm test` وترويسات الأمان للملفات الساكنة. نُشر إصدار `831c2212-...` عند 100% بعد
+    نجاح Preview وProduction smoke وفحص Browser نظيف.
 
 **الخطوة العملية التالية قبل 10 سبتمبر:**
 
@@ -456,8 +476,8 @@ git rev-parse --short refs/remotes/origin/main
 npm run check:prelaunch -- --base=https://zunftecho.de --marketing=held
 ```
 
-إذا أصبح GitHub auth متوفرًا، اجلب `main` أولًا ثم تأكد أن Local يمكنه Fast-forward إلى
-`5252812...`. لا تستخدم أوامر تكتب فوق التاريخ.
+اجلب `main` أولًا ثم تأكد أن Local و`origin/main` متطابقان أو يمكن تحديثهما بـFast-forward.
+لا تعتمد على Commit قديم ولا تستخدم أوامر تكتب فوق التاريخ.
 
 ## 24. الوثائق المرجعية
 

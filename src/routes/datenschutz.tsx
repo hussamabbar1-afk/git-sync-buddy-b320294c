@@ -41,7 +41,9 @@ function DatenschutzPage() {
       <main className="mx-auto max-w-4xl px-5 py-12 sm:px-8 sm:py-16">
         <article className="rounded-3xl border border-white/90 bg-white/90 p-6 shadow-[0_28px_80px_-48px_rgba(15,23,42,0.45)] backdrop-blur-sm sm:p-10">
           <p className="ze-kicker">Rechtliches</p>
-          <h1 className="mt-3 font-display text-4xl font-semibold">Datenschutzhinweise</h1>
+          <h1 className="mt-3 break-words font-display text-3xl font-semibold sm:text-4xl">
+            Datenschutzhinweise
+          </h1>
           <p className="mt-3 text-sm text-slate-500">Stand: 28. August 2026</p>
 
           <div className="mt-10 space-y-9 leading-7 text-slate-700">
