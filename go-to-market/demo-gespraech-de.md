@@ -1,5 +1,9 @@
 # ZunftEcho - Leitfaden für die 15-Minuten-Demo
 
+> **Derzeit nicht aktiv:** Die Erstqualifizierung erfolgt bis zu einer ausdrücklichen Änderung
+> async per Formular, E-Mail, Demo-Link oder Bildschirmaufnahme. Dieser Leitfaden bleibt nur für
+> eine später freiwillig gewünschte synchrone Demo erhalten.
+
 Stand: 1. September 2026
 
 ## Ziel des Gesprächs

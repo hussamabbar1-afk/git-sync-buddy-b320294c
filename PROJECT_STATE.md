@@ -71,7 +71,7 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
 | الصفحة الرئيسية `zunftecho.de`         | منفذة ومفعّلة             | هوية ZunftEcho، CTA للـPilot والـDemo                                                                                |
 | صفحة الأسعار `/preise`                 | منفذة ومفعّلة             | 99 € Pilot و149 € شهريًا مع حدود واضحة                                                                               |
 | Live Demo `/demo`                      | منفذة ومفعّلة             | ثلاثة سيناريوهات SHK عميقة بخمس مراحل، تعرض تزامن منظور العميل مع سجل التشغيل والتوجيه والموعد؛ لا تكتب بيانات إنتاج |
-| Founding Pilot `/registrieren`         | منفذة ومفعّلة             | خمسة أماكن معلنة؛ يجمع المصدر وحقول تأهيل تشغيلية واختيار Website-Check صريحًا؛ لا يبدأ دفعًا أو عقدًا               |
+| Founding Pilot `/registrieren`         | منفذة ومفعّلة             | خمسة أماكن معلنة؛ بريد فقط بلا حقل هاتف، مع تأهيل وWebsite-Check اختياري؛ لا يبدأ دفعًا أو عقدًا                     |
 | مركز الثقة `/vertrauen`                | منفذ ومفعّل               | حدود AI، الأدلة القابلة للفحص، لا مراجع مختلقة                                                                       |
 | Impressum / AGB / Datenschutz          | منفذة ومفعّلة بصياغة حذرة | يجب تحديثها بالبيانات الرسمية ومراجعتها مهنيًا قبل البيع الحي                                                        |
 | Wissen + المقالات المتخصصة             | منفذة ومفعّلة             | مركز معرفة وثلاثة مسارات محتوى عملية                                                                                 |
@@ -295,6 +295,8 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
   إعداد بصري/حساب بلا بديل، واذكر السبب قبل فتحه.
 - لا تؤجل خطوة لازمة بسبب تفضيل CLI؛ استخدم المتصفح عند الحاجة الفعلية.
 - الموارد المجانية مفضلة حتى الإطلاق، ولا يبدأ اشتراك مدفوع جديد دون ضرورة وقيمة واضحة.
+- مسار التسويق والبيع حاليًا `async-first`: لا مكالمات مبيعات هاتفية ولا اجتماعات فيديو إلزامية؛
+  التأهيل والـDemo والمتابعة تتم بالنموذج والبريد وروابط العرض أو تسجيل شاشة حتى يغيّر المالك ذلك صراحة.
 - العمل على خطوة واحدة في كل مرة عند توجيه المالك أثناء إجراءات خارجية.
 - لا تسأل عن قرارات روتينية قابلة للاستنتاج؛ نفّذ ضمن النطاق وبلّغ بالنتيجة.
 
@@ -326,9 +328,9 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
 - Cloudflare account ID: `3bceebd97b02f714c649114469aeaabd`
 - Cloudflare zone ID: `2cb3ac449c41ea5f9eeef882c5501d12`
 - Worker: `hussamabbar1-afk-git-sync-buddy-b320294c`
-- Current production Worker version: `bbfdff46-14aa-4601-ba50-a481e2a2c166` at 100%
-- آخر Deployment موثق في 1 سبتمبر 2026 برسالة `Deploy qualified founding pilot intake`؛ رُفعت
-  النسخة منفصلة، اجتازت Preview Go/No-Go، ثم أكد Wrangler تحويل 100% من الحركة إليها.
+- Current production Worker version: `89ddd124-4d66-4ef3-bdf7-f5ba4538baa5` at 100%
+- آخر Deployment موثق في 1 سبتمبر 2026 برسالة `Use async-first pilot qualification`؛ رُفعت
+  النسخة منفصلة، اجتازت Preview Go/No-Go وفحص غياب حقل الهاتف، ثم حُولت 100% من الحركة إليها.
 - Supabase Edge Functions after the mobile Widget hardening: `chat-orchestrator` v8,
   `reverse-geocode` v2, and `chat-attachment` v3; all `ACTIVE` with `verify_jwt=false` because
   their public Widget contracts validate widget/origin/conversation capability internally.
@@ -469,6 +471,10 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
     وقياس يومي من دون Newsletter أو Tracker أو Cold outreach، ثم نُشر إصدار Cloudflare
     `bbfdff46-...` عند 100% بعد نجاح 17 اختبارًا وTypeScript وLint وBuild وPreview/Production smoke.
     Commit التنفيذ المرفوع إلى `origin/main`: `6535882`.
+14. حُوّل البيع الأولي إلى `async-first` بطلب المالك: أزيل حقل الهاتف من `/registrieren`، وأصبح
+    الرد والتأهيل والـDemo بالبريد وروابط العرض أو تسجيل شاشة. عُطّل دليل المكالمة الحالية ووُثق
+    البديل في `async-pilot-qualifizierung-de.md`. نجحت 17/17 اختبارات وTypeScript وLint وBuild،
+    ثم نُشر إصدار Cloudflare `89ddd124-...` عند 100% بعد Preview Go/No-Go ناجح.
 
 **الخطوة العملية التالية قبل 10 سبتمبر:**
 
@@ -511,6 +517,7 @@ npm run check:prelaunch -- --base=https://zunftecho.de --marketing=held
 - `go-to-market/druckfreigabe-checkliste-de.md`
 - `go-to-market/pilot-anfrage-prozess-de.md`
 - `go-to-market/founding-pilot-10-tage-de.md`
+- `go-to-market/async-pilot-qualifizierung-de.md`
 
 ## 25. قاعدة تحديث هذا الملف
 

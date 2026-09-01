@@ -9,8 +9,8 @@ bleiben bestehen.
 
 ## Ziel und Freigabe
 
-Das Ziel der ersten Kampagne ist nicht möglichst viel Reichweite, sondern ein qualifiziertes
-Gespräch und anschließend ein bezahlter 30-Tage-Pilot. Sämtliche Inhalte werden vor dem
+Das Ziel der ersten Kampagne ist nicht möglichst viel Reichweite, sondern ein qualifizierter
+schriftlicher Austausch und anschließend ein bezahlter 30-Tage-Pilot. Sämtliche Inhalte werden vor dem
 Gewerbestart vorbereitet. Veröffentlichung, aktive Verteilung und direkte Akquise beginnen erst
 nach der Gewerbeanmeldung und der Aktualisierung der rechtlichen Angaben.
 
@@ -27,6 +27,8 @@ nach der Gewerbeanmeldung und der Aktualisierung der rechtlichen Angaben.
 - keine Aussagen wie „vollständig DSGVO-konform“ oder garantierte Umsatzsteigerung;
 - jede Veröffentlichung verweist auf die interaktive Demo oder die Pilotanfrage, nicht auf eine
   unfertige Zahlungsstrecke.
+- die erste Vertriebsstrecke bleibt `async-first`; keine Verkaufsanrufe oder verpflichtenden
+  Telefon-/Videotermine.
 
 ## Kostenfreier Kanal-Mix
 
@@ -224,10 +226,11 @@ Wöchentlich werden nur diese Kennzahlen verglichen:
 - Besuche je `source`-Kennung;
 - gestartete und abgeschlossene Demo-Sitzungen;
 - freiwillig eingegangene Pilotanfragen;
-- qualifizierte Gespräche;
+- qualifizierte schriftliche Austausche;
 - häufigste Einwände und fehlende Produktinformationen.
 
 Follower, Impressionen und Likes sind nachrangig. Nach 30 Tagen ist die Kampagne erfolgreich, wenn
-mindestens ein qualifiziertes Gespräch und möglichst ein bezahlter Pilot entstanden sind. Bleiben
+mindestens ein qualifizierter schriftlicher Austausch und möglichst ein bezahlter Pilot entstanden
+sind. Bleiben
 Demo-Aufrufe ohne Anfragen, wird zuerst Angebot und Übergang zur Pilotanfrage verbessert – nicht die
 Veröffentlichungsmenge erhöht.

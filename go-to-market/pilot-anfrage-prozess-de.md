@@ -12,7 +12,7 @@ persönliche Prüfung nicht.
 ## Eingang prüfen
 
 1. Benachrichtigungs-E-Mail und Datensatz in `pilot_requests` abgleichen.
-2. Firma, Ansprechpartner, Website, Telefonnummer, Quelle, Teamgröße, Anfragevolumen,
+2. Firma, Ansprechpartner, Website, Quelle, Teamgröße, Anfragevolumen,
    Hauptproblem, Startfenster, Audit-Wunsch und Freitext prüfen.
 3. Erkennbaren Spam schließen; einen Werbewiderspruch sofort als
    `do_not_contact_at` dokumentieren.
@@ -23,15 +23,16 @@ persönliche Prüfung nicht.
 
 ## Erste Antwort
 
-Betreff: `Ihre ZunftEcho-Pilotanfrage – kurzer Abstimmungstermin`
+Betreff: `Ihre ZunftEcho-Pilotanfrage – die nächsten Schritte per E-Mail`
 
 > Guten Tag {{Ansprechpartner}},
 >
-> vielen Dank für Ihre Anfrage zum ZunftEcho-Pilot für {{Firma}}. In einem
-> kurzen Gespräch klären wir, welche Website-Anfragen heute am meisten Zeit
-> kosten und ob der 30-Tage-Pilot dazu passt.
+> vielen Dank für Ihre Anfrage zum ZunftEcho-Pilot für {{Firma}}. Sie müssen keinen Telefon- oder
+> Videotermin buchen. Wir prüfen Ihre Angaben persönlich und klären per E-Mail, welche
+> Website-Anfragen heute am meisten Zeit kosten und ob der 30-Tage-Pilot dazu passt.
 >
-> Passt Ihnen {{Termin 1}} oder {{Termin 2}} für eine 15-minütige Live-Demo?
+> Bitte antworten Sie kurz: Welche Angabe fehlt am häufigsten, wer bearbeitet die Anfragen heute
+> und welcher Fall soll in der Demo gezeigt werden?
 >
 > Freundliche Grüße  
 > ZunftEcho Team
@@ -39,9 +40,9 @@ Betreff: `Ihre ZunftEcho-Pilotanfrage – kurzer Abstimmungstermin`
 Keine Zahlung, kein Auftrag und kein Pilotstart werden allein durch die Anfrage
 ausgelöst.
 
-## 15-Minuten-Gespräch dokumentieren
+## Schriftlichen Austausch dokumentieren
 
-Für jede Anfrage werden unmittelbar nach dem Gespräch folgende Punkte notiert:
+Für jede Anfrage werden nach der schriftlichen Klärung folgende Punkte notiert:
 
 - heutiger Eingangskanal und ungefähres Anfragevolumen;
 - größter manueller Zeitaufwand;
@@ -70,7 +71,7 @@ oder dauerhafter Ungeeignetheit.
 - Qualifizierungsfelder sind vollständig oder als Altkontakt nachvollziehbar leer.
 - Ein manueller Website-Check erfolgt nur, wenn `audit_requested = true` ist.
 - Erste Reaktion erfolgte innerhalb eines Werktags.
-- Status und Gesprächsnotiz stimmen überein.
+- Status und Kontaktnotiz stimmen überein.
 - Nächster Schritt hat ein Datum oder die Anfrage ist sauber abgeschlossen.
 - Persönlicher Name wird nur eingesetzt, wenn Vertrag, Rechnung oder rechtliche
   Identifizierung ihn erfordern; die normale Außenkommunikation bleibt

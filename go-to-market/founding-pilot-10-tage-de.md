@@ -13,7 +13,7 @@ Auftrag noch Zahlung noch reservierter Starttermin.
 | priorisierte Zielbetriebe     |           30 | SHK, Berlin/Brandenburg, eigene Website, passender Anfrageablauf |
 | persönlich geprüfte Erstwelle |           10 | Anschrift und Anknüpfungspunkt innerhalb 48 Stunden verifiziert  |
 | freiwillige Vormerkungen      |          5–8 | vollständiges Formular mit Einordnung des Betriebs               |
-| qualifizierte Gespräche       |          3–5 | Problem, Entscheider und realistisches Startfenster bestätigt    |
+| qualifizierte Austausche      |          3–5 | Problem, Entscheider und Startfenster schriftlich bestätigt      |
 | startbereite Piloten          |          1–3 | ausdrückliche Bereitschaft; Auftrag erst nach finaler Freigabe   |
 
 Das sind Steuerungswerte, keine Ergebnisversprechen.
@@ -96,10 +96,11 @@ Für höchstens fünf freiwillige Anfragen prüfen:
 
 Keine Formulare des Zielbetriebs absenden und keine personenbezogenen Testdaten verwenden.
 
-### 8. September – Demos bündeln
+### 8. September – asynchrone Demos bündeln
 
-- Zwei konkrete 15-Minuten-Termine pro freiwilliger Vormerkung anbieten.
-- Gespräch nach `demo-gespraech-de.md` führen.
+- Pro freiwilliger Vormerkung einen passenden Demo-Link oder eine kurze aufgezeichnete
+  Bildschirmdemo senden.
+- Rückfragen und Einordnung nach `async-pilot-qualifizierung-de.md` schriftlich führen.
 - `qualified` nur setzen, wenn Problem, Zuständigkeit und Startfenster tatsächlich passen.
 
 ### 9. September – Go/No-Go und Pipeline
@@ -113,7 +114,7 @@ Keine Formulare des Zielbetriebs absenden und keine personenbezogenen Testdaten 
 - Nur nach ausdrücklicher Freigabe die bereits definierte Launch-Flag ändern.
 - Zuerst eine Quelle aktivieren und Go/No-Go erneut ausführen.
 - Briefe erst nach der dokumentierten Versandfreigabe versenden.
-- Kein Paid-Test, bevor mindestens ein organischer Kanal ein qualifiziertes Gespräch erzeugt hat.
+- Kein Paid-Test, bevor mindestens ein organischer Kanal einen qualifizierten Austausch erzeugt hat.
 
 ## Lead-Scoring für die persönliche Prüfung
 
@@ -124,7 +125,7 @@ Je ein Punkt:
 - mindestens sechs Website-Anfragen pro Monat oder plausibles unbekanntes Volumen;
 - unvollständige Angaben, langsame Reaktion, Terminabstimmung oder Rückruflast als echtes Problem;
 - Start im September/Oktober möglich;
-- erreichbarer Entscheider nimmt am Gespräch teil.
+- erreichbarer Entscheider bestätigt die relevanten Punkte schriftlich.
 
 `4–6`: Demo priorisieren. `2–3`: später/nurture nach freiwilliger Anfrage. `0–1`: freundlich
 ablehnen oder schließen. Der Score ersetzt keine menschliche Prüfung.
@@ -143,6 +144,7 @@ ablehnen oder schließen. Der Score ersetzt keine menschliche Prüfung.
 ## Unveränderte Grenzen
 
 - Kein Cold Email, keine automatisierten LinkedIn-DMs, keine gekauften oder gescrapten Listen.
+- Keine Verkaufsanrufe oder verpflichtenden Telefon-/Videotermine; die Strecke bleibt async-first.
 - Keine garantierten Umsätze, Einsparungen, Referenzen oder künstliche Countdown-Verknappung.
 - Keine Zahlung, kein Vertrag und kein Pilotstart allein durch die Vormerkung.
 - Jeder Widerspruch beendet die Ansprache dauerhaft.

@@ -36,12 +36,12 @@ Demo-Szenarien und ein visuell geprüfter zehnseitiger Drucksatz sind vorbereite
 Offen bleiben nur das laute persönliche Durchspielen und der physische
 Probedruck mit dem gelieferten Papier und Umschlag.
 
-- Den 15-Minuten-Demo-Leitfaden zweimal laut durchspielen.
+- Die asynchrone Pilotqualifizierung mit einer Testanfrage und schriftlicher Antwort durchspielen.
 - Für jeden der zehn Zielbetriebe ein passendes Demo-Szenario festlegen.
 - Die Briefe einmal auf Normalpapier drucken und QR, Ränder, Faltung und Fensterposition prüfen.
 - Keine Briefe oder Werbe-E-Mails vorzeitig versenden.
 
-**Ergebnis:** Die Demo ist in maximal 15 Minuten verständlich und der Brief führt ohne Anmeldung
+**Ergebnis:** Die Demo ist ohne persönliche Erklärung verständlich und der Brief führt ohne Anmeldung
 zur passenden Produktansicht.
 
 ## 1.-3. September: Pilot-Onboarding proben
@@ -147,6 +147,6 @@ Nicht live verkaufen oder abrechnen, wenn einer dieser Punkte offen ist:
 
 - zehn personalisierte Briefe;
 - mindestens ein freiwilliger Demo-/Pilotkontakt;
-- mindestens ein qualifiziertes 15-Minuten-Gespräch;
+- mindestens ein qualifizierter schriftlicher Austausch;
 - Ziel: ein bezahlter 30-Tage-Pilot, ohne Preisnachlass oder Funktionsversprechen außerhalb des
   veröffentlichten Umfangs.

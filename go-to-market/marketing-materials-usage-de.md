@@ -14,7 +14,7 @@ eine eigene QR-Quellenkennung. Sie werden erst nach der Gewerbeanmeldung aktiv v
 
 Geeignet für:
 
-- persönliche Demo-Gespräche mit SHK-Betrieben;
+- schriftlich angeforderte Demo-Einordnungen und asynchrone Bildschirmdemos für SHK-Betriebe;
 - Beilage zu einem individuell adressierten Brief;
 - freiwillig angeforderte digitale Information nach einem Gespräch;
 - Ausdruck als Gesprächsunterlage.

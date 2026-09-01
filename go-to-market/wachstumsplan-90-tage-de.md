@@ -7,11 +7,12 @@ Stand: 1. September 2026
 Die ersten 90 Tage sollen nicht möglichst viele Kontakte erzeugen, sondern einen wiederholbaren
 Weg von fachlicher Aufmerksamkeit zu bezahlten Piloten beweisen. Die Reihenfolge ist verbindlich:
 
-`nützlicher Inhalt → Anfrage-Check oder Demo → freiwilliger Kontakt → 15-Minuten-Gespräch → Pilot`
+`nützlicher Inhalt → Anfrage-Check oder Demo → freiwilliger Kontakt → schriftliche Qualifizierung → Pilot`
 
 Veröffentlichung und aktive Verteilung beginnen erst nach Gewerbeanmeldung, aktualisierten
-Rechtstexten und bestandenem Go/No-Go. Live-Zahlungen sind keine Voraussetzung für die ersten
-Gespräche, dürfen aber erst nach dem getrennten Stripe-Test freigegeben werden.
+Rechtstexten und bestandenem Go/No-Go. Die Strecke ist zunächst vollständig `async-first`; es gibt
+keine Verkaufsanrufe oder verpflichtenden Telefon-/Videotermine. Live-Zahlungen dürfen erst nach
+dem getrennten Stripe-Test freigegeben werden.
 
 ## Kommerzielles Zielbild
 
@@ -31,7 +32,7 @@ Gespräche, dürfen aber erst nach dem getrennten Stripe-Test freigegeben werden
 
 ### 90-Tage-Ergebnis
 
-- mindestens 8 qualifizierte Gespräche;
+- mindestens 8 qualifizierte schriftliche Austausche;
 - 2–3 bezahlte Piloten, maximal 5 gleichzeitig;
 - mindestens ein vollständig gemessenes Pilot-Ergebnis;
 - ein belastbares Urteil, welcher Kanal und welches Problem tatsächlich konvertieren.
@@ -100,7 +101,7 @@ sondern um eine freiwillige Einführung zu genau einem passenden Betrieb oder We
 
 ## Phase 2 – Tage 31–60: Autorität vertiefen
 
-Diese Phase startet nur, wenn mindestens zwei qualifizierte Gespräche oder ein Pilot vorliegen.
+Diese Phase startet nur, wenn mindestens zwei qualifizierte Austausche oder ein Pilot vorliegen.
 
 ### Drei fachliche Themencluster
 
@@ -137,8 +138,8 @@ vervielfachen.
 
 ## Phase 3 – Tage 61–90: Gewinner skalieren
 
-Diese Phase startet nur, wenn mindestens ein Pilot aktiv ist und ein Kanal nachweislich ein
-qualifiziertes Gespräch erzeugt hat.
+Diese Phase startet nur, wenn mindestens ein Pilot aktiv ist und ein Kanal nachweislich einen
+qualifizierten Austausch erzeugt hat.
 
 ### Organische Skalierung
 
@@ -151,7 +152,7 @@ qualifiziertes Gespräch erzeugt hat.
 
 ### Bezahlter Test – optional und streng begrenzt
 
-Kein Paid-Test vor mindestens einem organisch qualifizierten Gespräch und einer funktionierenden
+Kein Paid-Test vor mindestens einem organisch qualifizierten Austausch und einer funktionierenden
 Conversion-Strecke. Danach höchstens ein Kanal gleichzeitig:
 
 - Testbudget: maximal 150 € für 14 Tage;
@@ -171,20 +172,20 @@ Budget bei null.
 Diese Briefs ergänzen die bereits fertigen zwölf LinkedIn-Beiträge; vor Veröffentlichung wird der
 Text jeweils aus dem tatsächlichen Produktstand final formuliert.
 
-| Nr. | Aufhänger | Beweis im Produkt | CTA | Source |
-| --- | --- | --- | --- | --- |
-| 13 | „Anfrage um 19:42 Uhr – was sieht der Betrieb?“ | Live-Aktivitätsprotokoll | Demo | `linkedin-post-13` |
-| 14 | Terminwunsch ist keine Bestätigung | Slot- und Bestätigungsstatus | Leitfaden | `linkedin-post-14` |
-| 15 | Fünf Angaben vor dem ersten Rückruf | Kontakt-, Ort- und Problemdaten | Check | `linkedin-post-15` |
-| 16 | Warum Fotos freiwillig bleiben | optionaler Upload und klare Grenze | Vertrauen | `linkedin-post-16` |
-| 17 | Gasgeruch: Wo Automatisierung endet | Sicherheitshinweis und Übergabe | Demo | `linkedin-post-17` |
-| 18 | Kein Chat-Verlauf durchsuchen | strukturierte Betriebssicht | Demo | `linkedin-post-18` |
-| 19 | Was der 99-Euro-Pilot bewusst nicht enthält | klare Ausschlüsse | Preise | `linkedin-post-19` |
-| 20 | Einbau auf WordPress, Wix oder HTML | Installationsführung | Pilot | `linkedin-post-20` |
-| 21 | Drei Ursachen für Rückrufchaos | Entscheidungsgrafik | Check | `linkedin-post-21` |
-| 22 | Wie ein kleiner Betrieb einen Pilot misst | Ergebnisprotokoll | Wissen | `linkedin-post-22` |
-| 23 | Webagentur: Abnahme einer Anfrage-Strecke | Partner-Checkliste | Partner | `linkedin-post-23` |
-| 24 | 60-Sekunden-Demo: Kunde bis Termin | fünf Demo-Schritte | Demo | `linkedin-post-24` |
+| Nr. | Aufhänger                                       | Beweis im Produkt                  | CTA       | Source             |
+| --- | ----------------------------------------------- | ---------------------------------- | --------- | ------------------ |
+| 13  | „Anfrage um 19:42 Uhr – was sieht der Betrieb?“ | Live-Aktivitätsprotokoll           | Demo      | `linkedin-post-13` |
+| 14  | Terminwunsch ist keine Bestätigung              | Slot- und Bestätigungsstatus       | Leitfaden | `linkedin-post-14` |
+| 15  | Fünf Angaben vor dem ersten Rückruf             | Kontakt-, Ort- und Problemdaten    | Check     | `linkedin-post-15` |
+| 16  | Warum Fotos freiwillig bleiben                  | optionaler Upload und klare Grenze | Vertrauen | `linkedin-post-16` |
+| 17  | Gasgeruch: Wo Automatisierung endet             | Sicherheitshinweis und Übergabe    | Demo      | `linkedin-post-17` |
+| 18  | Kein Chat-Verlauf durchsuchen                   | strukturierte Betriebssicht        | Demo      | `linkedin-post-18` |
+| 19  | Was der 99-Euro-Pilot bewusst nicht enthält     | klare Ausschlüsse                  | Preise    | `linkedin-post-19` |
+| 20  | Einbau auf WordPress, Wix oder HTML             | Installationsführung               | Pilot     | `linkedin-post-20` |
+| 21  | Drei Ursachen für Rückrufchaos                  | Entscheidungsgrafik                | Check     | `linkedin-post-21` |
+| 22  | Wie ein kleiner Betrieb einen Pilot misst       | Ergebnisprotokoll                  | Wissen    | `linkedin-post-22` |
+| 23  | Webagentur: Abnahme einer Anfrage-Strecke       | Partner-Checkliste                 | Partner   | `linkedin-post-23` |
+| 24  | 60-Sekunden-Demo: Kunde bis Termin              | fünf Demo-Schritte                 | Demo      | `linkedin-post-24` |
 
 ## Video- und Wiederverwendungsplan
 
@@ -221,7 +222,7 @@ keine automatisch umformulierten Keyword-Varianten.
 ### Wöchentlich
 
 - freiwillige Pilotanfragen nach `source`;
-- qualifizierte Gespräche nach Kanal und Problem;
+- qualifizierte Austausche nach Kanal und Problem;
 - Demo-zu-Anfrage-Übergänge, soweit datensparsam messbar;
 - häufigste Einwände;
 - erlaubter nächster Schritt pro Kontakt;
@@ -229,12 +230,12 @@ keine automatisch umformulierten Keyword-Varianten.
 
 ### Funnel-Ziele als interne Diagnose
 
-| Stufe | 30-Tage-Signal | Reaktion bei Unterschreitung |
-| --- | --- | --- |
-| qualifizierte Kontakte | mindestens 2 | Zielkunde und Einstieg prüfen |
-| persönliche Demos | mindestens 1 | CTA und Reaktionszeit prüfen |
-| bezahlte Piloten | Ziel 1 | Einwände, Umfang und Vertrauen prüfen |
-| Reaktionszeit | unter 1 Werktag | Zuständigkeit und Benachrichtigung prüfen |
+| Stufe                  | 30-Tage-Signal  | Reaktion bei Unterschreitung              |
+| ---------------------- | --------------- | ----------------------------------------- |
+| qualifizierte Kontakte | mindestens 2    | Zielkunde und Einstieg prüfen             |
+| asynchrone Demos       | mindestens 1    | CTA und Reaktionszeit prüfen              |
+| bezahlte Piloten       | Ziel 1          | Einwände, Umfang und Vertrauen prüfen     |
+| Reaktionszeit          | unter 1 Werktag | Zuständigkeit und Benachrichtigung prüfen |
 
 Follower, Likes und rohe Impressionen rechtfertigen allein weder Budget noch mehr Inhalte.
 
@@ -255,7 +256,7 @@ Follower, Likes und rohe Impressionen rechtfertigen allein weder Budget noch meh
 
 ### Gate C – Paid
 
-- mindestens ein organisch qualifiziertes Gespräch;
+- mindestens ein organisch qualifizierter Austausch;
 - funktionierende Quellenmessung;
 - datenschutzrechtliche Entscheidung zu Tracking und Einwilligung;
 - schriftliches Testbudget und Stop-Regel.
@@ -270,6 +271,7 @@ Follower, Likes und rohe Impressionen rechtfertigen allein weder Budget noch meh
 
 - keine gekauften oder gescrapten Listen;
 - keine Massennachrichten, automatisierten DMs oder zufälligen Werbeanrufe;
+- vorerst keine Verkaufsanrufe oder verpflichtenden Video-Meetings, auch nicht nach Formularen;
 - keine SEO-Ortsseiten oder KI-Artikel in Masse;
 - keine erfundenen Bewertungen, Partner oder Knappheit;
 - kein ungeprüftes Paid-Budget;

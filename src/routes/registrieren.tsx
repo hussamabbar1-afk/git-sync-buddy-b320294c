@@ -65,7 +65,7 @@ function PilotRequestPage() {
             company: value("company"),
             contact: value("contact"),
             email: value("email"),
-            phone: value("phone"),
+            phone: "",
             website: value("website"),
             team_size_range: value("team_size_range"),
             monthly_inquiry_range: value("monthly_inquiry_range"),
@@ -168,8 +168,8 @@ function PilotRequestPage() {
             >
               <CircleCheck className="mt-0.5 size-4 shrink-0" />
               <span>
-                Vielen Dank. Ihr Betrieb ist für die persönliche Pilotprüfung vorgemerkt. Wir melden
-                uns zur Abstimmung der nächsten Schritte – ohne automatische Werbung.
+                Vielen Dank. Ihr Betrieb ist für die persönliche Pilotprüfung vorgemerkt. Wir
+                antworten Ihnen persönlich per E-Mail – ohne Anruf und ohne automatische Werbung.
               </span>
             </div>
           ) : null}
@@ -202,10 +202,6 @@ function PilotRequestPage() {
               <Input id="email" name="email" type="email" autoComplete="email" required />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="phone">Telefon</Label>
-              <Input id="phone" name="phone" type="tel" autoComplete="tel" />
-            </div>
-            <div className="space-y-2 sm:col-span-2">
               <Label htmlFor="website">Website</Label>
               <Input id="website" name="website" type="url" placeholder="https://" />
             </div>
@@ -329,8 +325,8 @@ function PilotRequestPage() {
               </Button>
               <p className="mt-3 text-center text-xs leading-5 text-slate-500">
                 Wir verwenden Ihre Angaben ausschließlich zur Bearbeitung dieser Anfrage und
-                antworten persönlich. Kein Newsletter, keine automatische Werbeserie. Hinweise
-                finden Sie in unserer{" "}
+                antworten persönlich per E-Mail. Kein Telefonanruf, kein Newsletter, keine
+                automatische Werbeserie. Hinweise finden Sie in unserer{" "}
                 <Link to="/datenschutz" className="font-medium text-primary hover:underline">
                   Datenschutzerklärung
                 </Link>
