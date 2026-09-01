@@ -234,7 +234,8 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
 - القائمة المرجعية الوحيدة للمرسل إليهم هي `go-to-market/erste-briefwelle-10-de.md`.
 - `Woermann & Söhne` مستبعد دائمًا بسبب Werbewiderspruch.
 - اسم المالك صغير فقط في خانة المرسل؛ التوقيع `Ihr ZunftEcho-Team`.
-- الطباعة المادية، اختبار الورق/الظرف، وفحص QR لكل ورقة مسؤولية المالك ولم يُؤكد اكتمالها.
+- أكد المالك في 1 سبتمبر 2026 اكتمال الطباعة التجريبية وفحص الورق/الظرف وتجهيز الخطابات؛ يُعامل
+  ذلك كمنجز ولا يعاد إلا إذا تغير ملف الطباعة أو العنوان.
 - الإرسال محظور حتى Gewerbe وتحديث البيانات القانونية وإعادة فحص عناوين الشركات خلال 48 ساعة.
 - توجد جملة قديمة في `organic-campaign-30-days-de.md` تتحدث عن ثلاث رسائل؛ المرجع الأحدث والملزم
   هو **عشر رسائل**.
@@ -319,8 +320,9 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
 - Cloudflare account ID: `3bceebd97b02f714c649114469aeaabd`
 - Cloudflare zone ID: `2cb3ac449c41ea5f9eeef882c5501d12`
 - Worker: `hussamabbar1-afk-git-sync-buddy-b320294c`
-- Current production Worker version: `5eef905e-870c-423a-80e8-39c8977df010` at 100%
-- Current deployment ID: `4c4134d8-08a3-429e-a530-aa601eadd949`
+- Current production Worker version: `d428200b-39cf-4707-a502-aea366effe04` at 100%
+- آخر Deployment موثق للنسخة السابقة: `4c4134d8-08a3-429e-a530-aa601eadd949`؛ معرّف نشر
+  النسخة الحالية لم يُعده `wrangler deployments list`، لذلك لا يُعامل المعرّف السابق كحالي.
 - Supabase Edge Functions after the mobile Widget hardening: `chat-orchestrator` v8,
   `reverse-geocode` v2, and `chat-attachment` v3; all `ACTIVE` with `verify_jwt=false` because
   their public Widget contracts validate widget/origin/conversation capability internally.
@@ -357,6 +359,16 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
   رُقي إلى 100%. فحص الإنتاج النهائي نجح وبقي `/anfrage-check` على HTTP 404.
 - فحص Browser للـWidget على الهاتف نجح: فتح بطاقة العنوان، وجود X و`Abbrechen`، الإغلاق الفعلي،
   وتحميل أدوات الموقع والصورة بلا أخطاء Console. لم تُرسل صورة شخصية أو عنوان المالك في الاختبار.
+- أكد المالك اكتمال مراجعة الاشتراكات والطباعة التجريبية وتجهيز الخطابات العشرة.
+- حُدث دليل الـ15 دقيقة ليتوافق مع Live Demo ذي المراحل الخمس، مع إبقاء الاستعراض نفسه دون خمس
+  دقائق والتركيز على سجل التشغيل والمشكلة التجارية.
+- أُرسل اختبار استقبال موسوم إلى `kontakt@` و`support@` و`datenschutz@` و`sicherheit@` عبر
+  خط الإنتاج؛ سجل Brevo الأربعة `sent` من المحاولة الأولى مع Provider IDs وبلا Failure code.
+  هذا يثبت قبول المزود للإرسال إلى Aliases؛ إثبات ظهورها في صندوق الوجهة يحتاج سجل Cloudflare
+  Routing أو مشاهدة صندوق البريد ولا يُستنتج من حالة Brevo وحدها.
+- فحص Supabase المبكر: المشروع `ACTIVE_HEALTHY`، جميع وظائف Edge نشطة، كل مهام Cron التسع عشرة
+  نشطة وتشغيلات 24 ساعة المسجلة `succeeded`، وإجمالي البريد بعد الاختبار 28 `sent` بلا فشل.
+  لا توجد Billing accounts أو subscriptions أو subscription invoices أو Pilot requests مفتوحة.
 
 ## 21. الديون والمعلقات المعروفة
 
@@ -377,7 +389,8 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
 - Google Calendar/Outlook، SMS، Voice، WhatsApp، Social integrations.
 - sevDesk/Lexware Office.
 - Benchmark تنافسي بعد توفر بيانات حقيقية.
-- مراجعة اشتراكات Canva/ElevenLabs/Runway وإلغاء غير المطلوب.
+- مراجعة اشتراكات Canva/ElevenLabs/Runway وإلغاء غير المطلوب: أكد المالك اكتمالها في 1 سبتمبر
+  2026؛ لا تعد فتحها إلا إذا ظهرت رسوم أو طلب المالك مراجعة جديدة.
 - إصلاح سكربت Local preview أو توثيق بديل دائم.
 - تنظيف عشرة Fast Refresh warnings أولوية منخفضة.
 
@@ -409,8 +422,8 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
 
 **الخطوة العملية التالية قبل 10 سبتمبر:**
 
-- لا تُضف ميزات عشوائية جديدة. نفّذ فقط اختبار البريد الخارجي، فحص الاشتراكات المدفوعة المؤقتة،
-  Probedruck مادي للخطابات، وتجربة Demo كلاميًا.
+- لا تُضف ميزات عشوائية جديدة. أكد المالك في 1 سبتمبر اكتمال فحص الاشتراكات، الـProbedruck،
+  وتجهيز الخطابات العشرة. بقيت المتابعة التقنية، اختبار البريد، وتجربة Demo كلاميًا.
 - في 8 أو 9 سبتمبر: شغّل Go/No-Go النهائي حسب `go-to-market/prelaunch-runbook-de.md`.
 - في 10 سبتمبر: اتبع ترتيب التفعيل القانوني والضريبي وStripe في القسم 11، ثم غيّر
   `acquisitionCampaignLive` إلى `true` فقط بعد موافقة إطلاق صريحة واختبار `--marketing=live`.

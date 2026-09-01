@@ -1,6 +1,6 @@
 # ZunftEcho - Leitfaden für die 15-Minuten-Demo
 
-Stand: 29. August 2026
+Stand: 1. September 2026
 
 ## Ziel des Gesprächs
 
@@ -36,21 +36,26 @@ beenden und für einen späteren Zeitpunkt offenlassen.
 ## Minute 2-7: Live-Demo
 
 1. Das zum Betrieb passende Szenario auf `/demo` auswählen.
-2. Die Kundensicht zeigen: Rückfragen, Einsatzort, Dringlichkeit und Termin.
-3. Mit „Weiter“ zur Betriebssicht wechseln.
-4. Bei „Alarm & Übergabe“ erklären:
+2. Die fünf Schritte durchgehen: Kundenanfrage, Qualifizierung, Kontaktdaten, Routing und Termin.
+3. Dabei Kundensicht und Betriebssicht parallel lesen: Jede Kundenantwort vervollständigt den
+   Vorgang rechts, ohne dass das Team den Chat erneut durchsuchen muss.
+4. Bei „Routing“ erklären:
    - kritische Fälle werden sichtbar priorisiert;
    - das Team erhält zusätzlich eine externe E-Mail-Benachrichtigung;
+   - Zuständigkeit, Zeitstempel und nächster Schritt bleiben im Aktivitätsprotokoll sichtbar;
    - ein Mensch behält die Entscheidung und kann direkt übernehmen.
-5. Bei „Termin & Ergebnis“ erklären:
+5. Bei „Termin“ erklären:
    - der Kunde erhält eine verständliche Bestätigung;
-   - interne Termin-IDs werden nicht angezeigt;
+   - der Kunde sieht eine lesbare Vorgangsnummer statt einer technischen Datenbank-ID;
    - der Vorgang bleibt im Dashboard nachvollziehbar.
 
 Formulierung:
 
 > Das ist eine datensparsame Simulation. Im Pilot wird derselbe Ablauf mit Ihren Leistungen,
 > Einsatzgebieten, Öffnungszeiten und Ihrem frei wählbaren Assistentennamen eingerichtet.
+
+Nicht länger als fünf Minuten durch die Demo klicken. Das Aktivitätsprotokoll ist der Beleg für den
+operativen Nutzen; nicht jede Dashboard-Funktion vorführen.
 
 ## Minute 7-11: Nutzen auf den Betrieb übertragen
 
@@ -138,4 +143,3 @@ Nach jedem Gespräch dokumentieren:
 - Entscheidung: ungeeignet, später, Pilot interessiert oder Pilot bestätigt;
 - nächster erlaubter Schritt und Termin;
 - konkreter Einwand in den Worten des Betriebs.
-
