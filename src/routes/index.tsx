@@ -283,9 +283,9 @@ function LandingPage() {
       </header>
 
       <main>
-        <section className="relative isolate overflow-hidden border-b border-slate-200 bg-[linear-gradient(145deg,#f8fbff_0%,#ffffff_55%,#fff8ed_100%)]">
-          <div className="absolute -top-24 right-0 -z-10 size-[34rem] rounded-full bg-sky-200/30 blur-3xl" />
-          <div className="absolute -bottom-40 left-0 -z-10 size-[30rem] rounded-full bg-orange-200/25 blur-3xl" />
+        <section className="ze-hero relative isolate overflow-hidden border-b border-slate-200">
+          <div className="ze-technical-grid absolute inset-0 -z-20" />
+          <div className="ze-signal-orbit absolute top-12 right-[8%] -z-10 hidden size-72 lg:block" />
 
           <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-[1fr_0.92fr] lg:px-10 lg:py-24">
             <div className="max-w-2xl">
@@ -343,11 +343,26 @@ function LandingPage() {
               </Link>
             </div>
 
-            <div className="relative mx-auto w-full max-w-xl lg:mx-0">
-              <div className="absolute -inset-4 -z-10 rotate-2 rounded-[2rem] bg-sky-100/80" />
-              <InteractiveChatDemo />
+            <div className="ze-product-scene relative mx-auto w-full max-w-xl lg:mx-0">
+              <div className="ze-scene-backplate absolute -inset-5 -z-10 rounded-[2rem]" />
+              <div className="ze-product-card relative">
+                <InteractiveChatDemo />
+              </div>
 
-              <div className="absolute -right-4 -bottom-7 hidden items-center gap-3 rounded-xl border border-slate-200 bg-white p-3 shadow-xl sm:flex">
+              <div className="ze-float-card absolute -top-6 -left-5 hidden items-center gap-3 rounded-xl border border-slate-200 bg-white p-3 shadow-xl sm:flex">
+                <span className="relative flex size-10 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700">
+                  <span className="absolute -top-0.5 -right-0.5 size-2.5 animate-pulse rounded-full bg-emerald-500 ring-2 ring-white" />
+                  <ClipboardCheck className="size-5" />
+                </span>
+                <div>
+                  <p className="text-[11px] font-medium tracking-wide text-slate-400 uppercase">
+                    Live erfasst
+                  </p>
+                  <p className="text-sm font-semibold">Angaben vollständig</p>
+                </div>
+              </div>
+
+              <div className="ze-float-card ze-float-card-delay absolute -right-4 -bottom-7 hidden items-center gap-3 rounded-xl border border-slate-200 bg-white p-3 shadow-xl sm:flex">
                 <span className="flex size-10 items-center justify-center rounded-lg bg-orange-100 text-orange-700">
                   <Clock3 className="size-5" />
                 </span>
@@ -379,7 +394,7 @@ function LandingPage() {
               {benefits.map(({ icon: Icon, title, text }) => (
                 <article
                   key={title}
-                  className="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_16px_40px_-32px_rgba(15,23,42,0.45)]"
+                  className="ze-lift-card rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_16px_40px_-32px_rgba(15,23,42,0.45)]"
                 >
                   <span className="flex size-11 items-center justify-center rounded-xl bg-sky-50 text-primary">
                     <Icon className="size-5" />

@@ -11,6 +11,8 @@ import {
   MailCheck,
   MapPin,
   MessageSquareText,
+  Paperclip,
+  Phone,
   RotateCcw,
   ShieldCheck,
   UserRoundCheck,
@@ -23,7 +25,7 @@ import { BrandMark } from "@/components/brand-mark";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 
-type DemoStage = 0 | 1 | 2 | 3;
+type DemoStage = 0 | 1 | 2 | 3 | 4;
 
 type Scenario = {
   name: string;
@@ -36,6 +38,12 @@ type Scenario = {
   detailAnswer: string;
   slot: string;
   score: number;
+  customer: string;
+  phone: string;
+  property: string;
+  attachment: string;
+  assignee: string;
+  reference: string;
 };
 
 const scenarios: Scenario[] = [
@@ -50,6 +58,12 @@ const scenarios: Scenario[] = [
     detailAnswer: "Nein, kein Gasgeruch und kein Wasseraustritt.",
     slot: "Heute · 16:00–18:00",
     score: 94,
+    customer: "Anna Weber",
+    phone: "+49 30 555 018 42",
+    property: "Mietwohnung · 3. OG",
+    attachment: "Foto_Heiztherme.jpg",
+    assignee: "Notdienst · Mehmet K.",
+    reference: "ZE-24091",
   },
   {
     name: "Wasserleck",
@@ -62,6 +76,12 @@ const scenarios: Scenario[] = [
     detailAnswer: "Das Ventil ist zu. Es tropft nur noch langsam.",
     slot: "Heute · 14:00–16:00",
     score: 97,
+    customer: "Jonas Richter",
+    phone: "+49 30 555 016 77",
+    property: "Einfamilienhaus",
+    attachment: "Leck_unter_Spuele.jpg",
+    assignee: "Sanitär · Laura S.",
+    reference: "ZE-24092",
   },
   {
     name: "Badmodernisierung",
@@ -74,21 +94,28 @@ const scenarios: Scenario[] = [
     detailAnswer: "Die Aufteilung kann bleiben. Gewünscht ist eine bodengleiche Dusche.",
     slot: "Donnerstag · 10:00–11:00",
     score: 82,
+    customer: "Miriam Lehmann",
+    phone: "+49 30 555 014 31",
+    property: "Eigentumswohnung · 6 m² Bad",
+    attachment: "Grundriss_Bad.pdf",
+    assignee: "Beratung · Thomas B.",
+    reference: "ZE-24093",
   },
 ];
 
 const stages: Array<{ title: string; subtitle: string }> = [
   { title: "Kundenanfrage", subtitle: "Der Kunde beschreibt sein Anliegen." },
   { title: "Qualifizierung", subtitle: "Fehlende Informationen werden strukturiert ergänzt." },
-  { title: "Alarm & Übergabe", subtitle: "Priorität und zuständiges Team stehen sofort fest." },
-  { title: "Termin & Ergebnis", subtitle: "Der Kunde erhält eine klare Bestätigung." },
+  { title: "Kontaktdaten", subtitle: "Adresse, Erreichbarkeit und Anlage sind eindeutig." },
+  { title: "Routing", subtitle: "Priorität und zuständiges Team stehen sofort fest." },
+  { title: "Termin", subtitle: "Beide Seiten erhalten eine klare Bestätigung." },
 ];
 
 export function SalesFlowDemo() {
   const [scenarioIndex, setScenarioIndex] = useState(0);
   const [stage, setStage] = useState<DemoStage>(0);
   const scenario = scenarios[scenarioIndex]!;
-  const progress = (stage + 1) * 25;
+  const progress = (stage + 1) * 20;
 
   const chooseScenario = (index: number) => {
     setScenarioIndex(index);
@@ -120,7 +147,7 @@ export function SalesFlowDemo() {
         ))}
       </div>
 
-      <ol className="mt-7 grid gap-2 sm:grid-cols-2 lg:grid-cols-4" aria-label="Demo-Ablauf">
+      <ol className="mt-7 grid gap-2 sm:grid-cols-2 lg:grid-cols-5" aria-label="Demo-Ablauf">
         {stages.map((item, index) => {
           const isActive = index === stage;
           const isComplete = index < stage;
@@ -205,6 +232,21 @@ export function SalesFlowDemo() {
             )}
 
             {stage >= 2 ? (
+              <>
+                <ChatBubble>
+                  Unter welchem Namen und welcher Telefonnummer darf der Betrieb Sie erreichen?
+                </ChatBubble>
+                <ChatBubble user>
+                  {scenario.customer} · {scenario.phone}
+                </ChatBubble>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  <ChatFact icon={UserRoundCheck} label="Kontakt" value={scenario.customer} />
+                  <ChatFact icon={Paperclip} label="Anlage" value={scenario.attachment} />
+                </div>
+              </>
+            ) : null}
+
+            {stage >= 3 ? (
               <ChatBubble>
                 {scenario.urgencyTone === "critical"
                   ? "Danke. Ich habe den Fall als dringend markiert und das Team sofort informiert."
@@ -212,15 +254,15 @@ export function SalesFlowDemo() {
               </ChatBubble>
             ) : null}
 
-            {stage >= 3 ? (
+            {stage >= 4 ? (
               <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-950">
                 <p className="flex items-center gap-2 font-semibold">
                   <CalendarCheck className="size-5" /> Termin bestätigt
                 </p>
                 <p className="mt-2 font-medium">{scenario.slot}</p>
                 <p className="mt-1 text-xs leading-5 text-emerald-800">
-                  Bestätigung und Änderungslink wurden per E-Mail versendet. Keine interne ID wird
-                  angezeigt.
+                  Vorgang {scenario.reference} · Bestätigung und Änderungslink wurden per E-Mail
+                  versendet.
                 </p>
               </div>
             ) : null}
@@ -275,15 +317,19 @@ export function SalesFlowDemo() {
                 <div className="grid gap-3 sm:grid-cols-2">
                   <DataCard icon={Wrench} label="Anliegen" value={scenario.service} />
                   <DataCard icon={MapPin} label="Einsatzort" value={scenario.location} />
-                  <DataCard icon={Clock3} label="Priorität" value={scenario.urgency} />
+                  <DataCard
+                    icon={Phone}
+                    label="Kontakt"
+                    value={stage >= 2 ? `${scenario.customer} · ${scenario.phone}` : "wird erfasst"}
+                  />
                   <DataCard
                     icon={MessageSquareText}
                     label="Qualifizierung"
-                    value="Pflichtangaben vollständig"
+                    value={stage >= 2 ? scenario.property : "Angaben werden geprüft"}
                   />
                 </div>
 
-                {stage >= 2 ? (
+                {stage >= 3 ? (
                   <div
                     className={`rounded-2xl border p-4 ${
                       scenario.urgencyTone === "critical"
@@ -323,7 +369,7 @@ export function SalesFlowDemo() {
                   </div>
                 ) : null}
 
-                {stage >= 3 ? (
+                {stage >= 4 ? (
                   <div className="grid gap-3 sm:grid-cols-2">
                     <OutcomeCard
                       icon={CalendarCheck}
@@ -337,6 +383,40 @@ export function SalesFlowDemo() {
                     />
                   </div>
                 ) : null}
+
+                <div className="rounded-2xl border border-white/10 bg-black/10 p-4">
+                  <div className="flex items-center justify-between">
+                    <p className="text-xs font-semibold tracking-wide text-slate-300 uppercase">
+                      Live-Aktivität
+                    </p>
+                    <span className="font-mono text-[10px] text-slate-500">
+                      {scenario.reference}
+                    </span>
+                  </div>
+                  <ol className="mt-3 space-y-3 text-xs">
+                    <ActivityItem done label="Anfrage eingegangen" time="19:42:08" />
+                    <ActivityItem
+                      done={stage >= 1}
+                      label="Anliegen & Sicherheit geprüft"
+                      time="19:42:31"
+                    />
+                    <ActivityItem
+                      done={stage >= 2}
+                      label="Kontaktdaten vervollständigt"
+                      time="19:43:02"
+                    />
+                    <ActivityItem
+                      done={stage >= 3}
+                      label={`Zugewiesen an ${scenario.assignee}`}
+                      time="19:43:05"
+                    />
+                    <ActivityItem
+                      done={stage >= 4}
+                      label="Terminbestätigung versendet"
+                      time="19:43:11"
+                    />
+                  </ol>
+                </div>
               </div>
             )}
           </div>
@@ -357,7 +437,7 @@ export function SalesFlowDemo() {
           >
             <ArrowLeft className="size-4" /> Zurück
           </Button>
-          {stage < 3 ? (
+          {stage < 4 ? (
             <Button type="button" onClick={() => setStage((stage + 1) as DemoStage)}>
               Weiter <ArrowRight className="size-4" />
             </Button>
@@ -369,6 +449,20 @@ export function SalesFlowDemo() {
         </div>
       </div>
     </div>
+  );
+}
+
+function ActivityItem({ done, label, time }: { done: boolean; label: string; time: string }) {
+  return (
+    <li
+      className={`grid grid-cols-[12px_1fr_auto] items-center gap-2 ${done ? "text-slate-200" : "text-slate-600"}`}
+    >
+      <span
+        className={`size-2 rounded-full ${done ? "bg-emerald-400 shadow-[0_0_0_4px_rgba(52,211,153,0.1)]" : "bg-slate-700"}`}
+      />
+      <span>{label}</span>
+      <time className="font-mono text-[10px] text-slate-500">{done ? time : "—"}</time>
+    </li>
   );
 }
 

@@ -51,7 +51,8 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --shadow-card: 0 1px 2px oklch(0.25 0.05 250 / 0.06), 0 8px 24px -12px oklch(0.25 0.05 250 / 0.12);
+  --shadow-card:
+    0 1px 2px oklch(0.25 0.05 250 / 0.06), 0 8px 24px -12px oklch(0.25 0.05 250 / 0.12);
 }
 
 :root {
@@ -159,4 +160,142 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-card);
+}
+
+@layer components {
+  .ze-hero,
+  .ze-demo-stage {
+    background:
+      radial-gradient(circle at 78% 18%, rgb(186 230 253 / 0.48), transparent 27rem),
+      radial-gradient(circle at 9% 88%, rgb(254 215 170 / 0.34), transparent 24rem),
+      linear-gradient(145deg, #f7fbff 0%, #ffffff 55%, #fffaf3 100%);
+  }
+
+  .ze-technical-grid {
+    opacity: 0.46;
+    background-image:
+      linear-gradient(rgb(14 116 144 / 0.055) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(14 116 144 / 0.055) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: linear-gradient(to bottom, black, transparent 88%);
+  }
+
+  .ze-signal-orbit {
+    border: 1px solid rgb(14 116 144 / 0.14);
+    border-radius: 50%;
+    box-shadow:
+      0 0 0 42px rgb(14 116 144 / 0.04),
+      0 0 0 86px rgb(14 116 144 / 0.025);
+    animation: ze-orbit 18s linear infinite;
+  }
+
+  .ze-signal-orbit::before,
+  .ze-signal-orbit::after {
+    position: absolute;
+    content: "";
+    border-radius: 999px;
+    background: #f59e0b;
+    box-shadow: 0 0 0 7px rgb(245 158 11 / 0.13);
+  }
+
+  .ze-signal-orbit::before {
+    top: 24px;
+    left: 40px;
+    width: 9px;
+    height: 9px;
+  }
+  .ze-signal-orbit::after {
+    right: 18px;
+    bottom: 58px;
+    width: 6px;
+    height: 6px;
+  }
+
+  .ze-product-scene {
+    perspective: 1200px;
+  }
+
+  .ze-product-card {
+    transform: rotateY(-3deg) rotateX(1deg);
+    transform-origin: center;
+    transition: transform 500ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .ze-product-scene:hover .ze-product-card {
+    transform: rotateY(0deg) rotateX(0deg) translateY(-3px);
+  }
+
+  .ze-scene-backplate {
+    background: linear-gradient(145deg, rgb(224 242 254 / 0.92), rgb(255 247 237 / 0.84));
+    border: 1px solid rgb(14 116 144 / 0.08);
+    transform: rotate(2deg) translateZ(-40px);
+    box-shadow: 0 42px 90px -54px rgb(15 23 42 / 0.65);
+  }
+
+  .ze-float-card {
+    animation: ze-float 5.5s ease-in-out infinite;
+  }
+  .ze-float-card-delay {
+    animation-delay: -2.75s;
+  }
+
+  .ze-lift-card {
+    position: relative;
+    overflow: hidden;
+    transition:
+      transform 240ms ease,
+      border-color 240ms ease,
+      box-shadow 240ms ease;
+  }
+
+  .ze-lift-card::after {
+    position: absolute;
+    inset: auto 0 0;
+    height: 3px;
+    content: "";
+    background: linear-gradient(90deg, #0ea5e9, #f59e0b);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 240ms ease;
+  }
+
+  .ze-lift-card:hover {
+    transform: translateY(-5px);
+    border-color: rgb(125 211 252);
+    box-shadow: 0 22px 48px -30px rgb(15 23 42 / 0.5);
+  }
+
+  .ze-lift-card:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes ze-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes ze-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ze-signal-orbit,
+  .ze-float-card {
+    animation: none;
+  }
+  .ze-product-card,
+  .ze-product-scene:hover .ze-product-card,
+  .ze-lift-card,
+  .ze-lift-card:hover {
+    transform: none;
+    transition: none;
+  }
 }

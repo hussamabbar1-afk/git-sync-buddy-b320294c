@@ -39,7 +39,7 @@ function DemoPage() {
   const registrationSource = source ?? "live-demo";
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[linear-gradient(145deg,#f8fbff_0%,#ffffff_52%,#fff8ed_100%)] text-slate-950">
+    <div className="min-h-screen overflow-x-hidden bg-[#f7f9fc] text-slate-950">
       <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-10">
           <Link to="/" className="flex items-center gap-2.5" aria-label="ZunftEcho Startseite">
@@ -62,10 +62,15 @@ function DemoPage() {
       </header>
 
       <main>
-        <section className="border-b border-slate-200">
+        <section className="ze-demo-stage relative overflow-hidden border-b border-slate-200">
+          <div className="ze-technical-grid absolute inset-0 -z-10" />
           <div className="mx-auto max-w-7xl px-5 py-12 sm:px-8 sm:py-16 lg:px-10">
             <div className="mx-auto max-w-3xl text-center">
-              <p className="text-sm font-semibold tracking-wide text-primary uppercase">
+              <p className="mx-auto inline-flex items-center gap-2 rounded-full border border-sky-200 bg-white/80 px-3 py-1.5 text-sm font-semibold tracking-wide text-primary uppercase shadow-sm">
+                <span className="relative flex size-2">
+                  <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-60" />
+                  <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
+                </span>
                 Interaktive Live-Demo
               </p>
               <h1 className="mt-3 font-display text-4xl leading-tight font-semibold tracking-tight sm:text-5xl">
