@@ -459,7 +459,9 @@ function sanitizeActionResult(result: ActionResult): ActionResult {
     .slice(0, 6);
   return {
     ...result,
-    text: stripInternalIdentifiers(result.text),
+    text:
+      stripInternalIdentifiers(result.text) ||
+      "Ihre Anfrage wurde verarbeitet. Bitte wählen Sie den nächsten Schritt aus.",
     summary: result.summary ? stripInternalIdentifiers(result.summary) : result.summary,
     quickReplies,
   };

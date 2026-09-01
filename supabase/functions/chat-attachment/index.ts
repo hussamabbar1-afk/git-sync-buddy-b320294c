@@ -1,4 +1,5 @@
 import { withSupabase } from "npm:@supabase/server@^1";
+import { matchesImageSignature, safeImageName } from "./image-validation.ts";
 
 const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const allowedTypes = new Set(["image/jpeg", "image/png", "image/webp"]);
@@ -38,8 +39,17 @@ export default {
       );
     }
 
+    let form: FormData;
     try {
-      const form = await request.formData();
+      form = await request.formData();
+    } catch {
+      return Response.json(
+        { ok: false, code: "invalid_request" },
+        { status: 400, headers: cors(origin) },
+      );
+    }
+
+    try {
       const widgetKey = String(form.get("widget_key") ?? "");
       const conversationId = String(form.get("conversation_id") ?? "");
       const file = form.get("file");
@@ -109,6 +119,12 @@ export default {
         file.type === "image/png" ? "png" : file.type === "image/jpeg" ? "jpg" : "webp";
       const storagePath = `${conversation.company_id}/leads/${lead.id}/chat-${crypto.randomUUID()}.${extension}`;
       const bytes = new Uint8Array(await file.arrayBuffer());
+      if (!matchesImageSignature(bytes, file.type)) {
+        return Response.json(
+          { ok: false, code: "file_type_mismatch" },
+          { status: 422, headers: cors(origin) },
+        );
+      }
       const { error: uploadError } = await ctx.supabaseAdmin.storage
         .from("company-files")
         .upload(storagePath, bytes, {
@@ -124,7 +140,7 @@ export default {
           company_id: conversation.company_id,
           entity_type: "lead",
           entity_id: lead.id,
-          file_name: file.name.slice(0, 180) || `kundenfoto.${extension}`,
+          file_name: safeImageName(file.name, extension),
           mime_type: file.type,
           size_bytes: file.size,
           storage_path: storagePath,

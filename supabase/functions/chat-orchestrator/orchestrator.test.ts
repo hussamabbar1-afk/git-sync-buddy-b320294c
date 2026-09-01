@@ -95,6 +95,10 @@ Deno.test("appointment summaries are explicit and never expose internal ids", ()
   if (stripInternalIdentifiers(`Termin-ID: ${appointment.id} bestätigt`).includes(appointment.id)) {
     throw new Error("identifier sanitizer failed");
   }
+  const technical = stripInternalIdentifiers(
+    `Bitte bestätigen.\nreschedule_target_appointment_id: ${appointment.id}\n[object Object]`,
+  );
+  if (technical !== "Bitte bestätigen.") throw new Error(`technical artifact leaked: ${technical}`);
 });
 
 Deno.test("accepts the atomic reschedule RPC success contract", () => {

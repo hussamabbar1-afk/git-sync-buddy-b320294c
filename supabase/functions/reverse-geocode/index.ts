@@ -1,4 +1,5 @@
 import { withSupabase } from "npm:@supabase/server@^1";
+import { formatPostalAddress } from "./address.ts";
 
 type JsonObject = Record<string, unknown>;
 const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -75,7 +76,8 @@ export default {
       if (!response.ok) throw new Error(`nominatim_${response.status}`);
       const result = (await response.json()) as JsonObject;
       const address =
-        typeof result.display_name === "string" ? result.display_name.slice(0, 500) : "";
+        formatPostalAddress(result.address) ||
+        (typeof result.display_name === "string" ? result.display_name.slice(0, 240) : "");
       if (!address) throw new Error("address_missing");
       return Response.json(
         { ok: true, address, latitude, longitude, attribution: "© OpenStreetMap-Mitwirkende" },

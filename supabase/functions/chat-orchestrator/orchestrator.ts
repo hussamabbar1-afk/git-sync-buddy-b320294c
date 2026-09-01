@@ -168,14 +168,21 @@ export function appointmentChoices(
 }
 
 const UUID_ANY_RE = /[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/gi;
+const INTERNAL_FIELD_RE =
+  /\b(?:company_id|lead_id|conversation_id|appointment_id|target_appointment_id|cancellation_target_appointment_id|reschedule_target_appointment_id|reschedule_selection_pending|reschedule_new_date|reschedule_new_start_time|reschedule_confirmation_received|pending_appointment_date|pending_start_time|draft_appointment_date|draft_start_time)\b/i;
 
 export function stripInternalIdentifiers(value: unknown): string {
   return cleanText(value, 4_000)
+    .split(/\r?\n/)
+    .filter((line) => !INTERNAL_FIELD_RE.test(line))
+    .join("\n")
     .replace(
       /(?:Termin|Appointment)[\s_-]*(?:ID|UUID)\s*:?\s*[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/gi,
       "",
     )
     .replace(UUID_ANY_RE, "")
+    .replace(/\[object Object\]/gi, "")
+    .replace(/\{\s*\}|\[\s*\]/g, "")
     .replace(/[ \t]{2,}/g, " ")
     .replace(/[ \t]+([,.;!?])/g, "$1")
     .trim();

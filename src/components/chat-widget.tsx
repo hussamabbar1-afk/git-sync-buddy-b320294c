@@ -10,6 +10,7 @@ import {
   Send,
   ThumbsDown,
   ThumbsUp,
+  X,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
@@ -358,10 +359,18 @@ export function ChatWidget({
       confirmedLocation?.source === "browser_geolocation" && confirmedLocation.address === address
         ? confirmedLocation
         : { address, source: "manual" };
-    setConfirmedLocation(location);
     setLocationOpen(false);
+    setConfirmedLocation(null);
+    setLocationAddress("");
     setLocationNotice("Adresse bestätigt und wird mit Ihrer Anfrage übermittelt.");
     void handleSend(`Adresse bestätigt: ${address}`, true, location);
+  };
+
+  const closeLocationEditor = () => {
+    setLocationOpen(false);
+    setLocationAddress("");
+    setConfirmedLocation(null);
+    setLocationNotice(null);
   };
 
   const uploadPhoto = async (file: File) => {
@@ -394,7 +403,11 @@ export function ChatWidget({
       };
       if (!response.ok || payload.ok !== true)
         throw new Error(String(payload.code ?? "upload_failed"));
-      setPhotoCount((current) => current + 1);
+      const remaining =
+        typeof payload.remaining === "number" && Number.isFinite(payload.remaining)
+          ? Math.max(0, Math.min(2, Math.floor(payload.remaining)))
+          : null;
+      setPhotoCount(remaining === null ? (current) => current + 1 : 3 - remaining);
       setPhotoNotice("Foto sicher hochgeladen und Ihrer Anfrage zugeordnet.");
       setMessages((current) => [
         ...current,
@@ -407,7 +420,11 @@ export function ChatWidget({
           ? "Das Originalfoto darf höchstens 10 MB groß sein."
           : code === "compressed_too_large"
             ? "Das Foto ist nach der Komprimierung noch zu groß. Bitte wählen Sie ein anderes Bild."
-            : "Das Foto konnte nicht hochgeladen werden. Bitte versuchen Sie es erneut.",
+            : code === "image_limit_reached"
+              ? "Für diese Anfrage wurden bereits drei Fotos hochgeladen."
+              : code === "invalid_image" || code === "file_type_mismatch"
+                ? "Die Datei ist kein gültiges JPEG-, PNG- oder WebP-Bild."
+                : "Das Foto konnte nicht hochgeladen werden. Bitte versuchen Sie es erneut.",
       );
     } finally {
       setPhotoPending(false);
@@ -627,12 +644,26 @@ export function ChatWidget({
           </Button>
         </div>
         {locationOpen ? (
-          <div className="mb-2 rounded-md border bg-muted/30 p-2">
-            <p className="mb-1.5 text-[11px] text-muted-foreground">
-              Der Browser fragt nur nach Ihrer ausdrücklichen Zustimmung. Prüfen Sie die Adresse vor
-              dem Senden.
-            </p>
-            <div className="flex gap-2">
+          <div
+            className="mb-2 rounded-md border bg-muted/30 p-2"
+            role="region"
+            aria-label="Adresse bestätigen"
+          >
+            <div className="mb-1.5 flex items-start justify-between gap-2">
+              <p className="text-[11px] text-muted-foreground">
+                Der Browser fragt nur nach Ihrer ausdrücklichen Zustimmung. Prüfen Sie die Adresse
+                vor dem Senden.
+              </p>
+              <button
+                type="button"
+                onClick={closeLocationEditor}
+                className="shrink-0 rounded p-1 text-muted-foreground hover:bg-muted hover:text-foreground"
+                aria-label="Adresseingabe schließen"
+              >
+                <X className="size-3.5" />
+              </button>
+            </div>
+            <div className="grid gap-2 sm:grid-cols-[minmax(0,1fr)_auto]">
               <input
                 value={locationAddress}
                 onChange={(event) => {
@@ -646,6 +677,13 @@ export function ChatWidget({
                 Bestätigen
               </Button>
             </div>
+            <button
+              type="button"
+              onClick={closeLocationEditor}
+              className="mt-2 text-[11px] font-medium text-muted-foreground underline underline-offset-2"
+            >
+              Abbrechen
+            </button>
             {confirmedLocation?.source === "browser_geolocation" ? (
               <p className="mt-1 text-[10px] text-muted-foreground">
                 Kartendaten © OpenStreetMap-Mitwirkende

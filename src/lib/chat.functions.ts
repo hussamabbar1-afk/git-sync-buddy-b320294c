@@ -46,6 +46,22 @@ const metadataKeys = [
 
 type QuickReply = { label: string; value: string };
 
+const UUID_ANY_RE = /[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/gi;
+const INTERNAL_FIELD_RE =
+  /\b(?:company_id|lead_id|conversation_id|appointment_id|target_appointment_id|cancellation_target_appointment_id|reschedule_target_appointment_id|reschedule_selection_pending|reschedule_new_date|reschedule_new_start_time|reschedule_confirmation_received)\b/i;
+
+function customerVisibleText(value: string, max: number): string {
+  return value
+    .slice(0, max)
+    .split(/\r?\n/)
+    .filter((line) => !INTERNAL_FIELD_RE.test(line))
+    .join("\n")
+    .replace(UUID_ANY_RE, "")
+    .replace(/\[object Object\]/gi, "")
+    .replace(/[ \t]{2,}/g, " ")
+    .trim();
+}
+
 function normalizeQuickReplies(...sources: unknown[]): QuickReply[] {
   const replies: QuickReply[] = [];
 
@@ -62,8 +78,8 @@ function normalizeQuickReplies(...sources: unknown[]): QuickReply[] {
         const entry = item as Record<string, unknown>;
         const rawLabel = entry["label"] ?? entry["title"] ?? entry["time"] ?? entry["start"];
         const rawValue = entry["value"] ?? entry["message"] ?? rawLabel;
-        label = typeof rawLabel === "string" ? rawLabel.trim() : "";
-        value = typeof rawValue === "string" ? rawValue.trim() : "";
+        label = typeof rawLabel === "string" ? customerVisibleText(rawLabel, 120) : "";
+        value = typeof rawValue === "string" ? customerVisibleText(rawValue, 500) : "";
       }
 
       if (!label || !value || label.length > 120 || value.length > 500) continue;
@@ -170,7 +186,9 @@ export async function sendChatMessage(input: unknown) {
       : null;
 
   return {
-    message: messageText,
+    message:
+      customerVisibleText(messageText, 4_000) ||
+      "Ihre Anfrage wurde verarbeitet. Bitte wählen Sie den nächsten Schritt aus.",
     conversation_id:
       typeof responseBody.conversation_id === "string" ? responseBody.conversation_id : null,
     // Present from prepared v11 onwards; live v3 omits these.
@@ -187,7 +205,7 @@ export async function sendChatMessage(input: unknown) {
     progress_percent: progress,
     summary:
       typeof responseBody.summary === "string" && responseBody.summary.trim()
-        ? responseBody.summary.trim().slice(0, 2000)
+        ? customerVisibleText(responseBody.summary, 2_000)
         : null,
   };
 }
