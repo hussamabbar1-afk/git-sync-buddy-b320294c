@@ -1,6 +1,6 @@
 # حالة مشروع ZunftEcho
 
-> آخر تحديث: 31 أغسطس 2026 — المنطقة الزمنية `Europe/Berlin`  
+> آخر تحديث: 1 سبتمبر 2026 — المنطقة الزمنية `Europe/Berlin`  
 > الغرض: هذا الملف هو نقطة البداية الإلزامية لأي محادثة مستقبلية تخص المشروع.  
 > اقرأ أيضًا `AGENTS.md` قبل أي تعديل. عند التعارض، الكود والحالة الحية الأحدث يتقدمان على الوثائق المؤرخة.
 
@@ -130,6 +130,17 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
 | تذكير الموعد | منفذ عبر outbound queue/Cron | القناة الفعلية Email حاليًا |
 | بوابة العميل النهائي | منفذة | Token محدود الصلاحية، متابعة الحالة والتحكم بالمواعيد |
 | مزامنة Google Calendar/Outlook | مؤجلة | مخطط لها معماريًا وليست متصلة |
+
+تحسينات قبول 1 سبتمبر 2026 للـWidget على الهاتف:
+
+- عنوان Reverse Geocoding أصبح بريديًا مختصرًا من حقول OpenStreetMap المنظمة، مثل
+  `Coloniaallee 34, 12524 Berlin`، بدل `display_name` الطويل واللواحق الإدارية غير اللازمة.
+- بطاقة العنوان تحتوي زر إغلاق وزر `Abbrechen`، وتحذف الإحداثيات غير المؤكدة عند الإلغاء،
+  وتُغلق بعد التأكيد ولا تعيد إرسال الموقع مع كل رسالة لاحقة.
+- الردود والملخصات وQuick Replies تُنظف على الخادم والعميل من UUIDs ومفاتيح حالة الحجز التقنية؛
+  لم يُثبت تسريب صفوف قاعدة بيانات، لكن أُضيف Defense-in-depth لمنع ظهور artifacts تقنية.
+- رفع الصور يتحقق من JPEG/PNG/WebP فعليًا عبر Magic bytes، لا من MIME المعلن فقط، وينظف اسم
+  الملف ويرفض Multipart التالف بـHTTP 400. بقي الحد ثلاثة صور والتخزين الخاص وربط الشركة/Lead.
 
 ## 9. حالة الميزات — التنبيهات والأتمتة
 
@@ -299,8 +310,11 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
 - Cloudflare account ID: `3bceebd97b02f714c649114469aeaabd`
 - Cloudflare zone ID: `2cb3ac449c41ea5f9eeef882c5501d12`
 - Worker: `hussamabbar1-afk-git-sync-buddy-b320294c`
-- Current production Worker version: `c4b60e40-3c30-4c6b-a938-e1813fc13f91` at 100%
-- Current deployment ID: `cb91cf48-79df-4480-9355-eb5560c474b6`
+- Current production Worker version: `5eef905e-870c-423a-80e8-39c8977df010` at 100%
+- Current deployment ID: `4c4134d8-08a3-429e-a530-aa601eadd949`
+- Supabase Edge Functions after the mobile Widget hardening: `chat-orchestrator` v8,
+  `reverse-geocode` v2, and `chat-attachment` v3; all `ACTIVE` with `verify_jwt=false` because
+  their public Widget contracts validate widget/origin/conversation capability internally.
 
 لا تُضف مفاتيح أو كلمات مرور بجانب هذه المعرفات.
 
@@ -321,6 +335,19 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
 - HSTS/CSP موجودان على صفحات Worker الديناميكية التي فُحصت.
 - آخر قبول تشغيلي كامل للـChat والحجز والتنبيهات والـCron موثق في
   `docs/technical-acceptance-2026-08-29.md` و`docs/operational-rehearsal-2026-08-29.md`.
+
+بتاريخ 1 سبتمبر 2026:
+
+- أصلحت واجهة الموقع على الهاتف، تنسيق Reverse Geocoding، تحصين مخرجات تغيير الموعد، وفحص
+  محتوى الصور. آخر Commit وظيفي: `229a738`.
+- TypeScript `tsc --noEmit`: نجح. ESLint: صفر أخطاء وعشرة تحذيرات Fast Refresh القديمة فقط.
+- Production build: نجح. اختبارات العنوان وMagic bytes ومنظف المخرجات التقنية: نجحت.
+- Supabase `bundleOnly` نجح قبل نشر الدوال؛ Smoke حي أعاد عنوانًا مختصرًا
+  `Pariser Platz 1, 10117 Berlin`، وMultipart تالفًا بـHTTP 400 دون إنشاء بيانات عميل.
+- Cloudflare Version Preview `5eef905e-...` اجتاز Go/No-Go كاملًا في وضع `marketing=held`، ثم
+  رُقي إلى 100%. فحص الإنتاج النهائي نجح وبقي `/anfrage-check` على HTTP 404.
+- فحص Browser للـWidget على الهاتف نجح: فتح بطاقة العنوان، وجود X و`Abbrechen`، الإغلاق الفعلي،
+  وتحميل أدوات الموقع والصورة بلا أخطاء Console. لم تُرسل صورة شخصية أو عنوان المالك في الاختبار.
 
 ## 21. الديون والمعلقات المعروفة
 
@@ -365,6 +392,8 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
 5. الإصدار `c4b60e40-...` رُقّي إلى 100% واجتاز Production smoke كاملًا.
 6. رُفع التاريخ إلى GitHub عبر Merge غير تدميري `5252812...`.
 7. حُذفت ملفات OAuth المؤقتة لـGitHub وCloudflare.
+8. عولج تقرير الهاتف الخاص بتغيير الموعد والموقع والصور؛ نُشرت دوال Supabase بالإصدارات v8/v2/v3
+   وإصدار Cloudflare `5eef905e-...` عند 100%، واجتازت فحوصات Preview والإنتاج.
 
 **الخطوة العملية التالية قبل 10 سبتمبر:**
 
