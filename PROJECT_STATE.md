@@ -468,6 +468,7 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
     Supabase ونُشرت `pilot-request` v7. أضيفت خطة تشغيل واكتساب لعشرة أيام بمصادر قابلة للقياس
     وقياس يومي من دون Newsletter أو Tracker أو Cold outreach، ثم نُشر إصدار Cloudflare
     `bbfdff46-...` عند 100% بعد نجاح 17 اختبارًا وTypeScript وLint وBuild وPreview/Production smoke.
+    Commit التنفيذ المرفوع إلى `origin/main`: `6535882`.
 
 **الخطوة العملية التالية قبل 10 سبتمبر:**
 
