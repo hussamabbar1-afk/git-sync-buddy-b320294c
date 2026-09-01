@@ -12,7 +12,8 @@ persönliche Prüfung nicht.
 ## Eingang prüfen
 
 1. Benachrichtigungs-E-Mail und Datensatz in `pilot_requests` abgleichen.
-2. Firma, Ansprechpartner, Website, Telefonnummer, Quelle und Freitext prüfen.
+2. Firma, Ansprechpartner, Website, Telefonnummer, Quelle, Teamgröße, Anfragevolumen,
+   Hauptproblem, Startfenster, Audit-Wunsch und Freitext prüfen.
 3. Erkennbaren Spam schließen; einen Werbewiderspruch sofort als
    `do_not_contact_at` dokumentieren.
 4. Prüfen, ob der Betrieb zum ersten Fokus passt: SHK, eigene Website,
@@ -66,6 +67,8 @@ oder dauerhafter Ungeeignetheit.
 ## Abschlusskontrolle pro Anfrage
 
 - Quelle ist gespeichert und plausibel.
+- Qualifizierungsfelder sind vollständig oder als Altkontakt nachvollziehbar leer.
+- Ein manueller Website-Check erfolgt nur, wenn `audit_requested = true` ist.
 - Erste Reaktion erfolgte innerhalb eines Werktags.
 - Status und Gesprächsnotiz stimmen überein.
 - Nächster Schritt hat ein Datum oder die Anfrage ist sauber abgeschlossen.

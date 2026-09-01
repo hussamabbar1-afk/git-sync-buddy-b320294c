@@ -4,6 +4,7 @@ const testFiles = [
   "supabase/functions/reverse-geocode/address.test.ts",
   "supabase/functions/chat-attachment/image-validation.test.ts",
   "supabase/functions/chat-orchestrator/orchestrator.test.ts",
+  "supabase/functions/pilot-request/qualification.test.ts",
   "supabase/functions/stripe-webhook/stripe-webhook.test.ts",
   "supabase/functions/send-business-document/pdf.smoke.test.ts",
 ];

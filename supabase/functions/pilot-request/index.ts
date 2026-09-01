@@ -1,5 +1,7 @@
 import { withSupabase } from "npm:@supabase/server@^1";
 
+import { parsePilotQualification, type PilotQualification } from "./qualification.ts";
+
 type JsonObject = Record<string, unknown>;
 
 const ALLOWED_ORIGINS = new Set([
@@ -9,6 +11,31 @@ const ALLOWED_ORIGINS = new Set([
   "http://localhost:3000",
   "http://localhost:5173",
 ]);
+
+const QUALIFICATION_LABELS: Record<string, string> = {
+  solo: "Solo-Betrieb",
+  "2-5": "2–5 Mitarbeitende",
+  "6-10": "6–10 Mitarbeitende",
+  "11-plus": "Mehr als 10 Mitarbeitende",
+  "0-5": "0–5",
+  "6-15": "6–15",
+  "16-30": "16–30",
+  "31-plus": "Mehr als 30",
+  unknown: "Noch unbekannt",
+  "incomplete-details": "Wichtige Angaben fehlen",
+  "slow-response": "Antworten dauern zu lange",
+  "appointment-coordination": "Termine kosten zu viel Abstimmung",
+  "callback-load": "Zu viele Rückrufe",
+  other: "Etwas anderes",
+  "after-clearance": "Sobald der Pilot freigegeben ist",
+  september: "Im September",
+  october: "Im Oktober",
+  later: "Später",
+};
+
+function qualificationLabel(value: string | null): string {
+  return value ? (QUALIFICATION_LABELS[value] ?? value) : "–";
+}
 
 class RequestFailure extends Error {
   constructor(
@@ -120,6 +147,13 @@ export default {
       const message = text(payload, "message", 2000);
       const sourceValue = text(payload, "source", 80).toLowerCase();
       const source = /^[a-z0-9][a-z0-9:-]{0,79}$/.test(sourceValue) ? sourceValue : "website";
+      let qualification: PilotQualification;
+
+      try {
+        qualification = parsePilotQualification(payload);
+      } catch {
+        throw new RequestFailure(422, "invalid_request", "Bitte prüfen Sie Ihre Angaben.");
+      }
 
       if (company.length < 2 || contactName.length < 2 || !isEmail(email) || !isWebsite(website)) {
         throw new RequestFailure(422, "invalid_request", "Bitte prüfen Sie Ihre Angaben.");
@@ -157,6 +191,11 @@ export default {
           message: message || null,
           source,
           fingerprint_hash: fingerprint,
+          team_size_range: qualification.teamSizeRange,
+          monthly_inquiry_range: qualification.inquiryVolumeRange,
+          primary_challenge: qualification.primaryChallenge,
+          preferred_start_window: qualification.preferredStartWindow,
+          audit_requested: qualification.auditRequested,
         })
         .select("id")
         .single();
@@ -176,6 +215,11 @@ export default {
           ["Telefon", phone || "–"],
           ["Website", website || "–"],
           ["Quelle", source],
+          ["Teamgröße", qualificationLabel(qualification.teamSizeRange)],
+          ["Website-Anfragen/Monat", qualificationLabel(qualification.inquiryVolumeRange)],
+          ["Größte Herausforderung", qualificationLabel(qualification.primaryChallenge)],
+          ["Gewünschter Start", qualificationLabel(qualification.preferredStartWindow)],
+          ["Manueller Website-Check", qualification.auditRequested ? "Ja" : "Nein"],
           ["Nachricht", message || "–"],
         ]
           .map(
@@ -201,7 +245,7 @@ export default {
               replyTo: { email, name: contactName.slice(0, 70) },
               subject: `Neue Pilotanfrage – ${company}`,
               htmlContent: `<!doctype html><html lang="de"><body style="margin:0;background:#f3f7fb;font-family:Arial,sans-serif;color:#102033"><div style="max-width:640px;margin:0 auto;padding:32px 20px"><div style="display:flex;align-items:center;gap:12px;margin:0 0 18px"><img src="https://zunftecho.de/zunftecho-mark.png" width="44" height="44" alt="ZunftEcho" style="display:block;border-radius:12px"><strong style="font-size:20px">ZunftEcho</strong></div><div style="background:#fff;border:1px solid #dbe5ef;border-radius:16px;padding:32px"><div style="width:52px;height:4px;background:#e97824;border-radius:99px;margin-bottom:22px"></div><h2 style="margin:0 0 24px">Neue ZunftEcho-Pilotanfrage</h2>${details}</div></div></body></html>`,
-              textContent: `Neue ZunftEcho-Pilotanfrage\n\nFirma: ${company}\nAnsprechpartner: ${contactName}\nE-Mail: ${email}\nTelefon: ${phone || "–"}\nWebsite: ${website || "–"}\nQuelle: ${source}\n\n${message || "–"}`,
+              textContent: `Neue ZunftEcho-Pilotanfrage\n\nFirma: ${company}\nAnsprechpartner: ${contactName}\nE-Mail: ${email}\nTelefon: ${phone || "–"}\nWebsite: ${website || "–"}\nQuelle: ${source}\nTeamgröße: ${qualificationLabel(qualification.teamSizeRange)}\nWebsite-Anfragen/Monat: ${qualificationLabel(qualification.inquiryVolumeRange)}\nGrößte Herausforderung: ${qualificationLabel(qualification.primaryChallenge)}\nGewünschter Start: ${qualificationLabel(qualification.preferredStartWindow)}\nManueller Website-Check: ${qualification.auditRequested ? "Ja" : "Nein"}\n\n${message || "–"}`,
             }),
             signal: AbortSignal.timeout(15_000),
           });

@@ -71,7 +71,7 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
 | الصفحة الرئيسية `zunftecho.de`         | منفذة ومفعّلة             | هوية ZunftEcho، CTA للـPilot والـDemo                                                                                |
 | صفحة الأسعار `/preise`                 | منفذة ومفعّلة             | 99 € Pilot و149 € شهريًا مع حدود واضحة                                                                               |
 | Live Demo `/demo`                      | منفذة ومفعّلة             | ثلاثة سيناريوهات SHK عميقة بخمس مراحل، تعرض تزامن منظور العميل مع سجل التشغيل والتوجيه والموعد؛ لا تكتب بيانات إنتاج |
-| Pilot request `/registrieren`          | منفذة ومفعّلة             | يحفظ المصدر ويرسل تنبيهًا؛ لا يبدأ دفعًا أو عقدًا                                                                    |
+| Founding Pilot `/registrieren`         | منفذة ومفعّلة             | خمسة أماكن معلنة؛ يجمع المصدر وحقول تأهيل تشغيلية واختيار Website-Check صريحًا؛ لا يبدأ دفعًا أو عقدًا               |
 | مركز الثقة `/vertrauen`                | منفذ ومفعّل               | حدود AI، الأدلة القابلة للفحص، لا مراجع مختلقة                                                                       |
 | Impressum / AGB / Datenschutz          | منفذة ومفعّلة بصياغة حذرة | يجب تحديثها بالبيانات الرسمية ومراجعتها مهنيًا قبل البيع الحي                                                        |
 | Wissen + المقالات المتخصصة             | منفذة ومفعّلة             | مركز معرفة وثلاثة مسارات محتوى عملية                                                                                 |
@@ -86,6 +86,7 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
 | 30-day organic campaign                | مجهزة وغير منشورة         | 12 منشور LinkedIn وخطة أسبوعية، بلا رسائل جماعية                                                                     |
 | 90-day growth plan                     | مجهزة وغير منشورة         | توسع من الإشارة الأولى إلى المحتوى المتخصص والشركاء وPilot proof؛ Paid محكوم ببوابات و150 € كحد اختبار فقط           |
 | أول موجة خطابات                        | مجهزة رقميًا              | عشر رسائل A4 شخصية وملف طباعة موحد؛ الطباعة/الإرسال لم يُؤكدا                                                        |
+| خطة اكتساب 10 أيام                     | مجهزة تشغيليًا            | Funnel تأهيلي ومصادر وروتين يومي في `founding-pilot-10-tage-de.md`؛ لا يفتح Cold outreach أو الحملة المحجوبة         |
 | Vertrauensnachweis PDF                 | منفذ                      | موجود في `output/pdf/ZunftEcho-Vertrauensnachweis.pdf` داخل المشروع                                                  |
 
 ## 7. حالة الميزات — الحساب وDashboard
@@ -325,13 +326,14 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
 - Cloudflare account ID: `3bceebd97b02f714c649114469aeaabd`
 - Cloudflare zone ID: `2cb3ac449c41ea5f9eeef882c5501d12`
 - Worker: `hussamabbar1-afk-git-sync-buddy-b320294c`
-- Current production Worker version: `831c2212-424f-4214-b677-4f2ba59d4ca2` at 100%
-- آخر Deployment موثق أنشئ في `2026-09-01T12:37:01.410Z` برسالة
-  `Promote audited release after preview smoke and mobile QA`، وأكد `wrangler deployments status`
-  أن النسخة أعلاه تستقبل 100% من الحركة.
+- Current production Worker version: `bbfdff46-14aa-4601-ba50-a481e2a2c166` at 100%
+- آخر Deployment موثق في 1 سبتمبر 2026 برسالة `Deploy qualified founding pilot intake`؛ رُفعت
+  النسخة منفصلة، اجتازت Preview Go/No-Go، ثم أكد Wrangler تحويل 100% من الحركة إليها.
 - Supabase Edge Functions after the mobile Widget hardening: `chat-orchestrator` v8,
   `reverse-geocode` v2, and `chat-attachment` v3; all `ACTIVE` with `verify_jwt=false` because
   their public Widget contracts validate widget/origin/conversation capability internally.
+- `pilot-request` v7 نشطة مع `verify_jwt=false` لأن النموذج عام، وتحميه Origin allowlist وHoneypot
+  وRate limit وقيود حجم/نوع؛ الكتابة تتم بـService Role إلى جدول RLS بلا منح `anon/authenticated`.
 
 لا تُضف مفاتيح أو كلمات مرور بجانب هذه المعرفات.
 
@@ -397,6 +399,13 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
   بمفاتيح Widget أو Tokens عالية العشوائية أو `auth.uid()` و`search_path` ثابت، وليست تسريبًا.
 - اجتاز إصدار Cloudflare المعزول `831c2212-424f-4214-b677-4f2ba59d4ca2` فحص المعاينة والهاتف، ثم
   رُقي إلى 100%. أعاد فحص الإنتاج Go/No-Go كاملًا وبقي `/anfrage-check` على HTTP 404.
+- حُوّل `/registrieren` إلى مدخل مؤهل لخمسة Gründungspiloten مع Teamgröße وحجم الاستفسارات
+  والمشكلة الأساسية ونافذة البدء وOpt-in مستقل لفحص الموقع اليدوي. Migration
+  `20260901153000_add_founding_pilot_qualification.sql` مطبقة؛ RLS مفعّل، لا منح عامة، وعدد
+  الطلبات بقي صفرًا بعد اختبارات 403/422 التي لا تكتب بيانات.
+- نجحت 17/17 اختبارات عبر `npm test`، وTypeScript وESLint وProduction build و`git diff --check`.
+  نُشرت `pilot-request` v7، ثم اجتاز إصدار Cloudflare `bbfdff46-14aa-4601-ba50-a481e2a2c166`
+  فحص المعاينة والإنتاج في وضع `marketing=held` وأصبح عند 100%؛ بقي `/anfrage-check` HTTP 404.
 
 ## 21. الديون والمعلقات المعروفة
 
@@ -455,11 +464,17 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
     الخصوصية والشروط على الهاتف، أزيلت صلاحيات `anon` الزائدة وتحذيرات Fast Refresh المنظمة،
     وأضيف `npm test` وترويسات الأمان للملفات الساكنة. نُشر إصدار `831c2212-...` عند 100% بعد
     نجاح Preview وProduction smoke وفحص Browser نظيف.
+13. أُطلق مدخل «خمسة Gründungspiloten» المؤهل على `/registrieren`، وطُبقت حقوله المقيدة في
+    Supabase ونُشرت `pilot-request` v7. أضيفت خطة تشغيل واكتساب لعشرة أيام بمصادر قابلة للقياس
+    وقياس يومي من دون Newsletter أو Tracker أو Cold outreach، ثم نُشر إصدار Cloudflare
+    `bbfdff46-...` عند 100% بعد نجاح 17 اختبارًا وTypeScript وLint وBuild وPreview/Production smoke.
 
 **الخطوة العملية التالية قبل 10 سبتمبر:**
 
-- لا تُضف ميزات عشوائية جديدة. أكد المالك في 1 سبتمبر اكتمال فحص الاشتراكات، الـProbedruck،
-  وتجهيز الخطابات العشرة. بقيت المتابعة التقنية، اختبار البريد، وتجربة Demo كلاميًا.
+- نفّذ لوحة المتابعة اليومية ومصادر الروابط وفق `go-to-market/founding-pilot-10-tage-de.md`؛ مدخل
+  التأهيل العام جاهز، لكن لا ترسل رسائل باردة ولا تنشر `/anfrage-check` ولا تفعّل Paid قبل البوابة.
+- أكد المالك في 1 سبتمبر اكتمال فحص الاشتراكات والـProbedruck وتجهيز الخطابات العشرة؛ إرسالها
+  الخارجي يبقى مرتبطًا ببوابة Gewerbe/الإطلاق المسجلة، بينما يمكن تجهيز القائمة والمواد داخليًا.
 - في 8 أو 9 سبتمبر: شغّل Go/No-Go النهائي حسب `go-to-market/prelaunch-runbook-de.md`.
 - في 10 سبتمبر: اتبع ترتيب التفعيل القانوني والضريبي وStripe في القسم 11، ثم غيّر
   `acquisitionCampaignLive` إلى `true` فقط بعد موافقة إطلاق صريحة واختبار `--marketing=live`.
@@ -494,6 +509,7 @@ npm run check:prelaunch -- --base=https://zunftecho.de --marketing=held
 - `go-to-market/erste-briefwelle-10-de.md`
 - `go-to-market/druckfreigabe-checkliste-de.md`
 - `go-to-market/pilot-anfrage-prozess-de.md`
+- `go-to-market/founding-pilot-10-tage-de.md`
 
 ## 25. قاعدة تحديث هذا الملف
 

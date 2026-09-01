@@ -28,6 +28,39 @@ brief-protoss
 brief-a-m
 ```
 
+## Zusätzliche Quellen des Founding-Pilot-Sprints
+
+```text
+linkedin-founding-pilot
+referral-founding-pilot
+event-it-sicherheitstag
+partner-webagentur
+direct-demo
+```
+
+Diese Quellen werden nur bei einer tatsächlich genutzten, freiwilligen Kontaktstrecke eingesetzt.
+Ein Seitenaufruf wird weiterhin nicht gespeichert.
+
+## Qualifizierungsübersicht
+
+```sql
+select
+  source,
+  team_size_range,
+  monthly_inquiry_range,
+  primary_challenge,
+  preferred_start_window,
+  audit_requested,
+  status,
+  created_at
+from public.pilot_requests
+where do_not_contact_at is null
+order by created_at desc;
+```
+
+Die Abfrage ist ausschließlich für die manuelle interne Prüfung. Ergebnisse werden nicht als
+öffentliche Kennzahl oder Erfolgsbeleg verwendet.
+
 ## Bericht im Supabase SQL Editor
 
 Diese Abfrage liest nur aggregierte Zahlen. Sie erzeugt weder eine Tabelle noch
@@ -60,18 +93,18 @@ order by source;
 
 ## Manuelles Versandprotokoll
 
-| Quelle | versendet am | Antwort | Demo/Pilot | Widerspruch | nächster Schritt |
-| --- | --- | --- | --- | --- | --- |
-| brief-ro-do |  |  |  |  |  |
-| brief-bolowski |  |  |  |  |  |
-| brief-grelak |  |  |  |  |  |
-| brief-koblitz |  |  |  |  |  |
-| brief-wilcks |  |  |  |  |  |
-| brief-tim-gaertner |  |  |  |  |  |
-| brief-roesch |  |  |  |  |  |
-| brief-tschichholz |  |  |  |  |  |
-| brief-protoss |  |  |  |  |  |
-| brief-a-m |  |  |  |  |  |
+| Quelle             | versendet am | Antwort | Demo/Pilot | Widerspruch | nächster Schritt |
+| ------------------ | ------------ | ------- | ---------- | ----------- | ---------------- |
+| brief-ro-do        |              |         |            |             |                  |
+| brief-bolowski     |              |         |            |             |                  |
+| brief-grelak       |              |         |            |             |                  |
+| brief-koblitz      |              |         |            |             |                  |
+| brief-wilcks       |              |         |            |             |                  |
+| brief-tim-gaertner |              |         |            |             |                  |
+| brief-roesch       |              |         |            |             |                  |
+| brief-tschichholz  |              |         |            |             |                  |
+| brief-protoss      |              |         |            |             |                  |
+| brief-a-m          |              |         |            |             |                  |
 
 ## Auswertung nach 14 Tagen
 
