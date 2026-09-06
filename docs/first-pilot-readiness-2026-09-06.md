@@ -37,6 +37,23 @@ ZunftEcho:
 The score is only a queue-prioritisation aid. It does not infer revenue, team workload, location,
 decision authority, or contractual readiness, and it never accepts a pilot automatically.
 
+## Sender identity correction
+
+The owner confirmed that the first readiness notification displayed the legacy sender name
+`HandwerkAI`, although the message body and logo were correctly branded as ZunftEcho. The cause
+was the production secret `BREVO_SENDER_NAME`, which still carried the pre-rebrand value.
+
+- The shared Supabase secret was updated to `ZunftEcho` on 6 September 2026.
+- A post-change synthetic request was accepted and its notification recorded as sent without an
+  error; the exact test row was then deleted.
+- The `pilot-request` function was additionally hardened to send platform pilot notifications with
+  the fixed display name `ZunftEcho`, so a stale shared secret cannot reintroduce this issue.
+- The current production function is `pilot-request` version 10. Retrieval of the deployed source
+  confirmed the fixed sender name and no `BREVO_SENDER_NAME` lookup in this function.
+- Other current mail paths use either the corrected shared setting or the current tenant company
+  name. No unsent outbound message containing the legacy name exists. One already-sent invitation
+  from 28 August remains as immutable historical evidence only.
+
 ## Verification
 
 - Saved tests: 20/20 passed.

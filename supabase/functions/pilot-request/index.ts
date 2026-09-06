@@ -245,7 +245,7 @@ export default {
             body: JSON.stringify({
               sender: {
                 email: senderEmail,
-                name: (Deno.env.get("BREVO_SENDER_NAME")?.trim() || "ZunftEcho").slice(0, 70),
+                name: "ZunftEcho",
               },
               to: [{ email: notificationEmail, name: "ZunftEcho" }],
               replyTo: { email, name: contactName.slice(0, 70) },
