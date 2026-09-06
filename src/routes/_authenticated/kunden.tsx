@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Loader2, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { AppShell, PageHeader } from "@/components/app-shell";
+import { SkeletonRows } from "@/components/app-loading";
 import { CreateCustomerDialog } from "@/components/create-customer-dialog";
 import { CustomerDetailSheet } from "@/components/customer-detail-sheet";
 import { Button } from "@/components/ui/button";
@@ -212,10 +213,7 @@ function KundenPage() {
         </CardHeader>
         <CardContent>
           {loading ? (
-            <div className="flex items-center justify-center gap-2 py-10 text-sm text-muted-foreground">
-              <Loader2 className="h-4 w-4 animate-spin" />
-              Kunden werden geladen …
-            </div>
+            <SkeletonRows rows={5} />
           ) : error ? (
             <p className="py-10 text-center text-sm text-destructive">{error}</p>
           ) : (

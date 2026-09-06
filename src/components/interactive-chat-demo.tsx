@@ -1,19 +1,57 @@
 import { Bot, CalendarCheck, CheckCircle2, RotateCcw, UserCheck } from "lucide-react";
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
 import { Progress } from "@/components/ui/progress";
+import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
 
 type DemoStage = 0 | 1 | 2 | 3;
 
 const serviceOptions = ["Heizung ausgefallen", "Wasserleck", "Wartung anfragen"];
 const locationOptions = ["12043 Berlin-Neukölln", "12347 Berlin-Britz", "Anderer Einsatzort"];
 const appointmentOptions = ["Morgen · 08:00–10:00", "Morgen · 10:00–12:00", "Rückruf statt Termin"];
+const previewMessages = [
+  "Meine Heizung ist seit heute Morgen ausgefallen.",
+  "Der Einsatzort ist in 12524 Berlin.",
+  "Morgen zwischen 08:00 und 10:00 Uhr passt gut.",
+];
 
 export function InteractiveChatDemo() {
   const [stage, setStage] = useState<DemoStage>(0);
   const [service, setService] = useState(serviceOptions[0]!);
   const [location, setLocation] = useState(locationOptions[0]!);
   const [appointment, setAppointment] = useState(appointmentOptions[0]!);
+  const [previewIndex, setPreviewIndex] = useState(0);
+  const [previewLength, setPreviewLength] = useState(0);
+  const [pageVisible, setPageVisible] = useState(true);
+  const reduceMotion = usePrefersReducedMotion();
+
+  useEffect(() => {
+    const updateVisibility = () => setPageVisible(document.visibilityState === "visible");
+    updateVisibility();
+    document.addEventListener("visibilitychange", updateVisibility);
+    return () => document.removeEventListener("visibilitychange", updateVisibility);
+  }, []);
+
+  useEffect(() => {
+    if (stage !== 0 || !pageVisible) return;
+    const message = previewMessages[previewIndex]!;
+    if (reduceMotion) {
+      setPreviewLength(message.length);
+      return;
+    }
+
+    const delay = previewLength < message.length ? 38 : 1550;
+    const timer = window.setTimeout(() => {
+      if (previewLength < message.length) {
+        setPreviewLength((current) => current + 1);
+      } else {
+        setPreviewIndex((current) => (current + 1) % previewMessages.length);
+        setPreviewLength(0);
+      }
+    }, delay);
+
+    return () => window.clearTimeout(timer);
+  }, [pageVisible, previewIndex, previewLength, reduceMotion, stage]);
 
   const chooseService = (value: string) => {
     setService(value);
@@ -46,7 +84,13 @@ export function InteractiveChatDemo() {
           </span>
           <div>
             <p className="text-sm font-semibold">Lena · Beispielname</p>
-            <p className="text-xs text-emerald-600">● Online · Name frei wählbar</p>
+            <p className="flex items-center gap-1.5 text-xs text-emerald-600">
+              <span
+                className="ze-online-dot size-2 rounded-full bg-emerald-500"
+                aria-hidden="true"
+              />
+              Online · Name frei wählbar
+            </p>
           </div>
         </div>
         <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
@@ -66,7 +110,25 @@ export function InteractiveChatDemo() {
         <DemoMessage>Guten Tag! Wobei können wir Ihnen helfen?</DemoMessage>
 
         {stage === 0 ? (
-          <DemoChoices options={serviceOptions} onChoose={chooseService} />
+          <>
+            <div
+              className="rounded-xl border border-sky-100 bg-white/80 p-3 shadow-sm"
+              aria-hidden="true"
+            >
+              <div className="mb-2 flex items-center justify-between gap-3 text-[10px] font-semibold tracking-wide text-slate-400 uppercase">
+                <span>Automatische Vorschau</span>
+                <span className="flex items-center gap-1.5 normal-case">
+                  <span className="ze-typing-dot" /> Lena tippt
+                </span>
+              </div>
+              <p className="min-h-10 text-xs leading-5 text-slate-600">
+                {previewMessages[previewIndex]!.slice(0, previewLength)}
+                <span className="ze-typing-cursor" />
+              </p>
+            </div>
+            <span className="sr-only">Beispielvorschau: {previewMessages[previewIndex]}</span>
+            <DemoChoices options={serviceOptions} onChoose={chooseService} />
+          </>
         ) : (
           <>
             <DemoMessage user>{service}</DemoMessage>

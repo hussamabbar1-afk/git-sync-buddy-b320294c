@@ -3,6 +3,8 @@ import { Bell, Building2, CreditCard, ImageIcon, Key, Loader2, User } from "luci
 import { useEffect, useState } from "react";
 
 import { AppShell, PageHeader } from "@/components/app-shell";
+import { PageLoadingSkeleton } from "@/components/app-loading";
+import { ActionConfirmation } from "@/components/motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -161,11 +163,17 @@ function SettingsPage() {
     defaultNotificationPreferences,
   );
   const [notificationSaving, setNotificationSaving] = useState(false);
-  const [notificationNotice, setNotificationNotice] = useState<string | null>(null);
+  const [notificationNotice, setNotificationNotice] = useState<{
+    kind: "success" | "error";
+    text: string;
+  } | null>(null);
   const [logoPath, setLogoPath] = useState<string | null>(null);
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
   const [logoSaving, setLogoSaving] = useState(false);
-  const [logoNotice, setLogoNotice] = useState<string | null>(null);
+  const [logoNotice, setLogoNotice] = useState<{
+    kind: "success" | "error";
+    text: string;
+  } | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -337,15 +345,18 @@ function SettingsPage() {
     setNotificationSaving(false);
     setNotificationNotice(
       error
-        ? `Benachrichtigungen konnten nicht gespeichert werden: ${error.message}`
-        : "Ihre persönlichen Benachrichtigungen wurden gespeichert.",
+        ? {
+            kind: "error",
+            text: `Benachrichtigungen konnten nicht gespeichert werden: ${error.message}`,
+          }
+        : { kind: "success", text: "Ihre persönlichen Benachrichtigungen wurden gespeichert." },
     );
   };
 
   const uploadCompanyLogo = async (file: File) => {
     if (!companyId || logoSaving) return;
     if (!file.type.startsWith("image/") || file.size > 2 * 1024 * 1024) {
-      setLogoNotice("Bitte wählen Sie ein Bild mit höchstens 2 MB.");
+      setLogoNotice({ kind: "error", text: "Bitte wählen Sie ein Bild mit höchstens 2 MB." });
       return;
     }
     setLogoSaving(true);
@@ -358,7 +369,7 @@ function SettingsPage() {
       .upload(path, file, { contentType: file.type, upsert: false });
     if (uploadError) {
       setLogoSaving(false);
-      setLogoNotice("Das Logo konnte nicht hochgeladen werden.");
+      setLogoNotice({ kind: "error", text: "Das Logo konnte nicht hochgeladen werden." });
       return;
     }
     const { error: updateError } = await supabase
@@ -368,7 +379,7 @@ function SettingsPage() {
     if (updateError) {
       await supabase.storage.from("company-files").remove([path]);
       setLogoSaving(false);
-      setLogoNotice("Das Logo konnte nicht gespeichert werden.");
+      setLogoNotice({ kind: "error", text: "Das Logo konnte nicht gespeichert werden." });
       return;
     }
     if (logoPath) await supabase.storage.from("company-files").remove([logoPath]);
@@ -378,16 +389,16 @@ function SettingsPage() {
     setLogoPath(path);
     setLogoUrl(signed?.signedUrl ?? null);
     setLogoSaving(false);
-    setLogoNotice("Unternehmenslogo gespeichert.");
+    setLogoNotice({ kind: "success", text: "Unternehmenslogo gespeichert." });
   };
 
   if (loading) {
     return (
       <AppShell>
-        <PageHeader title="Einstellungen" description="Verwalten Sie Ihre Kontoeinstellungen." />
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <Loader2 className="size-4 animate-spin" /> Einstellungen werden geladen …
-        </div>
+        <PageLoadingSkeleton
+          title="Einstellungen"
+          description="Ihre Kontoeinstellungen werden vorbereitet."
+        />
       </AppShell>
     );
   }
@@ -466,9 +477,9 @@ function SettingsPage() {
                   </p>
                 ) : null}
                 {accountSuccess ? (
-                  <p className="rounded-md border border-primary/40 bg-primary/10 p-3 text-sm text-primary sm:col-span-2">
+                  <ActionConfirmation key={accountSuccess} className="sm:col-span-2">
                     {accountSuccess}
-                  </p>
+                  </ActionConfirmation>
                 ) : null}
               </CardContent>
             </Card>
@@ -508,7 +519,13 @@ function SettingsPage() {
                     PNG, JPG oder WebP · maximal 2 MB.
                   </p>
                   {logoNotice ? (
-                    <p className="text-xs text-muted-foreground">{logoNotice}</p>
+                    logoNotice.kind === "success" ? (
+                      <ActionConfirmation key={logoNotice.text}>
+                        {logoNotice.text}
+                      </ActionConfirmation>
+                    ) : (
+                      <p className="text-xs text-destructive">{logoNotice.text}</p>
+                    )
                   ) : null}
                 </CardContent>
               </Card>
@@ -649,7 +666,13 @@ function SettingsPage() {
                 Benachrichtigungen speichern
               </Button>
               {notificationNotice ? (
-                <p className="text-sm text-muted-foreground">{notificationNotice}</p>
+                notificationNotice.kind === "success" ? (
+                  <ActionConfirmation key={notificationNotice.text}>
+                    {notificationNotice.text}
+                  </ActionConfirmation>
+                ) : (
+                  <p className="text-sm text-destructive">{notificationNotice.text}</p>
+                )
               ) : null}
             </CardContent>
           </Card>
@@ -710,9 +733,9 @@ function SettingsPage() {
                 </p>
               ) : null}
               {generalSuccess ? (
-                <p className="rounded-md border border-primary/40 bg-primary/10 p-3 text-sm text-primary sm:col-span-2">
+                <ActionConfirmation key={generalSuccess} className="sm:col-span-2">
                   {generalSuccess}
-                </p>
+                </ActionConfirmation>
               ) : null}
             </CardContent>
           </Card>

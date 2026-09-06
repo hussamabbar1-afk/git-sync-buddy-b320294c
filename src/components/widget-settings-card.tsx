@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { AlertTriangle, ArrowRight, Check, Code2, Copy, Loader2, ShieldCheck } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
+import { SkeletonRows } from "@/components/app-loading";
 import { ChatWidget } from "@/components/chat-widget";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -257,8 +258,8 @@ export function WidgetSettingsCard({
           <CardTitle>Chat-Widget</CardTitle>
           <CardDescription>Einbindung auf Ihrer Website.</CardDescription>
         </CardHeader>
-        <CardContent className="flex items-center gap-2 text-sm text-muted-foreground">
-          <Loader2 className="size-4 animate-spin" /> Widget-Daten werden geladen …
+        <CardContent>
+          <SkeletonRows rows={3} />
         </CardContent>
       </Card>
     );

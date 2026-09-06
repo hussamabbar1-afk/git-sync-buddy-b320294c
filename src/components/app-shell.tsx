@@ -360,7 +360,9 @@ export function AppShell({ children }: { children: ReactNode }) {
         </header>
 
         <main className="ze-app-main flex-1 px-4 pt-5 pb-24 sm:py-7 lg:px-8 lg:py-9">
-          <div className="mx-auto w-full max-w-[96rem]">{children}</div>
+          <div key={pathname} className="ze-route-transition mx-auto w-full max-w-[96rem]">
+            {children}
+          </div>
         </main>
 
         <footer className="hidden items-center justify-end gap-4 border-t bg-card px-8 py-3 text-xs text-muted-foreground lg:flex">

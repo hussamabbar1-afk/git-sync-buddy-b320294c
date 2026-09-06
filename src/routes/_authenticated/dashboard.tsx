@@ -12,7 +12,6 @@ import {
   FileText,
   Flame,
   LifeBuoy,
-  Loader2,
   MoonStar,
   Siren,
   TrendingUp,
@@ -22,6 +21,8 @@ import { useEffect, useState } from "react";
 import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
 
 import { AppShell, PageHeader } from "@/components/app-shell";
+import { PageLoadingSkeleton } from "@/components/app-loading";
+import { CountUpNumber } from "@/components/motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -33,6 +34,7 @@ import {
 } from "@/components/ui/chart";
 import { Progress } from "@/components/ui/progress";
 import { supabase } from "@/integrations/supabase/client";
+import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
 import {
   asRecord,
   bool,
@@ -286,6 +288,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 function DashboardPage() {
+  const reduceMotion = usePrefersReducedMotion();
   const [overview, setOverview] = useState<Overview | null>(null);
   const [queue, setQueue] = useState<AttentionItem[]>([]);
   const [topLeads, setTopLeads] = useState<TopLead[]>([]);
@@ -414,10 +417,11 @@ function DashboardPage() {
   if (loading) {
     return (
       <AppShell>
-        <div className="flex items-center justify-center gap-2 py-20 text-sm text-muted-foreground">
-          <Loader2 className="h-4 w-4 animate-spin" />
-          Daten werden geladen …
-        </div>
+        <PageLoadingSkeleton
+          title="Übersicht"
+          description="Ihre Kennzahlen und nächsten Schritte werden vorbereitet."
+          cards={6}
+        />
       </AppShell>
     );
   }
@@ -505,6 +509,7 @@ function DashboardPage() {
       hint: `${d.open_leads} offene Leads`,
       icon: Users,
       to: "/leads" as const,
+      countUp: true,
     },
     {
       label: "Termine heute",
@@ -512,6 +517,7 @@ function DashboardPage() {
       hint: `${d.upcoming_appointments} kommende Termine`,
       icon: CalendarClock,
       to: "/termine" as const,
+      countUp: true,
     },
     {
       label: "Offene Aufträge",
@@ -519,6 +525,7 @@ function DashboardPage() {
       hint: `${d.in_progress_jobs} in Arbeit`,
       icon: ClipboardList,
       to: "/auftraege" as const,
+      countUp: true,
     },
     {
       label: "Offene Aufgaben",
@@ -526,6 +533,7 @@ function DashboardPage() {
       hint: d.overdue_tasks > 0 ? `${d.overdue_tasks} überfällig` : "Keine überfälligen Aufgaben",
       icon: d.overdue_tasks > 0 ? AlertTriangle : CheckSquare,
       to: "/aufgaben" as const,
+      countUp: false,
     },
     {
       label: "Menschliche Übergaben",
@@ -533,6 +541,7 @@ function DashboardPage() {
       hint: d.overdue_handoffs > 0 ? `${d.overdue_handoffs} über SLA` : "Innerhalb der SLA",
       icon: LifeBuoy,
       to: "/konversationen" as const,
+      countUp: false,
     },
     {
       label: "Offene Angebote",
@@ -540,6 +549,7 @@ function DashboardPage() {
       hint: d.expiring_quotes > 0 ? `${d.expiring_quotes} laufen bald ab` : "Keine ablaufenden",
       icon: FileText,
       to: "/angebote" as const,
+      countUp: false,
     },
   ];
 
@@ -590,7 +600,7 @@ function DashboardPage() {
       />
 
       <Card
-        className={`mb-6 overflow-hidden ${
+        className={`mb-6 overflow-hidden ${nextStep.tone === "critical" ? "ze-critical-surface" : ""} ${
           nextStep.tone === "critical"
             ? "border-red-300 bg-red-50/80 dark:border-red-900 dark:bg-red-950/25"
             : nextStep.tone === "warning"
@@ -640,69 +650,76 @@ function DashboardPage() {
         {cards.map((stat) => {
           const overdueHandoffCard =
             stat.label === "Menschliche Übergaben" && d.overdue_handoffs > 0;
+          const needsHumanAttention = stat.label === "Menschliche Übergaben" && d.needs_human > 0;
           return (
-            <Card
+            <Link
               key={stat.label}
-              className={`group h-full overflow-hidden transition-[transform,border-color,background-color,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_22px_50px_-34px_rgba(15,23,42,0.5)] ${
-                overdueHandoffCard
-                  ? "border-red-300 bg-red-50/70 shadow-sm shadow-red-100 hover:border-red-400 dark:border-red-900 dark:bg-red-950/25 dark:shadow-none"
-                  : "hover:border-primary/40 hover:bg-muted/30"
-              }`}
+              to={stat.to}
+              className="group block rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              aria-label={`${stat.label}: ${stat.value}. ${stat.hint}`}
             >
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle
-                  className={`text-sm font-medium ${
-                    overdueHandoffCard ? "text-red-700 dark:text-red-300" : "text-muted-foreground"
-                  }`}
-                >
-                  {stat.label}
-                </CardTitle>
-                <span className="flex size-8 items-center justify-center rounded-lg bg-muted/70 transition-colors group-hover:bg-primary/8">
-                  <stat.icon
-                    className={`size-4 ${
+              <Card
+                className={`ze-interactive-card h-full overflow-hidden ${
+                  overdueHandoffCard
+                    ? "ze-critical-surface border-red-300 bg-red-50/70 shadow-sm shadow-red-100 group-hover:border-red-400 dark:border-red-900 dark:bg-red-950/25 dark:shadow-none"
+                    : "group-hover:border-primary/40 group-hover:bg-muted/30"
+                }`}
+              >
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle
+                    className={`flex items-center gap-2 text-sm font-medium ${
                       overdueHandoffCard
-                        ? "text-red-600 dark:text-red-400"
-                        : "text-muted-foreground group-hover:text-primary"
-                    }`}
-                  />
-                </span>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div>
-                  <p
-                    className={`ze-metric-value text-3xl font-semibold ${
-                      overdueHandoffCard ? "text-red-700 dark:text-red-300" : ""
-                    }`}
-                  >
-                    {stat.value}
-                  </p>
-                  <p
-                    className={`mt-1 text-xs ${
-                      overdueHandoffCard
-                        ? "font-semibold text-red-700 dark:text-red-300"
+                        ? "text-red-700 dark:text-red-300"
                         : "text-muted-foreground"
                     }`}
                   >
-                    {stat.hint}
-                  </p>
-                </div>
-                <Button
-                  size="sm"
-                  variant={overdueHandoffCard ? "default" : "ghost"}
-                  className={
-                    overdueHandoffCard
-                      ? "bg-red-600 text-white hover:bg-red-700"
-                      : "-ml-3 text-muted-foreground"
-                  }
-                  asChild
-                >
-                  <Link to={stat.to}>
+                    {needsHumanAttention ? (
+                      <span className="ze-critical-dot" aria-hidden="true" />
+                    ) : null}
+                    {stat.label}
+                  </CardTitle>
+                  <span className="flex size-8 items-center justify-center rounded-lg bg-muted/70 transition-colors group-hover:bg-primary/8">
+                    <stat.icon
+                      className={`size-4 ${
+                        overdueHandoffCard
+                          ? "text-red-600 dark:text-red-400"
+                          : "text-muted-foreground group-hover:text-primary"
+                      }`}
+                    />
+                  </span>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div>
+                    <p
+                      className={`ze-metric-value text-3xl font-semibold ${
+                        overdueHandoffCard ? "text-red-700 dark:text-red-300" : ""
+                      }`}
+                    >
+                      {stat.countUp ? <CountUpNumber value={stat.value} /> : stat.value}
+                    </p>
+                    <p
+                      className={`mt-1 text-xs ${
+                        overdueHandoffCard
+                          ? "font-semibold text-red-700 dark:text-red-300"
+                          : "text-muted-foreground"
+                      }`}
+                    >
+                      {stat.hint}
+                    </p>
+                  </div>
+                  <span
+                    className={`inline-flex items-center gap-2 text-xs font-medium ${
+                      overdueHandoffCard
+                        ? "text-red-700 dark:text-red-300"
+                        : "text-muted-foreground"
+                    }`}
+                  >
                     {overdueHandoffCard ? "Jetzt bearbeiten" : "Öffnen"}
                     <ArrowRight className="size-3.5" />
-                  </Link>
-                </Button>
-              </CardContent>
-            </Card>
+                  </span>
+                </CardContent>
+              </Card>
+            </Link>
           );
         })}
       </div>
@@ -738,6 +755,10 @@ function DashboardPage() {
                     stroke="var(--color-conversations)"
                     strokeWidth={2}
                     dot={false}
+                    isAnimationActive={!reduceMotion}
+                    animationBegin={0}
+                    animationDuration={900}
+                    animationEasing="ease-out"
                   />
                   <Line
                     dataKey="leads"
@@ -745,6 +766,10 @@ function DashboardPage() {
                     stroke="var(--color-leads)"
                     strokeWidth={2}
                     dot={false}
+                    isAnimationActive={!reduceMotion}
+                    animationBegin={110}
+                    animationDuration={900}
+                    animationEasing="ease-out"
                   />
                   <Line
                     dataKey="appointments"
@@ -752,6 +777,10 @@ function DashboardPage() {
                     stroke="var(--color-appointments)"
                     strokeWidth={2}
                     dot={false}
+                    isAnimationActive={!reduceMotion}
+                    animationBegin={220}
+                    animationDuration={900}
+                    animationEasing="ease-out"
                   />
                 </LineChart>
               </ChartContainer>
@@ -932,6 +961,10 @@ function DashboardPage() {
             ) : (
               queue.map((item) => {
                 const target = resolveExistingRoute(item.route);
+                const needsAttention =
+                  item.item_type === "handoff" ||
+                  item.item_type === "lead_sla" ||
+                  (item.due_at ? new Date(item.due_at).getTime() < Date.now() : false);
                 const body = (
                   <div className="flex w-full items-start justify-between gap-4 py-3 text-left">
                     <div className="min-w-0">
@@ -940,7 +973,12 @@ function DashboardPage() {
                         <p className="truncate text-xs text-muted-foreground">{item.subtitle}</p>
                       ) : null}
                       <p className="mt-1 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-                        <span>{itemTypeLabels[item.item_type] ?? item.item_type}</span>
+                        <span className="inline-flex items-center gap-1.5">
+                          {needsAttention ? (
+                            <span className="ze-critical-dot" aria-hidden="true" />
+                          ) : null}
+                          {itemTypeLabels[item.item_type] ?? item.item_type}
+                        </span>
                         {item.due_at ? <span>Fällig: {formatDateTime(item.due_at)}</span> : null}
                         {!target ? <span>Ansicht noch nicht verfügbar</span> : null}
                       </p>

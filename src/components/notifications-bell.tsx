@@ -1,10 +1,11 @@
 import { useNavigate } from "@tanstack/react-router";
-import { Bell, Check, Loader2 } from "lucide-react";
+import { Bell, Check } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Skeleton } from "@/components/ui/skeleton";
 import { supabase } from "@/integrations/supabase/client";
 
 type NotificationRow = {
@@ -171,13 +172,23 @@ export function NotificationsBell() {
     }
   };
 
+  const hasCriticalUnread = items.some(
+    (item) =>
+      !item.read_at &&
+      (item.type === "handoff" ||
+        item.type === "handoff_overdue" ||
+        item.type === "angry_customer"),
+  );
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button variant="ghost" size="icon" aria-label="Benachrichtigungen" className="relative">
           <Bell className="size-4" />
           {unread > 0 ? (
-            <span className="absolute -top-0.5 -right-0.5 flex min-w-4 items-center justify-center rounded-full bg-primary px-1 text-[10px] leading-4 font-semibold text-primary-foreground">
+            <span
+              className={`absolute -top-0.5 -right-0.5 flex min-w-4 items-center justify-center rounded-full bg-primary px-1 text-[10px] leading-4 font-semibold text-primary-foreground ${hasCriticalUnread ? "ze-critical-badge" : ""}`}
+            >
               {unread > 9 ? "9+" : unread}
             </span>
           ) : null}
@@ -198,8 +209,16 @@ export function NotificationsBell() {
         </div>
 
         {loading ? (
-          <div className="flex items-center gap-2 px-3 py-6 text-xs text-muted-foreground">
-            <Loader2 className="size-3 animate-spin" /> Wird geladen …
+          <div className="space-y-3 px-3 py-4" aria-label="Benachrichtigungen werden geladen">
+            {Array.from({ length: 3 }).map((_, index) => (
+              <div key={index} className="flex items-start gap-2">
+                <Skeleton className="mt-1 size-2 shrink-0 rounded-full" />
+                <div className="flex-1 space-y-2">
+                  <Skeleton className="h-3 w-2/3" />
+                  <Skeleton className="h-3 w-full" />
+                </div>
+              </div>
+            ))}
           </div>
         ) : error ? (
           <div className="px-3 py-6 text-xs text-destructive">
@@ -219,6 +238,11 @@ export function NotificationsBell() {
                 const clickable = item.entity_type
                   ? Boolean(entityRoutes[item.entity_type])
                   : false;
+                const critical =
+                  !item.read_at &&
+                  (item.type === "handoff" ||
+                    item.type === "handoff_overdue" ||
+                    item.type === "angry_customer");
                 return (
                   <li key={item.id}>
                     <div
@@ -240,7 +264,7 @@ export function NotificationsBell() {
                       }`}
                     >
                       <span
-                        className={`mt-1.5 size-1.5 shrink-0 rounded-full ${
+                        className={`mt-1.5 size-1.5 shrink-0 rounded-full ${critical ? "ze-critical-dot" : ""} ${
                           item.read_at ? "bg-transparent" : "bg-primary"
                         }`}
                       />

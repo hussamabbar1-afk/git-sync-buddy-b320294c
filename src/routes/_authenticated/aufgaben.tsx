@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Loader2, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
 import { AppShell, PageHeader } from "@/components/app-shell";
+import { SkeletonRows } from "@/components/app-loading";
 import { TaskDetailSheet, memberLabel, type TeamMember } from "@/components/task-detail-sheet";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -423,10 +424,7 @@ function AufgabenPage() {
             </CardHeader>
             <CardContent>
               {queueLoading ? (
-                <div className="flex items-center justify-center gap-2 py-8 text-sm text-muted-foreground">
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  Arbeitsliste wird geladen …
-                </div>
+                <SkeletonRows rows={3} />
               ) : queueTasks.length === 0 && queueJobs.length === 0 ? (
                 <p className="py-8 text-center text-sm text-muted-foreground">
                   Für die nächsten 7 Tage stehen keine Aufgaben oder Einsätze für Sie an.
@@ -560,10 +558,7 @@ function AufgabenPage() {
             </CardHeader>
             <CardContent>
               {loading ? (
-                <div className="flex items-center justify-center gap-2 py-12 text-sm text-muted-foreground">
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  Aufgaben werden geladen …
-                </div>
+                <SkeletonRows rows={5} />
               ) : error ? (
                 <div className="space-y-3 py-12 text-center">
                   <p className="text-sm text-destructive">{error}</p>
@@ -619,7 +614,13 @@ function AufgabenPage() {
                                   {taskStatusLabel(row.status)}
                                 </Badge>
                                 {isTaskOverdue(row.status, row.due_at) ? (
-                                  <Badge variant="destructive">Überfällig</Badge>
+                                  <Badge
+                                    variant="destructive"
+                                    className="ze-critical-badge gap-1.5"
+                                  >
+                                    <span className="ze-critical-dot bg-white" aria-hidden="true" />
+                                    Überfällig
+                                  </Badge>
                                 ) : null}
                               </div>
                             </TableCell>

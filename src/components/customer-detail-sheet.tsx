@@ -1,6 +1,7 @@
 import { Check, Copy, ExternalLink, Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import { SkeletonRows } from "@/components/app-loading";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -373,10 +374,7 @@ export function CustomerDetailSheet({
 
         <div className="space-y-6 px-4 pb-8">
           {loading ? (
-            <div className="flex items-center justify-center gap-2 py-10 text-sm text-muted-foreground">
-              <Loader2 className="h-4 w-4 animate-spin" />
-              Kundendaten werden geladen …
-            </div>
+            <SkeletonRows rows={5} />
           ) : error ? (
             <p className="py-10 text-center text-sm text-destructive">{error}</p>
           ) : data ? (

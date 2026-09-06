@@ -9,7 +9,6 @@ import {
   Copy,
   ExternalLink,
   Globe2,
-  Loader2,
   MonitorSmartphone,
   PlugZap,
   RefreshCw,
@@ -20,6 +19,7 @@ import {
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { AppShell, PageHeader } from "@/components/app-shell";
+import { PageLoadingSkeleton } from "@/components/app-loading";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -274,13 +274,10 @@ function InstallationPage() {
   if (loading) {
     return (
       <AppShell>
-        <PageHeader
+        <PageLoadingSkeleton
           title="Widget installieren"
-          description="Website-Chat in wenigen Schritten verbinden und prüfen."
+          description="Website-Verbindung und Einbauschritte werden vorbereitet."
         />
-        <div className="flex items-center justify-center gap-2 py-24 text-sm text-muted-foreground">
-          <Loader2 className="size-4 animate-spin" /> Installationsdaten werden geladen …
-        </div>
       </AppShell>
     );
   }

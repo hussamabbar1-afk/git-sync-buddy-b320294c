@@ -3,6 +3,7 @@ import { Check, ChevronLeft, ChevronRight, Loader2, Plus, X } from "lucide-react
 import { useEffect, useState } from "react";
 
 import { AppShell, PageHeader } from "@/components/app-shell";
+import { PageLoadingSkeleton } from "@/components/app-loading";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -519,10 +520,10 @@ function OnboardingPage() {
   if (initialLoading) {
     return (
       <AppShell>
-        <PageHeader title="Einrichtung" description="Ihre Daten werden geladen." />
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <Loader2 className="size-4 animate-spin" /> Daten werden geladen …
-        </div>
+        <PageLoadingSkeleton
+          title="Einrichtung"
+          description="Ihr Einrichtungsstand wird vorbereitet."
+        />
       </AppShell>
     );
   }

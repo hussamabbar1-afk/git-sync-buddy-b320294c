@@ -1,6 +1,7 @@
 import { BookOpen, CheckCircle2, Edit3, Loader2, Plus, Trash2, XCircle } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
+import { SkeletonRows } from "@/components/app-loading";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -289,8 +290,8 @@ export function AiKnowledgeCard({
           <CardTitle>KI-Wissenscenter</CardTitle>
           <CardDescription>Wissen, Fachbegriffe und offene Kundenfragen.</CardDescription>
         </CardHeader>
-        <CardContent className="flex items-center gap-2 text-sm text-muted-foreground">
-          <Loader2 className="size-4 animate-spin" /> Wissenscenter wird geladen …
+        <CardContent>
+          <SkeletonRows rows={3} />
         </CardContent>
       </Card>
     );

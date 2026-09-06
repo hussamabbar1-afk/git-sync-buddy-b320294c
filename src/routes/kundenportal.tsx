@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 
 import { Badge } from "@/components/ui/badge";
 import { BrandMark } from "@/components/brand-mark";
+import { ActionConfirmation } from "@/components/motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -132,7 +133,10 @@ function CustomerPortalPage() {
   const [availableSlots, setAvailableSlots] = useState<AvailableSlot[]>([]);
   const [selectedSlot, setSelectedSlot] = useState("");
   const [appointmentPending, setAppointmentPending] = useState(false);
-  const [appointmentNotice, setAppointmentNotice] = useState<string | null>(null);
+  const [appointmentNotice, setAppointmentNotice] = useState<{
+    kind: "success" | "error" | "info";
+    text: string;
+  } | null>(null);
 
   const loadPortal = useCallback(async () => {
     if (!token) {
@@ -172,7 +176,7 @@ function CustomerPortalPage() {
     const root = asRecord(payload);
     const result = asRecord(root["result"]);
     if (slotError || root["ok"] !== true) {
-      setAppointmentNotice("Freie Zeiten konnten nicht geladen werden.");
+      setAppointmentNotice({ kind: "error", text: "Freie Zeiten konnten nicht geladen werden." });
       return;
     }
     const slots = asArray(result["slots"]).flatMap((value): AvailableSlot[] => {
@@ -182,9 +186,12 @@ function CustomerPortalPage() {
       return startTime && endTime ? [{ startTime, endTime }] : [];
     });
     setAvailableSlots(slots);
-    setAppointmentNotice(
-      slots.length ? "Bitte wählen Sie eine freie Uhrzeit." : "An diesem Tag ist kein Termin frei.",
-    );
+    setAppointmentNotice({
+      kind: "info",
+      text: slots.length
+        ? "Bitte wählen Sie eine freie Uhrzeit."
+        : "An diesem Tag ist kein Termin frei.",
+    });
   };
 
   const rescheduleAppointment = async (appointmentId: string) => {
@@ -203,16 +210,19 @@ function CustomerPortalPage() {
     setAppointmentPending(false);
     const root = asRecord(payload);
     if (updateError || root["updated"] !== true) {
-      setAppointmentNotice(
-        root["reason"] === "slot_not_available"
-          ? "Dieser Termin wurde gerade vergeben. Bitte wählen Sie einen anderen."
-          : "Der Termin konnte nicht geändert werden.",
-      );
+      setAppointmentNotice({
+        kind: "error",
+        text:
+          root["reason"] === "slot_not_available"
+            ? "Dieser Termin wurde gerade vergeben. Bitte wählen Sie einen anderen."
+            : "Der Termin konnte nicht geändert werden.",
+      });
       return;
     }
-    setAppointmentNotice(
-      "Termin erfolgreich geändert. Die Bestätigung wird automatisch versendet.",
-    );
+    setAppointmentNotice({
+      kind: "success",
+      text: "Termin erfolgreich geändert. Die Bestätigung wird automatisch versendet.",
+    });
     setEditingAppointmentId(null);
     await loadPortal();
   };
@@ -228,10 +238,10 @@ function CustomerPortalPage() {
     setAppointmentPending(false);
     const root = asRecord(payload);
     if (cancelError || root["cancelled"] !== true) {
-      setAppointmentNotice("Der Termin konnte nicht abgesagt werden.");
+      setAppointmentNotice({ kind: "error", text: "Der Termin konnte nicht abgesagt werden." });
       return;
     }
-    setAppointmentNotice("Termin wurde abgesagt.");
+    setAppointmentNotice({ kind: "success", text: "Termin wurde abgesagt." });
     setEditingAppointmentId(null);
     await loadPortal();
   };
@@ -443,9 +453,20 @@ function CustomerPortalPage() {
             </div>
 
             {appointmentNotice ? (
-              <p className="mt-4 rounded-xl border bg-white p-3 text-sm text-slate-700">
-                {appointmentNotice}
-              </p>
+              appointmentNotice.kind === "success" ? (
+                <ActionConfirmation key={appointmentNotice.text} className="mt-4">
+                  {appointmentNotice.text}
+                </ActionConfirmation>
+              ) : (
+                <p
+                  className={`mt-4 rounded-xl border bg-white p-3 text-sm ${
+                    appointmentNotice.kind === "error" ? "text-red-700" : "text-slate-700"
+                  }`}
+                  role={appointmentNotice.kind === "error" ? "alert" : "status"}
+                >
+                  {appointmentNotice.text}
+                </p>
+              )
             ) : null}
 
             <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-5">

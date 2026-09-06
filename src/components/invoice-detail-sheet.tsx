@@ -1,6 +1,7 @@
 import { Download, Loader2, Mail, Plus, Printer, Trash2 } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
+import { SkeletonRows } from "@/components/app-loading";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -590,10 +591,7 @@ export function InvoiceDetailSheet({
 
         <div className="space-y-6 px-4 pb-10">
           {loading ? (
-            <div className="flex items-center justify-center gap-2 py-10 text-sm text-muted-foreground">
-              <Loader2 className="h-4 w-4 animate-spin" />
-              Rechnung wird geladen …
-            </div>
+            <SkeletonRows rows={5} />
           ) : error ? (
             <p className="py-10 text-center text-sm text-destructive">{error}</p>
           ) : invoice && form ? (

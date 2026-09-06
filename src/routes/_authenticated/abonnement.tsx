@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { z } from "zod";
 
 import { AppShell, PageHeader } from "@/components/app-shell";
+import { SkeletonRows } from "@/components/app-loading";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -217,9 +218,7 @@ function SubscriptionPage() {
           </CardHeader>
           <CardContent>
             {loading ? (
-              <p className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Loader2 className="size-4 animate-spin" /> Daten werden geladen …
-              </p>
+              <SkeletonRows rows={2} />
             ) : subscription ? (
               <div className="space-y-3">
                 <div className="flex items-center justify-between gap-3">

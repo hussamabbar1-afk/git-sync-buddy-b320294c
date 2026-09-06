@@ -7,6 +7,7 @@ import {
   ClipboardCheck,
   Clock3,
   Code2,
+  Globe2,
   MessageSquareText,
   Menu,
   PhoneCall,
@@ -20,6 +21,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { BrandMark } from "@/components/brand-mark";
 import { InteractiveChatDemo } from "@/components/interactive-chat-demo";
+import { ScrollReveal } from "@/components/motion";
 import { acquisitionCampaignLive } from "@/lib/launch-flags";
 import {
   Sheet,
@@ -288,19 +290,19 @@ function LandingPage() {
           <div className="ze-signal-orbit absolute top-12 right-[8%] -z-10 hidden size-72 lg:block" />
 
           <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-[1fr_0.92fr] lg:px-10 lg:py-24">
-            <div className="max-w-2xl">
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-3 py-1.5 text-sm font-medium text-sky-800">
+            <div className="ze-hero-copy max-w-2xl">
+              <div className="ze-hero-enter mb-6 inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-3 py-1.5 text-sm font-medium text-sky-800">
                 <Sparkles className="size-4" /> Für SHK-Betriebe in Berlin & Brandenburg
               </div>
-              <h1 className="font-display text-4xl leading-[1.06] font-semibold tracking-[-0.045em] text-balance sm:text-5xl lg:text-[3.65rem]">
+              <h1 className="ze-hero-enter ze-hero-enter-1 font-display text-4xl leading-[1.06] font-semibold tracking-[-0.045em] text-balance sm:text-5xl lg:text-[3.65rem]">
                 Mehr vollständige Kundenanfragen. Weniger Rückrufchaos.
               </h1>
-              <p className="mt-6 max-w-xl text-lg leading-8 text-slate-600">
+              <p className="ze-hero-enter ze-hero-enter-2 mt-6 max-w-xl text-lg leading-8 text-slate-600">
                 ZunftEcho nimmt Website-Anfragen auf, stellt die richtigen Rückfragen und übergibt
                 Ihrem Team vollständige Leads – auch wenn gerade alle auf der Baustelle sind.
               </p>
 
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <div className="ze-hero-enter ze-hero-enter-3 mt-8 flex flex-col gap-3 sm:flex-row">
                 <Button asChild size="lg" className="h-12 px-6 text-base">
                   <Link to="/registrieren">
                     30-Tage-Pilot anfragen <ArrowRight />
@@ -324,7 +326,7 @@ function LandingPage() {
                 </Link>
               ) : null}
 
-              <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-slate-600">
+              <div className="ze-hero-enter ze-hero-enter-4 mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-slate-600">
                 <span className="flex items-center gap-2">
                   <CheckCircle2 className="size-4 text-emerald-600" /> 30 Tage · 99 € netto
                 </span>
@@ -343,7 +345,7 @@ function LandingPage() {
               </Link>
             </div>
 
-            <div className="ze-product-scene relative mx-auto w-full max-w-xl lg:mx-0">
+            <div className="ze-product-scene ze-hero-enter ze-hero-enter-3 relative mx-auto w-full max-w-xl lg:mx-0">
               <div className="ze-scene-backplate absolute -inset-5 -z-10 rounded-[2rem]" />
               <div className="ze-product-card relative">
                 <InteractiveChatDemo />
@@ -447,21 +449,20 @@ function LandingPage() {
 
             <div className="mt-12 grid gap-5 lg:grid-cols-3">
               {steps.map((step, index) => (
-                <article
-                  key={step.number}
-                  className="relative rounded-2xl border border-slate-200 bg-white p-6"
-                >
-                  <span className="font-display text-sm font-semibold text-primary">
-                    {step.number}
-                  </span>
-                  <h3 className="mt-4 text-xl font-semibold">{step.title}</h3>
-                  <p className="mt-3 leading-7 text-slate-600">{step.text}</p>
-                  {index < steps.length - 1 ? (
-                    <span className="absolute top-1/2 -right-4 z-10 hidden size-8 -translate-y-1/2 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-400 lg:flex">
-                      <ChevronRight className="size-4" />
+                <ScrollReveal key={step.number} delay={index * 110} className="h-full">
+                  <article className="ze-depth-card relative h-full rounded-2xl border border-slate-200 bg-white p-6">
+                    <span className="font-display text-sm font-semibold text-primary">
+                      {step.number}
                     </span>
-                  ) : null}
-                </article>
+                    <h3 className="mt-4 text-xl font-semibold">{step.title}</h3>
+                    <p className="mt-3 leading-7 text-slate-600">{step.text}</p>
+                    {index < steps.length - 1 ? (
+                      <span className="absolute top-1/2 -right-4 z-10 hidden size-8 -translate-y-1/2 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-400 shadow-sm lg:flex">
+                        <ChevronRight className="size-4" />
+                      </span>
+                    ) : null}
+                  </article>
+                </ScrollReveal>
               ))}
             </div>
           </div>
@@ -503,7 +504,10 @@ function LandingPage() {
                     text: "Verbindung automatisch erkannt",
                   },
                 ].map(({ icon: Icon, title, text }) => (
-                  <div key={title} className="rounded-xl border border-white/10 bg-white/5 p-4">
+                  <div
+                    key={title}
+                    className="ze-depth-card-dark rounded-xl border border-white/10 bg-white/5 p-4"
+                  >
                     <Icon className="size-5 text-sky-400" />
                     <p className="mt-3 text-sm font-semibold">{title}</p>
                     <p className="mt-1 text-xs leading-5 text-slate-400">{text}</p>
@@ -535,6 +539,37 @@ function LandingPage() {
                   <span className="text-xs text-slate-500">ZunftEcho · Installation</span>
                 </div>
                 <div className="p-5 sm:p-7">
+                  <figure
+                    className="ze-installation-flow mb-6 rounded-xl border border-white/10 bg-slate-950/70 p-4"
+                    aria-label="Verbindung zwischen Ihrer Website und dem ZunftEcho Widget"
+                  >
+                    <div className="flex items-center gap-3 sm:gap-4">
+                      <div className="ze-installation-node">
+                        <Globe2 className="size-5 text-sky-300" />
+                        <span>Ihre Website</span>
+                      </div>
+                      <div className="relative h-10 min-w-12 flex-1" aria-hidden="true">
+                        <svg
+                          className="absolute inset-0 size-full"
+                          viewBox="0 0 180 40"
+                          preserveAspectRatio="none"
+                        >
+                          <path className="ze-connection-track" d="M 4 20 H 176" />
+                          <path className="ze-connection-pulse" d="M 4 20 H 176" />
+                        </svg>
+                        <span className="ze-connection-beacon absolute top-1/2 left-1/2 flex size-7 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-sky-400/30 bg-slate-900 text-sky-300">
+                          <PlugZap className="size-3.5" />
+                        </span>
+                      </div>
+                      <div className="ze-installation-node">
+                        <MessageSquareText className="size-5 text-emerald-300" />
+                        <span>ZunftEcho Widget</span>
+                      </div>
+                    </div>
+                    <figcaption className="mt-3 text-center text-[11px] text-slate-500">
+                      Sicher verbunden · Status wird automatisch geprüft
+                    </figcaption>
+                  </figure>
                   <div className="flex items-center justify-between gap-4">
                     <div>
                       <p className="text-sm font-semibold">Persönlicher Website-Code</p>

@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Loader2 } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { AppShell, PageHeader } from "@/components/app-shell";
+import { SkeletonRows } from "@/components/app-loading";
 import { LeadDetailSheet } from "@/components/lead-detail-sheet";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -235,10 +235,7 @@ function LeadsPage() {
         </CardHeader>
         <CardContent>
           {loading ? (
-            <div className="flex items-center justify-center gap-2 py-10 text-sm text-muted-foreground">
-              <Loader2 className="h-4 w-4 animate-spin" />
-              Leads werden geladen …
-            </div>
+            <SkeletonRows rows={5} />
           ) : error ? (
             <p className="py-10 text-center text-sm text-destructive">{error}</p>
           ) : (

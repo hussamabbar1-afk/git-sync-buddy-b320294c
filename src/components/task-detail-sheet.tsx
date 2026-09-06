@@ -1,6 +1,7 @@
 import { Loader2, Trash2 } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
+import { SkeletonRows } from "@/components/app-loading";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -227,9 +228,8 @@ export function TaskDetailSheet({
         </SheetHeader>
 
         {loading ? (
-          <div className="flex items-center justify-center gap-2 py-16 text-sm text-muted-foreground">
-            <Loader2 className="h-4 w-4 animate-spin" />
-            Aufgabe wird geladen …
+          <div className="px-4">
+            <SkeletonRows rows={5} />
           </div>
         ) : error ? (
           <div className="space-y-3 px-4 py-16 text-center">
@@ -245,7 +245,10 @@ export function TaskDetailSheet({
               <Badge variant={priorityVariant(task.priority)}>{priorityLabel(task.priority)}</Badge>
               <Badge variant="outline">{taskTypeLabel(task.task_type)}</Badge>
               {isTaskOverdue(task.status, task.due_at) ? (
-                <Badge variant="destructive">Überfällig</Badge>
+                <Badge variant="destructive" className="ze-critical-badge gap-1.5">
+                  <span className="ze-critical-dot bg-white" aria-hidden="true" />
+                  Überfällig
+                </Badge>
               ) : null}
             </div>
 

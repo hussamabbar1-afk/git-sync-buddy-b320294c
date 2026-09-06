@@ -3,6 +3,8 @@ import { Check, Copy, Loader2, MailPlus, Shield, Trash2, UserRoundCog, Users } f
 import { useEffect, useState, type FormEvent } from "react";
 
 import { AppShell, PageHeader } from "@/components/app-shell";
+import { SkeletonRows } from "@/components/app-loading";
+import { ActionConfirmation } from "@/components/motion";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -177,9 +179,9 @@ function TeamPage() {
         </p>
       ) : null}
       {success ? (
-        <p className="mb-4 rounded-md border border-emerald-300 bg-emerald-50 p-3 text-sm text-emerald-800 dark:border-emerald-900 dark:bg-emerald-950/30 dark:text-emerald-300">
+        <ActionConfirmation key={success} className="mb-4">
           {success}
-        </p>
+        </ActionConfirmation>
       ) : null}
 
       <div className="grid gap-4 lg:grid-cols-[1fr_380px]">
@@ -194,9 +196,7 @@ function TeamPage() {
           </CardHeader>
           <CardContent className="divide-y">
             {loading ? (
-              <p className="flex items-center justify-center gap-2 py-10 text-sm text-muted-foreground">
-                <Loader2 className="size-4 animate-spin" /> Team wird geladen …
-              </p>
+              <SkeletonRows rows={4} />
             ) : members.length === 0 ? (
               <p className="py-10 text-center text-sm text-muted-foreground">
                 Keine Teammitglieder gefunden.

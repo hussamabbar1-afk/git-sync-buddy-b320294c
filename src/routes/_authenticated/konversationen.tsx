@@ -3,6 +3,7 @@ import { CircleCheckBig, ImageIcon, Loader2, MessageSquareWarning, Send } from "
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { AppShell, PageHeader } from "@/components/app-shell";
+import { SkeletonRows } from "@/components/app-loading";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -541,9 +542,8 @@ function ConversationsPage() {
           </CardHeader>
           <CardContent className="divide-y p-0">
             {loading ? (
-              <div className="flex items-center justify-center gap-2 px-6 py-10 text-sm text-muted-foreground">
-                <Loader2 className="h-4 w-4 animate-spin" />
-                Konversationen werden geladen …
+              <div className="px-6">
+                <SkeletonRows rows={5} />
               </div>
             ) : error ? (
               <p className="px-6 py-10 text-center text-sm text-destructive">{error}</p>
@@ -583,7 +583,7 @@ function ConversationsPage() {
                               ? "default"
                               : "outline"
                         }
-                        className="text-[10px]"
+                        className={`text-[10px] ${needsHuman(conversation) ? "ze-critical-badge" : ""}`}
                       >
                         {statusLabel(conversation.status)}
                       </Badge>
@@ -619,7 +619,10 @@ function ConversationsPage() {
             {selectedConversation && needsHuman(selectedConversation) ? (
               <div className="mt-3 space-y-2 rounded-md border border-destructive/40 bg-destructive/10 p-3">
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <Badge variant="destructive">Mitarbeiter benötigt</Badge>
+                  <Badge variant="destructive" className="ze-critical-badge gap-1.5">
+                    <span className="ze-critical-dot bg-white" aria-hidden="true" />
+                    Mitarbeiter benötigt
+                  </Badge>
                   <Button size="sm" onClick={handleResolve} disabled={resolving}>
                     {resolving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
                     Als erledigt markieren
@@ -715,10 +718,7 @@ function ConversationsPage() {
               </div>
             ) : null}
             {messagesLoading ? (
-              <div className="flex items-center justify-center gap-2 py-10 text-sm text-muted-foreground">
-                <Loader2 className="h-4 w-4 animate-spin" />
-                Gesprächsverlauf wird geladen …
-              </div>
+              <SkeletonRows rows={4} />
             ) : messagesError ? (
               <p className="py-10 text-center text-sm text-destructive">{messagesError}</p>
             ) : !selectedConversation ? (

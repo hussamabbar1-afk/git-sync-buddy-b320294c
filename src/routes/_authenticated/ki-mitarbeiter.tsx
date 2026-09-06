@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import { AiKnowledgeCard } from "@/components/ai-knowledge-card";
 import { AppShell, PageHeader } from "@/components/app-shell";
+import { PageLoadingSkeleton } from "@/components/app-loading";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -410,13 +411,10 @@ function AiEmployeePage() {
   if (loading) {
     return (
       <AppShell>
-        <PageHeader
+        <PageLoadingSkeleton
           title="KI-Mitarbeiter"
-          description="Legen Sie fest, wie sich Ihr digitaler Mitarbeiter gegenüber Kunden verhält."
+          description="Konfiguration und Wissensstand werden vorbereitet."
         />
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <Loader2 className="size-4 animate-spin" /> Daten werden geladen …
-        </div>
       </AppShell>
     );
   }

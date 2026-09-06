@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Loader2, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
 import { AppShell, PageHeader } from "@/components/app-shell";
+import { SkeletonRows } from "@/components/app-loading";
 import { JobDetailSheet } from "@/components/job-detail-sheet";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -496,10 +497,7 @@ function AuftraegePage() {
             </CardHeader>
             <CardContent>
               {loading ? (
-                <div className="flex items-center justify-center gap-2 py-12 text-sm text-muted-foreground">
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  Aufträge werden geladen …
-                </div>
+                <SkeletonRows rows={5} />
               ) : error ? (
                 <div className="space-y-3 py-12 text-center">
                   <p className="text-sm text-destructive">{error}</p>
