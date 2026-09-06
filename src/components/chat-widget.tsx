@@ -19,6 +19,7 @@ import { Progress } from "@/components/ui/progress";
 import { Textarea } from "@/components/ui/textarea";
 import { SUPABASE_FUNCTIONS_URL } from "@/lib/supabase-urls";
 import { sendChatMessage } from "@/lib/chat.functions";
+import { customerSafeText, isUploadPhotoAction } from "@/lib/customer-safe-text";
 
 export type ChatMetadata = {
   client_id?: string;
@@ -55,28 +56,97 @@ export type QuickReply = { label: string; value: string };
 
 const conversationStorageKey = (widgetKey: string) => `zunftecho_chat_${widgetKey}`;
 const transcriptStorageKey = (widgetKey: string) => `zunftecho_chat_messages_${widgetKey}`;
+const MAX_ORIGINAL_IMAGE_BYTES = 25 * 1024 * 1024;
+const MAX_RAW_HEIC_BYTES = 8 * 1024 * 1024;
+const MAX_COMPRESSED_IMAGE_BYTES = 1_500_000;
+
+function isHeicImage(file: File) {
+  return /image\/(?:heic|heif)/i.test(file.type) || /\.(?:heic|heif)$/i.test(file.name.trim());
+}
+
+async function decodeChatImage(file: File): Promise<{
+  source: CanvasImageSource;
+  width: number;
+  height: number;
+  dispose: () => void;
+}> {
+  if (typeof createImageBitmap === "function") {
+    try {
+      const bitmap = await createImageBitmap(file);
+      return {
+        source: bitmap,
+        width: bitmap.width,
+        height: bitmap.height,
+        dispose: () => bitmap.close(),
+      };
+    } catch {
+      // Safari and some Android browsers decode formats through <img> but not ImageBitmap.
+    }
+  }
+
+  const objectUrl = URL.createObjectURL(file);
+  const image = new Image();
+  image.src = objectUrl;
+  try {
+    await image.decode();
+    return {
+      source: image,
+      width: image.naturalWidth,
+      height: image.naturalHeight,
+      dispose: () => URL.revokeObjectURL(objectUrl),
+    };
+  } catch (error) {
+    URL.revokeObjectURL(objectUrl);
+    throw error;
+  }
+}
 
 async function compressChatImage(file: File): Promise<File> {
-  if (file.size > 10 * 1024 * 1024) throw new Error("original_too_large");
-  if (!file.type.startsWith("image/")) throw new Error("invalid_image");
+  if (file.size > MAX_ORIGINAL_IMAGE_BYTES) throw new Error("original_too_large");
+  if (!file.type.startsWith("image/") && !/\.(?:jpe?g|png|webp|heic|heif)$/i.test(file.name)) {
+    throw new Error("invalid_image");
+  }
 
-  const bitmap = await createImageBitmap(file);
-  const scale = Math.min(1, 1600 / Math.max(bitmap.width, bitmap.height));
-  const canvas = document.createElement("canvas");
-  canvas.width = Math.max(1, Math.round(bitmap.width * scale));
-  canvas.height = Math.max(1, Math.round(bitmap.height * scale));
-  const context = canvas.getContext("2d", { alpha: false });
-  if (!context) throw new Error("compression_failed");
-  context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
-  bitmap.close();
+  let decoded: Awaited<ReturnType<typeof decodeChatImage>>;
+  try {
+    decoded = await decodeChatImage(file);
+  } catch {
+    if (isHeicImage(file) && file.size <= MAX_RAW_HEIC_BYTES) {
+      const extension = /\.heif$/i.test(file.name) ? "heif" : "heic";
+      return new File([file], `${file.name.replace(/\.[^.]+$/, "") || "kundenfoto"}.${extension}`, {
+        type: extension === "heif" ? "image/heif" : "image/heic",
+      });
+    }
+    throw new Error(isHeicImage(file) ? "heic_too_large" : "invalid_image");
+  }
 
-  const blob = await new Promise<Blob | null>((resolve) =>
-    canvas.toBlob(resolve, "image/webp", 0.8),
-  );
-  if (!blob || blob.size > 1_500_000) throw new Error("compressed_too_large");
-  return new File([blob], `${file.name.replace(/\.[^.]+$/, "") || "kundenfoto"}.webp`, {
-    type: "image/webp",
-  });
+  try {
+    const canvas = document.createElement("canvas");
+
+    const longestEdge = Math.max(decoded.width, decoded.height);
+    const targets = [1600, 1360, 1120];
+    const qualities = [0.82, 0.74, 0.66];
+    for (let index = 0; index < targets.length; index += 1) {
+      const scale = Math.min(1, targets[index]! / longestEdge);
+      canvas.width = Math.max(1, Math.round(decoded.width * scale));
+      canvas.height = Math.max(1, Math.round(decoded.height * scale));
+      const context = canvas.getContext("2d", { alpha: false });
+      if (!context) throw new Error("compression_failed");
+      context.drawImage(decoded.source, 0, 0, canvas.width, canvas.height);
+      const blob = await new Promise<Blob | null>((resolve) =>
+        canvas.toBlob(resolve, "image/webp", qualities[index]),
+      );
+      if (blob && blob.size <= MAX_COMPRESSED_IMAGE_BYTES) {
+        return new File([blob], `${file.name.replace(/\.[^.]+$/, "") || "kundenfoto"}.webp`, {
+          type: "image/webp",
+        });
+      }
+    }
+  } finally {
+    decoded.dispose();
+  }
+
+  throw new Error("compressed_too_large");
 }
 
 function restoreMessages(widgetKey: string): ChatMessage[] {
@@ -362,7 +432,7 @@ export function ChatWidget({
     setLocationOpen(false);
     setConfirmedLocation(null);
     setLocationAddress("");
-    setLocationNotice("Adresse bestätigt und wird mit Ihrer Anfrage übermittelt.");
+    setLocationNotice(null);
     void handleSend(`Adresse bestätigt: ${address}`, true, location);
   };
 
@@ -413,18 +483,21 @@ export function ChatWidget({
         ...current,
         { role: "user", content: "📎 Optionales Foto hochgeladen" },
       ]);
+      void handleSend("Ich habe ein Foto hochgeladen.", false);
     } catch (uploadError) {
       const code = uploadError instanceof Error ? uploadError.message : "";
       setPhotoNotice(
         code === "original_too_large"
-          ? "Das Originalfoto darf höchstens 10 MB groß sein."
+          ? "Das Originalfoto darf höchstens 25 MB groß sein. Größere Dateien bitte vorher verkleinern."
           : code === "compressed_too_large"
             ? "Das Foto ist nach der Komprimierung noch zu groß. Bitte wählen Sie ein anderes Bild."
-            : code === "image_limit_reached"
-              ? "Für diese Anfrage wurden bereits drei Fotos hochgeladen."
-              : code === "invalid_image" || code === "file_type_mismatch"
-                ? "Die Datei ist kein gültiges JPEG-, PNG- oder WebP-Bild."
-                : "Das Foto konnte nicht hochgeladen werden. Bitte versuchen Sie es erneut.",
+            : code === "heic_too_large" || code === "file_too_large"
+              ? "Diese HEIC-/HEIF-Datei ist zu groß. Bis 8 MB wird sie direkt unterstützt; größere Fotos werden automatisch komprimiert, wenn der Browser sie öffnen kann."
+              : code === "image_limit_reached"
+                ? "Für diese Anfrage wurden bereits drei Fotos hochgeladen."
+                : code === "invalid_image" || code === "file_type_mismatch"
+                  ? "Die Datei ist kein gültiges JPEG-, PNG-, WebP-, HEIC- oder HEIF-Bild."
+                  : "Das Foto konnte nicht hochgeladen werden. Bitte versuchen Sie es erneut.",
       );
     } finally {
       setPhotoPending(false);
@@ -459,95 +532,115 @@ export function ChatWidget({
     }
   };
 
+  const handleQuickReply = (reply: QuickReply) => {
+    if (isUploadPhotoAction(reply.value, reply.label)) {
+      setError(null);
+      setPhotoNotice(
+        "Wählen Sie jetzt ein Foto aus. Erst nach erfolgreichem Upload geht es weiter.",
+      );
+      fileInputRef.current?.click();
+      return;
+    }
+    void handleSend(reply.value);
+  };
+
   return (
     <div className="flex h-80 flex-col rounded-md border">
       <div ref={scrollRef} className="flex-1 space-y-2 overflow-y-auto p-3">
         {welcomeMessage ? (
           <div className="max-w-[85%] rounded-lg bg-muted px-3 py-2 text-xs">{welcomeMessage}</div>
         ) : null}
-        {messages.map((message, index) => (
-          <div key={index} className="space-y-1">
-            <div
-              className={`max-w-[85%] rounded-lg px-3 py-2 text-xs ${
-                message.role === "user" ? "ml-auto bg-primary text-primary-foreground" : "bg-muted"
-              }`}
-            >
-              {message.content}
-            </div>
-            {message.role === "assistant" && message.assistant_message_id ? (
-              <div className="flex items-center gap-2 pl-1">
-                {message.rating ? (
-                  <span className="text-[10px] text-muted-foreground">
-                    Danke für Ihre Rückmeldung.
-                  </span>
-                ) : null}
-                <button
-                  type="button"
-                  aria-label="Hilfreich"
-                  onClick={() => void rate(index, 1)}
-                  className={`rounded p-1 transition-colors hover:bg-muted ${
-                    message.rating === 1 ? "text-primary" : "text-muted-foreground"
-                  }`}
-                >
-                  <ThumbsUp className="size-3" />
-                </button>
-                <button
-                  type="button"
-                  aria-label="Nicht hilfreich"
-                  onClick={() => void rate(index, -1)}
-                  className={`rounded p-1 transition-colors hover:bg-muted ${
-                    message.rating === -1 ? "text-destructive" : "text-muted-foreground"
-                  }`}
-                >
-                  <ThumbsDown className="size-3" />
-                </button>
+        {messages.map((message, index) => {
+          const visibleContent = customerSafeText(message.content);
+          if (!visibleContent) return null;
+          return (
+            <div key={index} className="space-y-1">
+              <div
+                className={`max-w-[85%] rounded-lg px-3 py-2 text-xs ${
+                  message.role === "user"
+                    ? "ml-auto bg-primary text-primary-foreground"
+                    : "bg-muted"
+                }`}
+              >
+                {visibleContent}
               </div>
-            ) : null}
-            {message.role === "assistant" &&
-            message.progress_percent !== null &&
-            message.progress_percent !== undefined ? (
-              <div className="max-w-[85%] space-y-1 px-1">
-                <div className="flex items-center justify-between text-[10px] text-muted-foreground">
-                  <span>Anfragefortschritt</span>
-                  <span>{message.progress_percent}%</span>
-                </div>
-                <Progress value={message.progress_percent} className="h-1.5" />
-              </div>
-            ) : null}
-            {message.role === "assistant" && message.summary ? (
-              <div className="max-w-[90%] rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-xs text-emerald-950">
-                <p className="flex items-center gap-1.5 font-medium">
-                  <CheckCircle2 className="size-3.5" /> Zusammenfassung
-                </p>
-                <p className="mt-1 whitespace-pre-line leading-5">{message.summary}</p>
-              </div>
-            ) : null}
-            {message.role === "assistant" &&
-            index === messages.length - 1 &&
-            message.quick_replies?.length ? (
-              <div className="flex flex-wrap gap-1.5 pt-1">
-                {message.quick_replies.map((reply) => (
+              {message.role === "assistant" && message.assistant_message_id ? (
+                <div className="flex items-center gap-2 pl-1">
+                  {message.rating ? (
+                    <span className="text-[10px] text-muted-foreground">
+                      Danke für Ihre Rückmeldung.
+                    </span>
+                  ) : null}
                   <button
-                    key={`${reply.label}-${reply.value}`}
                     type="button"
-                    onClick={() => void handleSend(reply.value)}
-                    disabled={pending}
-                    className="rounded-full border border-primary/30 bg-background px-3 py-1.5 text-left text-[11px] font-medium text-primary transition-colors hover:bg-primary/5 disabled:opacity-50"
+                    aria-label="Hilfreich"
+                    onClick={() => void rate(index, 1)}
+                    className={`rounded p-1 transition-colors hover:bg-muted ${
+                      message.rating === 1 ? "text-primary" : "text-muted-foreground"
+                    }`}
                   >
-                    {reply.label}
+                    <ThumbsUp className="size-3" />
                   </button>
-                ))}
-              </div>
-            ) : null}
-          </div>
-        ))}
+                  <button
+                    type="button"
+                    aria-label="Nicht hilfreich"
+                    onClick={() => void rate(index, -1)}
+                    className={`rounded p-1 transition-colors hover:bg-muted ${
+                      message.rating === -1 ? "text-destructive" : "text-muted-foreground"
+                    }`}
+                  >
+                    <ThumbsDown className="size-3" />
+                  </button>
+                </div>
+              ) : null}
+              {message.role === "assistant" &&
+              message.progress_percent !== null &&
+              message.progress_percent !== undefined ? (
+                <div className="max-w-[85%] space-y-1 px-1">
+                  <div className="flex items-center justify-between text-[10px] text-muted-foreground">
+                    <span>Anfragefortschritt</span>
+                    <span>{message.progress_percent}%</span>
+                  </div>
+                  <Progress value={message.progress_percent} className="h-1.5" />
+                </div>
+              ) : null}
+              {message.role === "assistant" && message.summary ? (
+                <div className="max-w-[90%] rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-xs text-emerald-950">
+                  <p className="flex items-center gap-1.5 font-medium">
+                    <CheckCircle2 className="size-3.5" /> Zusammenfassung
+                  </p>
+                  <p className="mt-1 whitespace-pre-line leading-5">
+                    {customerSafeText(message.summary)}
+                  </p>
+                </div>
+              ) : null}
+              {message.role === "assistant" &&
+              index === messages.length - 1 &&
+              message.quick_replies?.length ? (
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {message.quick_replies.map((reply) => (
+                    <button
+                      key={`${reply.label}-${reply.value}`}
+                      type="button"
+                      onClick={() => handleQuickReply(reply)}
+                      disabled={pending}
+                      className="rounded-full border border-primary/30 bg-background px-3 py-1.5 text-left text-[11px] font-medium text-primary transition-colors hover:bg-primary/5 disabled:opacity-50"
+                    >
+                      {reply.label}
+                    </button>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+          );
+        })}
         {!messages.length && initialQuickReplies.length ? (
           <div className="grid gap-1.5 sm:grid-cols-2">
             {initialQuickReplies.map((reply) => (
               <button
                 key={`${reply.label}-${reply.value}`}
                 type="button"
-                onClick={() => void handleSend(reply.value)}
+                onClick={() => handleQuickReply(reply)}
                 disabled={pending}
                 className="rounded-lg border bg-background px-3 py-2 text-left text-xs font-medium transition-colors hover:border-primary/40 hover:bg-primary/5 disabled:opacity-50"
               >
@@ -621,7 +714,7 @@ export function ChatWidget({
           <input
             ref={fileInputRef}
             type="file"
-            accept="image/jpeg,image/png,image/webp"
+            accept="image/*,.heic,.heif"
             className="hidden"
             onChange={(event) => {
               const file = event.target.files?.[0];

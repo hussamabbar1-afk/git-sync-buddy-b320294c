@@ -567,8 +567,8 @@ function SettingsPage() {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-5">
-              <div className="overflow-x-auto rounded-md border">
-                <div className="grid min-w-[620px] grid-cols-[1fr_100px_100px_100px] border-b bg-muted/40 px-4 py-2 text-xs font-medium text-muted-foreground">
+              <div className="overflow-hidden rounded-md border">
+                <div className="hidden grid-cols-[1fr_100px_100px_100px] border-b bg-muted/40 px-4 py-2 text-xs font-medium text-muted-foreground md:grid">
                   <span>Ereignis</span>
                   <span className="text-center">Dashboard</span>
                   <span className="text-center">E-Mail</span>
@@ -577,10 +577,13 @@ function SettingsPage() {
                 {(Object.keys(notificationLabels) as NotificationEvent[]).map((event) => (
                   <div
                     key={event}
-                    className="grid min-w-[620px] grid-cols-[1fr_100px_100px_100px] items-center border-b px-4 py-3 last:border-b-0"
+                    className="grid grid-cols-3 items-center gap-3 border-b px-4 py-4 last:border-b-0 md:grid-cols-[1fr_100px_100px_100px] md:gap-0 md:py-3"
                   >
-                    <span className="text-sm font-medium">{notificationLabels[event]}</span>
-                    <div className="flex justify-center">
+                    <span className="col-span-3 text-sm font-medium md:col-span-1">
+                      {notificationLabels[event]}
+                    </span>
+                    <div className="flex min-w-0 flex-col items-center gap-1.5">
+                      <span className="text-[10px] text-muted-foreground md:hidden">Dashboard</span>
                       <Switch
                         checked={notificationPreferences.event_channels[event].in_app}
                         onCheckedChange={(checked) =>
@@ -589,7 +592,8 @@ function SettingsPage() {
                         aria-label={`${notificationLabels[event]} im Dashboard`}
                       />
                     </div>
-                    <div className="flex justify-center">
+                    <div className="flex min-w-0 flex-col items-center gap-1.5">
+                      <span className="text-[10px] text-muted-foreground md:hidden">E-Mail</span>
                       <Switch
                         checked={notificationPreferences.event_channels[event].email}
                         onCheckedChange={(checked) =>
@@ -598,7 +602,8 @@ function SettingsPage() {
                         aria-label={`${notificationLabels[event]} per E-Mail`}
                       />
                     </div>
-                    <div className="flex justify-center">
+                    <div className="flex min-w-0 flex-col items-center gap-1.5">
+                      <span className="text-[10px] text-muted-foreground md:hidden">SMS</span>
                       <Switch checked={false} disabled aria-label="SMS noch nicht verfügbar" />
                     </div>
                   </div>

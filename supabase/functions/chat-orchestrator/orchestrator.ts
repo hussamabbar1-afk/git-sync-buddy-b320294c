@@ -60,6 +60,49 @@ export function normalizeLanguage(value: unknown, fallback = "de"): string {
   return /^[a-z]{2}$/.test(code) ? code : fallback;
 }
 
+export const PHOTO_UPLOAD_ACTION = "__action_upload_photo";
+
+export function normalizeIssueType(value: unknown): string {
+  const text = cleanText(value, 120);
+  const key = normalized(text);
+  if (["appointment", "booking", "appointment booking"].includes(key)) return "Terminbuchung";
+  if (["cancellation", "cancel appointment", "appointment cancellation"].includes(key)) {
+    return "Terminabsage";
+  }
+  if (["reschedule", "rescheduling", "appointment rescheduling"].includes(key)) {
+    return "Terminverschiebung";
+  }
+  return text;
+}
+
+export function normalizeQuickReplyAction(value: unknown, label?: unknown): string {
+  const action = cleanText(value, 500);
+  const caption = cleanText(label, 120).toLocaleLowerCase();
+  if (
+    /^(?:__action_)?upload(?:[_ -]?a)?[_ -]?photo$/i.test(action) ||
+    /^(?:upload (?:a )?photo|foto (?:auswählen|hochladen)|bild (?:auswählen|hochladen))$/.test(
+      caption,
+    )
+  ) {
+    return PHOTO_UPLOAD_ACTION;
+  }
+  return action;
+}
+
+export function isPhotoUploadQuestion(value: unknown): boolean {
+  const text = normalized(value);
+  if (
+    !text ||
+    /(?:habe|already|just) .*(?:foto|photo|image).*(?:hochgeladen|uploaded)/.test(text)
+  ) {
+    return false;
+  }
+  const mentionsPhoto = /\b(?:foto|photo|image|bild|screenshot)\b/.test(text);
+  const asksUpload =
+    /\b(?:upload|hochladen|anhangen|attach|senden|send|moglich|possible|can|kann)\b/.test(text);
+  return mentionsPhoto && asksUpload;
+}
+
 export function validIsoDate(value: unknown): string | null {
   const text = cleanText(value, 10);
   if (!/^\d{4}-\d{2}-\d{2}$/.test(text)) return null;

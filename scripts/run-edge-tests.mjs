@@ -1,6 +1,7 @@
 import { pathToFileURL } from "node:url";
 
 const testFiles = [
+  "src/lib/customer-safe-text.test.ts",
   "supabase/functions/reverse-geocode/address.test.ts",
   "supabase/functions/chat-attachment/image-validation.test.ts",
   "supabase/functions/chat-orchestrator/orchestrator.test.ts",

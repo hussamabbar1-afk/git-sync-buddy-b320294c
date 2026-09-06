@@ -2,7 +2,7 @@ import { withSupabase } from "npm:@supabase/server@^1";
 import { matchesImageSignature, safeImageName } from "./image-validation.ts";
 
 const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-const allowedTypes = new Set(["image/jpeg", "image/png", "image/webp"]);
+const allowedTypes = new Set(["image/jpeg", "image/png", "image/webp", "image/heic", "image/heif"]);
 const allowedOrigins = new Set([
   "https://zunftecho.de",
   "https://www.zunftecho.de",
@@ -32,7 +32,7 @@ export default {
         { ok: false, code: "origin_not_allowed" },
         { status: 403, headers: cors(origin) },
       );
-    if (Number(request.headers.get("content-length") ?? 0) > 1_800_000) {
+    if (Number(request.headers.get("content-length") ?? 0) > 8_500_000) {
       return Response.json(
         { ok: false, code: "file_too_large" },
         { status: 413, headers: cors(origin) },
@@ -63,7 +63,8 @@ export default {
           { status: 400, headers: cors(origin) },
         );
       }
-      if (!allowedTypes.has(file.type) || file.size <= 0 || file.size > 1_500_000) {
+      const maxBytes = /image\/(?:heic|heif)/i.test(file.type) ? 8_000_000 : 1_500_000;
+      if (!allowedTypes.has(file.type) || file.size <= 0 || file.size > maxBytes) {
         return Response.json(
           { ok: false, code: "invalid_image" },
           { status: 422, headers: cors(origin) },
@@ -116,7 +117,15 @@ export default {
         );
 
       const extension =
-        file.type === "image/png" ? "png" : file.type === "image/jpeg" ? "jpg" : "webp";
+        file.type === "image/png"
+          ? "png"
+          : file.type === "image/jpeg"
+            ? "jpg"
+            : file.type === "image/heic"
+              ? "heic"
+              : file.type === "image/heif"
+                ? "heif"
+                : "webp";
       const storagePath = `${conversation.company_id}/leads/${lead.id}/chat-${crypto.randomUUID()}.${extension}`;
       const bytes = new Uint8Array(await file.arrayBuffer());
       if (!matchesImageSignature(bytes, file.type)) {

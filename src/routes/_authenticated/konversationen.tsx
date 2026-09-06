@@ -1,6 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { CircleCheckBig, ImageIcon, Loader2, MessageSquareWarning, Send } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  ArrowLeft,
+  CircleCheckBig,
+  ImageIcon,
+  Loader2,
+  MessageSquareWarning,
+  Send,
+} from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 
 import { AppShell, PageHeader } from "@/components/app-shell";
 import { SkeletonRows } from "@/components/app-loading";
@@ -10,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { customerSafeText } from "@/lib/customer-safe-text";
 import { detailSearchSchema } from "@/lib/deep-link";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -75,6 +83,7 @@ type LeadAttachment = {
   file_name: string;
   storage_path: string;
   signed_url: string;
+  mime_type: string | null;
 };
 
 type MessageFeedbackRow = {
@@ -167,8 +176,8 @@ function ConversationsPage() {
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [mobileDetailOpen, setMobileDetailOpen] = useState(false);
   const { id: deepLinkId } = Route.useSearch();
-  const deepLinkApplied = useRef(false);
 
   const [messages, setMessages] = useState<MessageRow[]>([]);
   const [messagesLoading, setMessagesLoading] = useState(false);
@@ -290,13 +299,13 @@ function ConversationsPage() {
     });
   }, [conversations, leadByConversation, search]);
 
-  // Deep link (?id=) wins over the default "first conversation" selection.
+  // Deep links from the global search open the requested conversation, including on mobile.
   useEffect(() => {
-    if (!deepLinkId || deepLinkApplied.current) return;
+    if (!deepLinkId) return;
     if (conversations.some((item) => item.id === deepLinkId)) {
-      deepLinkApplied.current = true;
       setSearch("");
       setSelectedId(deepLinkId);
+      setMobileDetailOpen(true);
     }
   }, [conversations, deepLinkId]);
 
@@ -373,7 +382,7 @@ function ConversationsPage() {
     void (async () => {
       const { data } = await supabase
         .from("attachments")
-        .select("id, file_name, storage_path")
+        .select("id, file_name, storage_path, mime_type")
         .eq("entity_type", "lead")
         .eq("entity_id", lead.id)
         .order("created_at", { ascending: true });
@@ -530,8 +539,8 @@ function ConversationsPage() {
         description={`${recentCount} Gespräche in den letzten 7 Tagen.`}
       />
 
-      <div className="grid gap-4 lg:grid-cols-[360px_1fr]">
-        <Card>
+      <div className="grid min-w-0 gap-4 lg:grid-cols-[360px_minmax(0,1fr)]">
+        <Card className={`min-w-0 ${mobileDetailOpen ? "hidden lg:block" : "block"}`}>
           <CardHeader className="space-y-3">
             <CardTitle className="text-base">Posteingang</CardTitle>
             <Input
@@ -557,7 +566,10 @@ function ConversationsPage() {
                 return (
                   <button
                     key={conversation.id}
-                    onClick={() => setSelectedId(conversation.id)}
+                    onClick={() => {
+                      setSelectedId(conversation.id);
+                      setMobileDetailOpen(true);
+                    }}
                     className={`w-full px-6 py-4 text-left transition-colors hover:bg-muted ${
                       conversation.id === selectedId ? "bg-muted" : ""
                     }`}
@@ -595,8 +607,19 @@ function ConversationsPage() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card
+          className={`min-w-0 overflow-hidden ${mobileDetailOpen ? "block" : "hidden lg:block"}`}
+        >
           <CardHeader className="border-b">
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="mb-1 w-fit px-0 lg:hidden"
+              onClick={() => setMobileDetailOpen(false)}
+            >
+              <ArrowLeft className="size-4" /> Zurück zu Konversationen
+            </Button>
             <CardTitle className="text-base">
               {selectedConversation
                 ? `${customerName(selectedConversation, selectedLead)}${
@@ -699,21 +722,33 @@ function ConversationsPage() {
                   <ImageIcon className="size-4" /> Kundenfotos ({attachments.length})
                 </p>
                 <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-                  {attachments.map((attachment) => (
-                    <a
-                      key={attachment.id}
-                      href={attachment.signed_url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="overflow-hidden rounded-md border bg-background"
-                    >
-                      <img
-                        src={attachment.signed_url}
-                        alt={attachment.file_name}
-                        className="h-28 w-full object-cover"
-                      />
-                    </a>
-                  ))}
+                  {attachments.map((attachment) => {
+                    const browserPreview = !/image\/(?:heic|heif)/i.test(
+                      attachment.mime_type ?? "",
+                    );
+                    return (
+                      <a
+                        key={attachment.id}
+                        href={attachment.signed_url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="overflow-hidden rounded-md border bg-background"
+                      >
+                        {browserPreview ? (
+                          <img
+                            src={attachment.signed_url}
+                            alt={attachment.file_name}
+                            className="h-28 w-full object-cover"
+                          />
+                        ) : (
+                          <span className="flex h-28 flex-col items-center justify-center gap-2 px-2 text-center text-xs text-muted-foreground">
+                            <ImageIcon className="size-6" />
+                            HEIC-Foto öffnen
+                          </span>
+                        )}
+                      </a>
+                    );
+                  })}
                 </div>
               </div>
             ) : null}
@@ -731,6 +766,8 @@ function ConversationsPage() {
               </p>
             ) : (
               messages.map((message) => {
+                const visibleContent = customerSafeText(message.content);
+                if (!visibleContent) return null;
                 const label =
                   message.source_channel === "manual" ? "Mitarbeiter" : roleLabel(message.role);
                 const isAssistant = message.role === "assistant";
@@ -749,7 +786,7 @@ function ConversationsPage() {
                           : "bg-muted text-foreground"
                       }`}
                     >
-                      <p className="whitespace-pre-wrap">{message.content}</p>
+                      <p className="whitespace-pre-wrap break-words">{visibleContent}</p>
                       <p
                         className={`mt-1 text-[10px] ${
                           isAssistant ? "text-primary-foreground/70" : "text-muted-foreground"

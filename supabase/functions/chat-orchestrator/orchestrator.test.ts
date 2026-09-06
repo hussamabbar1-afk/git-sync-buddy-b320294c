@@ -3,6 +3,10 @@ import {
   appointmentActionSummary,
   availabilityReply,
   containsAcuteDanger,
+  isPhotoUploadQuestion,
+  normalizeIssueType,
+  normalizeQuickReplyAction,
+  PHOTO_UPLOAD_ACTION,
   rescheduleMutationSucceeded,
   resolveAppointmentTarget,
   resolveConfiguredService,
@@ -125,4 +129,25 @@ Deno.test("escalates only unmistakably angry customers", () => {
   if (!shouldEscalateSentiment("angry")) throw new Error("angry customer not escalated");
   if (shouldEscalateSentiment("frustrated")) throw new Error("frustration escalated too early");
   if (shouldEscalateSentiment("neutral")) throw new Error("neutral customer escalated");
+});
+
+Deno.test("normalizes appointment labels and photo upload actions", () => {
+  if (normalizeIssueType("Appointment") !== "Terminbuchung") {
+    throw new Error("English appointment label leaked");
+  }
+  if (normalizeIssueType("Terminbuchung") !== "Terminbuchung") {
+    throw new Error("German issue type changed");
+  }
+  if (normalizeQuickReplyAction("upload_photo", "Upload a Photo") !== PHOTO_UPLOAD_ACTION) {
+    throw new Error("legacy upload action not normalized");
+  }
+  if (!isPhotoUploadQuestion("Can I upload a photo for the employee?")) {
+    throw new Error("English photo question missed");
+  }
+  if (isPhotoUploadQuestion("Ich habe ein Foto hochgeladen.")) {
+    throw new Error("completed upload treated as a new question");
+  }
+  if (stripInternalIdentifiers("upload_photo") !== "upload_photo") {
+    throw new Error("sanitizer unexpectedly corrupted action before normalization");
+  }
 });

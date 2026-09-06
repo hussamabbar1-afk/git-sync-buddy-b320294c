@@ -11,7 +11,11 @@ import {
   shouldEscalateSentiment,
   formatAppointment,
   isQuestionWorthRecording,
+  isPhotoUploadQuestion,
   normalizeLanguage,
+  normalizeIssueType,
+  normalizeQuickReplyAction,
+  PHOTO_UPLOAD_ACTION,
   resolveAppointmentTarget,
   resolveConfiguredService,
   rescheduleMutationSucceeded,
@@ -297,7 +301,7 @@ function asAnalysis(value: JsonObject): ChatAnalysis {
           if (!entry || typeof entry !== "object") return [];
           const object = entry as JsonObject;
           const label = cleanText(object.label, 120);
-          const replyValue = cleanText(object.value, 500);
+          const replyValue = normalizeQuickReplyAction(object.value, label);
           return label && replyValue ? [{ label, value: replyValue }] : [];
         })
         .slice(0, 6)
@@ -313,7 +317,7 @@ function asAnalysis(value: JsonObject): ChatAnalysis {
     email: cleanText(value.email, 160).toLowerCase(),
     postal_code: cleanText(value.postal_code, 30),
     address: cleanText(value.address, 240),
-    issue_type: cleanText(value.issue_type, 120),
+    issue_type: normalizeIssueType(value.issue_type),
     issue_description: cleanText(value.issue_description, 600),
     urgency,
     preferred_contact_method: contact,
@@ -384,6 +388,7 @@ async function analyzeChat(args: {
   const instructions = `Du bist der strukturierte Dialog- und Extraktionskern von ZunftEcho für einen deutschen Handwerksbetrieb.
 Analysiere hauptsächlich current_message; nutze den Verlauf nur für ausstehende Bestätigungen und bereits genannte Daten.
 Gib interne Kategorien und reply_de immer auf Deutsch zurück. Erkenne user_language als ISO-639-1-Code.
+Verwende für neue Termine ausschließlich die Kategorie "Terminbuchung", für Absagen "Terminabsage" und für Verschiebungen "Terminverschiebung"; niemals englische Kategorien.
 intent: booking für neue Terminwünsche, cancel für Absagen, reschedule für Verschiebungen, waitlist nur bei ausdrücklicher Wartelistenbitte, sonst general.
 customer_sentiment ist angry nur bei klar erkennbarer starker Verärgerung, wiederholten Beschwerden oder ausdrücklicher Eskalation. Ein dringendes technisches Problem allein ist neutral oder frustrated. frustrated löst keine automatische Übergabe aus.
 Setze Bestätigungsfelder nur bei einer eindeutigen Bestätigung des zuletzt angebotenen Vorgangs. Das Wort "buchen" in einem neuen Wunsch ist keine Bestätigung.
@@ -432,11 +437,15 @@ async function localize(language: string, result: ActionResult): Promise<ActionR
   );
   const quickReplies = Array.isArray(translated.quick_replies)
     ? translated.quick_replies
-        .flatMap((entry): QuickReply[] => {
+        .flatMap((entry, index): QuickReply[] => {
           if (!entry || typeof entry !== "object") return [];
           const item = entry as JsonObject;
           const label = cleanText(item.label, 120);
-          const value = cleanText(item.value, 500);
+          const original = result.quickReplies?.[index];
+          const value = normalizeQuickReplyAction(
+            original?.value === PHOTO_UPLOAD_ACTION ? PHOTO_UPLOAD_ACTION : item.value,
+            label,
+          );
           return label && value ? [{ label, value }] : [];
         })
         .slice(0, 6)
@@ -453,7 +462,10 @@ function sanitizeActionResult(result: ActionResult): ActionResult {
   const quickReplies = result.quickReplies
     ?.map((reply) => ({
       label: stripInternalIdentifiers(reply.label).slice(0, 120),
-      value: stripInternalIdentifiers(reply.value).slice(0, 500),
+      value: normalizeQuickReplyAction(stripInternalIdentifiers(reply.value), reply.label).slice(
+        0,
+        500,
+      ),
     }))
     .filter((reply) => reply.label && reply.value)
     .slice(0, 6);
@@ -570,6 +582,14 @@ async function routeAction(args: {
   );
   const requestedDate = validIsoDate(analysis.appointment.date);
   const requestedTime = validTime(analysis.appointment.start_time);
+
+  if (isPhotoUploadQuestion(message)) {
+    return {
+      text: "Ja. Sie können hier direkt ein Foto hochladen; es wird sicher Ihrer Anfrage zugeordnet und ist anschließend für den Betrieb sichtbar. Tippen Sie auf „Foto hochladen“ und wählen Sie das Bild aus.",
+      quickReplies: [{ label: "Foto hochladen", value: PHOTO_UPLOAD_ACTION }],
+      progress: computeProgress(lead, analysis),
+    };
+  }
 
   if (analysis.intent === "cancel") {
     if (!appointments.length)

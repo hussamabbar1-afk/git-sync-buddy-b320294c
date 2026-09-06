@@ -15,7 +15,18 @@ const signatures = {
     bytes.length >= 12 &&
     String.fromCharCode(...bytes.slice(0, 4)) === "RIFF" &&
     String.fromCharCode(...bytes.slice(8, 12)) === "WEBP",
+  "image/heic": (bytes: Uint8Array) => matchesIsoBaseMediaImage(bytes),
+  "image/heif": (bytes: Uint8Array) => matchesIsoBaseMediaImage(bytes),
 } as const;
+
+const heifBrands = new Set(["heic", "heix", "hevc", "hevx", "heim", "heis", "mif1", "msf1"]);
+
+function matchesIsoBaseMediaImage(bytes: Uint8Array): boolean {
+  if (bytes.length < 12) return false;
+  const box = String.fromCharCode(...bytes.slice(4, 8));
+  const brand = String.fromCharCode(...bytes.slice(8, 12));
+  return box === "ftyp" && heifBrands.has(brand);
+}
 
 export type AllowedImageType = keyof typeof signatures;
 

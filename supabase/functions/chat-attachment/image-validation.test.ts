@@ -7,6 +7,16 @@ Deno.test("accepts only matching image signatures", () => {
   if (matchesImageSignature(new TextEncoder().encode("not an image"), "image/webp")) {
     throw new Error("text accepted as webp");
   }
+  const heic = new TextEncoder().encode("\u0000\u0000\u0000\u001cftypheic\u0000\u0000\u0000\u0000");
+  if (!matchesImageSignature(heic, "image/heic")) throw new Error("heic rejected");
+  if (
+    matchesImageSignature(
+      new TextEncoder().encode("\u0000\u0000\u0000\u001cftypmp42"),
+      "image/heic",
+    )
+  ) {
+    throw new Error("non-image ISO media accepted as heic");
+  }
 });
 
 Deno.test("sanitizes uploaded image names", () => {
