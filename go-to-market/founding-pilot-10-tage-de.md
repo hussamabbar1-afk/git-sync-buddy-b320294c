@@ -28,8 +28,9 @@ Das sind Steuerungswerte, keine Ergebnisversprechen.
 | Webagentur-/Digitalisierungspartner    | `https://zunftecho.de/demo?source=partner-webagentur`      |
 | direkte Demo nach freiwilliger Anfrage | `https://zunftecho.de/demo?source=direct-demo`             |
 
-Die zehn Briefquellen bleiben unverändert in `messplan-kostenlos-de.md`. Demo und Registrierung
-reichen `source` bis `pilot_requests.source` weiter. Es gibt keinen zusätzlichen Besuchertracker.
+Die neun freigegebenen Briefquellen und die dauerhaft gesperrte historische Quelle
+`brief-tschichholz` sind in `messplan-kostenlos-de.md` dokumentiert. Demo und Registrierung reichen
+`source` bis `pilot_requests.source` weiter. Es gibt keinen zusätzlichen Besuchertracker.
 
 ## Tagesplan
 

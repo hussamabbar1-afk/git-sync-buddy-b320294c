@@ -1,6 +1,12 @@
 # ZunftEcho - erste Briefwelle mit zehn Zielbetrieben
 
-Stand der Recherche: 29. August 2026
+Stand: 6. September 2026
+
+**Operativer Status:** Druck und Kuvertierung wurden am 6. September 2026 vom
+Inhaber als abgeschlossen bestätigt. Die Übergabe zum postalischen Versand ist
+für den 7. September 2026 vorgesehen. Bei der abschließenden 48-Stunden-Prüfung
+wurde Andrea Tschichholz wegen des Werbewiderspruchs im offiziellen Impressum
+ausgeschlossen; versendet werden daher neun Schreiben.
 
 ## Zweck und Auswahl
 
@@ -24,7 +30,7 @@ sofort und dauerhaft zum Ausschluss.
 5. Klaus-Peter Wilcks Heizung & Sanitär GmbH - `brief-wilcks`
 6. Sanitär Meisterbetrieb Tim Gärtner - `brief-tim-gaertner`
 7. Ing. Rolf Roesch GmbH - `brief-roesch`
-8. Andrea Tschichholz, Heizung - Gas - Sanitär - `brief-tschichholz`
+8. **Nicht versenden:** Andrea Tschichholz, Heizung - Gas - Sanitär - `brief-tschichholz`
 9. PROTOSS Haustechnik GmbH - `brief-protoss`
 10. A + M Heizung-Sanitär GmbH - `brief-a-m`
 
@@ -46,10 +52,15 @@ Schwächen behauptet.
 
 ## Versand- und Messregel
 
-- Versand bleibt bis zur Gewerbeanmeldung und der rechtlichen Endprüfung
-  gesperrt.
+- Nach der vom Inhaber bestätigten rechtlichen Prüfung ist diese einmalige
+  postalische Welle mit den neun nicht ausgeschlossenen Empfängern freigegeben.
+  Verkauf, Rechnungsstellung und Live-Zahlungen bleiben davon getrennt und bis
+  zur Gewerbeanmeldung gesperrt.
 - Jeder QR-Code führt zu `/demo` und trägt ausschließlich seine eigene
   `brief-*`-Quelle.
+- Alle zehn Produktionspfade wurden am 6. September 2026 geprüft: Demo und
+  Registrierungsseite antworteten jeweils mit HTTP 200, und beide
+  Registrierungslinks je Demo bewahrten die korrekte Quelle.
 - Nach Versand werden Datum, Rückmeldung und Widerspruch pro Betrieb intern
   dokumentiert.
 - Keine automatische Nachfassserie. Ein weiterer Kontakt erfolgt nur bei einer
@@ -58,5 +69,8 @@ Schwächen behauptet.
 ## Dauerhafte Ausschlüsse
 
 - Woermann & Söhne: dokumentierter Werbewiderspruch; keine erneute Ansprache.
+- Andrea Tschichholz: Werbewiderspruch im offiziellen Impressum am 6. September
+  2026 erneut festgestellt; das bereits gedruckte Schreiben wird nicht
+  versendet und es erfolgt keine erneute Ansprache.
 - Archivdateien sind keine Versandfreigabe. Maßgeblich ist ausschließlich die
-  obige Zehnerliste.
+  obige Liste einschließlich ihrer Ausschlusskennzeichnung.

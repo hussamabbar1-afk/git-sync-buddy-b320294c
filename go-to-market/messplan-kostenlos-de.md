@@ -1,6 +1,12 @@
 # ZunftEcho - kostenloser und datensparsamer Messplan
 
-Stand: 29. August 2026
+Stand: 6. September 2026
+
+Die zehn Schreiben sind gedruckt und kuvertiert. Die Übergabe zum Versand ist
+für den 7. September 2026 vorgesehen; das Feld `versendet am` bleibt bis zur
+tatsächlichen Übergabe bewusst leer. Das Schreiben an Andrea Tschichholz wurde
+nach dem erneuten Werbewiderspruchs-Check gesperrt und wird aus dem Stapel
+entfernt; die aktive Versandwelle umfasst neun Schreiben.
 
 ## Entscheidung
 
@@ -14,6 +20,9 @@ Marketing-Cookie und vermeidet eine unnötige Sammlung von IP-, Geräte- oder
 Verhaltensdaten.
 
 ## Quellen der ersten Welle
+
+Neun Quellen sind aktiv. `brief-tschichholz` bleibt ausschließlich als
+gesperrter historischer Messwert dokumentiert und darf nicht eingesetzt werden.
 
 ```text
 brief-ro-do
@@ -102,7 +111,7 @@ order by source;
 | brief-wilcks       |              |         |            |             |                  |
 | brief-tim-gaertner |              |         |            |             |                  |
 | brief-roesch       |              |         |            |             |                  |
-| brief-tschichholz  |              |         |            |             |                  |
+| brief-tschichholz  |              |         |            | Website 06.09.2026 | dauerhaft ausgeschlossen |
 | brief-protoss      |              |         |            |             |                  |
 | brief-a-m          |              |         |            |             |                  |
 
@@ -115,3 +124,12 @@ order by source;
   automatisch mehr Kontakte oder häufigere Nachfassaktionen auslösen.
 - Erst bei einer größeren Welle lohnt eine zusätzliche, datenschutzrechtlich
   geprüfte Reichweitenmessung.
+
+## Messbasis vor Versand
+
+Am 6. September 2026 lag der aggregierte Ausgangsstand für jede der zehn
+`brief-*`-Quellen bei null Konversationen, null Leads und null Pilotanfragen.
+Die tägliche, rein lesende Kampagnenüberwachung berücksichtigt ab jetzt neben
+den drei digitalen Quellen auch die neun freigegebenen Briefquellen. Die
+gesperrte Quelle `brief-tschichholz` bleibt bei null und wird nicht als aktive
+Quelle gewertet. Die Überwachung löst keine automatische Nachfassaktion aus.

@@ -1,6 +1,11 @@
 # ZunftEcho – Druckfreigabe für die erste Briefwelle
 
-Stand: 29. August 2026
+Stand: 6. September 2026
+
+**Status:** Der Inhaber hat Druck und Kuvertierung am 6. September 2026 als
+abgeschlossen bestätigt. Die Übergabe zum postalischen Versand ist für den
+7. September 2026 vorgesehen. Vor der Übergabe ist der Umschlag an Andrea
+Tschichholz aus dem Stapel zu entfernen; die aktive Welle umfasst neun Briefe.
 
 ## DIN-Lang-Umschläge ohne Fenster
 
@@ -29,7 +34,7 @@ Reihenfolge. Die Einzeldateien bleiben für Nachdruck und Einzelprüfung erhalte
 - `zunftecho-anschreiben-wilcks.pdf` → Quelle `brief-wilcks`
 - `zunftecho-anschreiben-tim-gaertner.pdf` → Quelle `brief-tim-gaertner`
 - `zunftecho-anschreiben-roesch.pdf` → Quelle `brief-roesch`
-- `zunftecho-anschreiben-tschichholz.pdf` → Quelle `brief-tschichholz`
+- `zunftecho-anschreiben-tschichholz.pdf` → Quelle `brief-tschichholz` → **nicht versenden**
 - `zunftecho-anschreiben-protoss.pdf` → Quelle `brief-protoss`
 - `zunftecho-anschreiben-a-m.pdf` → Quelle `brief-a-m`
 
@@ -47,7 +52,7 @@ in der Absenderzeile; die eigentliche Unterschrift lautet `Ihr ZunftEcho-Team`.
 5. Wilcks Heizung & Sanitär
 6. Tim Gärtner
 7. Ing. Rolf Roesch GmbH
-8. Andrea Tschichholz
+8. Andrea Tschichholz – **nicht versenden**
 9. PROTOSS Haustechnik
 10. A + M Heizung-Sanitär
 
@@ -78,8 +83,9 @@ in der Absenderzeile; die eigentliche Unterschrift lautet `Ihr ZunftEcho-Team`.
 
 Versand erst, wenn alle Punkte erfüllt sind:
 
-- Gewerbeanmeldung und zulässige geschäftliche Verwendung der Daten sind
-  bestätigt;
+- die rechtliche Zulässigkeit dieser einmaligen postalischen Welle und die
+  geschäftliche Verwendung der öffentlich recherchierten Daten sind vom
+  Inhaber geprüft und freigegeben;
 - Website, Demo und Pilotformular sind erreichbar;
 - rechtliche Angaben entsprechen dem dann tatsächlich registrierten Stand;
 - kein Werbewiderspruch des Empfängers liegt vor;
@@ -87,5 +93,10 @@ Versand erst, wenn alle Punkte erfüllt sind:
   48 Stunden vor dem Versand nochmals auf der offiziellen Website geprüft;
 - Datum des Einwurfs beziehungsweise Versands wird intern notiert.
 
-Woermann & Söhne bleibt aufgrund des dokumentierten Werbewiderspruchs von der
-ersten und jeder späteren Welle ausgeschlossen.
+Diese Freigabe betrifft ausschließlich die Marketingbriefe. Verkauf,
+Rechnungsstellung, Stripe und Live-Zahlungen bleiben bis zur Gewerbeanmeldung
+gesperrt.
+
+Woermann & Söhne sowie Andrea Tschichholz bleiben aufgrund dokumentierter
+Werbewidersprüche von dieser und jeder späteren Welle ausgeschlossen. Das
+bereits gedruckte Schreiben an Andrea Tschichholz darf nicht versendet werden.

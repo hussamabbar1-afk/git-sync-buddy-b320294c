@@ -63,7 +63,10 @@ machen. Die Website ist nur der öffentlich sichtbare Gesprächsanknüpfungspunk
 - **Zeigen:** Kundengruppe, Objekt/Einheiten, Dringlichkeit, Ansprechpartner vor Ort, Übergabe.
 - **Leitfrage:** „Welche Informationen müssen Hausverwaltungen bei der ersten Meldung mitliefern?“
 
-## 8. Andrea Tschichholz
+## 8. Andrea Tschichholz – dauerhaft ausgeschlossen, nicht verwenden
+
+Dieses archivierte Szenario darf wegen des dokumentierten Werbewiderspruchs
+weder für eine Ansprache noch für eine Nachfassaktion verwendet werden.
 
 - **Einstieg:** Persönliche Betreuung bleibt erhalten; die digitale Aufnahme bereitet sie nur vor.
 - **Kundenfall:** „Unsere Gastherme verliert regelmäßig Druck, aber es gibt keine Fehlermeldung.“
