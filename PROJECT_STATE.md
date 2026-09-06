@@ -1,6 +1,6 @@
 # حالة مشروع ZunftEcho
 
-> آخر تحديث: 1 سبتمبر 2026 — المنطقة الزمنية `Europe/Berlin`  
+> آخر تحديث: 6 سبتمبر 2026 — المنطقة الزمنية `Europe/Berlin`
 > الغرض: هذا الملف هو نقطة البداية الإلزامية لأي محادثة مستقبلية تخص المشروع.  
 > اقرأ أيضًا `AGENTS.md` قبل أي تعديل. عند التعارض، الكود والحالة الحية الأحدث يتقدمان على الوثائق المؤرخة.
 
@@ -100,16 +100,16 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
 | تجربة الهاتف والتنقل                            | منفذة ومختبرة عند 390px | القوائم الجانبية والسفلية تعرض المناطق التشغيلية                        |
 | Sidebar ثابت                                    | منفذ                    | لا يتحرك مع Scroll المحتوى الرئيسي                                      |
 | Dashboard و`Nächste Schritte`                   | منفذ                    | يعرض إجراءً مباشرًا للحالات المتأخرة                                    |
-| Conversations / Leads / Customers               | منفذة                   | مع التفاصيل، البحث، التصعيد والحالة                                     |
+| Conversations / Leads / Customers               | منفذة ومصححة للموبايل   | عرض قائمة/تفاصيل مع رجوع، Deep links مباشرة، بحث وتصعيد وحالة            |
 | Offers / Jobs / Invoices / Tasks / Appointments | منفذة                   | واجهات وإجراءات العمل موجودة                                            |
 | Global search                                   | منفذ                    | عبر العناصر التشغيلية الرئيسية                                          |
 | Team/Benutzerverwaltung                         | منفذة                   | أدوار ودعوات؛ `team_invite` مضاف لقيد outbound messages                 |
 | Hilfe/Support/FAQ داخل Dashboard                | منفذة                   | بريد الدعم الرسمي ظاهر                                                  |
-| Einstellungen الموسعة                           | منفذة                   | بروفايل، شركة، شعار، لغة/منطقة زمنية، إشعارات وفوترة                    |
+| Einstellungen الموسعة                           | منفذة ومصححة للموبايل   | مفاتيح كل قنوات الإشعارات ظاهرة دون تمرير أفقي، مع بقية الإعدادات        |
 | سجل الاشتراك والفواتير                          | منفذ كواجهة وبنية       | يظل بلا فواتير حقيقية حتى تفعيل Stripe والفوترة                         |
 | AI settings audit log                           | منفذ                    | يسجل من غيّر ماذا ومتى                                                  |
 | Analytics زمنية ومصادر Leads                    | منفذة                   | تقارن الفترات ومصادر الطلبات                                            |
-| AI response feedback                            | منفذ                    | نجاح/مراجعة وThumbs feedback                                            |
+| AI response feedback                            | منفذ ومختبر حيًا        | صلاحية RPC للعضو المسجل مرتبطة بشركته، و`anon` ممنوع                    |
 | Benchmark تنافسي                                | مؤجل                    | قيمة أقل قبل وجود بيانات حقيقية كافية                                   |
 
 ## 8. حالة الميزات — Widget وChatbot والمواعيد
@@ -125,7 +125,7 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
 | fallback ذكي وتحويل بشري         | منفذ                         | الأخطار/الغضب/الحالات غير العادية تُصعّد                   |
 | الملخص النهائي                   | منفذ ومحسن                   | لا يعرض UUID تقنيًا                                        |
 | مشاركة الموقع                    | منفذة                        | إذن Browser صريح مع بديل عنوان يدوي/Reverse geocoding      |
-| رفع الصور اختياريًا              | منفذ                         | ضغط وحدود حجم/عدد وتخزين خاص مرتبط بالـLead                |
+| رفع الصور اختياريًا              | منفذ ومحصّن للموبايل         | ضغط صور حتى 25MB، HEIC/HEIF حتى 8MB، وحد ثلاثة وتخزين خاص  |
 | Dynamic appointment slots        | منفذة                        | Toggle للشركة وخيارات حسب الخدمة                           |
 | منع Double-booking               | منفذ ومختبر                  | عملية ذرّية في قاعدة البيانات                              |
 | تأكيد/إلغاء/تعديل الموعد         | منفذ                         | عبر المحادثة وبوابة العميل                                 |
@@ -157,6 +157,19 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
   وتجديد App Shell والـDashboard والجداول والحقول والحوارات والقوائم وحالات التحميل/الفراغ.
 - بقيت التحسينات Code-native بلا مكتبة 3D أو صور عامة جديدة؛ زاد CSS المضغوط بنحو 3 كيلوبايت
   فقط مقارنة بالنسخة السابقة، وأضيفت أبعاد صريحة للشعار لتقليل Layout Shift.
+
+إصلاحات قبول 6 سبتمبر 2026:
+
+- إجراء رفع الصورة لا يُرسل `upload_photo` كرسالة: يفتح منتقي الملف، ينتظر نجاح الرفع، ثم يكمل
+  الحوار برسالة مفهومة. العميل والخادم ينظفان النصوص التقنية وUUIDs، ونُظفت الرسالة التاريخية.
+- محرر العنوان يغلق فور التأكيد أو الإلغاء، يمسح حالته ولا يحجز مساحة المحادثة بعد ذلك؛ العنوان
+  المختصر يبقى من Reverse Geocoding المنظم.
+- أنواع الطلبات الإنجليزية المعروفة تُحوّل إلى `Terminbuchung`/`Terminabsage`/
+  `Terminverschiebung` في المنسق وTrigger قاعدة البيانات، وصفر قيم إنجليزية متبقية في الإنتاج.
+- شاشة المحادثات على الهاتف أصبحت Master/Detail مستقرة مع زر رجوع ومنع overflow، والبحث العام
+  يفتح المحادثة المطلوبة مباشرة. مرفقات HEIC تُعرض كرابط فتح آمن عندما لا يدعم المتصفح معاينتها.
+- استُكملت Object grants المطابقة لسياسات RLS الحالية دون توسيع نطاق الصفوف؛ نجح تحديث محادثة
+  وتحديث Lead الناتج وتقييم المحادثة بهوية Owner داخل Transaction تم التراجع عنها بعد الاختبار.
 
 ## 9. حالة الميزات — التنبيهات والأتمتة
 
@@ -328,11 +341,12 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
 - Cloudflare account ID: `3bceebd97b02f714c649114469aeaabd`
 - Cloudflare zone ID: `2cb3ac449c41ea5f9eeef882c5501d12`
 - Worker: `hussamabbar1-afk-git-sync-buddy-b320294c`
-- Current production Worker version: `89ddd124-4d66-4ef3-bdf7-f5ba4538baa5` at 100%
-- آخر Deployment موثق في 1 سبتمبر 2026 برسالة `Use async-first pilot qualification`؛ رُفعت
-  النسخة منفصلة، اجتازت Preview Go/No-Go وفحص غياب حقل الهاتف، ثم حُولت 100% من الحركة إليها.
-- Supabase Edge Functions after the mobile Widget hardening: `chat-orchestrator` v8,
-  `reverse-geocode` v2, and `chat-attachment` v3; all `ACTIVE` with `verify_jwt=false` because
+- Current production Worker version: `c6b90904-59e2-442b-8188-61155b593387` at 100%
+- آخر Deployment موثق في 6 سبتمبر 2026 برسالة
+  `Release mobile chat, upload, RLS and visual QA fixes`؛ اجتازت النسخة Preview وProduction
+  Go/No-Go وبقيت الحملة معلقة.
+- Supabase Edge Functions after the mobile Widget hardening: `chat-orchestrator` v9,
+  `reverse-geocode` v2, and `chat-attachment` v4; all `ACTIVE` with `verify_jwt=false` because
   their public Widget contracts validate widget/origin/conversation capability internally.
 - `pilot-request` v7 نشطة مع `verify_jwt=false` لأن النموذج عام، وتحميه Origin allowlist وHoneypot
   وRate limit وقيود حجم/نوع؛ الكتابة تتم بـService Role إلى جدول RLS بلا منح `anon/authenticated`.
@@ -340,6 +354,25 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
 لا تُضف مفاتيح أو كلمات مرور بجانب هذه المعرفات.
 
 ## 20. آخر اختبارات موثقة
+
+بتاريخ 6 سبتمبر 2026:
+
+- نُفذت تحسينات الحركة الخفيفة للواجهة العامة والداخلية في Commit `6f93f74`: دخول Hero،
+  Scroll reveals، Live preview، رسم خط Dashboard، Count-up، Skeletons وحالات تأكيد مع احترام
+  `prefers-reduced-motion` ودون مكتبة 3D ثقيلة.
+- نجحت 19/19 اختبارات محفوظة، وTypeScript وESLint وProduction build و`git diff --check`.
+- طبقت migrations `20260906005757_repair_owner_workflows_and_chat_actions.sql` و
+  `20260906011226_redact_legacy_customer_identifiers.sql` بنجاح؛ صار عدد Object grants الناقصة
+  المقابلة لسياسات RLS صفرًا، و`submit_chat_feedback` متاحًا لـ`authenticated/service_role` فقط.
+- فحص الترابط: صفر اختلاف Company بين Lead/Conversation، وصفر اختلاف Customer بين Lead/
+  Appointment، وصفر نصوص تقنية ظاهرة للعميل، وصفر أنواع طلبات إنجليزية. بقي موعد قديم من
+  17 أغسطس بحالة `requested` بلا Lead أو Customer؛ لم يُخترع له ارتباط لأنه يسبق التدفق الحالي.
+- نُشرت `chat-orchestrator` v9 و`chat-attachment` v4، وأعاد Health check نتيجة 200 ورفض
+  Multipart غير صالح بـ400. يدعم Storage أصلًا HEIC/HEIF وحد 10MB؛ قُيد المسار العام إلى 8MB.
+- اجتاز Cloudflare Preview `c6b90904-...` والفحص المرئي على 390px و1280px بلا Horizontal
+  overflow أو أخطاء Console، ثم رُقي إلى 100%. اجتاز الإنتاج Go/No-Go كاملًا وبقي
+  `/anfrage-check` على 404. فُتح محرر العنوان وأُغلق، وثبت قبول `image/*,.heic,.heif` حيًا.
+- Commit التنفيذ: `b213d8b` (`fix: harden mobile chat and owner workflows`).
 
 بتاريخ 31 أغسطس 2026:
 
@@ -475,6 +508,9 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
     الرد والتأهيل والـDemo بالبريد وروابط العرض أو تسجيل شاشة. عُطّل دليل المكالمة الحالية ووُثق
     البديل في `async-pilot-qualifizierung-de.md`. نجحت 17/17 اختبارات وTypeScript وLint وBuild،
     ثم نُشر إصدار Cloudflare `89ddd124-...` عند 100% بعد Preview Go/No-Go ناجح.
+15. أُنجز إصلاح شامل لتقرير الموبايل والشات: عولج رفع الصور/HEIC، إغلاق العنوان، الترجمة، شاشة
+    المحادثات والبحث والإشعارات، مزامنة الصلاحيات وتقييم الجودة، وتنظيف المعرفات القديمة. طُبقت
+    هجرتان ونُشرت دالتا Edge v9/v4 وإصدار Cloudflare `c6b90904-...` عند 100% بعد QA ناجح.
 
 **الخطوة العملية التالية قبل 10 سبتمبر:**
 
