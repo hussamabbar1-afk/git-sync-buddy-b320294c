@@ -2,6 +2,20 @@
 
 Stand: 29. August 2026
 
+## DIN-Lang-Umschläge ohne Fenster
+
+Für die zehn Umschläge ohne Fenster liegen zehn separate Druckdateien unter
+`output/pdf/envelopes-din-lang/` vor. Jede Datei besteht aus genau einer Seite im Querformat
+`220 x 110 mm`. Die Absenderangabe steht oben links, die Frankierzone oben rechts bleibt frei und
+die Empfängeranschrift liegt innerhalb der Lesezone.
+
+- Im PDF-Druckdialog `Tatsächliche Größe` beziehungsweise `100 %` verwenden.
+- Als Papierformat `DIN Lang` oder benutzerdefiniert `220 x 110 mm` auswählen.
+- Optionen wie `An Seite anpassen`, `Verkleinern` oder randloses Vergrößern deaktivieren.
+- Zuerst nur einen Testumschlag bedrucken und die Einzugsrichtung der konkreten Druckerzufuhr
+  prüfen. Erst danach die übrigen neun Dateien drucken.
+- Die Briefmarke erst nach dem Druck oben rechts in der freigehaltenen Zone anbringen.
+
 ## Freigegebene Dateien
 
 Für den Stapeldruck ist `zunftecho-erste-briefwelle-10-drucksatz.pdf` die
