@@ -78,12 +78,12 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
 | Partner page                           | منفذة ومفعّلة             | لا تعد بعمولة أو White-label تلقائيًا                                                                                |
 | Sitemap وSEO الأساسي                   | منفذ                      | إرسال Sitemap لمحركات البحث ينتظر Gewerbe وإطلاق الحملة                                                              |
 | `/.well-known/security.txt`            | منفذ ومفعّل               | يستخدم `sicherheit@zunftecho.de`                                                                                     |
-| Website-Anfrage-Check `/anfrage-check` | مجهز وغير منشور           | محجوب بـHTTP 404 حقيقي وروابطه مخفية؛ المفتاح `acquisitionCampaignLive=false`                                        |
-| LinkedIn-Unternehmensseite             | مجهزة نصيًا وغير منشورة   | الإنشاء/النشر ينتظر Gewerbe                                                                                          |
-| YouTube-Markenkanal                    | مجهز نصيًا وغير منشور     | النشر ينتظر Gewerbe                                                                                                  |
-| Google Search Console / Bing           | غير مفعّلين               | يُفعلان بعد الإطلاق وإرسال Sitemap                                                                                   |
+| Website-Anfrage-Check `/anfrage-check` | منفذ ومفعّل               | نُشر في 6 سبتمبر 2026؛ المفتاح `acquisitionCampaignLive=true` وروابطه ظاهرة                                          |
+| LinkedIn-Unternehmensseite             | متعذرة خارجيًا حاليًا     | LinkedIn رفض إنشاءها لأن حساب المدير لا يملك الحد الأدنى من الاتصالات؛ نُشر أول منشور من الحساب الشخصي بدلًا منها   |
+| YouTube-Markenkanal                    | مجهز وينتظر تأكيد الحفظ   | نموذج القناة الحالية مجهز باسم ZunftEcho و`@zunftecho` والوصف والرابط والبريد الرسمي؛ لم تُحفظ التغييرات بعد          |
+| Google Search Console / Bing           | غير مفعّلين               | Sitemap عامة ومحدثة؛ إنشاء الخصائص وإرسالها ما زالا يتطلبان خطوات الحساب/DNS الخارجية                               |
 | Google Unternehmensprofil              | مرفوض حاليًا              | لا يناسب نشاطًا Online-only بلا استقبال عملاء في موقع معلن                                                           |
-| 30-day organic campaign                | مجهزة وغير منشورة         | 12 منشور LinkedIn وخطة أسبوعية، بلا رسائل جماعية                                                                     |
+| 30-day organic campaign                | مفعّلة جزئيًا             | نُشر المدخل المجاني وأول منشور LinkedIn؛ بقية الإيقاع الشهري يبدأ من خطة المحتوى، بلا رسائل جماعية                  |
 | 90-day growth plan                     | مجهزة وغير منشورة         | توسع من الإشارة الأولى إلى المحتوى المتخصص والشركاء وPilot proof؛ Paid محكوم ببوابات و150 € كحد اختبار فقط           |
 | أول موجة خطابات                        | مجهزة رقميًا              | عشر رسائل A4 شخصية وملف طباعة موحد؛ الطباعة/الإرسال لم يُؤكدا                                                        |
 | خطة اكتساب 10 أيام                     | مجهزة تشغيليًا            | Funnel تأهيلي ومصادر وروتين يومي في `founding-pilot-10-tage-de.md`؛ لا يفتح Cold outreach أو الحملة المحجوبة         |
@@ -341,10 +341,10 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
 - Cloudflare account ID: `3bceebd97b02f714c649114469aeaabd`
 - Cloudflare zone ID: `2cb3ac449c41ea5f9eeef882c5501d12`
 - Worker: `hussamabbar1-afk-git-sync-buddy-b320294c`
-- Current production Worker version: `c6b90904-59e2-442b-8188-61155b593387` at 100%
+- Current production Worker version: `d127e29a-11e0-484f-83d9-6cfd3effd1c2` at 100%
 - آخر Deployment موثق في 6 سبتمبر 2026 برسالة
-  `Release mobile chat, upload, RLS and visual QA fixes`؛ اجتازت النسخة Preview وProduction
-  Go/No-Go وبقيت الحملة معلقة.
+  `Launch ZunftEcho organic acquisition campaign; billing disabled`؛ اجتازت النسخة Preview
+  وProduction Go/No-Go وصارت الحملة العامة مفعلة.
 - Supabase Edge Functions after the mobile Widget hardening: `chat-orchestrator` v9,
   `reverse-geocode` v2, and `chat-attachment` v4; all `ACTIVE` with `verify_jwt=false` because
   their public Widget contracts validate widget/origin/conversation capability internally.
@@ -356,6 +356,14 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
 ## 20. آخر اختبارات موثقة
 
 بتاريخ 6 سبتمبر 2026:
+
+- فُتح `acquisitionCampaignLive=true` ونُشر Anfrage-Check وروابطه العامة وتحديث Sitemap عبر إصدار
+  Cloudflare `d127e29a-11e0-484f-83d9-6cfd3effd1c2` عند 100% بعد نجاح 19/19 اختبارًا وTypeScript
+  وESLint وBuild وPreview/Production Go/No-Go في وضع `marketing=live`.
+- بقيت الفوترة مغلقة: لا توجد أسرار `STRIPE*` في Supabase، وCheckout يقبل تقنيًا مفاتيح
+  `sk_test_` فقط. لا Live payment ولا فاتورة رسمية فُعّلت.
+- نُشر أول منشور للحملة على LinkedIn من الملف الشخصي بالمصدر `linkedin-check-01`. تعذر إنشاء صفحة
+  شركة لأن LinkedIn أبلغ أن الحساب لا يملك عدد الاتصالات المطلوب.
 
 - نُفذت تحسينات الحركة الخفيفة للواجهة العامة والداخلية في Commit `6f93f74`: دخول Hero،
   Scroll reveals، Live preview، رسم خط Dashboard، Count-up، Skeletons وحالات تأكيد مع احترام
@@ -512,15 +520,15 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
     المحادثات والبحث والإشعارات، مزامنة الصلاحيات وتقييم الجودة، وتنظيف المعرفات القديمة. طُبقت
     هجرتان ونُشرت دالتا Edge v9/v4 وإصدار Cloudflare `c6b90904-...` عند 100% بعد QA ناجح.
 
-**الخطوة العملية التالية قبل 10 سبتمبر:**
+**آخر نقطة توقف الحالية:**
 
-- نفّذ لوحة المتابعة اليومية ومصادر الروابط وفق `go-to-market/founding-pilot-10-tage-de.md`؛ مدخل
-  التأهيل العام جاهز، لكن لا ترسل رسائل باردة ولا تنشر `/anfrage-check` ولا تفعّل Paid قبل البوابة.
-- أكد المالك في 1 سبتمبر اكتمال فحص الاشتراكات والـProbedruck وتجهيز الخطابات العشرة؛ إرسالها
-  الخارجي يبقى مرتبطًا ببوابة Gewerbe/الإطلاق المسجلة، بينما يمكن تجهيز القائمة والمواد داخليًا.
-- في 8 أو 9 سبتمبر: شغّل Go/No-Go النهائي حسب `go-to-market/prelaunch-runbook-de.md`.
-- في 10 سبتمبر: اتبع ترتيب التفعيل القانوني والضريبي وStripe في القسم 11، ثم غيّر
-  `acquisitionCampaignLive` إلى `true` فقط بعد موافقة إطلاق صريحة واختبار `--marketing=live`.
+- اكتمل إطلاق الموقع التسويقي والحملة العضوية الأساسية في 6 سبتمبر بموافقة صريحة من المالك، مع
+  إبقاء البيع والفوترة والدفع الرسمي معلقة حتى Gewerbe.
+- التالي خارجيًا: حفظ هوية قناة YouTube المجهزة ثم رفع الفيديو الرسمي المعتمد، وإنشاء خصائص
+  Search Console/Bing وإرسال Sitemap. يلزم تأكيد واجهة المستخدم عند خطوة النشر الخارجية النهائية.
+- صفحة LinkedIn للشركة تبقى متعذرة حتى يحقق حساب المدير شرط الاتصالات؛ لا تُستخدم اتصالات أو
+  رسائل آلية لتجاوز القيد.
+- الخطابات العشرة لا يمكن إرسالها ماديًا من النظام؛ هي جاهزة وتبقى ضمن الإرسال اليدوي للمالك.
 
 ## 23. أول أوامر لمحادثة مستقبلية
 
@@ -531,7 +539,7 @@ git status --short
 git log -5 --oneline --decorate
 git rev-parse --short HEAD
 git rev-parse --short refs/remotes/origin/main
-npm run check:prelaunch -- --base=https://zunftecho.de --marketing=held
+npm run check:prelaunch -- --base=https://zunftecho.de --marketing=live
 ```
 
 اجلب `main` أولًا ثم تأكد أن Local و`origin/main` متطابقان أو يمكن تحديثهما بـFast-forward.
