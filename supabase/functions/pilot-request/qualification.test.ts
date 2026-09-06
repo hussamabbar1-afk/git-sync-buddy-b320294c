@@ -1,4 +1,4 @@
-import { parsePilotQualification } from "./qualification.ts";
+import { parsePilotQualification, scorePilotQualification } from "./qualification.ts";
 
 Deno.test("accepts structured founding-pilot qualification", () => {
   const parsed = parsePilotQualification({
@@ -29,4 +29,28 @@ Deno.test("keeps old clients compatible and rejects invented values", () => {
     rejected = true;
   }
   if (!rejected) throw new Error("unknown qualification value accepted");
+});
+
+Deno.test("scores only self-reported pilot readiness signals", () => {
+  const high = scorePilotQualification(
+    parsePilotQualification({
+      team_size_range: "2-5",
+      monthly_inquiry_range: "16-30",
+      primary_challenge: "incomplete-details",
+      preferred_start_window: "after-clearance",
+      audit_requested: true,
+    }),
+  );
+  if (high.score !== 5 || high.label !== "hoch") throw new Error("high priority not detected");
+
+  const low = scorePilotQualification(
+    parsePilotQualification({
+      team_size_range: "solo",
+      monthly_inquiry_range: "0-5",
+      primary_challenge: "other",
+      preferred_start_window: "later",
+      audit_requested: false,
+    }),
+  );
+  if (low.score !== 0 || low.label !== "niedrig") throw new Error("low priority inflated");
 });

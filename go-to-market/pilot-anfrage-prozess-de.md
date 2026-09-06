@@ -1,6 +1,6 @@
 # ZunftEcho – Prozess für neue Pilotanfragen
 
-Stand: 29. August 2026
+Stand: 6. September 2026
 
 ## Reaktionsziel
 
@@ -12,6 +12,8 @@ persönliche Prüfung nicht.
 ## Eingang prüfen
 
 1. Benachrichtigungs-E-Mail und Datensatz in `pilot_requests` abgleichen.
+   Die E-Mail ist direkt beantwortbar, weil `Reply-To` auf die freiwillig
+   angegebene Adresse des Interessenten gesetzt ist.
 2. Firma, Ansprechpartner, Website, Quelle, Teamgröße, Anfragevolumen,
    Hauptproblem, Startfenster, Audit-Wunsch und Freitext prüfen.
 3. Erkennbaren Spam schließen; einen Werbewiderspruch sofort als
@@ -20,6 +22,11 @@ persönliche Prüfung nicht.
    wiederkehrende Anfragen und ein erreichbarer Entscheider.
 5. Anfrage nach dem ersten tatsächlichen Kontakt von `new` auf `contacted`
    setzen.
+
+Die interne Signalstärke von null bis fünf dient nur zur Reihenfolge im
+Posteingang. Sie verwendet ausschließlich selbst gemeldete Formularangaben und
+ist weder eine automatische Annahme noch ein Ersatz für die persönliche
+Prüfung.
 
 ## Erste Antwort
 

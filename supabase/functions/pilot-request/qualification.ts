@@ -22,6 +22,11 @@ export type PilotQualification = {
   auditRequested: boolean;
 };
 
+export type PilotPriority = {
+  score: number;
+  label: "hoch" | "mittel" | "niedrig";
+};
+
 function optionalChoice<T extends string>(value: unknown, allowed: readonly T[]): T | null {
   if (value === undefined || value === null || value === "") return null;
   if (typeof value !== "string" || !allowed.includes(value as T)) {
@@ -45,5 +50,26 @@ export function parsePilotQualification(payload: Record<string, unknown>): Pilot
     primaryChallenge: optionalChoice(payload.primary_challenge, PRIMARY_CHALLENGES),
     preferredStartWindow: optionalChoice(payload.preferred_start_window, START_WINDOWS),
     auditRequested: payload.audit_requested === true,
+  };
+}
+
+export function scorePilotQualification(qualification: PilotQualification): PilotPriority {
+  let score = 0;
+
+  if (["6-15", "16-30", "31-plus"].includes(qualification.inquiryVolumeRange ?? "")) {
+    score += 2;
+  } else if (qualification.inquiryVolumeRange === "unknown") {
+    score += 1;
+  }
+
+  if (qualification.primaryChallenge && qualification.primaryChallenge !== "other") score += 1;
+  if (qualification.preferredStartWindow && qualification.preferredStartWindow !== "later") {
+    score += 1;
+  }
+  if (qualification.auditRequested) score += 1;
+
+  return {
+    score,
+    label: score >= 4 ? "hoch" : score >= 2 ? "mittel" : "niedrig",
   };
 }
