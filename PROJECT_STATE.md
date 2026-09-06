@@ -11,10 +11,10 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
 يجمع البيانات الناقصة، يميّز الحالات الخطرة، ينظم التحويل إلى موظف، ويعرض Leads ومواعيد
 ومحادثات وإجراءات العمل داخل Dashboard.
 
-الحالة الحالية: **الجانب التقني صالح للعرض والتحضير لأول Pilot، لكنه ليس مفعّلًا بعد للبيع
-والفوترة الحية**. الموقع يعمل على `https://zunftecho.de`، وصفحة الثقة والهوية والبريد الرسمي
-منشورة. المدفوعات والفواتير الرسمية والحملات النشطة محجوبة عمدًا إلى ما بعد Gewerbeanmeldung
-والتأكد من البيانات الضريبية والقانونية.
+الحالة الحالية: **الجانب التقني صالح للعرض والتحضير لأول Pilot، والحملة العضوية العامة مفعّلة،
+لكن البيع والفوترة الحية غير مفعّلين بعد**. الموقع يعمل على `https://zunftecho.de`، وصفحة الثقة
+والهوية والبريد الرسمي منشورة. المدفوعات والفواتير الرسمية تبقى محجوبة عمدًا إلى ما بعد
+Gewerbeanmeldung والتأكد من البيانات الضريبية والقانونية.
 
 ## 2. معاني حالات الميزات
 
@@ -341,10 +341,10 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
 - Cloudflare account ID: `3bceebd97b02f714c649114469aeaabd`
 - Cloudflare zone ID: `2cb3ac449c41ea5f9eeef882c5501d12`
 - Worker: `hussamabbar1-afk-git-sync-buddy-b320294c`
-- Current production Worker version: `d127e29a-11e0-484f-83d9-6cfd3effd1c2` at 100%
+- Current production Worker version: `ecd36cce-37f7-48e5-bbda-56ddf575352f` at 100%
 - آخر Deployment موثق في 6 سبتمبر 2026 برسالة
-  `Launch ZunftEcho organic acquisition campaign; billing disabled`؛ اجتازت النسخة Preview
-  وProduction Go/No-Go وصارت الحملة العامة مفعلة.
+  `Publish privacy-first ZunftEcho explainer video`؛ اجتازت النسخة Preview وProduction Go/No-Go
+  وبقيت الحملة العامة مفعلة والفوترة معطلة.
 - Supabase Edge Functions after the mobile Widget hardening: `chat-orchestrator` v9,
   `reverse-geocode` v2, and `chat-attachment` v4; all `ACTIVE` with `verify_jwt=false` because
   their public Widget contracts validate widget/origin/conversation capability internally.
@@ -368,6 +368,13 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
   Demo قابل للقياس. نُشر الفيديو الرسمي علنًا على `https://youtu.be/IG5tb2o-ASY` بعنوان ألماني
   ووصف وروابط مصدر `youtube-video-01`، ولغة ألمانية، وتصنيف غير مخصص للأطفال، وإفصاح AI صريح.
   اكتملت معالجة الفيديو وفحص حقوق الطبع والنشر بلا مشاكل.
+- أُضيف الفيديو الرسمي إلى الصفحة الرئيسية داخل مشغل موافقة خفيف: صورة WebP محلية بحجم 31,628
+  بايت، ولا يُنشأ iframe أو اتصال مع YouTube قبل النقر. أضيفت بيانات `VideoObject` وروابط مصدر
+  `website-video-01`، ووُسعت CSP فقط عبر `frame-src` إلى `www.youtube-nocookie.com`.
+- نجحت 19/19 اختبارات وTypeScript وESLint وBuild وPreview/Production Go/No-Go. فُحص التصميم على
+  عرض `390x844` بلا انزياح أفقي، وأثبت Browser أن iframe ينتقل من 0 قبل النقر إلى 1 بعده بلا
+  أخطاء Console. نُشر Cloudflare `ecd36cce-37f7-48e5-bbda-56ddf575352f` عند 100%؛ Commit الميزة
+  `99ab105`.
 - أُنشئت خاصية النطاق `zunftecho.de` في Google Search Console، وأُضيف سجل TXT للتحقق بتفويض
   Cloudflare Domain Connect. قُبلت `https://zunftecho.de/sitemap.xml` بحالة نجاح واكتُشفت 11 صفحة.
 - أُنشئت خاصية `https://zunftecho.de/` في Bing Webmaster باستيراد Google Search Console؛ منح
@@ -535,6 +542,8 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
   إبقاء البيع والفوترة والدفع الرسمي معلقة حتى Gewerbe.
 - اكتملت هوية قناة YouTube ونشر الفيديو الرسمي وGoogle Search Console وBing Webmaster وDNS،
   وأُرسلت Sitemap إلى محركي البحث. تنتظر تقارير الفهرسة الأولى بعد مهلة المعالجة الخارجية.
+- أصبح الفيديو المنشور أصلًا تسويقيًا داخل الصفحة الرئيسية بمشغل خصوصية click-to-load وبيانات SEO
+  وروابط تحويل قابلة للقياس؛ الإصدار `ecd36cce-...` حي عند 100% وCommit الميزة `99ab105`.
 - صفحة LinkedIn للشركة تبقى متعذرة حتى يحقق حساب المدير شرط الاتصالات؛ لا تُستخدم اتصالات أو
   رسائل آلية لتجاوز القيد.
 - الخطابات العشرة لا يمكن إرسالها ماديًا من النظام؛ هي جاهزة وتبقى ضمن الإرسال اليدوي للمالك.
