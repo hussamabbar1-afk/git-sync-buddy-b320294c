@@ -59,6 +59,7 @@ function withSecurityHeaders(request: Request, response: Response): Response {
       "font-src 'self' data: https://fonts.gstatic.com",
       "img-src 'self' data: blob:",
       "connect-src 'self' https://srufegisweghdswdsdxb.supabase.co wss://srufegisweghdswdsdxb.supabase.co",
+      "frame-src 'self' https://www.youtube-nocookie.com",
       isEmbeddableWidget ? "frame-ancestors *" : "frame-ancestors 'none'",
     ].join("; "),
   );

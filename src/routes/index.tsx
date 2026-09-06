@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import { BrandMark } from "@/components/brand-mark";
 import { InteractiveChatDemo } from "@/components/interactive-chat-demo";
 import { ScrollReveal } from "@/components/motion";
+import { YouTubeVideoLite } from "@/components/youtube-video-lite";
 import { acquisitionCampaignLive } from "@/lib/launch-flags";
 import {
   Sheet,
@@ -143,6 +144,26 @@ export const Route = createFileRoute("/")({
               addressLocality: "Berlin",
               addressCountry: "DE",
             },
+          },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "VideoObject",
+          name: "ZunftEcho: Website-Anfragen für SHK-Betriebe strukturiert aufnehmen",
+          description:
+            "In 65 Sekunden zeigt ZunftEcho, wie SHK-Betriebe Website-Anfragen rund um die Uhr aufnehmen, qualifizieren und strukturiert an ihr Team übergeben.",
+          thumbnailUrl: "https://zunftecho.de/zunftecho-video-preview.webp",
+          uploadDate: "2026-09-06",
+          duration: "PT1M5S",
+          embedUrl: "https://www.youtube.com/embed/IG5tb2o-ASY",
+          inLanguage: "de-DE",
+          publisher: {
+            "@type": "Organization",
+            name: "ZunftEcho",
+            url: "https://zunftecho.de/",
           },
         }),
       },
@@ -430,6 +451,46 @@ function LandingPage() {
                 </p>
               </div>
             </div>
+          </div>
+        </section>
+
+        <section
+          id="video"
+          className="scroll-mt-20 border-y border-slate-200 bg-slate-50 py-20 sm:py-24"
+        >
+          <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 sm:px-8 lg:grid-cols-[0.72fr_1.28fr] lg:px-10">
+            <ScrollReveal>
+              <div className="max-w-xl">
+                <p className="text-sm font-semibold tracking-wide text-primary uppercase">
+                  ZunftEcho in 65 Sekunden
+                </p>
+                <h2 className="mt-3 text-3xl leading-tight font-semibold sm:text-4xl">
+                  Vom ersten Hallo bis zur vorbereiteten Anfrage.
+                </h2>
+                <p className="mt-5 text-lg leading-8 text-slate-600">
+                  Sehen Sie kompakt, wie die digitale Assistentin Kundenanliegen aufnimmt, fehlende
+                  Angaben klärt und Ihrem Team einen verwertbaren Lead übergibt.
+                </p>
+                <div className="mt-7 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
+                  <Button asChild size="lg">
+                    <Link to="/demo" search={{ source: "website-video-01" }}>
+                      Live-Demo ausprobieren <ArrowRight />
+                    </Link>
+                  </Button>
+                  {acquisitionCampaignLive ? (
+                    <Button asChild variant="outline" size="lg" className="bg-white">
+                      <Link to="/anfrage-check" search={{ source: "website-video-01" }}>
+                        Anfrage-Check starten
+                      </Link>
+                    </Button>
+                  ) : null}
+                </div>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal delay={100}>
+              <YouTubeVideoLite />
+            </ScrollReveal>
           </div>
         </section>
 
