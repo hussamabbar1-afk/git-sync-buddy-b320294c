@@ -16,6 +16,8 @@ dist-ssr
 .nitro
 *.local
 tmp/
+.tmp-upload/
+tmp-upload/
 __pycache__/
 
 # Private migration backups (may contain credential references)
