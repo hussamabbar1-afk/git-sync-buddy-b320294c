@@ -76,12 +76,12 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
 | Impressum / AGB / Datenschutz          | منفذة ومفعّلة بصياغة حذرة | يجب تحديثها بالبيانات الرسمية ومراجعتها مهنيًا قبل البيع الحي                                                        |
 | Wissen + المقالات المتخصصة             | منفذة ومفعّلة             | مركز معرفة وثلاثة مسارات محتوى عملية                                                                                 |
 | Partner page                           | منفذة ومفعّلة             | لا تعد بعمولة أو White-label تلقائيًا                                                                                |
-| Sitemap وSEO الأساسي                   | منفذ ومُرسل إلى Google    | خاصية النطاق موثقة عبر Cloudflare؛ قُبل `https://zunftecho.de/sitemap.xml` واكتشف Google 11 صفحة في 6 سبتمبر 2026     |
+| Sitemap وSEO الأساسي                   | منفذ ومُرسل للمحركين      | قُبلت الخريطة في Google مع 11 صفحة، وأُرسلت إلى Bing وهي قيد المعالجة بلا أخطاء أو تحذيرات في 6 سبتمبر 2026          |
 | `/.well-known/security.txt`            | منفذ ومفعّل               | يستخدم `sicherheit@zunftecho.de`                                                                                     |
 | Website-Anfrage-Check `/anfrage-check` | منفذ ومفعّل               | نُشر في 6 سبتمبر 2026؛ المفتاح `acquisitionCampaignLive=true` وروابطه ظاهرة                                          |
 | LinkedIn-Unternehmensseite             | متعذرة خارجيًا حاليًا     | LinkedIn رفض إنشاءها لأن حساب المدير لا يملك الحد الأدنى من الاتصالات؛ نُشر أول منشور من الحساب الشخصي بدلًا منها   |
 | YouTube-Markenkanal                    | مفعّل مع فيديو علني       | الهوية `ZunftEcho` و`@zunftecho` منشورة؛ الفيديو الرسمي متاح على `https://youtu.be/IG5tb2o-ASY`                       |
-| Google Search Console / Bing           | Google مفعّل / Bing معلق  | موثقة خاصية نطاق Google وسجل DNS وSitemap ناجحة؛ Bing لم يُنشأ بعد                                                     |
+| Google Search Console / Bing           | مفعّلان                   | Google موثق عبر DNS؛ أُنشئت خاصية Bing باستيراد GSC بصلاحية قراءة فقط وأُرسلت Sitemap بنجاح                           |
 | Google Unternehmensprofil              | مرفوض حاليًا              | لا يناسب نشاطًا Online-only بلا استقبال عملاء في موقع معلن                                                           |
 | 30-day organic campaign                | مفعّلة جزئيًا             | نُشر المدخل المجاني وأول منشور LinkedIn؛ بقية الإيقاع الشهري يبدأ من خطة المحتوى، بلا رسائل جماعية                  |
 | 90-day growth plan                     | مجهزة وغير منشورة         | توسع من الإشارة الأولى إلى المحتوى المتخصص والشركاء وPilot proof؛ Paid محكوم ببوابات و150 € كحد اختبار فقط           |
@@ -370,6 +370,10 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
   اكتملت معالجة الفيديو وفحص حقوق الطبع والنشر بلا مشاكل.
 - أُنشئت خاصية النطاق `zunftecho.de` في Google Search Console، وأُضيف سجل TXT للتحقق بتفويض
   Cloudflare Domain Connect. قُبلت `https://zunftecho.de/sitemap.xml` بحالة نجاح واكتُشفت 11 صفحة.
+- أُنشئت خاصية `https://zunftecho.de/` في Bing Webmaster باستيراد Google Search Console؛ منح
+  Bing صلاحية `webmasters.readonly` فقط للتحقق الدوري وتحديث الخرائط. لم يستورد Bing الخريطة
+  تلقائيًا، لذا أُرسلت `https://zunftecho.de/sitemap.xml` يدويًا وظهرت بحالة `Processing` مع
+  صفر أخطاء وصفر تحذيرات؛ بيانات Bing قد تستغرق حتى 48 ساعة للظهور.
 
 - نُفذت تحسينات الحركة الخفيفة للواجهة العامة والداخلية في Commit `6f93f74`: دخول Hero،
   Scroll reveals، Live preview، رسم خط Dashboard، Count-up، Skeletons وحالات تأكيد مع احترام
@@ -529,8 +533,8 @@ ZunftEcho هو SaaS ألماني موجّه أولًا إلى شركات الت�
 
 - اكتمل إطلاق الموقع التسويقي والحملة العضوية الأساسية في 6 سبتمبر بموافقة صريحة من المالك، مع
   إبقاء البيع والفوترة والدفع الرسمي معلقة حتى Gewerbe.
-- اكتملت هوية قناة YouTube ونشر الفيديو الرسمي وGoogle Search Console وDNS وSitemap. المتبقي
-  من قنوات الفهرسة الخارجية هو إنشاء Bing Webmaster إن اختيرت.
+- اكتملت هوية قناة YouTube ونشر الفيديو الرسمي وGoogle Search Console وBing Webmaster وDNS،
+  وأُرسلت Sitemap إلى محركي البحث. تنتظر تقارير الفهرسة الأولى بعد مهلة المعالجة الخارجية.
 - صفحة LinkedIn للشركة تبقى متعذرة حتى يحقق حساب المدير شرط الاتصالات؛ لا تُستخدم اتصالات أو
   رسائل آلية لتجاوز القيد.
 - الخطابات العشرة لا يمكن إرسالها ماديًا من النظام؛ هي جاهزة وتبقى ضمن الإرسال اليدوي للمالك.
