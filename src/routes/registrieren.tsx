@@ -109,7 +109,7 @@ function PilotRequestPage() {
         </div>
       </header>
 
-      <main className="mx-auto grid max-w-6xl gap-10 px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+      <main className="mx-auto grid min-w-0 max-w-6xl grid-cols-1 gap-10 px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
         <section>
           <Link
             to="/"
@@ -184,7 +184,7 @@ function PilotRequestPage() {
             </div>
           ) : null}
 
-          <form className="grid gap-5 sm:grid-cols-2" onSubmit={handleSubmit}>
+          <form className="grid min-w-0 grid-cols-1 gap-5 sm:grid-cols-2" onSubmit={handleSubmit}>
             <div className="hidden" aria-hidden="true">
               <Label htmlFor="fax">Fax</Label>
               <Input id="fax" name="fax" tabIndex={-1} autoComplete="off" />
@@ -310,7 +310,7 @@ function PilotRequestPage() {
               <Button
                 type="submit"
                 size="lg"
-                className="h-12 w-full text-base"
+                className="h-auto min-h-12 w-full whitespace-normal py-3 text-center text-base"
                 disabled={requestState === "submitting"}
               >
                 {requestState === "submitting" ? (

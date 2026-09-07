@@ -32,7 +32,9 @@ export default {
         { status: 403, headers: cors(origin) },
       );
 
-    const payload = (await request.json().catch(() => ({}))) as JsonObject;
+    const body: unknown = await request.json().catch(() => null);
+    const payload: JsonObject =
+      body && typeof body === "object" && !Array.isArray(body) ? (body as JsonObject) : {};
     const widgetKey = typeof payload.widget_key === "string" ? payload.widget_key : "";
     const conversationId =
       typeof payload.conversation_id === "string" ? payload.conversation_id : "";
@@ -69,10 +71,11 @@ export default {
       .select("id, role, content, customer_visible_content, created_at, source_channel")
       .eq("conversation_id", conversationId)
       .eq("role", "assistant")
-      .order("created_at", { ascending: true })
+      .eq("source_channel", "manual")
+      .order("created_at", { ascending: false })
       .limit(60);
     if (error) throw error;
-    const messages = (data ?? []).map((item) => ({
+    const messages = (data ?? []).reverse().map((item) => ({
       id: item.id,
       content: item.customer_visible_content || item.content,
       created_at: item.created_at,

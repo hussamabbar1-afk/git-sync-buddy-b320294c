@@ -57,7 +57,7 @@ export type QuickReply = { label: string; value: string };
 const conversationStorageKey = (widgetKey: string) => `zunftecho_chat_${widgetKey}`;
 const transcriptStorageKey = (widgetKey: string) => `zunftecho_chat_messages_${widgetKey}`;
 const MAX_ORIGINAL_IMAGE_BYTES = 25 * 1024 * 1024;
-const MAX_RAW_HEIC_BYTES = 8 * 1024 * 1024;
+const MAX_RAW_HEIC_BYTES = 8_000_000;
 const MAX_COMPRESSED_IMAGE_BYTES = 1_500_000;
 
 function isHeicImage(file: File) {
@@ -137,9 +137,15 @@ async function compressChatImage(file: File): Promise<File> {
         canvas.toBlob(resolve, "image/webp", qualities[index]),
       );
       if (blob && blob.size <= MAX_COMPRESSED_IMAGE_BYTES) {
-        return new File([blob], `${file.name.replace(/\.[^.]+$/, "") || "kundenfoto"}.webp`, {
-          type: "image/webp",
-        });
+        const extension =
+          blob.type === "image/png" ? "png" : blob.type === "image/jpeg" ? "jpg" : "webp";
+        return new File(
+          [blob],
+          `${file.name.replace(/\.[^.]+$/, "") || "kundenfoto"}.${extension}`,
+          {
+            type: blob.type,
+          },
+        );
       }
     }
   } finally {
@@ -238,10 +244,18 @@ export function ChatWidget({
   const conversationId = useRef<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const sendInFlight = useRef(false);
+  const retryLocation = useRef<ConfirmedLocation | null>(null);
+  const locationRequest = useRef(0);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const storedConversationId = sessionStorage.getItem(conversationStorageKey(widgetKey));
+    let storedConversationId: string | null = null;
+    try {
+      storedConversationId = sessionStorage.getItem(conversationStorageKey(widgetKey));
+    } catch {
+      /* Storage can be disabled in embedded/private contexts. */
+    }
     conversationId.current = storedConversationId;
     setActiveConversationId(storedConversationId);
     setMessages(restoreMessages(widgetKey));
@@ -250,7 +264,11 @@ export function ChatWidget({
 
   useEffect(() => {
     if (typeof window === "undefined" || !restored) return;
-    sessionStorage.setItem(transcriptStorageKey(widgetKey), JSON.stringify(messages.slice(-40)));
+    try {
+      sessionStorage.setItem(transcriptStorageKey(widgetKey), JSON.stringify(messages.slice(-40)));
+    } catch {
+      /* The in-memory conversation still works. */
+    }
   }, [messages, restored, widgetKey]);
 
   useEffect(() => {
@@ -274,7 +292,12 @@ export function ChatWidget({
         };
         if (cancelled || !Array.isArray(payload.messages)) return;
         const incoming = payload.messages.flatMap((item): ChatMessage[] => {
-          if (typeof item.id !== "string" || typeof item.content !== "string") return [];
+          if (
+            item.source_channel !== "manual" ||
+            typeof item.id !== "string" ||
+            typeof item.content !== "string"
+          )
+            return [];
           return [
             {
               role: "assistant",
@@ -307,10 +330,10 @@ export function ChatWidget({
   const handleSend = async (
     suggestedText?: string,
     appendUser = true,
-    location: ConfirmedLocation | null = confirmedLocation,
+    location: ConfirmedLocation | null = null,
   ) => {
     const text = (suggestedText ?? input).trim();
-    if (!text || pending) return;
+    if (!text || sendInFlight.current) return;
     if (text.length > maxMessageLength) {
       setError(
         `Die Nachricht darf höchstens ${maxMessageLength.toLocaleString("de-DE")} Zeichen enthalten.`,
@@ -319,6 +342,8 @@ export function ChatWidget({
     }
 
     setError(null);
+    sendInFlight.current = true;
+    retryLocation.current = location;
     setRetryText(null);
     setPending(true);
     setInput("");
@@ -336,11 +361,19 @@ export function ChatWidget({
       if (result.conversation_id) {
         conversationId.current = result.conversation_id;
         setActiveConversationId(result.conversation_id);
-        sessionStorage.setItem(conversationStorageKey(widgetKey), result.conversation_id);
+        try {
+          sessionStorage.setItem(conversationStorageKey(widgetKey), result.conversation_id);
+        } catch {
+          /* Optional persistence only. */
+        }
       }
 
       setMessages((m) => [
-        ...m,
+        ...m.filter(
+          (item) =>
+            !result.assistant_message_id ||
+            item.assistant_message_id !== result.assistant_message_id,
+        ),
         {
           role: "assistant",
           content: result.message || "…",
@@ -352,6 +385,7 @@ export function ChatWidget({
           summary: result.summary,
         },
       ]);
+      retryLocation.current = null;
     } catch {
       setRetryText(text);
       setError(
@@ -359,11 +393,13 @@ export function ChatWidget({
           "Die Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut.",
       );
     } finally {
+      sendInFlight.current = false;
       setPending(false);
     }
   };
 
   const requestBrowserLocation = () => {
+    const requestId = ++locationRequest.current;
     setLocationNotice(null);
     if (!("geolocation" in navigator)) {
       setLocationNotice(
@@ -376,6 +412,7 @@ export function ChatWidget({
     setLocationPending(true);
     navigator.geolocation.getCurrentPosition(
       async ({ coords }) => {
+        if (requestId !== locationRequest.current) return;
         try {
           const response = await fetch(`${SUPABASE_FUNCTIONS_URL}/reverse-geocode`, {
             method: "POST",
@@ -387,6 +424,7 @@ export function ChatWidget({
             }),
           });
           const payload = (await response.json()) as { ok?: boolean; address?: unknown };
+          if (requestId !== locationRequest.current) return;
           if (!response.ok || payload.ok !== true || typeof payload.address !== "string") {
             throw new Error("reverse_failed");
           }
@@ -400,6 +438,7 @@ export function ChatWidget({
           setLocationOpen(true);
           setLocationNotice("Standort gefunden. Bitte prüfen und anschließend bestätigen.");
         } catch {
+          if (requestId !== locationRequest.current) return;
           setLocationOpen(true);
           setLocationNotice(
             "Der Standort konnte nicht in eine Adresse umgewandelt werden. Bitte Adresse eingeben.",
@@ -409,6 +448,7 @@ export function ChatWidget({
         }
       },
       () => {
+        if (requestId !== locationRequest.current) return;
         setLocationPending(false);
         setLocationOpen(true);
         setLocationNotice(
@@ -420,6 +460,7 @@ export function ChatWidget({
   };
 
   const confirmManualLocation = () => {
+    if (sendInFlight.current) return;
     const address = locationAddress.trim();
     if (address.length < 5) {
       setLocationNotice("Bitte geben Sie eine vollständige Adresse ein.");
@@ -437,6 +478,8 @@ export function ChatWidget({
   };
 
   const closeLocationEditor = () => {
+    locationRequest.current += 1;
+    setLocationPending(false);
     setLocationOpen(false);
     setLocationAddress("");
     setConfirmedLocation(null);
@@ -541,12 +584,12 @@ export function ChatWidget({
       fileInputRef.current?.click();
       return;
     }
-    void handleSend(reply.value);
+    void handleSend(/^[\p{L}\p{N}_-]+$/u.test(reply.value) ? reply.label : reply.value);
   };
 
   return (
-    <div className="flex h-80 flex-col rounded-md border">
-      <div ref={scrollRef} className="flex-1 space-y-2 overflow-y-auto p-3">
+    <div className="flex h-80 min-h-0 flex-col rounded-md border">
+      <div ref={scrollRef} className="min-h-0 flex-1 space-y-2 overflow-y-auto p-3">
         {welcomeMessage ? (
           <div className="max-w-[85%] rounded-lg bg-muted px-3 py-2 text-xs">{welcomeMessage}</div>
         ) : null}
@@ -663,7 +706,7 @@ export function ChatWidget({
             {retryText ? (
               <button
                 type="button"
-                onClick={() => void handleSend(retryText, false)}
+                onClick={() => void handleSend(retryText, false, retryLocation.current)}
                 className="inline-flex items-center gap-1 rounded border border-destructive/30 px-2 py-1 font-medium"
               >
                 <RefreshCw className="size-3" /> Erneut senden
@@ -706,7 +749,7 @@ export function ChatWidget({
             type="button"
             variant="ghost"
             size="sm"
-            onClick={() => setLocationOpen((open) => !open)}
+            onClick={() => (locationOpen ? closeLocationEditor() : setLocationOpen(true))}
             disabled={pending}
           >
             <MapPin className="mr-1.5 size-3.5" /> Adresse eingeben
@@ -766,7 +809,12 @@ export function ChatWidget({
                 placeholder="Straße, Hausnummer, PLZ und Ort"
                 className="min-w-0 flex-1 rounded-md border bg-background px-3 py-2 text-xs"
               />
-              <Button type="button" size="sm" onClick={confirmManualLocation}>
+              <Button
+                type="button"
+                size="sm"
+                onClick={confirmManualLocation}
+                disabled={pending || locationPending}
+              >
                 Bestätigen
               </Button>
             </div>

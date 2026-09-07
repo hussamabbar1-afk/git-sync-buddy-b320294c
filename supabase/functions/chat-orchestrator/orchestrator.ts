@@ -86,7 +86,8 @@ export function normalizeQuickReplyAction(value: unknown, label?: unknown): stri
   ) {
     return PHOTO_UPLOAD_ACTION;
   }
-  return action;
+  // Model-generated button identifiers are not customer messages.
+  return /^[\p{L}\p{N}_-]+$/u.test(action) && caption ? cleanText(label, 120) : action;
 }
 
 export function isPhotoUploadQuestion(value: unknown): boolean {
@@ -252,7 +253,7 @@ export function appointmentActionSummary(args: {
 }
 
 export function containsAcuteDanger(message: unknown): boolean {
-  const value = cleanText(message, 4_000).normalize("NFKC").toLocaleLowerCase();
+  let value = cleanText(message, 4_000).normalize("NFKC").toLocaleLowerCase();
   const negations = [
     "kein gasgeruch",
     "keinen gasgeruch",
@@ -261,7 +262,8 @@ export function containsAcuteDanger(message: unknown): boolean {
     "no gas leak",
     "لا توجد رائحة غاز",
   ];
-  if (negations.some((term) => value.includes(term))) return false;
+  // A negated gas smell must not mask a separate fire/electrical hazard.
+  for (const term of negations) value = value.replaceAll(term, "");
   return [
     "gasgeruch",
     "gasleck",
@@ -295,6 +297,21 @@ export function containsAcuteDanger(message: unknown): boolean {
   ].some((term) => value.includes(term));
 }
 
+export function isAlternativeBookingRequest(message: unknown): boolean {
+  return /(?:ander(?:en|er|e|es)?\s+(?:termin|zeitpunkt|uhrzeit)|(?:another|different)\s+(?:appointment|time|date)|موعد\s*آخر)/i.test(
+    cleanText(message),
+  );
+}
+
+export function companyLocalDate(timeZone: unknown, now = new Date()): string {
+  return new Intl.DateTimeFormat("sv-SE", {
+    timeZone: cleanText(timeZone, 80) || "Europe/Berlin",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(now);
+}
+
 export function securityReply(reason: unknown): string {
   switch (cleanText(reason, 80)) {
     case "message_too_long":
@@ -324,6 +341,8 @@ export function availabilityReply(reason: unknown): string {
       return "Dieser Termin liegt außerhalb des aktuell freigegebenen Buchungszeitraums. Bitte wählen Sie einen früheren Zeitpunkt.";
     case "minimum_notice":
       return "Dieser Termin liegt zu kurzfristig. Bitte wählen Sie einen späteren Zeitpunkt.";
+    case "past_date":
+      return "Dieser Tag liegt in der Vergangenheit. Bitte wählen Sie ein zukünftiges Datum.";
     case "conflict":
     case "conflict_race":
       return "Dieser Termin ist leider nicht mehr verfügbar. Bitte wählen Sie einen anderen Zeitpunkt oder lassen Sie sich auf die Warteliste setzen.";

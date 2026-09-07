@@ -158,7 +158,7 @@ function WidgetPage() {
   ].slice(0, 6);
 
   return (
-    <div className="flex min-h-screen flex-col bg-background p-3">
+    <div className="flex h-dvh min-h-0 flex-col overflow-hidden bg-background p-3">
       {status === "loading" ? (
         <div className="flex flex-1 items-center justify-center gap-2 text-sm text-muted-foreground">
           <Loader2 className="size-4 animate-spin" /> Chat wird geladen …

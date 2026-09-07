@@ -109,6 +109,7 @@ export async function sendChatMessage(input: unknown) {
 
   const res = await fetch(CHAT_ENDPOINT, {
     method: "POST",
+    signal: AbortSignal.timeout(55_000),
     headers: { "content-type": "application/json" },
     body: JSON.stringify(body),
   });

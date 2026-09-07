@@ -457,9 +457,9 @@ function AuftraegePage() {
           </div>
 
           <Card className="mt-6">
-            <CardHeader className="gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <CardHeader className="gap-3 xl:flex-row xl:items-center xl:justify-between">
               <CardTitle className="text-base">Auftragsliste</CardTitle>
-              <div className="flex flex-col gap-2 sm:flex-row">
+              <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:flex-wrap">
                 <Input
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}

@@ -19,6 +19,8 @@ export default tseslint.config(
       ".npm-cache",
       ".tmp-*",
       "node_modules",
+      "tmp",
+      ".private",
     ],
   },
   {

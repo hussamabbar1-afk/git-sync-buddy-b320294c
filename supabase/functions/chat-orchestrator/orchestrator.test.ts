@@ -15,6 +15,7 @@ import {
   stripInternalIdentifiers,
   validIsoDate,
   validTime,
+  companyLocalDate,
 } from "./orchestrator.ts";
 
 Deno.test("normalizes dates and times", () => {
@@ -120,9 +121,16 @@ Deno.test("accepts the atomic reschedule RPC success contract", () => {
 Deno.test("danger and customer-safe fallback messages", () => {
   if (!containsAcuteDanger("Ich rieche Gas, was soll ich tun?")) throw new Error("danger missed");
   if (containsAcuteDanger("Es gibt keinen Gasgeruch.")) throw new Error("negation ignored");
+  if (!containsAcuteDanger("Kein Gasgeruch, aber es brennt!"))
+    throw new Error("separate danger masked");
   if (!securityReply("rate_limited").includes("später")) throw new Error("rate message missing");
   if (!availabilityReply("conflict").includes("nicht mehr verfügbar"))
     throw new Error("conflict message missing");
+});
+
+Deno.test("uses the company date at the UTC midnight boundary", () => {
+  if (companyLocalDate("Europe/Berlin", new Date("2026-09-06T22:30:00Z")) !== "2026-09-07")
+    throw new Error("local date shifted");
 });
 
 Deno.test("escalates only unmistakably angry customers", () => {
@@ -132,6 +140,11 @@ Deno.test("escalates only unmistakably angry customers", () => {
 });
 
 Deno.test("normalizes appointment labels and photo upload actions", () => {
+  if (
+    normalizeQuickReplyAction("mit_mitarbeiter_sprechen", "Mit Mitarbeiter sprechen") !==
+    "Mit Mitarbeiter sprechen"
+  )
+    throw new Error("internal action leaked");
   if (normalizeIssueType("Appointment") !== "Terminbuchung") {
     throw new Error("English appointment label leaked");
   }

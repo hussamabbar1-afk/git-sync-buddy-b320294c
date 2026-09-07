@@ -46,7 +46,7 @@ function withSecurityHeaders(request: Request, response: Response): Response {
   headers.set("strict-transport-security", "max-age=31536000; includeSubDomains");
   headers.set("x-content-type-options", "nosniff");
   headers.set("referrer-policy", "strict-origin-when-cross-origin");
-  headers.set("permissions-policy", "camera=(), microphone=(), geolocation=(), payment=()");
+  headers.set("permissions-policy", "camera=(), microphone=(), geolocation=(self), payment=()");
   headers.set(
     "content-security-policy",
     [

@@ -724,7 +724,7 @@ function DashboardPage() {
         })}
       </div>
 
-      <div className="mt-6 grid gap-4 lg:grid-cols-3">
+      <div className="mt-6 grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-3">
         <Card className="overflow-hidden lg:col-span-2">
           <CardHeader>
             <CardTitle>Aktivität der letzten 14 Tage</CardTitle>
@@ -805,7 +805,7 @@ function DashboardPage() {
         </Card>
       </div>
 
-      <div className="mt-6 grid gap-4 lg:grid-cols-3">
+      <div className="mt-6 grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-3">
         <Card className="lg:col-span-2">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -946,7 +946,7 @@ function DashboardPage() {
         </CardContent>
       </Card>
 
-      <div className="mt-6 grid gap-4 lg:grid-cols-3">
+      <div className="mt-6 grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-3">
         <Card className="lg:col-span-2">
           <CardHeader>
             <CardTitle>Benötigt Ihre Aufmerksamkeit</CardTitle>
@@ -968,7 +968,9 @@ function DashboardPage() {
                 const body = (
                   <div className="flex w-full items-start justify-between gap-4 py-3 text-left">
                     <div className="min-w-0">
-                      <p className="text-sm font-medium">{item.title ?? "Ohne Titel"}</p>
+                      <p className="break-words text-sm font-medium">
+                        {item.title ?? "Ohne Titel"}
+                      </p>
                       {item.subtitle ? (
                         <p className="truncate text-xs text-muted-foreground">{item.subtitle}</p>
                       ) : null}
@@ -1039,7 +1041,7 @@ function DashboardPage() {
         </Card>
       </div>
 
-      <div className="mt-6 grid gap-4 lg:grid-cols-3">
+      <div className="mt-6 grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-3">
         <Card className="lg:col-span-2">
           <CardHeader className="flex flex-row items-center justify-between space-y-0">
             <CardTitle>Priorisierte Leads</CardTitle>

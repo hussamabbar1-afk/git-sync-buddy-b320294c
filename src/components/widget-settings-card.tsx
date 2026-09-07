@@ -498,7 +498,11 @@ export function WidgetSettingsCard({
               </div>
             </div>
 
-            <Button onClick={() => void handleSave()} disabled={saving || !canManage}>
+            <Button
+              className="h-auto max-w-full whitespace-normal text-center"
+              onClick={() => void handleSave()}
+              disabled={saving || !canManage}
+            >
               {saving ? <Loader2 className="size-4 animate-spin" /> : null}
               Widget-Darstellung und Sicherheit speichern
             </Button>

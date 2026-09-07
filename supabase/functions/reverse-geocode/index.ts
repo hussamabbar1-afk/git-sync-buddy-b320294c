@@ -32,10 +32,12 @@ export default {
         { ok: false, code: "origin_not_allowed" },
         { status: 403, headers: cors(origin) },
       );
-    const payload = (await request.json().catch(() => ({}))) as JsonObject;
+    const body: unknown = await request.json().catch(() => null);
+    const payload: JsonObject =
+      body && typeof body === "object" && !Array.isArray(body) ? (body as JsonObject) : {};
     const widgetKey = typeof payload.widget_key === "string" ? payload.widget_key : "";
-    const latitude = Number(payload.latitude);
-    const longitude = Number(payload.longitude);
+    const latitude = typeof payload.latitude === "number" ? payload.latitude : NaN;
+    const longitude = typeof payload.longitude === "number" ? payload.longitude : NaN;
     if (
       !uuidPattern.test(widgetKey) ||
       !Number.isFinite(latitude) ||

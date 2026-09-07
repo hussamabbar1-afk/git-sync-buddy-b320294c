@@ -8,6 +8,9 @@ const testFiles = [
   "supabase/functions/pilot-request/qualification.test.ts",
   "supabase/functions/stripe-webhook/stripe-webhook.test.ts",
   "supabase/functions/send-business-document/pdf.smoke.test.ts",
+  "scripts/chat-runtime-tests.mjs",
+  "scripts/attachment-runtime-tests.mjs",
+  "scripts/widget-request-tests.mjs",
 ];
 
 const tests = [];

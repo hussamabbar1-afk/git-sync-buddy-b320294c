@@ -126,7 +126,8 @@ export default {
               : file.type === "image/heif"
                 ? "heif"
                 : "webp";
-      const storagePath = `${conversation.company_id}/leads/${lead.id}/chat-${crypto.randomUUID()}.${extension}`;
+      // The database and storage policies use the singular entity type.
+      const storagePath = `${conversation.company_id}/lead/${lead.id}/chat-${crypto.randomUUID()}.${extension}`;
       const bytes = new Uint8Array(await file.arrayBuffer());
       if (!matchesImageSignature(bytes, file.type)) {
         return Response.json(
@@ -159,10 +160,30 @@ export default {
         .single();
       if (insertError) {
         await ctx.supabaseAdmin.storage.from("company-files").remove([storagePath]);
+        if (insertError.message?.includes("chat_image_limit_reached")) {
+          return Response.json(
+            { ok: false, code: "image_limit_reached" },
+            { status: 409, headers: cors(origin) },
+          );
+        }
         throw insertError;
       }
       return Response.json(
-        { ok: true, attachment_id: attachment.id, remaining: Math.max(0, 2 - (count ?? 0)) },
+        {
+          ok: true,
+          attachment_id: attachment.id,
+          remaining: Math.max(
+            0,
+            3 -
+              ((
+                await ctx.supabaseAdmin
+                  .from("attachments")
+                  .select("id", { count: "exact", head: true })
+                  .eq("entity_type", "lead")
+                  .eq("entity_id", lead.id)
+              ).count ?? (count ?? 0) + 1),
+          ),
+        },
         { headers: cors(origin) },
       );
     } catch (error) {

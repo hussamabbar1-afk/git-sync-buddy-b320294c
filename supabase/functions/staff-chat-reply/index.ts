@@ -15,7 +15,9 @@ export default {
     }
 
     try {
-      const payload = (await request.json().catch(() => ({}))) as JsonObject;
+      const body: unknown = await request.json().catch(() => null);
+      const payload: JsonObject =
+        body && typeof body === "object" && !Array.isArray(body) ? (body as JsonObject) : {};
       const conversationId = clean(payload.conversation_id, 80);
       const message = clean(payload.message, 4_000);
       if (!uuidPattern.test(conversationId) || !message) {
