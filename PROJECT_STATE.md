@@ -612,9 +612,9 @@ Gewerbeanmeldung والتأكد من البيانات الضريبية والق�
 - متبقٍ للتحصين: Auth leaked-password protection غير مفعلة، وSafari/iPhone الفعلي لم يُختبر.
   تحذيرات SECURITY DEFINER الاستشارية ليست صفرًا ولا تُقدَّم النتائج كشهادة أمن مطلقة.
   لا تفعّل Stripe أو فواتير رسمية ولا تغيّر خطة Supabase المدفوعة تلقائيًا.
-- Git: بدأ التدقيق من `ed316a2` المتطابق مع `origin/main`. ستجد إصلاحاته في Commit
-  `fix: harden chatbot workflows and complete production QA`؛ استخدم `git log` لتحديد SHA الحالي
-  بعد حفظ هذا الملف، ولا تعتمد على SHA الابتدائي كآخر إصدار.
+- Git: بدأ التدقيق من `ed316a2` المتطابق مع `origin/main`. إصلاحات التطبيق والاختبارات محفوظة
+  في `aa51820` (`fix: harden chatbot workflows and complete production QA`). يأتي بعده تحديث
+  توثيقي لمعرف التسليم؛ استخدم `git log` لتحديد رأس الفرع، ولا تعتمد على SHA الابتدائي كآخر إصدار.
 
 نفّذها كفحص قراءة فقط قبل أي تغيير:
 
