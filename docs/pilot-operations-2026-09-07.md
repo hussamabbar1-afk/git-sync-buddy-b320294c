@@ -62,9 +62,14 @@ not a completed security feature.
 
 ## Backup and isolated restoration — NOT YET VERIFIED
 
-The current MCP access verifies database state but does not expose backup inventory.
-No management token was available in the task environment; the dashboard required login.
-No snapshot, export, restore, or off-site copy was created or claimed by this checkpoint.
+Follow-up: an existing CLI credential was found in the standard local Supabase credential
+file (not in environment variables). It was used in memory for read-only Management API
+requests, without printing or copying it. The backup inventory returned zero entries,
+`walg_enabled=true` and `pitr_enabled=false` in `eu-central-1`. WAL-G being enabled does
+not establish an available or tested recovery point. No snapshot, export, restore, or
+off-site copy has been created or claimed. Credential access is no longer the blocker;
+an actual recovery source, owner-controlled encrypted destination and isolated restore
+test remain outstanding.
 
 Supabase documents daily accessible backups for paid plans and recommends exports on Free.
 Database backups **do not include Storage file bodies**:
@@ -139,6 +144,29 @@ installation and complete workflow on a clean Linux runner, not only the local W
   covered by request-handler tests, but no production p50/p95, cost baseline, or live telemetry
   ingestion result is claimed. The existing log viewer/authorized log access is needed next.
 
-Resolve backup/restore access and real-device acceptance; evaluate live latency samples;
+Resolve backup/restore coverage and real-device acceptance; evaluate live latency samples;
 continue the existing organic content schedule and daily source monitor, without duplicate
 automations, cold outreach, phone calls, paid ads, or payment activation.
+
+## Narrow photo-question fast path — implementation checkpoint
+
+Only a standalone first-message German/English question about whether uploading a photo
+is possible uses a curated reply without analysis or translation calls. The existing
+widget gate and tenant checks still run; an upload-ready Lead and both messages are
+persisted before the normal upload action is returned. Existing Leads, prior conversation,
+appointments, confirmed location, unsupported output languages, mixed requests, symptoms,
+upload failures and negations retain the full normal path. Existing handoff/safety guards
+are unchanged. Model, prompts, booking logic, frontend assets and billing are unchanged.
+
+This follows the [OpenAI latency guidance](https://developers.openai.com/api/docs/guides/latency-optimization)
+to avoid model calls for constrained, known output; it is not a replacement for general
+conversation understanding. Regression coverage is now 57 tests, including language policy,
+provider outage, persistence order, gate/handoff rejection and compound danger messages.
+Frontend/strict Edge TypeScript, lint and production build also pass locally.
+
+Live performance-event access now works through the existing Management API credential
+and the unified `analytics/endpoints/logs` endpoint. A source-filtered query first returned
+a backend error; querying only the exact `chat_performance` event marker succeeded.
+No broad customer logs are required. Initial v18 synthetic samples confirm analysis and
+English localization dominate request time. Production deployment and paired measurements
+for this new fast path are pending the clean-runner quality check at this checkpoint.

@@ -19,6 +19,8 @@ import {
   normalizeIssueType,
   normalizeQuickReplyAction,
   PHOTO_UPLOAD_ACTION,
+  PHOTO_UPLOAD_REPLY_DE,
+  standalonePhotoReply,
   resolveAppointmentTarget,
   resolveConfiguredService,
   rescheduleMutationSucceeded,
@@ -687,7 +689,7 @@ async function routeAction(args: {
 
   if (isPhotoUploadQuestion(message)) {
     return {
-      text: "Ja. Sie können hier direkt ein Foto hochladen; es wird sicher Ihrer Anfrage zugeordnet und ist anschließend für den Betrieb sichtbar. Tippen Sie auf „Foto hochladen“ und wählen Sie das Bild aus.",
+      text: PHOTO_UPLOAD_REPLY_DE,
       quickReplies: [{ label: "Foto hochladen", value: PHOTO_UPLOAD_ACTION }],
       progress: computeProgress(lead, analysis),
     };
@@ -1408,6 +1410,49 @@ Deno.serve(async (request: Request) => {
         (existingLead?.id && appointment.lead_id === existingLead.id) ||
         appointment.conversation_id === conversationId,
     );
+    const photoIntroduction = standalonePhotoReply(message, agent);
+    if (
+      photoIntroduction &&
+      !existingLead &&
+      !relevantAppointments.length &&
+      history.length <= 1 &&
+      !body.location &&
+      (!history[0] || (history[0].role === "user" && history[0].content === message))
+    ) {
+      // A first-turn platform FAQ needs no extraction or translation model. Still
+      // persist the lead before exposing the upload action: attachments require it.
+      // Existing conversations, appointments and confirmed location data never enter.
+      telemetry.mark("action");
+      await upsertLead(
+        null,
+        companyId,
+        conversationId,
+        asAnalysis({
+          user_language: photoIntroduction.detectedLanguage,
+        }),
+      );
+      telemetry.mark("persist_reply");
+      const messageId = await saveAssistant(
+        conversationId,
+        PHOTO_UPLOAD_REPLY_DE,
+        photoIntroduction.text,
+        photoIntroduction.language,
+      );
+      await patchRows("conversations", `id=eq.${encodeURIComponent(conversationId)}`, {
+        customer_language: photoIntroduction.language,
+        detected_language: photoIntroduction.detectedLanguage,
+        preferred_language: photoIntroduction.language,
+      });
+      return respond({
+        message: photoIntroduction.text,
+        conversation_id: conversationId,
+        assistant_message_id: messageId,
+        language: photoIntroduction.language,
+        quick_replies: [{ label: photoIntroduction.label, value: PHOTO_UPLOAD_ACTION }],
+        progress_percent: 0,
+        summary: null,
+      });
+    }
     const knowledge =
       knowledgeRaw && typeof knowledgeRaw === "object" ? (knowledgeRaw as JsonObject) : {};
     const terminology =

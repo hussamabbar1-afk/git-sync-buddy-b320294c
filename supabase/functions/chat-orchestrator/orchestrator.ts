@@ -62,6 +62,52 @@ export function normalizeLanguage(value: unknown, fallback = "de"): string {
 
 export const PHOTO_UPLOAD_ACTION = "__action_upload_photo";
 
+export const PHOTO_UPLOAD_REPLY_DE =
+  "Ja. Sie können hier direkt ein Foto hochladen; es wird sicher Ihrer Anfrage zugeordnet und ist anschließend für den Betrieb sichtbar. Tippen Sie auf „Foto hochladen“ und wählen Sie das Bild aus.";
+
+// Intentionally narrow: only a whole, standalone capability question qualifies.
+// Extra symptoms, contact details, booking requests, negations and upload failures
+// must keep the normal extraction/safety path, even if they mention a photo.
+export function standalonePhotoReply(message: string, agent: Record<string, unknown>) {
+  const text = message
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, " ")
+    .replace(/[?!.]+$/, "")
+    .trim();
+  const detectedLanguage =
+    /^(?:kann|darf) ich (?:hier )?(?:ein )?(?:foto|bild|screenshot) (?:hier )?(?:hochladen|anhängen)$/.test(
+      text,
+    )
+      ? "de"
+      : /^can i (?:upload|attach) (?:a |an )?(?:photo|picture|image|screenshot)(?: here)?(?: for (?:your |the )?staff)?$/.test(
+            text,
+          )
+        ? "en"
+        : null;
+  if (!detectedLanguage) return null;
+  const supported = Array.isArray(agent.supported_languages)
+    ? agent.supported_languages.map((value) => normalizeLanguage(value)).filter(Boolean)
+    : ["de"];
+  const configured = normalizeLanguage(agent.language);
+  const language =
+    agent.auto_detect_language !== false && supported.includes(detectedLanguage)
+      ? detectedLanguage
+      : supported.includes(configured)
+        ? configured
+        : (supported[0] ?? "de");
+  if (language !== "de" && language !== "en") return null;
+  return {
+    detectedLanguage,
+    language,
+    text:
+      language === "de"
+        ? PHOTO_UPLOAD_REPLY_DE
+        : "Yes. You can upload a photo directly here. It will be securely attached to your enquiry and visible to the company's staff. Tap “Upload photo” and choose your image.",
+    label: language === "de" ? "Foto hochladen" : "Upload photo",
+  };
+}
+
 export function normalizeIssueType(value: unknown): string {
   const text = cleanText(value, 120);
   const key = normalized(text);
