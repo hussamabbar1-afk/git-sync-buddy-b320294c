@@ -6,6 +6,7 @@ import { stripTypeScriptTypes } from "node:module";
 const entry = new URL("../supabase/functions/chat-orchestrator/index.ts", import.meta.url);
 const source = (await readFile(entry, "utf8"))
   .replace('import "jsr:@supabase/functions-js/edge-runtime.d.ts";', "")
+  .replace('"./telemetry.ts"', JSON.stringify(new URL("./telemetry.ts", entry).href))
   .replace('"./orchestrator.ts"', JSON.stringify(new URL("./orchestrator.ts", entry).href));
 let handler;
 Deno.env = {
@@ -39,6 +40,8 @@ async function runCase({
   conversation = {},
   appointments = [],
   aiFailure = false,
+  logFailure = false,
+  networkHook,
   gate,
   mutate = {},
 } = {}) {
@@ -64,6 +67,12 @@ async function runCase({
     ...analysis,
   };
   const originalFetch = globalThis.fetch;
+  const originalInfo = console.info;
+  const metrics = [];
+  console.info = (line) => {
+    if (logFailure) throw new Error("synthetic log sink failure");
+    metrics.push(JSON.parse(line));
+  };
   const OriginalDate = globalThis.Date;
   globalThis.Date = class extends OriginalDate {
     constructor(...args) {
@@ -77,6 +86,7 @@ async function runCase({
     const url = new URL(input);
     const body = init.body ? JSON.parse(init.body) : null;
     calls.push({ url, method: init.method ?? "GET", body });
+    await networkHook?.({ url, body, calls });
     if (url.hostname === "api.openai.com") {
       if (aiFailure) return response({ error: { message: "synthetic outage" } }, 503);
       if (body.text.format.name === "zunftecho_localized_reply") {
@@ -89,7 +99,15 @@ async function runCase({
           }),
         });
       }
-      return response({ output_text: JSON.stringify(baseAnalysis) });
+      return response({
+        output_text: JSON.stringify(baseAnalysis),
+        usage: {
+          input_tokens: 400,
+          output_tokens: 90,
+          input_tokens_details: { cached_tokens: 100 },
+          output_tokens_details: { reasoning_tokens: 10 },
+        },
+      });
     }
     const resource = url.pathname.replace("/rest/v1/", "");
     if (resource === "rpc/consume_widget_request") return response(gate ?? { allowed: true });
@@ -150,12 +168,71 @@ async function runCase({
         }),
       }),
     );
-    return { status: result.status, data: await result.json(), calls, lead: currentLead };
+    return { status: result.status, data: await result.json(), calls, lead: currentLead, metrics };
   } finally {
     globalThis.fetch = originalFetch;
     globalThis.Date = OriginalDate;
+    console.info = originalInfo;
   }
 }
+
+Deno.test(
+  "runtime: measured response never exposes telemetry or private request data",
+  async () => {
+    const r = await runCase({ message: "private-customer@example.test" });
+    assert.equal(r.metrics.length, 1);
+    assert.equal(r.metrics[0].ai[0].input_tokens, 400);
+    assert.equal(r.metrics[0].status, 200);
+    assert.doesNotMatch(
+      JSON.stringify(r.metrics),
+      /private-customer|11111111|22222222|0300000000|Teststraße/,
+    );
+    assert.equal(r.data.stages_ms, undefined);
+    assert.equal(r.data.ai, undefined);
+  },
+);
+Deno.test(
+  "runtime: provider failure is measured and logging failure cannot break a response",
+  async () => {
+    const failed = await runCase({ aiFailure: true });
+    assert.equal(failed.status, 503);
+    assert.equal(failed.metrics[0].status, 503);
+    assert.equal(failed.metrics[0].ai[0].ok, false);
+    assert.equal((await runCase({ logFailure: true })).status, 200);
+  },
+);
+Deno.test(
+  "runtime: input writes overlap booking-config read but decisions wait for all",
+  async () => {
+    let releaseRead;
+    let inputWritten = false;
+    const readReady = new Promise((resolve) => {
+      releaseRead = resolve;
+    });
+    const r = await runCase({
+      networkHook: async ({ url, body }) => {
+        if (url.pathname.endsWith("/companies")) {
+          await Promise.race([
+            readReady,
+            new Promise((_, reject) => {
+              const timer = setTimeout(
+                () => reject(new Error("serial config read blocks input")),
+                1000,
+              );
+              timer.unref();
+            }),
+          ]);
+        }
+        if (url.pathname.endsWith("/messages") && body?.role === "user") {
+          inputWritten = true;
+          releaseRead();
+        }
+        if (url.hostname === "api.openai.com") assert.equal(inputWritten, true);
+      },
+    });
+    assert.equal(r.status, 200);
+  },
+);
 
 const appointment = {
   id: targetId,

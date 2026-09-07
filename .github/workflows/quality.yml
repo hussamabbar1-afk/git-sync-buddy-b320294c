@@ -1,0 +1,44 @@
+name: Quality gate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Tests, types, lint and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24.19.0"
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
+        with:
+          bun-version: "1.4.2"
+      - name: Install locked dependencies
+        run: bun install --frozen-lockfile
+      - name: Regression tests (mocked network, no production secrets)
+        run: npm test
+      - name: Type check
+        run: node node_modules/typescript/bin/tsc --noEmit
+      - name: Chat Edge type check
+        run: node node_modules/typescript/bin/tsc --noEmit --strict --skipLibCheck --target ES2022 --module ESNext --moduleResolution bundler --allowImportingTsExtensions supabase/functions/chat-orchestrator/runtime.d.ts supabase/functions/chat-orchestrator/index.ts
+      - name: Lint
+        run: npm run lint -- --max-warnings=0
+      - name: Production build (does not deploy)
+        run: npm run build
+      - name: Whitespace check
+        run: git diff --check

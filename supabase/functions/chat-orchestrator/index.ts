@@ -1,4 +1,5 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
+import { createChatTelemetry, type ChatTelemetry } from "./telemetry.ts";
 
 import {
   appointmentActionSummary,
@@ -159,44 +160,56 @@ async function openAIJson(
   input: string,
   schema: JsonObject,
   maxOutputTokens = 2_500,
+  telemetry?: ChatTelemetry,
 ): Promise<JsonObject> {
   if (!OPENAI_API_KEY) throw new Error("OPENAI_API_KEY_missing");
-  const response = await fetch("https://api.openai.com/v1/responses", {
-    method: "POST",
-    signal: AbortSignal.timeout(35_000),
-    headers: {
-      authorization: `Bearer ${OPENAI_API_KEY}`,
-      "content-type": "application/json",
-    },
-    body: JSON.stringify({
-      model: OPENAI_MODEL,
-      store: false,
-      instructions,
-      input,
-      reasoning: { effort: "low" },
-      max_output_tokens: maxOutputTokens,
-      text: {
-        format: {
-          type: "json_schema",
-          name,
-          strict: true,
-          schema,
-        },
+  const record = telemetry?.startAI(
+    name === "zunftecho_chat_analysis" ? "analysis" : "localization",
+  );
+  let usage: Parameters<NonNullable<typeof record>>[1];
+  try {
+    const response = await fetch("https://api.openai.com/v1/responses", {
+      method: "POST",
+      signal: AbortSignal.timeout(35_000),
+      headers: {
+        authorization: `Bearer ${OPENAI_API_KEY}`,
+        "content-type": "application/json",
       },
-    }),
-  });
-  const data = (await response.json().catch(() => ({}))) as JsonObject;
-  if (!response.ok) {
-    const apiError =
-      data.error && typeof data.error === "object"
-        ? cleanText((data.error as JsonObject).message, 300)
-        : "";
-    throw new Error(`openai_${response.status}:${apiError || "request_failed"}`);
+      body: JSON.stringify({
+        model: OPENAI_MODEL,
+        store: false,
+        instructions,
+        input,
+        reasoning: { effort: "low" },
+        max_output_tokens: maxOutputTokens,
+        text: {
+          format: {
+            type: "json_schema",
+            name,
+            strict: true,
+            schema,
+          },
+        },
+      }),
+    });
+    const data = (await response.json().catch(() => ({}))) as JsonObject;
+    usage = data.usage as typeof usage;
+    if (!response.ok) {
+      const apiError =
+        data.error && typeof data.error === "object"
+          ? cleanText((data.error as JsonObject).message, 300)
+          : "";
+      throw new Error(`openai_${response.status}:${apiError || "request_failed"}`);
+    }
+    const parsed = JSON.parse(responseText(data));
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed))
+      throw new Error("openai_invalid_json");
+    record?.(true, usage);
+    return parsed as JsonObject;
+  } catch (error) {
+    record?.(false, usage);
+    throw error;
   }
-  const parsed = JSON.parse(responseText(data));
-  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed))
-    throw new Error("openai_invalid_json");
-  return parsed as JsonObject;
 }
 
 const analysisSchema: JsonObject = {
@@ -351,6 +364,7 @@ async function analyzeChat(args: {
   appointments: AppointmentRow[];
   knowledge: JsonObject;
   terminology: JsonObject;
+  telemetry?: ChatTelemetry;
 }): Promise<ChatAnalysis> {
   const context = args.context;
   const company =
@@ -422,10 +436,16 @@ knowledge_supported ist true, wenn reply_de durch strukturierte Unternehmensdate
       },
     },
   };
-  return asAnalysis(await openAIJson("zunftecho_chat_analysis", instructions, input, schema));
+  return asAnalysis(
+    await openAIJson("zunftecho_chat_analysis", instructions, input, schema, 2_500, args.telemetry),
+  );
 }
 
-async function localize(language: string, result: ActionResult): Promise<ActionResult> {
+async function localize(
+  language: string,
+  result: ActionResult,
+  telemetry?: ChatTelemetry,
+): Promise<ActionResult> {
   if (language === "de") return result;
   const schema: JsonObject = {
     type: "object",
@@ -456,6 +476,7 @@ async function localize(language: string, result: ActionResult): Promise<ActionR
     }),
     schema,
     1_200,
+    telemetry,
   );
   const quickReplies = Array.isArray(translated.quick_replies)
     ? translated.quick_replies
@@ -1247,24 +1268,30 @@ Deno.serve(async (request: Request) => {
 
   let companyId: string | null = null;
   let conversationId: string | null = null;
+  const telemetry = createChatTelemetry();
+  let responseStatus = 503;
+  const respond = (body: unknown, status = 200) => {
+    responseStatus = status;
+    return jsonResponse(body, status);
+  };
   try {
     if (!SUPABASE_URL || !SERVICE_ROLE_KEY) throw new Error("supabase_runtime_not_configured");
     const body = (await request.json().catch(() => null)) as JsonObject | null;
     if (!body || typeof body !== "object" || Array.isArray(body))
-      return jsonResponse({ error: "invalid_json" }, 400);
+      return respond({ error: "invalid_json" }, 400);
     const widgetKey = cleanText(body.widget_key, 80);
     const message = cleanText(body.message, 20_000);
     const suppliedConversationId = cleanText(body.conversation_id, 80);
-    if (!UUID_RE.test(widgetKey) || !message)
-      return jsonResponse({ error: "invalid_request" }, 400);
+    if (!UUID_RE.test(widgetKey) || !message) return respond({ error: "invalid_request" }, 400);
     if (suppliedConversationId && !UUID_RE.test(suppliedConversationId))
-      return jsonResponse({ error: "invalid_conversation_id" }, 400);
+      return respond({ error: "invalid_conversation_id" }, 400);
 
     const origin = cleanText(body.origin || request.headers.get("origin"), 2_000);
     const clientHash = cleanText(
       body.client_id || request.headers.get("x-forwarded-for") || "anonymous",
       2_000,
     );
+    telemetry.mark("gate");
     const gate = (await rpc("consume_widget_request", {
       p_widget_key: widgetKey,
       p_client_hash: clientHash,
@@ -1272,7 +1299,7 @@ Deno.serve(async (request: Request) => {
       p_message_length: message.length,
     })) as JsonObject;
     if (gate?.allowed !== true) {
-      return jsonResponse({
+      return respond({
         message: securityReply(gate?.reason),
         conversation_id: null,
         assistant_message_id: null,
@@ -1283,6 +1310,7 @@ Deno.serve(async (request: Request) => {
       });
     }
 
+    telemetry.mark("context");
     const [contextRaw, conversationRaw] = await Promise.all([
       rpc("get_chatbot_context", { p_widget_key: widgetKey }),
       rpc("get_or_create_conversation", {
@@ -1299,13 +1327,14 @@ Deno.serve(async (request: Request) => {
     conversationId = rpcUuid(conversationRaw);
     if (!companyId || !conversationId) throw new Error("chat_context_unavailable");
 
-    const bookingConfig = await selectRows<JsonObject>(
-      "companies",
-      `id=eq.${encodeURIComponent(companyId)}&select=dynamic_booking_enabled,booking_window_days&limit=1`,
-    );
-    if (bookingConfig[0]) Object.assign(company, bookingConfig[0]);
-
-    await Promise.all([
+    telemetry.mark("persist_input");
+    // This company read does not depend on either input write. Keep all three
+    // awaited before reading conversation status/history or making decisions.
+    const [bookingConfig] = await Promise.all([
+      selectRows<JsonObject>(
+        "companies",
+        `id=eq.${encodeURIComponent(companyId)}&select=dynamic_booking_enabled,booking_window_days&limit=1`,
+      ),
       rpc("set_conversation_context", {
         p_widget_key: widgetKey,
         p_conversation_id: conversationId,
@@ -1325,7 +1354,9 @@ Deno.serve(async (request: Request) => {
         source_channel: "widget",
       }),
     ]);
+    if (bookingConfig[0]) Object.assign(company, bookingConfig[0]);
 
+    telemetry.mark("load_history");
     const conversationRows = await selectRows<JsonObject>(
       "conversations",
       `id=eq.${encodeURIComponent(conversationId)}&select=id,status,handoff_reason,customer_language&limit=1`,
@@ -1335,15 +1366,17 @@ Deno.serve(async (request: Request) => {
         "Ihre Anfrage wurde bereits an einen Mitarbeiter weitergegeben. Weitere Nachrichten werden gespeichert; ein Mitarbeiter übernimmt die weitere Bearbeitung.";
       const language = normalizeLanguage(conversationRows[0].customer_language);
       let localized = internal;
+      telemetry.mark("localization");
       if (language !== "de") {
         try {
-          localized = (await localize(language, { text: internal })).text;
+          localized = (await localize(language, { text: internal }, telemetry)).text;
         } catch {
           /* retain safe fallback */
         }
       }
+      telemetry.mark("persist_reply");
       const messageId = await saveAssistant(conversationId, internal, localized, language);
-      return jsonResponse({
+      return respond({
         message: localized,
         conversation_id: conversationId,
         assistant_message_id: messageId,
@@ -1380,6 +1413,7 @@ Deno.serve(async (request: Request) => {
     const terminology =
       terminologyRaw && typeof terminologyRaw === "object" ? (terminologyRaw as JsonObject) : {};
     // Immediate safety routing must also work during an AI provider outage.
+    telemetry.mark("analysis");
     const analysis = containsAcuteDanger(message)
       ? asAnalysis({
           user_language: /[\u0600-\u06ff]/.test(message)
@@ -1401,6 +1435,7 @@ Deno.serve(async (request: Request) => {
           appointments: relevantAppointments,
           knowledge,
           terminology,
+          telemetry,
         });
     // Widget-generated acknowledgements are German implementation text, not a
     // customer language switch. Keep the customer's established language.
@@ -1410,6 +1445,7 @@ Deno.serve(async (request: Request) => {
     ) {
       analysis.user_language = normalizeLanguage(conversationRows[0].customer_language);
     }
+    telemetry.mark("action");
     let lead = await upsertLead(existingLead, companyId, conversationId, analysis);
     const suppliedLocation =
       body.location && typeof body.location === "object" && !Array.isArray(body.location)
@@ -1515,14 +1551,16 @@ Deno.serve(async (request: Request) => {
           ? configuredLanguage
           : (supportedLanguages[0] ?? "de");
     let customerResult = internalResult;
+    telemetry.mark("localization");
     if (customerLanguage !== "de") {
       try {
-        customerResult = await localize(customerLanguage, internalResult);
+        customerResult = await localize(customerLanguage, internalResult, telemetry);
       } catch {
         customerResult = internalResult;
       }
     }
     customerResult = sanitizeActionResult(customerResult);
+    telemetry.mark("persist_reply");
     const assistantMessageId = await saveAssistant(
       conversationId,
       internalResult.text,
@@ -1534,7 +1572,7 @@ Deno.serve(async (request: Request) => {
       detected_language: analysis.user_language,
       preferred_language: customerLanguage,
     });
-    return jsonResponse({
+    return respond({
       message: customerResult.text,
       conversation_id: conversationId,
       assistant_message_id: assistantMessageId || null,
@@ -1544,8 +1582,16 @@ Deno.serve(async (request: Request) => {
       summary: customerResult.summary ?? null,
     });
   } catch (error) {
+    telemetry.mark("error");
     console.error("chat-orchestrator", errorMessage(error));
     await logFailure(companyId, conversationId, error);
-    return jsonResponse({ error: "temporary_failure" }, 503);
+    return respond({ error: "temporary_failure" }, 503);
+  } finally {
+    // Logging must never turn an already committed booking into an HTTP failure.
+    try {
+      console.info(JSON.stringify(telemetry.finish(responseStatus)));
+    } catch {
+      /* best effort */
+    }
   }
 });
