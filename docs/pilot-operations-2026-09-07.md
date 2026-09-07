@@ -140,9 +140,9 @@ installation and complete workflow on a clean Linux runner, not only the local W
 - Five test conversations in total were cleaned up with the exact marked company and service;
   rate buckets removed. First company deletion was rolled back by the service foreign key;
   the subsequent scoped transaction deleted the child first. No real data was affected.
-- Live stage/token log export is not yet available to this task. Instrumentation is deployed and
-  covered by request-handler tests, but no production p50/p95, cost baseline, or live telemetry
-  ingestion result is claimed. The existing log viewer/authorized log access is needed next.
+- At the v18 handoff, live stage/token log access was not yet available. The later follow-up
+  below resolves access and verifies ingestion; this historical two-request comparison still
+  does not establish a latency improvement or a representative production baseline.
 
 Resolve backup/restore coverage and real-device acceptance; evaluate live latency samples;
 continue the existing organic content schedule and daily source monitor, without duplicate
@@ -168,5 +168,42 @@ Live performance-event access now works through the existing Management API cred
 and the unified `analytics/endpoints/logs` endpoint. A source-filtered query first returned
 a backend error; querying only the exact `chat_performance` event marker succeeded.
 No broad customer logs are required. Initial v18 synthetic samples confirm analysis and
-English localization dominate request time. Production deployment and paired measurements
-for this new fast path are pending the clean-runner quality check at this checkpoint.
+English localization dominate request time.
+
+### Verified production result — v19
+
+Implementation commit `e8b88ee` passed [GitHub Quality gate 34152744094](https://github.com/hussamabbar1-afk/git-sync-buddy-b320294c/actions/runs/34152744094)
+before deployment. `chat-orchestrator` **v19 ACTIVE**, bundle SHA-256
+`d3cba093335295ebae087a676d6e3a726484df3bce8e1060a0451294069e1f6e`.
+The frontend Worker and other Edge functions remain unchanged; public production smoke,
+health GET200 and invalid empty chat POST400 pass.
+
+Six fresh synthetic conversations per version, three per language, sequentially from the
+same workstation on 7 September (baseline18:41–18:43 UTC; v19 at18:44 UTC):
+
+| Language | v18 client elapsed ms | v19 client elapsed ms | Median before → after |
+| --- | --- | --- | --- |
+| German | 7122, 8698, 9806 | 1445, 583, 699 | 8698 → 699ms |
+| English | 13341, 14993, 11693 | 550, 630, 553 | 13341 → 553ms |
+
+All responses were200, correct language, the existing upload-action contract, and no raw
+action/UUID in visible message text or telemetry fields in the response. Live matching
+server events measured6883–14883ms before and429–759ms after. The first v19 client request
+also includes deployment/network startup overhead, which server elapsed time does not.
+The six baseline requests made9 model calls (7914 input tokens,4583 output tokens;
+2304 cached input and2112 reasoning output are subsets). All six v19 events have `ai:[]`.
+The offline performance report successfully ingested these real events. Its sample p95
+is not a reliable production percentile at n=6; no monetary savings or mobile3G/4G claim
+is inferred. This evidence applies only to the narrow first-turn photo FAQ.
+
+An English follow-up about heating maintenance remained in the same conversation, used
+the normal workflow and returned in English in13146ms: **general chat latency remains
+open**. Twelve conversations had twelve correctly company-linked Leads, with zero missing
+or duplicate links, zero appointments, zero outbound messages and zero workflow errors.
+There were26 persisted messages, including13 assistant replies after the follow-up.
+Actual image upload bytes and real Safari were not re-tested in this narrow follow-up;
+the previous attachment audit remains separate evidence.
+
+The exact isolated `QA-FAST-20260907` company, twelve conversations/Leads, service, agent
+and rate buckets were deleted after verification; residual counts are zero. No real
+customer records were changed, no emails sent and no files uploaded in this benchmark.
