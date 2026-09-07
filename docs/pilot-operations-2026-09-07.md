@@ -111,7 +111,33 @@ useful evidence but does not mark this real-device requirement complete.
 Local verification: 52/52 saved tests pass; frontend TypeScript, strict chat Edge TypeScript,
 Deno check, ESLint (zero warnings) and production build pass. The existing production
 public smoke check passes. Frontend CSS remains 27.40 KB gzip; no frontend assets were edited.
-GitHub run and Edge deployment verification are recorded at handoff below when available.
+GitHub [Quality gate run 34151326468](https://github.com/hussamabbar1-afk/git-sync-buddy-b320294c/actions/runs/34151326468)
+completed successfully for implementation commit `a7ae24d`. This verifies the frozen-lockfile
+installation and complete workflow on a clean Linux runner, not only the local Windows checkout.
+
+### Production handoff
+
+- `chat-orchestrator` **v18 ACTIVE**; deployment used explicit `import_map_path=deno.json`
+  because the first upload inherited v17's obsolete temporary import-map path and was rejected.
+  No failed bundle was activated. Future MCP deploys must specify the import-map path explicitly.
+- Cloudflare Worker is unchanged at `4782bfc6-f9ae-4ff3-b3cd-6009f817e35e`;
+  no frontend deployment was necessary. Health GET passes and malformed/empty requests return400.
+- Isolated `QA-PERF-20260907` company had no members, email recipients, outbound messages,
+  appointments or real customer information. German and English photo questions both returned
+  correct action cards and preserved language before/after deployment; internal metrics were not
+  exposed in the response. One initial test expected an obsolete action name; its assertion was
+  corrected to the existing `__action_upload_photo` contract, not by changing the working app.
+- Tiny paired sample (one fresh conversation per language per version): German9485ms
+  before versus11388ms after; English11515ms before versus12339ms after.
+  An earlier single German sample was9089ms. These results **do not establish
+  a speed improvement**. Provider variability/cold starts and the very small sample prevent an
+  improvement or regression conclusion. Further speed optimization remains open.
+- Five test conversations in total were cleaned up with the exact marked company and service;
+  rate buckets removed. First company deletion was rolled back by the service foreign key;
+  the subsequent scoped transaction deleted the child first. No real data was affected.
+- Live stage/token log export is not yet available to this task. Instrumentation is deployed and
+  covered by request-handler tests, but no production p50/p95, cost baseline, or live telemetry
+  ingestion result is claimed. The existing log viewer/authorized log access is needed next.
 
 Resolve backup/restore access and real-device acceptance; evaluate live latency samples;
 continue the existing organic content schedule and daily source monitor, without duplicate
