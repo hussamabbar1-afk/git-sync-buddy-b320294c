@@ -1,6 +1,8 @@
 # Recovery preflight — 7 September 2026
 
 Status: **inventory completed; backup/export/restore NOT completed**.
+Historical preflight status: the subsequent USB export and archive verification are
+documented in `usb-backup-2026-09-08.md`; full isolated restoration is still outstanding.
 Production code, permissions, credentials, billing and service plans were not changed.
 Started from clean `ac9c335`, matching fetched `origin/main`.
 
