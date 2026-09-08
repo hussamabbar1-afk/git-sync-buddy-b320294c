@@ -4,7 +4,7 @@ Two individual exploratory inquiries submitted through explicitly invited partne
 
 ## HeWo Systems
 
-- Latest: a genuine written response was received, with video introduction required before partnership review. No meeting was scheduled. A polite deferral preserving written-only communication was sent once at 23:39 Berlin time from `kontakt@zunftecho.de`; Gmail Sent confirms the action, but Brevo showed no delivery event at the last check. This is not a partnership or customer win.
+- Latest: a genuine written response was received, with video introduction required before partnership review. No meeting was scheduled. A polite deferral preserving written-only communication was sent once from `kontakt@zunftecho.de`; Brevo logged it as delivered at 23:40 Berlin time. This is not a partnership or customer win.
 
 - Invitation and form: https://hewosystems.com/partner
 - Privacy notice reviewed: https://hewosystems.com/datenschutz
@@ -33,6 +33,6 @@ Guten Tag Bauleo-Team, auf Ihrer Partnerseite bitten Sie um Zielgruppe, Ablauf u
 - Search the correct owner's inbox for HeWo/Bauleo replies as well as ZunftEcho; a response might omit our brand in its subject. Do not rely on the mismatched Gmail connector. Do not store incoming personal details in Git.
 - Never repeat either form submission because an answer is pending. No scheduled outbound follow-up and no newsletter subscription.
 - If interested, answer concrete partner criteria in writing and ask whether an interested SHK business can contact us voluntarily. Do not accept referrals containing customer data without a proper basis.
-- Craftboxx and HERO were sent once and provider-delivered after sender authentication. Plancraft was also sent once and provider-delivered. Do not repeat any of these inquiries automatically.
+- Craftboxx, HERO, Plancraft, Badheld and KIMEO were sent once and provider-delivered after sender authentication. Do not repeat any of these inquiries automatically.
 - Paid listing, new integration, commissions, contracts and activation require their own decision/legal readiness. Preserve the existing Pilot prices and billing hold.
 - LinkedIn Pilot invitation already published today: do not duplicate it. Existing postal wave stays unchanged. No additional ad spend.

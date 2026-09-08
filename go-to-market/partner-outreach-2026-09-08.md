@@ -1,8 +1,8 @@
 # First-customer partner inquiries — 8 September 2026
 
-Status: **Three individual inquiries sent and provider-delivered. No partner, referral or customer acquired.**
+Status: **Five individual inquiries sent and provider-delivered. No partner, referral or customer acquired.**
 
-Current checkpoint superseding the historical setup below: the domain and `ZunftEcho <kontakt@zunftecho.de>` sender are authenticated. A new internal message was received with domain signing and TLS. Craftboxx and HERO were sent once at 23:39 Berlin time and logged as delivered by Brevo. Plancraft was sent once at 23:44 and logged as delivered. See `business-sender-verification-2026-09-08.md`. Do not resend or recreate the SMTP key.
+Current checkpoint superseding the historical setup below: the domain and `ZunftEcho <kontakt@zunftecho.de>` sender are authenticated. A new internal message was received with domain signing and TLS. Craftboxx and HERO were sent once at 23:39 Berlin time and logged as delivered by Brevo. Plancraft was delivered at 23:44, Badheld at 23:56 and KIMEO at 23:57. See `business-sender-verification-2026-09-08.md`. Do not resend or recreate the SMTP key.
 
 Historical setup note: a separate standard Brevo SMTP key named `ZunftEcho Gmail individual replies` was generated (expires 8 September 2027, also subject to provider inactivity expiry). Gmail authenticated over port 587/TLS and the alias was later confirmed. Cloudflare routing still sends all four business aliases to the owner's receiving Gmail account with suffix `4`. No production key, forwarding rule or personal default sender was changed.
 
@@ -15,6 +15,8 @@ The official pages below explicitly invite partnership inquiries at the listed a
 | Craftboxx | https://www.craftboxx.de/partnerprogramme | info@craftboxx.de | Sent once; Brevo delivered 23:39 |
 | HERO | https://hero-software.de/kooperationen/partnerschaften | kooperationen@hero-software.de | Sent once; Brevo delivered 23:39 |
 | Plancraft | https://plancraft.com/de-de/partner | kooperation@plancraft.com | Sent once; Brevo delivered 23:44 |
+| Badheld | https://www.badheld.com/installateure/ | kontakt@badheld.com | Sent once; Brevo delivered 23:56 |
+| KIMEO | https://kimeo-handwerk.de/netzwerk | info@kimeo-handwerk.de | Sent once; Brevo delivered 23:57 |
 
 Do not send again without a substantive reply. Use only the verified `ZunftEcho <kontakt@zunftecho.de>` identity for replies. No recipient was subscribed to a list or recurring campaign.
 
@@ -69,6 +71,18 @@ Freundliche Grüße
 ZunftEcho
 kontakt@zunftecho.de
 https://zunftecho.de/impressum
+
+## Badheld — individual inquiry
+
+Subject: Kooperationsanfrage: vollständige SHK-Website-Anfragen vor der Projektprüfung
+
+Sent once after the official Installateure page explicitly invited direct contact for SHK projects and cooperation. The message used `badheld-partner-01`, stated that no integration, data transfer or remuneration exists, and requested only a written voluntary review/referral. Brevo logged `Versendet` and `Zugestellt` at 23:56 Berlin time.
+
+## KIMEO — criteria inquiry
+
+Subject: Schriftliche Partnerprüfung: ZunftEcho für strukturierte SHK-Anfragen
+
+Sent once after the official network page invited software providers and startups to apply as partners. The message used `kimeo-partner-01`, disclosed that ZunftEcho has no paying customer yet and asked for the legal, EU-AI-Act and membership-fee criteria. It explicitly said this was not a paid application and made no integration, remuneration or data-transfer commitment. Brevo logged `Versendet` and `Zugestellt` at 23:57 Berlin time.
 
 ## Execution and response rules
 

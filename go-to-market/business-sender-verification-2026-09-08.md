@@ -7,7 +7,7 @@
 - One internal test, subject `ZunftEcho – Absendertest 08.09.2026`, was sent at 18:33 Berlin time. Gmail displayed sent, but Brevo logs explicitly rejected it because the sender was not valid. **The test was NOT delivered.** Do not treat Gmail Sent as delivery proof.
 - Brevo domain authentication was completed after all four record checks passed. The sender list now shows `ZunftEcho <kontakt@zunftecho.de>` as verified, with DKIM on `zunftecho.de` and DMARC configured.
 - A new internal test, subject `ZunftEcho – Zustelltest nach Domainprüfung`, arrived in the actual receiving account at 23:38 Berlin time. Gmail message details showed `gz.d.sender-sib.com` as sender infrastructure, `zunftecho.de` as the signing domain and standard TLS. Brevo logged delivery and an open. The rejected 18:33 test remains historical evidence and must not be reclassified.
-- Craftboxx and HERO were sent once at 23:39 and Brevo logged both as delivered. A written-only HeWo deferral was sent once from Gmail at 23:39; no Brevo delivery event was visible at the last check, so its delivery remains unverified. Plancraft was sent once at 23:44 and Brevo logged it as delivered. None of these is a customer or partnership win.
+- Craftboxx and HERO were sent once at 23:39 and Brevo logged both as delivered. The written-only HeWo deferral was also logged as delivered at 23:40. Plancraft was delivered at 23:44, Badheld at 23:56 and KIMEO at 23:57. HERO produced open-tracking events, which may be automated and are not evidence of human interest. None of these is a customer or partnership win.
 
 ## DNS changes and verification
 
@@ -30,7 +30,7 @@ Reference: https://help.brevo.com/hc/en-us/articles/12163873383186-Authenticate-
 
 ## Incoming partnership status
 
-- HeWo has sent a genuine reply requiring a video introduction before substantive partnership review. This is not a customer, referral, or partnership agreement. Respect written-only preference: no meeting scheduled. A brief polite deferral is planned but **not sent**.
+- HeWo has sent a genuine reply requiring a video introduction before substantive partnership review. This is not a customer, referral, or partnership agreement. Respect written-only preference: no meeting scheduled. A brief polite deferral was sent once and logged as delivered; do not follow up again unless HeWo provides a new written option.
 - No Bauleo reply found in the limited project-specific receiving-mailbox search. Do not claim a complete inbox audit.
 - QA Pilot messages are tests, not prospects.
 
