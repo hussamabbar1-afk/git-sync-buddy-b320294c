@@ -4,7 +4,7 @@ Owner priority: acquire the first genuine SHK Pilot customer. Continue written s
 
 ## Evidence and action
 
-- Pilot request count at inspection: 0. Targeted Gmail search returned no matching messages; this is not proof of coverage of every mailbox. LinkedIn inbox contained only its welcome message.
+- Pilot request count at inspection: 0. The initial Gmail connector search used a different account and must NOT be treated as project-inbox evidence. A subsequent project-specific search in the owner's authenticated Gmail browser session after 5 September found only two search-engine onboarding messages, not a customer inquiry. This limited search does not establish coverage of all messages. LinkedIn inbox contained only its welcome message.
 - Existing LinkedIn check post: 51 impressions observed; account has 0 connections/followers. Reach is the immediate constraint, not demonstrated form abandonment.
 - Published a distinct public Pilot invitation; LinkedIn confirmed publication:
   https://www.linkedin.com/feed/update/urn:li:activity:7502975827190538240/
@@ -21,3 +21,7 @@ Owner priority: acquire the first genuine SHK Pilot customer. Continue written s
 5. If qualified visits occur without inquiries, inspect that specific conversion step. Do not infer a broken funnel from impressions alone.
 
 No paid campaign, new subscription, cold email, new postal mailing or customer contract was initiated. First customer remains outstanding.
+
+## Partnership channel follow-through
+
+Two explicitly invited partnership channels were verified on their official websites: Craftboxx and HERO. Individually tailored inquiries and evidence are saved in `partner-outreach-2026-09-08.md`. Neither inquiry has been sent. The available Gmail connector is the wrong account; the owner's browser compose view offered no business sender selector, and Brevo's individual-mail action requires an email connection. No contacts were subscribed to campaigns and no credentials or email settings were changed. The existing monitor now verifies mailbox identity before searching.
