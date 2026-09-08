@@ -63,7 +63,7 @@ This was a database-level rehearsal, not a complete Supabase platform recovery. 
 - Cron and network-extension restoration while keeping jobs disabled until reviewed.
 - Edge Function secrets and third-party provider configuration, which are not contained in the database archive.
 
-The recovery identity remains only in `.private/recovery-2026-09-08/identity.txt`, outside Git and protected for the Windows owner and SYSTEM. A second copy must be stored in an owner-controlled password manager or on a different protected device. It must not be placed on the same USB as the encrypted archive.
+The original recovery identity remains in `.private/recovery-2026-09-08/identity.txt`, outside Git and protected for the Windows owner and SYSTEM. At the owner's request, a second same-device copy was protected with Windows DPAPI at `C:/Users/Alabar/AppData/Local/ZunftEcho/Recovery/recovery-identity-2026-09-08.dpapi`. Its ACL permits only the current Windows owner and SYSTEM, and an in-memory decrypt-and-compare round trip passed. It is not on the USB or in Git. Because DPAPI binds this copy to the current Windows account and device, an owner-controlled password manager or a different protected device is still required for protection against loss of the computer or disk.
 
 The temporary plaintext restore directory was deleted after the checks. The encrypted USB archive remains the recovery source.
 
