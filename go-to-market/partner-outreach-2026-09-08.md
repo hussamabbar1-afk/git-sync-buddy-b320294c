@@ -1,10 +1,10 @@
 # First-customer partner inquiries — 8 September 2026
 
-Status: **Prepared, NOT SENT. No partner, referral or customer acquired.**
+Status: **Three individual inquiries sent and provider-delivered. No partner, referral or customer acquired.**
 
-Current checkpoint superseding the historical setup below: Gmail alias confirmed; receiving account accessible. One internal test was rejected by Brevo (unverified sender), not delivered. Four DNS record checks now pass; final domain authentication awaits user confirmation. Craftboxx is saved as an unsent Gmail draft; HERO remains unsent. See `business-sender-verification-2026-09-08.md`. Do not recreate that draft or SMTP key.
+Current checkpoint superseding the historical setup below: the domain and `ZunftEcho <kontakt@zunftecho.de>` sender are authenticated. A new internal message was received with domain signing and TLS. Craftboxx and HERO were sent once at 23:39 Berlin time and logged as delivered by Brevo. Plancraft was sent once at 23:44 and logged as delivered. See `business-sender-verification-2026-09-08.md`. Do not resend or recreate the SMTP key.
 
-Latest sender setup: a separate standard Brevo SMTP key named `ZunftEcho Gmail individual replies` was generated (expires 8 September 2027, also subject to provider inactivity expiry). Gmail authenticated successfully over port 587/TLS, but the alias is **pending email confirmation**, not ready to send. Cloudflare rules directly establish that all four business aliases forward to the owner's Gmail address with suffix `4`, not the currently signed-in Brevo account with suffix `55`. The destination account is not signed into the browser. User sign-in is required; do not redirect mail as a workaround. No test or partner email has been sent. No production key or personal default sender changed. Historical statements below describe the pre-setup state.
+Historical setup note: a separate standard Brevo SMTP key named `ZunftEcho Gmail individual replies` was generated (expires 8 September 2027, also subject to provider inactivity expiry). Gmail authenticated over port 587/TLS and the alias was later confirmed. Cloudflare routing still sends all four business aliases to the owner's receiving Gmail account with suffix `4`. No production key, forwarding rule or personal default sender was changed.
 
 ## Basis and limits
 
@@ -12,10 +12,11 @@ The official pages below explicitly invite partnership inquiries at the listed a
 
 | Organization | Invitation source | Intended recipient | Status |
 | --- | --- | --- | --- |
-| Craftboxx | https://www.craftboxx.de/partnerprogramme | info@craftboxx.de | Prepared; business sending channel required |
-| HERO | https://hero-software.de/kooperationen/partnerschaften | kooperationen@hero-software.de | Prepared; business sending channel required |
+| Craftboxx | https://www.craftboxx.de/partnerprogramme | info@craftboxx.de | Sent once; Brevo delivered 23:39 |
+| HERO | https://hero-software.de/kooperationen/partnerschaften | kooperationen@hero-software.de | Sent once; Brevo delivered 23:39 |
+| Plancraft | https://plancraft.com/de-de/partner | kooperation@plancraft.com | Sent once; Brevo delivered 23:44 |
 
-Do not send from the unrelated Gmail connector account. The owner's Gmail browser session is accessible, but its compose view did not expose a business From selector. Brevo is accessible; its individual Compose action requests connecting an email account. No connection, API key creation, contact subscription or send was performed. Use verified `ZunftEcho <kontakt@zunftecho.de>` for eventual sending and replies. Recheck invitation and duplicate/sent status before sending.
+Do not send again without a substantive reply. Use only the verified `ZunftEcho <kontakt@zunftecho.de>` identity for replies. No recipient was subscribed to a list or recurring campaign.
 
 ## Craftboxx — individual inquiry
 
@@ -39,6 +40,12 @@ Freundliche Grüße
 ZunftEcho
 kontakt@zunftecho.de
 https://zunftecho.de/impressum
+
+## Plancraft — individual inquiry
+
+Subject: Kooperationsanfrage: strukturierte Website-Anfragen vor der Auftragsbearbeitung
+
+Sent once to `kooperation@plancraft.com` from the verified business sender. It used the distinct source `plancraft-partner-01`, explicitly stated that no Plancraft integration exists, requested written-only review and kept Pilot activation and billing on hold. Brevo logged `Versendet` and `Zugestellt` at 23:44 Berlin time.
 
 ## HERO — individual inquiry
 
@@ -66,7 +73,7 @@ https://zunftecho.de/impressum
 ## Execution and response rules
 
 1. Verify the business sender and Reply-To, then send each inquiry once, individually. Record actual provider acceptance and time; acceptance is not proof of delivery or interest.
-2. Do not add either recipient to marketing lists or scheduled follow-ups. If declined, stop and record the objection.
+2. Do not add any recipient to marketing lists or scheduled follow-ups. If declined, stop and record the objection.
 3. If interested, answer their criteria in writing. No commissions, paid listing, integration commitment or customer-data exchange without a separate decision.
 4. For a voluntary referral, let the interested business contact ZunftEcho itself. Qualify its website, trade and request volume using the existing async qualification process.
 5. A positive partner reply is not a won customer. Contract/Pilot activation and billing remain held pending Gewerbe/legal readiness.

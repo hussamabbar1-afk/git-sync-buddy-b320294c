@@ -5,9 +5,9 @@
 - Actual business receiving Gmail account (suffix `4`) is now accessible. The Gmail connector remains a different account; do not use it for project mail.
 - Gmail sending account (suffix `55`) has confirmed the alias `ZunftEcho <kontakt@zunftecho.de>` through the received confirmation link. Personal default From and production SMTP credentials are unchanged.
 - One internal test, subject `ZunftEcho – Absendertest 08.09.2026`, was sent at 18:33 Berlin time. Gmail displayed sent, but Brevo logs explicitly rejected it because the sender was not valid. **The test was NOT delivered.** Do not treat Gmail Sent as delivery proof.
-- Brevo sender creation led to domain authentication; the business sender is not yet listed as verified in Brevo. Finish domain verification and the specific sender setup before another test.
-- Final domain-authentication action is awaiting explicit user confirmation. The four individual record checks now report success; an overall stale mismatch banner still appears, so do not claim final authentication complete.
-- Craftboxx inquiry is saved as an unsent Gmail draft in the sending account. HERO and the HeWo response are not sent. Check Sent and this existing draft before any send; do not create duplicates.
+- Brevo domain authentication was completed after all four record checks passed. The sender list now shows `ZunftEcho <kontakt@zunftecho.de>` as verified, with DKIM on `zunftecho.de` and DMARC configured.
+- A new internal test, subject `ZunftEcho – Zustelltest nach Domainprüfung`, arrived in the actual receiving account at 23:38 Berlin time. Gmail message details showed `gz.d.sender-sib.com` as sender infrastructure, `zunftecho.de` as the signing domain and standard TLS. Brevo logged delivery and an open. The rejected 18:33 test remains historical evidence and must not be reclassified.
+- Craftboxx and HERO were sent once at 23:39 and Brevo logged both as delivered. A written-only HeWo deferral was sent once from Gmail at 23:39; no Brevo delivery event was visible at the last check, so its delivery remains unverified. Plancraft was sent once at 23:44 and Brevo logged it as delivered. None of these is a customer or partnership win.
 
 ## DNS changes and verification
 
@@ -36,8 +36,6 @@ Reference: https://help.brevo.com/hc/en-us/articles/12163873383186-Authenticate-
 
 ## Resume sequence
 
-1. Obtain the requested confirmation for final Brevo domain authentication. Reuse existing domain and DNS records; do not recreate SMTP keys.
-2. Complete the specific business sender if still absent; stop for any separate security-sensitive confirmation required by the UI policy.
-3. Send one new clearly identified internal test; verify recipient arrival, sender display and authentication before external mail. The earlier rejected test need not be resent.
-4. Recheck duplicates; send the saved Craftboxx draft, the HERO draft from `partner-outreach-2026-09-08.md`, and a brief written HeWo deferral once each.
-5. Record actual send/delivery evidence, update monitoring and project state. Do not count a send as a customer win.
+1. Monitor the actual business receiving account and Brevo logs for replies, bounces or complaints. Do not resend these inquiries automatically.
+2. Answer genuine interest in writing within one business day and ask only missing qualification questions.
+3. Preserve the billing and Pilot-activation hold until legal readiness. A send, delivery, open or partner reply is not a won customer.
