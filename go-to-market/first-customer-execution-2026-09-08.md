@@ -4,6 +4,8 @@ Owner priority: acquire the first genuine SHK Pilot customer. Continue written s
 
 ## Evidence and action
 
+**Mailbox evidence correction:** Direct Cloudflare routing inspection later on 8 September established that the actual business destination is the owner's Gmail account with suffix `4`, which is not signed into the browser. The browser searches described below used the Brevo account with suffix `55`, not the receiving mailbox. They do NOT establish absence of customer inquiries. Verify against routing before future inbox checks. A newly prepared Gmail business-sender alias is awaiting confirmation delivered to that actual destination; SMTP authentication alone is not completed sender verification.
+
 - Pilot request count at inspection: 0. The initial Gmail connector search used a different account and must NOT be treated as project-inbox evidence. A subsequent project-specific search in the owner's authenticated Gmail browser session after 5 September found only two search-engine onboarding messages, not a customer inquiry. This limited search does not establish coverage of all messages. LinkedIn inbox contained only its welcome message.
 - Existing LinkedIn check post: 51 impressions observed; account has 0 connections/followers. Reach is the immediate constraint, not demonstrated form abandonment.
 - Published a distinct public Pilot invitation; LinkedIn confirmed publication:

@@ -2,6 +2,8 @@
 
 Status: **Prepared, NOT SENT. No partner, referral or customer acquired.**
 
+Latest sender setup: a separate standard Brevo SMTP key named `ZunftEcho Gmail individual replies` was generated (expires 8 September 2027, also subject to provider inactivity expiry). Gmail authenticated successfully over port 587/TLS, but the alias is **pending email confirmation**, not ready to send. Cloudflare rules directly establish that all four business aliases forward to the owner's Gmail address with suffix `4`, not the currently signed-in Brevo account with suffix `55`. The destination account is not signed into the browser. User sign-in is required; do not redirect mail as a workaround. No test or partner email has been sent. No production key or personal default sender changed. Historical statements below describe the pre-setup state.
+
 ## Basis and limits
 
 The official pages below explicitly invite partnership inquiries at the listed addresses (verified 8 September). This is a narrow response to that invitation, not permission for newsletters, recurring follow-ups or outreach to their customers. General email-marketing restrictions remain applicable: https://www.gesetze-im-internet.de/uwg_2004/__7.html . This review is not a legal clearance certificate.
