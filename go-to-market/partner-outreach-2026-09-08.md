@@ -2,6 +2,8 @@
 
 Status: **Prepared, NOT SENT. No partner, referral or customer acquired.**
 
+Current checkpoint superseding the historical setup below: Gmail alias confirmed; receiving account accessible. One internal test was rejected by Brevo (unverified sender), not delivered. Four DNS record checks now pass; final domain authentication awaits user confirmation. Craftboxx is saved as an unsent Gmail draft; HERO remains unsent. See `business-sender-verification-2026-09-08.md`. Do not recreate that draft or SMTP key.
+
 Latest sender setup: a separate standard Brevo SMTP key named `ZunftEcho Gmail individual replies` was generated (expires 8 September 2027, also subject to provider inactivity expiry). Gmail authenticated successfully over port 587/TLS, but the alias is **pending email confirmation**, not ready to send. Cloudflare rules directly establish that all four business aliases forward to the owner's Gmail address with suffix `4`, not the currently signed-in Brevo account with suffix `55`. The destination account is not signed into the browser. User sign-in is required; do not redirect mail as a workaround. No test or partner email has been sent. No production key or personal default sender changed. Historical statements below describe the pre-setup state.
 
 ## Basis and limits

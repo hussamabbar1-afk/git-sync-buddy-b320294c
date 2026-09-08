@@ -4,6 +4,8 @@ Two individual exploratory inquiries submitted through explicitly invited partne
 
 ## HeWo Systems
 
+- Latest: a genuine written response was received, with video introduction required before partnership review. No meeting scheduled, respecting written-only preference. Polite deferral remains unsent pending business sender readiness. This is not a partnership or customer win.
+
 - Invitation and form: https://hewosystems.com/partner
 - Privacy notice reviewed: https://hewosystems.com/datenschutz
 - Submitted once. Visible confirmation: “Vielen Dank.” / “Wir haben Ihre Anfrage erhalten und melden uns zeitnah.” This is form acceptance, not proof of a human reply.
