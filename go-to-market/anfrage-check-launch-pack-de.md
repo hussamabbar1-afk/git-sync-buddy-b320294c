@@ -108,6 +108,18 @@ Verkaufsdruck zu erzeugen.
 3. Empfänger als „Team / Webagentur“ darstellen, ohne echte Kontaktdaten.
 4. Schluss: „Gemeinsam drei konkrete Verbesserungen festlegen.“
 
+## Produktionsstand Video A — 9. September 2026
+
+Video A ist als 30,5-sekündiges, vertikales MP4 fertig produziert und technisch geprüft. Es nutzt
+echte mobile Aufnahmen des live veröffentlichten Anfrage-Checks, enthält keine Kundendaten, keine
+fremden Medien und keine Musik. Der eindeutige Messlink lautet
+`https://zunftecho.de/anfrage-check?source=youtube-check-video-01`.
+
+Produktionsdateien, freigegebener Titel, Beschreibung und Prüfprotokoll liegen unter
+`assets/anfrage-check-video-a-2026-09-09/README.md`. Das Video ist **vorbereitet, nicht
+veröffentlicht**. Vorgesehener Termin im Redaktionsplan ist Freitag, 11. September 2026; Upload und
+öffentliche Freigabe werden nicht als bereits erledigt dokumentiert.
+
 ## Zulässige Verteilung ohne Werbebudget
 
 ### Eigene Kanäle

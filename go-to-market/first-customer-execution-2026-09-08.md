@@ -29,3 +29,14 @@ No paid campaign, new subscription, cold email, new postal mailing or customer c
 ## Partnership channel follow-through
 
 Five explicitly invited partnership channels were verified on their official websites: Craftboxx, HERO, Plancraft, Badheld and KIMEO. Individually tailored inquiries and evidence are saved in `partner-outreach-2026-09-08.md`. Each was sent once from the authenticated business identity and logged as delivered by Brevo. No contacts were subscribed to campaigns, no recurring follow-up was created and no integration, commission or paid listing was promised. The existing monitor must check replies and sources `plancraft-partner-01`, `badheld-partner-01`, `kimeo-partner-01` and `youtube-comment-01` without counting delivery, tracking opens or the owned comment as conversion.
+
+## Scheduled organic follow-through — 9 September 2026
+
+The first incomplete item after the published LinkedIn Anfrage-Check post is Friday's Video A.
+It is now produced from the real mobile production route and verified as a 30.5-second vertical
+H.264 video. The final asset and publication copy are stored in
+`assets/anfrage-check-video-a-2026-09-09/`. Its source is `youtube-check-video-01`.
+
+This checkpoint is preparation only: the video has not been uploaded or published, and therefore
+must not yet be monitored or counted as a live source. No paid placement, cold outreach, billing
+activation or product change was made.
