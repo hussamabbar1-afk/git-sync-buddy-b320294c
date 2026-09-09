@@ -862,6 +862,9 @@ npm run check:prelaunch -- --base=https://zunftecho.de --marketing=live
   يشغّل ناتج `.output` عبر Wrangler محليًا، وتحقق HTTP 200. ثُبت Wrangler 4.129.1 كاعتماد تطوير
   فقط، مع override لـSharp 0.35.4 لإغلاق advisory الحالي؛ لا تدخل هذه الأدوات حزمة المتصفح ولا
   تغيّر إنتاج الشات أو الفوترة.
+- نُشرت صفحة الـSEO الجديدة على الإنتاج في 9 سبتمبر 2026 ضمن نسخة Cloudflare Workers
+  `151e070d-ddb5-44e6-8929-494c5c6f994e`. أعاد المسار و`/sitemap.xml` استجابة HTTP 200،
+  ونجح فحص ما قبل الإطلاق الكامل على النطاق الحي مع بقاء الحملة العضوية مفعلة والفوترة متوقفة.
 
 - `AGENTS.md`
 - `docs/technical-acceptance-2026-08-29.md`

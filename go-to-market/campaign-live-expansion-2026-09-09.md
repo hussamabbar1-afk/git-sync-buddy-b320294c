@@ -87,3 +87,8 @@ Die Seite wurde bei 390 und 1.440 Pixel Breite visuell geprüft. Produktionsbuil
 ESLint, `npm audit` ohne Findings und Wrangler-Dry-Run sind erfolgreich. Der defekte bisherige
 `vite preview`-Pfad wurde durch eine lokale Wrangler-Vorschau des tatsächlichen `.output`-Workers
 ersetzt; Wrangler ist nur Entwicklungsabhängigkeit und wird nicht an Besucher ausgeliefert.
+
+Die Veröffentlichung auf `zunftecho.de` ist abgeschlossen. Die Cloudflare-Workers-Version
+`151e070d-ddb5-44e6-8929-494c5c6f994e` liefert die neue Seite und die aktualisierte Sitemap jeweils
+mit HTTP 200 aus. Der vollständige Produktions-Smoke-Test ist ebenfalls erfolgreich; organisches
+Marketing bleibt aktiv und Billing bleibt bis zur Gewerbe-Freigabe deaktiviert.
