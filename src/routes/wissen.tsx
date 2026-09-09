@@ -4,6 +4,7 @@ import {
   Bot,
   ClipboardCheck,
   Clock3,
+  ListChecks,
   MessageSquareText,
   SearchCheck,
   Wrench,
@@ -22,6 +23,14 @@ const guides = [
     title: "Website-Anfrage-Check für SHK-Betriebe",
     description:
       "Acht Fragen, eine sofortige Auswertung und drei konkrete Verbesserungen – anonym und ohne Anmeldung.",
+  },
+  {
+    to: "/website-anfragen-handwerk-checkliste" as const,
+    icon: ListChecks,
+    label: "8-Punkte-Checkliste",
+    title: "Website-Anfragen im Handwerk vollständig aufnehmen",
+    description:
+      "Anliegen, Einsatzort, Dringlichkeit, Erreichbarkeit, Termin, Fotos, Daten und Übergabe praktisch prüfen.",
   },
   {
     to: "/shk-anfragen-automatisieren" as const,

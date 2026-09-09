@@ -9,12 +9,13 @@
     "build:dev": "vite build --mode development",
     "check:prelaunch": "node --use-system-ca scripts/prelaunch-smoke.mjs",
     "test": "node --experimental-strip-types --no-warnings scripts/run-edge-tests.mjs",
-    "preview": "vite preview",
+    "preview": "wrangler dev --local",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
   "overrides": {
-    "rolldown": "1.2.1"
+    "rolldown": "1.2.1",
+    "sharp": "0.35.4"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -90,6 +91,7 @@
     "prettier": "^3.7.3",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.56.1",
-    "vite": "8.1.5"
+    "vite": "8.1.5",
+    "wrangler": "4.129.1"
   }
 }

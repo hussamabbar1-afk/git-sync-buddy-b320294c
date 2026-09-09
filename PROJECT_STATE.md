@@ -852,6 +852,16 @@ npm run check:prelaunch -- --base=https://zunftecho.de --marketing=live
 - B وC **جاهزان وليسا منشورين بعد** كي لا تتزاحم ثلاثة Shorts من القناة نفسها في يوم واحد.
   المصدران المحجوزان عند النشر هما `youtube-check-video-02` و`youtube-check-video-03`، ولا
   يدخلان المراقبة أو قياس التحويل قبل نشرهما فعليًا. هذا ترتيب توزيع، لا عائق إنتاج.
+- تحولت حالة Google لـ`/anfrage-check` في 9 سبتمبر إلى **مفهرسة ومتاحة على Google** بعد الطلب
+  المقبول؛ لا يُعد ذلك زيارة أو Lead. بقي Bing في حالة discovered/not crawled ولم يُكرر الطلب.
+- أُعدت صفحة SEO جديدة `/website-anfragen-handwerk-checkliste` بمصدر مستقل
+  `seo-anfrage-check-checkliste`: ثمانية محاور عملية، CTA مباشر للفحص، Article+FAQ schema، رابط
+  داخلي من Wissen وإدراج في sitemap. فُحصت بصريًا عند390 و1440px ونجح build و57/57 اختبارًا
+  وESLint وWrangler dry-run و`npm audit` بصفر ثغرات مسجلة.
+- أُصلح أمر المعاينة المحلي الذي كان يبحث خطأ عن `dist/server/server.js`: أصبح `npm run preview`
+  يشغّل ناتج `.output` عبر Wrangler محليًا، وتحقق HTTP 200. ثُبت Wrangler 4.129.1 كاعتماد تطوير
+  فقط، مع override لـSharp 0.35.4 لإغلاق advisory الحالي؛ لا تدخل هذه الأدوات حزمة المتصفح ولا
+  تغيّر إنتاج الشات أو الفوترة.
 
 - `AGENTS.md`
 - `docs/technical-acceptance-2026-08-29.md`

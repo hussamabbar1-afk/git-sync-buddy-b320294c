@@ -23,6 +23,13 @@ type KnowledgeArticleProps = {
   source: string;
   sections: KnowledgeSection[];
   faq: KnowledgeFaq[];
+  cta?: {
+    eyebrow: string;
+    title: string;
+    text: string;
+    href: string;
+    label: string;
+  };
 };
 
 export function KnowledgeArticle({
@@ -33,8 +40,18 @@ export function KnowledgeArticle({
   source,
   sections,
   faq,
+  cta,
 }: KnowledgeArticleProps) {
   const campaignSource = useCampaignSource(source);
+  const articleCta =
+    cta ??
+    ({
+      eyebrow: "In zwei Minuten ansehen",
+      title: "Vom Chat bis zum fertigen Lead",
+      text: "Die interaktive Demo benötigt keine Anmeldung und schreibt keine Produktionsdaten.",
+      href: "/demo",
+      label: "Live-Demo öffnen",
+    } satisfies NonNullable<KnowledgeArticleProps["cta"]>);
 
   return (
     <PublicMarketingShell source={source}>
@@ -101,14 +118,12 @@ export function KnowledgeArticle({
 
           <aside className="lg:sticky lg:top-24 lg:self-start">
             <div className="rounded-2xl bg-slate-950 p-6 text-white shadow-xl">
-              <p className="text-sm font-semibold text-sky-300">In zwei Minuten ansehen</p>
-              <h2 className="mt-2 text-xl font-semibold">Vom Chat bis zum fertigen Lead</h2>
-              <p className="mt-3 text-sm leading-6 text-slate-300">
-                Die interaktive Demo benötigt keine Anmeldung und schreibt keine Produktionsdaten.
-              </p>
+              <p className="text-sm font-semibold text-sky-300">{articleCta.eyebrow}</p>
+              <h2 className="mt-2 text-xl font-semibold">{articleCta.title}</h2>
+              <p className="mt-3 text-sm leading-6 text-slate-300">{articleCta.text}</p>
               <Button asChild className="mt-5 w-full" variant="secondary">
-                <a href={`/demo?source=${encodeURIComponent(campaignSource)}`}>
-                  Live-Demo öffnen <ArrowRight />
+                <a href={`${articleCta.href}?source=${encodeURIComponent(campaignSource)}`}>
+                  {articleCta.label} <ArrowRight />
                 </a>
               </Button>
             </div>

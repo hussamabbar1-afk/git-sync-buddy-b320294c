@@ -28,6 +28,7 @@ import { Route as PreiseRouteImport } from './routes/preise'
 import { Route as RegistrierenRouteImport } from './routes/registrieren'
 import { Route as ShkAnfragenAutomatisierenRouteImport } from './routes/shk-anfragen-automatisieren'
 import { Route as VertrauenRouteImport } from './routes/vertrauen'
+import { Route as WebsiteAnfragenHandwerkChecklisteRouteImport } from './routes/website-anfragen-handwerk-checkliste'
 import { Route as WidgetRouteImport } from './routes/widget'
 import { Route as WissenRouteImport } from './routes/wissen'
 import { Route as AuthenticatedAbonnementRouteImport } from './routes/_authenticated/abonnement'
@@ -145,6 +146,12 @@ const VertrauenRoute = VertrauenRouteImport.update({
   path: '/vertrauen',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WebsiteAnfragenHandwerkChecklisteRoute =
+  WebsiteAnfragenHandwerkChecklisteRouteImport.update({
+    id: '/website-anfragen-handwerk-checkliste',
+    path: '/website-anfragen-handwerk-checkliste',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const WidgetRoute = WidgetRouteImport.update({
   id: '/widget',
   path: '/widget',
@@ -266,6 +273,7 @@ export interface FileRoutesByFullPath {
   '/registrieren': typeof RegistrierenRoute
   '/shk-anfragen-automatisieren': typeof ShkAnfragenAutomatisierenRoute
   '/vertrauen': typeof VertrauenRoute
+  '/website-anfragen-handwerk-checkliste': typeof WebsiteAnfragenHandwerkChecklisteRoute
   '/widget': typeof WidgetRoute
   '/wissen': typeof WissenRoute
   '/abonnement': typeof AuthenticatedAbonnementRoute
@@ -305,6 +313,7 @@ export interface FileRoutesByTo {
   '/registrieren': typeof RegistrierenRoute
   '/shk-anfragen-automatisieren': typeof ShkAnfragenAutomatisierenRoute
   '/vertrauen': typeof VertrauenRoute
+  '/website-anfragen-handwerk-checkliste': typeof WebsiteAnfragenHandwerkChecklisteRoute
   '/widget': typeof WidgetRoute
   '/wissen': typeof WissenRoute
   '/abonnement': typeof AuthenticatedAbonnementRoute
@@ -346,6 +355,7 @@ export interface FileRoutesById {
   '/registrieren': typeof RegistrierenRoute
   '/shk-anfragen-automatisieren': typeof ShkAnfragenAutomatisierenRoute
   '/vertrauen': typeof VertrauenRoute
+  '/website-anfragen-handwerk-checkliste': typeof WebsiteAnfragenHandwerkChecklisteRoute
   '/widget': typeof WidgetRoute
   '/wissen': typeof WissenRoute
   '/_authenticated/abonnement': typeof AuthenticatedAbonnementRoute
@@ -387,6 +397,7 @@ export interface FileRouteTypes {
     | '/registrieren'
     | '/shk-anfragen-automatisieren'
     | '/vertrauen'
+    | '/website-anfragen-handwerk-checkliste'
     | '/widget'
     | '/wissen'
     | '/abonnement'
@@ -426,6 +437,7 @@ export interface FileRouteTypes {
     | '/registrieren'
     | '/shk-anfragen-automatisieren'
     | '/vertrauen'
+    | '/website-anfragen-handwerk-checkliste'
     | '/widget'
     | '/wissen'
     | '/abonnement'
@@ -466,6 +478,7 @@ export interface FileRouteTypes {
     | '/registrieren'
     | '/shk-anfragen-automatisieren'
     | '/vertrauen'
+    | '/website-anfragen-handwerk-checkliste'
     | '/widget'
     | '/wissen'
     | '/_authenticated/abonnement'
@@ -507,6 +520,7 @@ export interface RootRouteChildren {
   RegistrierenRoute: typeof RegistrierenRoute
   ShkAnfragenAutomatisierenRoute: typeof ShkAnfragenAutomatisierenRoute
   VertrauenRoute: typeof VertrauenRoute
+  WebsiteAnfragenHandwerkChecklisteRoute: typeof WebsiteAnfragenHandwerkChecklisteRoute
   WidgetRoute: typeof WidgetRoute
   WissenRoute: typeof WissenRoute
 }
@@ -644,6 +658,13 @@ declare module '@tanstack/react-router' {
       path: '/vertrauen'
       fullPath: '/vertrauen'
       preLoaderRoute: typeof VertrauenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/website-anfragen-handwerk-checkliste': {
+      id: '/website-anfragen-handwerk-checkliste'
+      path: '/website-anfragen-handwerk-checkliste'
+      fullPath: '/website-anfragen-handwerk-checkliste'
+      preLoaderRoute: typeof WebsiteAnfragenHandwerkChecklisteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/widget': {
@@ -845,6 +866,8 @@ const rootRouteChildren: RootRouteChildren = {
   RegistrierenRoute: RegistrierenRoute,
   ShkAnfragenAutomatisierenRoute: ShkAnfragenAutomatisierenRoute,
   VertrauenRoute: VertrauenRoute,
+  WebsiteAnfragenHandwerkChecklisteRoute:
+    WebsiteAnfragenHandwerkChecklisteRoute,
   WidgetRoute: WidgetRoute,
   WissenRoute: WissenRoute,
 }

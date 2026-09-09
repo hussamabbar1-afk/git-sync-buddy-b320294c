@@ -22,9 +22,9 @@ Stand: 9. September 2026
 
 ## Indexierung
 
-- Google Search Console: `/anfrage-check` war noch nicht im Index und Google kannte die URL noch
-  nicht. Die URL wurde am 9. September erfolgreich in die priorisierte Crawl-Warteschlange
-  eingereicht.
+- Google Search Console: `/anfrage-check` war zunächst unbekannt. Nach dem am 9. September
+  angenommenen Antrag meldet die URL-Prüfung nun „URL ist auf Google“ und „Seite ist indexiert“.
+  Das ist ein echter Statuswechsel, aber noch kein Klick oder Interessent.
 - Bing Webmaster Tools: URL seit 6. September bekannt, aber noch nicht gecrawlt. Der manuelle
   Indexierungsantrag wurde erfolgreich angenommen.
 - Mehrfaches erneutes Einreichen erhöht laut den Oberflächen die Priorität nicht; daher keine
@@ -74,3 +74,16 @@ Beide Shorts sind vollständig dekodiert und visuell geprüft, enthalten keine K
 Kontaktdaten und bleiben vorerst unveröffentlicht. Das ist kein Leerlauf: Video A erhält eine eigene
 organische Lernphase, während die nächste Veröffentlichung ohne Produktionsverzug bereitsteht.
 Nicht veröffentlichte Quellen werden nicht in die Conversionauswertung aufgenommen.
+
+## Organische Suchstrecke erweitert
+
+Als nächste eigene Akquisitionsfläche wurde der Leitfaden
+`/website-anfragen-handwerk-checkliste` vorbereitet. Er beantwortet die acht praktischen Bereiche
+Anliegen, Einsatzort, Dringlichkeit, Erreichbarkeit, Termin, Fotos, Datenminimierung und Übergabe und
+führt mit der Quelle `seo-anfrage-check-checkliste` zum kostenlosen Anfrage-Check. Die Seite enthält
+Article- und FAQPage-Strukturdaten, ist intern aus `/wissen` verlinkt und steht in der Sitemap.
+
+Die Seite wurde bei 390 und 1.440 Pixel Breite visuell geprüft. Produktionsbuild, 57 Regressionstests,
+ESLint, `npm audit` ohne Findings und Wrangler-Dry-Run sind erfolgreich. Der defekte bisherige
+`vite preview`-Pfad wurde durch eine lokale Wrangler-Vorschau des tatsächlichen `.output`-Workers
+ersetzt; Wrangler ist nur Entwicklungsabhängigkeit und wird nicht an Besucher ausgeliefert.
