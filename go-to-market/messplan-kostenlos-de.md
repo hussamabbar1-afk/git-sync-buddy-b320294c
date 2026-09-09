@@ -50,6 +50,22 @@ direct-demo
 Diese Quellen werden nur bei einer tatsächlich genutzten, freiwilligen Kontaktstrecke eingesetzt.
 Ein Seitenaufruf wird weiterhin nicht gespeichert.
 
+## Aktive eigene Digitalkanäle — 9. September 2026
+
+```text
+youtube-video-01
+youtube-comment-01
+youtube-check-video-01
+youtube-community-01
+linkedin-check-01
+linkedin-first-pilot-01
+website-video-01
+```
+
+Der Short mit `youtube-check-video-01` und der Community-Beitrag mit `youtube-community-01` sind
+live. Der vorhandene YouTube-Kommentar mit `youtube-comment-01` führt jetzt zum Anfrage-Check. Die
+Aktivität des ZunftEcho-Kontos selbst wird nie als Interessent oder Conversion gezählt.
+
 ## Qualifizierungsübersicht
 
 ```sql

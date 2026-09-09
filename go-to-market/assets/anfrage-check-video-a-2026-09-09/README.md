@@ -1,7 +1,6 @@
 # Anfrage-Check Video A — Produktionspaket
 
-Status: am 9. September 2026 fertig produziert und technisch geprüft, noch nicht öffentlich
-veröffentlicht.
+Status: am 9. September 2026 fertig produziert, technisch geprüft und öffentlich veröffentlicht.
 
 ## Finales Video
 
@@ -16,11 +15,16 @@ Die nummerierten PNG-Dateien sind die verwendeten Szenen. `06-outro.svg` ist die
 Quelle der Schlusskarte. `contact-sheet.png` und `video-preview.png` dokumentieren die visuelle
 Endkontrolle und sind nicht für die Veröffentlichung bestimmt.
 
-## Vorgesehene Veröffentlichung
+## Veröffentlichung
 
-Zeitpunkt laut Redaktionsplan: Freitag, 11. September 2026. Der genaue Zeitpunkt und die
-öffentliche Veröffentlichung bleiben eine externe Aktion und werden unmittelbar vor dem Upload
-bestätigt.
+- Short: `https://www.youtube.com/shorts/YhXYXCV0rSI`
+- Veröffentlichung: 9. September 2026
+- Community-Beitrag: `https://www.youtube.com/post/Ugkx7-FUDLplfH2JgDOPX41SN9J7bRcOqYxX`
+- CTA-Quelle: `youtube-check-video-01`
+
+Der im Redaktionsplan vorgesehene Freitagstermin wurde auf ausdrücklichen Wunsch vorgezogen. Das
+gibt Indexierung und organischer Verteilung mehr Zeit; der übrige Wochenrhythmus wird dadurch nicht
+verdichtet.
 
 **Titel**
 
@@ -47,6 +51,11 @@ bestätigt.
 - Die URL in der Beschreibung vor dem Freigeben einmal öffnen und den Source-Erhalt prüfen.
 - Eigene Aufrufe, Upload-Checks und Vorschauen niemals als organische Conversion zählen.
 
+YouTube hat die Veröffentlichung ohne Copyright-Hinweis abgeschlossen. Erweiterte Kanalmerkmale
+wie eigene Short-Vorschaubilder, angeheftete Kommentare, Short-Verknüpfungen und anklickbare externe
+Links bleiben bis zu einer Identitäts-/Telefonbestätigung deaktiviert. Diese Kontoeinstellung wurde
+nicht stellvertretend geändert.
+
 ## Prüfprotokoll
 
 - Das MP4 wurde vollständig durch FFmpeg dekodiert; keine Decoderfehler.
@@ -54,4 +63,3 @@ bestätigt.
   6.593.832 Byte.
 - Intro, drei echte Frageseiten, echte Auswertung und Schlusskarte wurden als Kontaktbogen und
   Zeitstichproben visuell kontrolliert.
-

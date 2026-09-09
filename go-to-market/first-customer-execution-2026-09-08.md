@@ -37,6 +37,9 @@ It is now produced from the real mobile production route and verified as a 30.5-
 H.264 video. The final asset and publication copy are stored in
 `assets/anfrage-check-video-a-2026-09-09/`. Its source is `youtube-check-video-01`.
 
-This checkpoint is preparation only: the video has not been uploaded or published, and therefore
-must not yet be monitored or counted as a live source. No paid placement, cold outreach, billing
-activation or product change was made.
+The video was subsequently published early at the owner's explicit request:
+`https://www.youtube.com/shorts/YhXYXCV0rSI`. A CTA comment was added, the older owned-video comment
+was redirected to the Anfrage-Check while keeping `youtube-comment-01`, and a Community post was
+published with `youtube-community-01`. Both new sources are now live and included in monitoring.
+Own views and posts are not conversions. No paid placement, cold outreach, billing activation or
+product change was made. Full evidence: `campaign-live-expansion-2026-09-09.md`.

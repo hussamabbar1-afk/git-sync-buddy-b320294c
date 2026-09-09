@@ -115,10 +115,11 @@ echte mobile Aufnahmen des live veröffentlichten Anfrage-Checks, enthält keine
 fremden Medien und keine Musik. Der eindeutige Messlink lautet
 `https://zunftecho.de/anfrage-check?source=youtube-check-video-01`.
 
-Produktionsdateien, freigegebener Titel, Beschreibung und Prüfprotokoll liegen unter
-`assets/anfrage-check-video-a-2026-09-09/README.md`. Das Video ist **vorbereitet, nicht
-veröffentlicht**. Vorgesehener Termin im Redaktionsplan ist Freitag, 11. September 2026; Upload und
-öffentliche Freigabe werden nicht als bereits erledigt dokumentiert.
+Produktionsdateien, Titel, Beschreibung und Prüfprotokoll liegen unter
+`assets/anfrage-check-video-a-2026-09-09/README.md`. Das Video wurde auf ausdrücklichen Wunsch am
+9. September vorgezogen und unter `https://www.youtube.com/shorts/YhXYXCV0rSI` veröffentlicht.
+Ein eigener CTA-Kommentar und ein Community-Beitrag sind ebenfalls live; Details und Kanalgrenzen
+stehen in `campaign-live-expansion-2026-09-09.md`.
 
 ## Zulässige Verteilung ohne Werbebudget
 

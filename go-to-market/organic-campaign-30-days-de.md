@@ -79,6 +79,10 @@ und Gesprächsqualität dieser Welle ausgewertet wurden.
 - Freitag: Video A – acht Fragen und die persönliche Auswertung
 - täglicher Aufwand: höchstens 30 Minuten für Antworten und echte Fachdiskussionen
 
+**Ist-Stand 9. September 2026:** Video A wurde auf ausdrücklichen Wunsch vor dem Freitagstermin
+veröffentlicht. Daraus folgt kein zusätzlicher Upload in derselben Woche. Live-Link und Quellen:
+`campaign-live-expansion-2026-09-09.md`.
+
 ### Woche 2 – Sicherheit und Übergabe erklären
 
 - Montag: Beitrag 02 – warum ein Chatbot nicht alles selbst lösen darf
