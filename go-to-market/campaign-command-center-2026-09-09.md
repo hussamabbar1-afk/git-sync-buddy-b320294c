@@ -16,9 +16,10 @@ Erfolgsversprechen bleiben ausgeschlossen.
 
 ## Aktuelle Messbasis
 
-Lesender Stand am 9. September 2026, 17:46 Uhr:
+Lesender Stand am 9. September 2026, 19:08 Uhr:
 
-- Anfrage-Check-Short A: 36 Aufrufe seit Veröffentlichung, davon 91,7 % aus dem Shorts-Feed;
+- Anfrage-Check-Short A: aktuell 35 Aufrufe; YouTube hat die frühere Anzeige von 36 nachträglich
+  korrigiert. Der zuletzt verfügbare Herkunftswert lag bei 91,7 % aus dem Shorts-Feed;
 - Abonnentenänderung: keine ausgewiesene Änderung;
 - noch keine belastbaren Daten zur Zuschauerbindung;
 - Pilotanfragen: 0;
@@ -27,6 +28,9 @@ Lesender Stand am 9. September 2026, 17:46 Uhr:
 - Workflow-Fehler in den letzten 24 Stunden: 0;
 - im korrekten Projektpostfach keine neue menschliche Partner- oder Kundenantwort; sichtbar sind
   nur die bekannte HeWo-Antwort und die automatische Craftboxx-Eingangsbestätigung.
+- alle drei geplanten Shorts weiterhin als `Geplant` sichtbar; null Kommentare vor ihrer
+  Veröffentlichung. Short A zeigt einen Kommentar, der vom eigenen ZunftEcho-Konto stammt und nicht
+  als Interessent zählt.
 
 Diese frühe Stichprobe reicht nicht für eine Aussage über die Wirkung des Formats. Video A erhält
 mindestens bis zum nächsten Werktag eine eigene Lernphase; die fehlende Sofort-Conversion wird nicht
@@ -78,6 +82,22 @@ Ein generativer Rohentwurf darf nur als Rohmaterial dienen, wenn er diesen Lock 
   menschliche Antwort und kein Widerspruch vorliegt. HeWo bleibt davon ausgeschlossen, solange die
   dort verlangte Video-/Terminbedingung nicht bewusst akzeptiert wird.
 - Jeder Widerspruch beendet den Kontakt dauerhaft.
+
+## Vertriebspipeline und ICP-Lernen
+
+Die erste belastbare zweite Research-Auswahl ist in
+`qualified-prospect-pipeline-2026-09-09.md` dokumentiert. Sie enthält zehn noch nicht kontaktierte
+SHK-Betriebe mit nachvollziehbarem ZunftEcho Fit Score, öffentlich belegten Signalen und bekannten
+Entscheidern. Der aktuelle Pipeline-Stand lautet:
+
+`Qualified 9 · Research 1 · Contacted 0 · Replied 0 · Interested 0 · Demo 0 · Trial 0 · Customer 0`
+
+Die Auswahl ist kein Versandauftrag. Sie bleibt bis zur 14-Tage-Auswertung nach einem vom Inhaber
+bestätigten Versanddatum der ersten Briefwelle im Status `Qualified/Research`; der bisher nur
+vorgesehene Termin wird nicht als Versandnachweis behandelt. Betriebe mit nachweislich mehr als zehn
+Mitarbeitenden sind für den ersten Pilot-Sprint unabhängig von ihrer Punktzahl ausgesteuert. Vor jeder
+späteren Aktion gilt erneut die 48-Stunden-Prüfung von Impressum, Widerspruch, Kontaktdaten und
+zulässigem Kanal.
 
 ## Bezahlte Reichweite
 
