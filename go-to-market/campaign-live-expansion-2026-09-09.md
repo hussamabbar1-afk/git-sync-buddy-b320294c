@@ -92,3 +92,21 @@ Die Veröffentlichung auf `zunftecho.de` ist abgeschlossen. Die Cloudflare-Worke
 `151e070d-ddb5-44e6-8929-494c5c6f994e` liefert die neue Seite und die aktualisierte Sitemap jeweils
 mit HTTP 200 aus. Der vollständige Produktions-Smoke-Test ist ebenfalls erfolgreich; organisches
 Marketing bleibt aktiv und Billing bleibt bis zur Gewerbe-Freigabe deaktiviert.
+
+## Higgsfield und visueller Produktions-Lock
+
+Der vorhandene Higgsfield-MCP-Zugang ist auf den privaten Plus-Workspace geschaltet. Ein
+Veo-3.1-Lite-Test kostete acht Credits; der verbleibende Stand beträgt 102. Der Rohentwurf ist
+absichtlich nicht freigegeben, weil die visuelle Prüfung Pseudo-Schrift und eine unpassende
+Fahrzeug-Cockpit-Interpretation zeigte. Er bleibt ausschließlich als internes Bewegungsreferenz.
+
+Die kostenlose Genjutsu-Korrektur läuft unter Job
+`cef39d7b-6776-45df-becf-9a23a934406d` und steht noch in der externen Warteschlange. Es wurden dafür
+keine weiteren Credits ausgegeben und der Job wird nicht dupliziert.
+
+Unabhängig davon wurde die wiederverwendbare Identität in
+`go-to-market/zunftecho-visual-identity-lock.md` fixiert und eine kontrollierte 16-Sekunden-
+Produktionsfassung erstellt. Sie nutzt die exakte Bildmarke, Palette und deutsche Botschaft,
+enthält keine generierte Schrift oder Kundendaten und wurde vollständig dekodiert sowie über acht
+Zeitstichproben visuell geprüft. Die Quelle `youtube-higgsfield-video-04` wird erst nach tatsächlicher
+Veröffentlichung als aktiv behandelt.

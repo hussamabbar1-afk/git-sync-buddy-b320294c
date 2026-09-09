@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#06233b"/><stop offset="1" stop-color="#0b5272"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="20" stdDeviation="26" flood-opacity=".3"/></filter>
+  </defs>
+  <rect width="1080" height="1920" fill="url(#bg)"/><circle cx="950" cy="160" r="340" fill="#38bdf8" opacity=".11"/><circle cx="120" cy="1740" r="300" fill="#f2a34c" opacity=".1"/>
+  <rect x="82" y="74" width="106" height="106" rx="30" fill="#ffffff" filter="url(#shadow)"/>
+  <g font-family="Space Grotesk, Segoe UI, Arial, sans-serif">
+    <text x="214" y="150" font-size="44" font-weight="700" fill="#ffffff">ZunftEcho</text>
+    <text x="216" y="188" font-family="DM Sans, Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="4" fill="#8fb2c6">FÜR SHK-BETRIEBE</text>
+    <text x="82" y="650" font-family="DM Sans, Segoe UI, Arial, sans-serif" font-size="30" font-weight="700" letter-spacing="4" fill="#7dd3fc">KOSTENLOSER ANFRAGE-CHECK</text>
+    <text x="82" y="780" font-size="86" font-weight="700" letter-spacing="-3" fill="#ffffff"><tspan x="82">8 Fragen.</tspan><tspan x="82" dy="104">Drei klare Schritte.</tspan></text>
+    <text x="82" y="1080" font-family="DM Sans, Segoe UI, Arial, sans-serif" font-size="42" fill="#c5d8e5">Ohne Anmeldung · keine Speicherung</text>
+    <g transform="translate(82 1260)" filter="url(#shadow)"><rect width="916" height="150" rx="36" fill="#ffffff"/><text x="458" y="93" text-anchor="middle" font-size="41" font-weight="700" fill="#087eaa">zunftecho.de/anfrage-check</text></g>
+    <text x="82" y="1810" font-family="DM Sans, Segoe UI, Arial, sans-serif" font-size="30" font-weight="700" fill="#8fb2c6">Für SHK-Betriebe · Berlin &amp; Brandenburg</text>
+  </g>
+</svg>

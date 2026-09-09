@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7fbff"/><stop offset="1" stop-color="#fff5e8"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#08213b" flood-opacity=".13"/></filter>
+    <pattern id="grid" width="54" height="54" patternUnits="userSpaceOnUse"><path d="M54 0H0V54" fill="none" stroke="#087eaa" stroke-opacity=".045"/></pattern>
+  </defs>
+  <rect width="1080" height="1920" fill="url(#bg)"/><rect width="1080" height="1920" fill="url(#grid)"/>
+  <circle cx="120" cy="180" r="290" fill="#38bdf8" opacity=".1"/><circle cx="1000" cy="1690" r="330" fill="#f2a34c" opacity=".09"/>
+  <rect x="82" y="74" width="106" height="106" rx="30" fill="#ffffff" fill-opacity=".84" stroke="#d8e2ea" filter="url(#shadow)"/>
+  <g font-family="Space Grotesk, Segoe UI, Arial, sans-serif">
+    <text x="214" y="150" font-size="44" font-weight="700" fill="#08213b">ZunftEcho</text>
+    <text x="216" y="188" font-family="DM Sans, Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="4" fill="#607286">FÜR SHK-BETRIEBE</text>
+    <text x="82" y="640" font-family="DM Sans, Segoe UI, Arial, sans-serif" font-size="30" font-weight="700" letter-spacing="4" fill="#087eaa">WEBSITE-ANFRAGEN</text>
+    <text x="82" y="760" font-size="88" font-weight="700" letter-spacing="-3" fill="#08213b"><tspan x="82">Aus Nachricht wird</tspan><tspan x="82" dy="104">Arbeitsgrundlage.</tspan></text>
+    <text x="82" y="1060" font-family="DM Sans, Segoe UI, Arial, sans-serif" font-size="42" fill="#41566b"><tspan x="82">Anliegen. Ort. Dringlichkeit.</tspan><tspan x="82" dy="62">Foto. Terminwunsch.</tspan></text>
+    <g transform="translate(82 1248)" filter="url(#shadow)"><rect width="720" height="108" rx="54" fill="#ffffff" fill-opacity=".86" stroke="#d8e2ea"/><circle cx="56" cy="54" r="17" fill="#087eaa"/><circle cx="56" cy="54" r="7" fill="#ffffff"/><text x="96" y="68" font-size="34" font-weight="700" fill="#08213b">Strukturiert statt Rückrufchaos.</text></g>
+    <text x="82" y="1810" font-family="DM Sans, Segoe UI, Arial, sans-serif" font-size="30" font-weight="700" fill="#607286">zunftecho.de</text>
+  </g>
+</svg>
