@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eef9ff"/>
+      <stop offset="1" stop-color="#fff7e9"/>
+    </linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="22" stdDeviation="28" flood-color="#08213b" flood-opacity=".14"/></filter>
+  </defs>
+  <rect width="1080" height="1920" fill="url(#bg)"/>
+  <circle cx="120" cy="180" r="250" fill="#38bdf8" opacity=".12"/>
+  <circle cx="960" cy="1680" r="320" fill="#f59e0b" opacity=".1"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <rect x="82" y="92" width="76" height="76" rx="24" fill="#087eaa" filter="url(#shadow)"/>
+    <text x="120" y="145" font-size="40" font-weight="700" text-anchor="middle" fill="white">Z</text>
+    <text x="184" y="143" font-size="36" font-weight="700" fill="#08213b">ZunftEcho</text>
+    <text x="82" y="660" font-size="31" font-weight="700" letter-spacing="4" fill="#087eaa">WEBSITE-ANFRAGEN</text>
+    <text x="82" y="770" font-size="92" font-weight="700" letter-spacing="-4" fill="#08213b">
+      <tspan x="82">Ein Formular ist</tspan><tspan x="82" dy="106">noch kein Ablauf.</tspan>
+    </text>
+    <text x="82" y="1050" font-size="43" fill="#41566b">
+      <tspan x="82">Entscheidend ist, was nach</tspan><tspan x="82" dy="62">dem Absenden wirklich vorliegt.</tspan>
+    </text>
+    <rect x="82" y="1240" width="596" height="86" rx="43" fill="white" stroke="#d8e2ea" filter="url(#shadow)"/>
+    <text x="380" y="1295" font-size="31" font-weight="700" text-anchor="middle" fill="#08213b">Kontaktformular oder echter Ablauf?</text>
+    <text x="82" y="1810" font-size="30" font-weight="700" fill="#607286">Für SHK-Betriebe</text>
+    <text x="998" y="1810" font-size="30" font-weight="700" text-anchor="end" fill="#607286">zunftecho.de</text>
+  </g>
+</svg>

@@ -59,3 +59,18 @@ Veröffentlichung mit einer engen Suche nach Craftboxx, HERO, Plancraft, Badheld
 Bauleo geprüft. Gefunden wurden nur die automatische Eingangsbestätigung von Craftboxx und die
 bereits bekannte HeWo-Antwort. Es lag kein neuer menschlicher Interessent vor und es wurde keine
 Nachricht erneut versandt.
+
+## Nächste Inhalte sind produktionsbereit
+
+Noch am 9. September wurden die zwei Folgestücke vollständig produziert, statt die Kampagne während
+der ersten Messphase untätig zu lassen:
+
+- Video B: `assets/anfrage-check-video-b-2026-09-09/` — 26 Sekunden zum Unterschied zwischen
+  Standardformular und vollständigem Anfrageablauf; vorgesehene Quelle `youtube-check-video-02`.
+- Video C: `assets/anfrage-check-video-c-2026-09-09/` — 24 Sekunden zum gemeinsamen Auswerten mit
+  Team oder Webagentur; vorgesehene Quelle `youtube-check-video-03`.
+
+Beide Shorts sind vollständig dekodiert und visuell geprüft, enthalten keine Kunden- oder
+Kontaktdaten und bleiben vorerst unveröffentlicht. Das ist kein Leerlauf: Video A erhält eine eigene
+organische Lernphase, während die nächste Veröffentlichung ohne Produktionsverzug bereitsteht.
+Nicht veröffentlichte Quellen werden nicht in die Conversionauswertung aufgenommen.

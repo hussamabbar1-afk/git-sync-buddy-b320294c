@@ -121,6 +121,24 @@ Produktionsdateien, Titel, Beschreibung und Prüfprotokoll liegen unter
 Ein eigener CTA-Kommentar und ein Community-Beitrag sind ebenfalls live; Details und Kanalgrenzen
 stehen in `campaign-live-expansion-2026-09-09.md`.
 
+## Produktionsstand Videos B und C — 9. September 2026
+
+Die beiden nächsten organischen Erklärstücke sind fertig produziert und geprüft, aber bewusst noch
+nicht veröffentlicht. So wird die heutige Auslieferung von Video A nicht durch mehrere nahezu
+zeitgleiche Shorts desselben Kanals kannibalisiert.
+
+- Video B: 26 Sekunden, „Kontaktformular oder echter Ablauf?“, Quelle bei Veröffentlichung
+  `youtube-check-video-02`; Paket unter
+  `assets/anfrage-check-video-b-2026-09-09/README.md`.
+- Video C: 24 Sekunden, „Ergebnis teilen“, Quelle bei Veröffentlichung
+  `youtube-check-video-03`; Paket unter
+  `assets/anfrage-check-video-c-2026-09-09/README.md`.
+
+Beide Dateien sind H.264 in 1080 × 1920 bei 30 fps, vollständig dekodiert und visuell geprüft. Sie
+enthalten keine echten Kunden- oder Kontaktdaten, keine fremden Medien und keine Musik. Die Quellen
+bleiben bis zur tatsächlichen Veröffentlichung inaktiv und dürfen vorher nicht als Traffickanäle
+gewertet werden.
+
 ## Zulässige Verteilung ohne Werbebudget
 
 ### Eigene Kanäle
