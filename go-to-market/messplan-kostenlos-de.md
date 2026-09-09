@@ -1,10 +1,11 @@
 # ZunftEcho - kostenloser und datensparsamer Messplan
 
-Stand: 6. September 2026
+Stand: 9. September 2026
 
 Die zehn Schreiben sind gedruckt und kuvertiert. Die Übergabe zum Versand ist
-für den 7. September 2026 vorgesehen; das Feld `versendet am` bleibt bis zur
-tatsächlichen Übergabe bewusst leer. Das Schreiben an Andrea Tschichholz wurde
+noch nicht durch den Inhaber als tatsächlich erfolgt bestätigt; das Feld `versendet am` bleibt bis
+zu dieser Bestätigung bewusst leer und die 14-Tage-Auswertung beginnt nicht am früher nur
+vorgesehenen 7. September. Das Schreiben an Andrea Tschichholz wurde
 nach dem erneuten Werbewiderspruchs-Check gesperrt und wird aus dem Stapel
 entfernt; die aktive Versandwelle umfasst neun Schreiben.
 
@@ -68,6 +69,25 @@ live. Der vorhandene YouTube-Kommentar mit `youtube-comment-01` und der Kanal-Pr
 `youtube-channel` führen jetzt zum Anfrage-Check. Die Aktivität des ZunftEcho-Kontos selbst wird
 nie als Interessent oder Conversion gezählt.
 
+## Reservierte, noch inaktive Videoquellen — 9. September 2026
+
+```text
+youtube-check-video-02
+youtube-check-video-03
+youtube-higgsfield-video-04
+youtube-product-core-01
+```
+
+Die ersten drei Quellen gehören zu bereits geplanten YouTube-Shorts und werden erst zum jeweiligen
+öffentlichen Veröffentlichungstermin aktiviert. `youtube-product-core-01` gehört zum
+QA-bestandenen 64-Sekunden-Kernvideo; Upload und Terminierung stehen noch aus. Keine dieser Quellen
+wird vor ihrer tatsächlichen Veröffentlichung als aktive Reichweite oder Conversionbasis gewertet.
+
+Der öffentliche Anfrage-Check wurde am 9. September 2026 mit
+`source=youtube-product-core-01` vollständig durchlaufen. Seine Ergebnislinks übernahmen die Quelle
+erwartungsgemäß mit Score-Suffix (`youtube-product-core-01-s0`) in Demo und Pilotformular. Damit ist
+die Zuordnung der freiwilligen Folgeschritte technisch bestätigt; der Test selbst ist kein Lead.
+
 ## Qualifizierungsübersicht
 
 ```sql
@@ -120,18 +140,18 @@ order by source;
 
 ## Manuelles Versandprotokoll
 
-| Quelle             | versendet am | Antwort | Demo/Pilot | Widerspruch | nächster Schritt |
-| ------------------ | ------------ | ------- | ---------- | ----------- | ---------------- |
-| brief-ro-do        |              |         |            |             |                  |
-| brief-bolowski     |              |         |            |             |                  |
-| brief-grelak       |              |         |            |             |                  |
-| brief-koblitz      |              |         |            |             |                  |
-| brief-wilcks       |              |         |            |             |                  |
-| brief-tim-gaertner |              |         |            |             |                  |
-| brief-roesch       |              |         |            |             |                  |
+| Quelle             | versendet am | Antwort | Demo/Pilot | Widerspruch        | nächster Schritt         |
+| ------------------ | ------------ | ------- | ---------- | ------------------ | ------------------------ |
+| brief-ro-do        |              |         |            |                    |                          |
+| brief-bolowski     |              |         |            |                    |                          |
+| brief-grelak       |              |         |            |                    |                          |
+| brief-koblitz      |              |         |            |                    |                          |
+| brief-wilcks       |              |         |            |                    |                          |
+| brief-tim-gaertner |              |         |            |                    |                          |
+| brief-roesch       |              |         |            |                    |                          |
 | brief-tschichholz  |              |         |            | Website 06.09.2026 | dauerhaft ausgeschlossen |
-| brief-protoss      |              |         |            |             |                  |
-| brief-a-m          |              |         |            |             |                  |
+| brief-protoss      |              |         |            |                    |                          |
+| brief-a-m          |              |         |            |                    |                          |
 
 ## Auswertung nach 14 Tagen
 

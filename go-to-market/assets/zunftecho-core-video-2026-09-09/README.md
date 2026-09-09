@@ -26,6 +26,8 @@ strukturierten Arbeitsstand und macht die menschliche Grenze ausdrücklich sicht
 - `scene-01.png` bis `scene-08.png`: deterministisch gerenderte Szenen;
 - `contact-sheet.png`: Gesamtprüfung aller acht Szenen;
 - `demo-desktop-tall.png`: am 9. September 2026 erfasste öffentliche Live-Demo mit Beispieldaten;
+- `youtube-upload-de.md`: freigabefertiger deutscher Titel, Beschreibung, Einstellungen und
+  Messlogik für den noch ausstehenden YouTube-Upload;
 - `render-scenes.mjs`: reproduzierbares Rendering der Szenen.
 
 ## Brand Lock
@@ -43,6 +45,8 @@ strukturierten Arbeitsstand und macht die menschliche Grenze ausdrücklich sicht
 - reservierte Quelle: `youtube-product-core-01`;
 - CTA: `https://zunftecho.de/anfrage-check?source=youtube-product-core-01`;
 - Status: produziert und QA-bestanden, **nicht veröffentlicht**;
+- empfohlener Uploadtermin nach ausdrücklicher Ausführungsbestätigung: 12. September 2026,
+  18:30 Uhr Europe/Berlin;
 - die Quelle bleibt bis zur tatsächlichen Veröffentlichung in der Conversionmessung inaktiv.
 
 ## QA-Gates
