@@ -57,14 +57,16 @@ youtube-video-01
 youtube-comment-01
 youtube-check-video-01
 youtube-community-01
+youtube-channel
 linkedin-check-01
 linkedin-first-pilot-01
 website-video-01
 ```
 
 Der Short mit `youtube-check-video-01` und der Community-Beitrag mit `youtube-community-01` sind
-live. Der vorhandene YouTube-Kommentar mit `youtube-comment-01` führt jetzt zum Anfrage-Check. Die
-Aktivität des ZunftEcho-Kontos selbst wird nie als Interessent oder Conversion gezählt.
+live. Der vorhandene YouTube-Kommentar mit `youtube-comment-01` und der Kanal-Profillink mit
+`youtube-channel` führen jetzt zum Anfrage-Check. Die Aktivität des ZunftEcho-Kontos selbst wird
+nie als Interessent oder Conversion gezählt.
 
 ## Qualifizierungsübersicht
 

@@ -15,6 +15,10 @@ Stand: 9. September 2026
 - Zusätzlich wurde ein öffentlicher Community-Beitrag mit dem Short als Videoanlage veröffentlicht:
   `https://www.youtube.com/post/Ugkx7-FUDLplfH2JgDOPX41SN9J7bRcOqYxX`.
   Der eigene Check-Link darin trägt `youtube-community-01`.
+- Der bisherige Profil-Hauptlink des YouTube-Kanals wurde von der Live-Demo auf den
+  niedrigschwelligeren Anfrage-Check umgestellt:
+  `https://zunftecho.de/anfrage-check?source=youtube-channel`. Bestehende Video- und
+  Kommentarlinks zur Demo bleiben erhalten; es wurde keine Strecke entfernt.
 
 ## Indexierung
 
@@ -38,7 +42,8 @@ Stand: 9. September 2026
 
 ## Messung und Grenzen
 
-- Neue Live-Quellen: `youtube-check-video-01` und `youtube-community-01`.
+- Neue Live-Quellen: `youtube-check-video-01` und `youtube-community-01`; `youtube-channel` bleibt
+  als bestehende Kanalquelle erhalten und führt jetzt zum Anfrage-Check.
 - Der ältere `youtube-comment-01` bleibt separat, wurde aber auf den Anfrage-Check umgeleitet.
 - Eigene Videoaufrufe, Upload-Prüfungen, eigene Kommentare und eigene Community-Beiträge sind keine
   Interessenten oder Conversions.
