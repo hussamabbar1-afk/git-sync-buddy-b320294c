@@ -34,15 +34,22 @@ mit hektischen Mehrfach-Uploads beantwortet.
 
 ## Verbindlicher Veröffentlichungsplan
 
-| Datum         | Kanal                     | Inhalt                                       | Quelle                                            | Status                                            |
-| ------------- | ------------------------- | -------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
-| 09.09.        | YouTube Short + Community | Video A: acht Fragen                         | `youtube-check-video-01` / `youtube-community-01` | live                                              |
-| 14.09., 18:30 | YouTube Short             | Video B: Kontaktformular oder echter Ablauf  | `youtube-check-video-02`                          | produktionsbereit, Veröffentlichung zu bestätigen |
-| 17.09., 18:30 | YouTube Short             | Video C: Ergebnis mit Team/Webagentur teilen | `youtube-check-video-03`                          | produktionsbereit, Veröffentlichung zu bestätigen |
-| 21.09., 18:30 | YouTube Short             | kontrollierter 16-Sekunden-Workflow          | `youtube-higgsfield-video-04`                     | produktionsbereit, Veröffentlichung zu bestätigen |
+| Datum         | Kanal                     | Inhalt                                       | Quelle                                            | Status                  |
+| ------------- | ------------------------- | -------------------------------------------- | ------------------------------------------------- | ----------------------- |
+| 09.09.        | YouTube Short + Community | Video A: acht Fragen                         | `youtube-check-video-01` / `youtube-community-01` | live                    |
+| 14.09., 18:30 | YouTube Short             | Video B: Kontaktformular oder echter Ablauf  | `youtube-check-video-02`                          | hochgeladen und geplant |
+| 17.09., 18:30 | YouTube Short             | Video C: Ergebnis mit Team/Webagentur teilen | `youtube-check-video-03`                          | hochgeladen und geplant |
+| 21.09., 18:30 | YouTube Short             | kontrollierter 16-Sekunden-Workflow          | `youtube-higgsfield-video-04`                     | hochgeladen und geplant |
 
 Der Abstand verhindert, dass drei sehr ähnliche Shorts ihre erste Auslieferung gegenseitig
 kannibalisieren. Quellen werden erst ab tatsächlicher Veröffentlichung als aktiv gemessen.
+
+Die drei geplanten Shorts sind in YouTube Studio als „Geplant“ bestätigt, bleiben bis zum jeweiligen
+Termin privat und haben die Copyright-Prüfung ohne Befund abgeschlossen:
+
+- Video B: `https://www.youtube.com/shorts/MFd-i4O6Ze4`;
+- Video C: `https://www.youtube.com/shorts/9ce655sAIbQ`;
+- 16-Sekunden-Workflow: `https://www.youtube.com/shorts/gqC8ty5k1NY`.
 
 ## Produktions-Backlog
 

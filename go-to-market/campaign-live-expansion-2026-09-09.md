@@ -47,7 +47,7 @@ Stand: 9. September 2026
 - Der ältere `youtube-comment-01` bleibt separat, wurde aber auf den Anfrage-Check umgeleitet.
 - Eigene Videoaufrufe, Upload-Prüfungen, eigene Kommentare und eigene Community-Beiträge sind keine
   Interessenten oder Conversions.
-- Die tägliche Überwachung bis 16. September wurde um beide neuen Quellen, den Short und den
+- Die tägliche Überwachung bis 9. Oktober wurde um beide neuen Quellen, den Short und den
   Community-Beitrag ergänzt.
 - Kein bezahltes Placement, keine kalte E-Mail, keine Massen-DM, keine neue Briefwelle, kein
   Abonnement und keine Rechnungs-/Stripe-Aktivierung wurden ausgelöst.
@@ -60,7 +60,7 @@ Bauleo geprüft. Gefunden wurden nur die automatische Eingangsbestätigung von C
 bereits bekannte HeWo-Antwort. Es lag kein neuer menschlicher Interessent vor und es wurde keine
 Nachricht erneut versandt.
 
-## Nächste Inhalte sind produktionsbereit
+## Nächste Inhalte sind produziert und eingeplant
 
 Noch am 9. September wurden die zwei Folgestücke vollständig produziert, statt die Kampagne während
 der ersten Messphase untätig zu lassen:
@@ -71,9 +71,15 @@ der ersten Messphase untätig zu lassen:
   Team oder Webagentur; vorgesehene Quelle `youtube-check-video-03`.
 
 Beide Shorts sind vollständig dekodiert und visuell geprüft, enthalten keine Kunden- oder
-Kontaktdaten und bleiben vorerst unveröffentlicht. Das ist kein Leerlauf: Video A erhält eine eigene
-organische Lernphase, während die nächste Veröffentlichung ohne Produktionsverzug bereitsteht.
-Nicht veröffentlichte Quellen werden nicht in die Conversionauswertung aufgenommen.
+Kontaktdaten und wurden am 9. September in YouTube Studio hochgeladen. YouTube bestätigte für beide
+die Copyright-Prüfung ohne Befund. Sie bleiben bis zum jeweiligen Termin privat:
+
+- Video B: `https://www.youtube.com/shorts/MFd-i4O6Ze4`, geplant für 14. September 2026, 18:30 Uhr;
+- Video C: `https://www.youtube.com/shorts/9ce655sAIbQ`, geplant für 17. September 2026, 18:30 Uhr.
+
+Der Abstand gibt Video A eine eigene organische Lernphase und verhindert einen unnötigen
+Mehrfach-Upload am selben Tag. Nicht veröffentlichte Quellen werden weiterhin nicht in die
+Conversionauswertung aufgenommen.
 
 ## Organische Suchstrecke erweitert
 
@@ -108,5 +114,7 @@ Unabhängig davon wurde die wiederverwendbare Identität in
 `go-to-market/zunftecho-visual-identity-lock.md` fixiert und eine kontrollierte 16-Sekunden-
 Produktionsfassung erstellt. Sie nutzt die exakte Bildmarke, Palette und deutsche Botschaft,
 enthält keine generierte Schrift oder Kundendaten und wurde vollständig dekodiert sowie über acht
-Zeitstichproben visuell geprüft. Die Quelle `youtube-higgsfield-video-04` wird erst nach tatsächlicher
-Veröffentlichung als aktiv behandelt.
+Zeitstichproben visuell geprüft. Die Fassung wurde als
+`https://www.youtube.com/shorts/gqC8ty5k1NY` hochgeladen, bestand die Copyright-Prüfung ohne Befund
+und ist für 21. September 2026, 18:30 Uhr, geplant. Die Quelle `youtube-higgsfield-video-04` wird erst
+nach tatsächlicher Veröffentlichung als aktiv behandelt.
