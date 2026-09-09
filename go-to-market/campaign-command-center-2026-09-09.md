@@ -57,8 +57,12 @@ Termin privat und haben die Copyright-Prüfung ohne Befund abgeschlossen:
 
 ## Produktions-Backlog
 
-1. Ein 60- bis 90-sekündiges, bildschirmgeführtes 16:9-Kernvideo aus echten Produktansichten:
-   Problem, vollständige Anfrage, menschliche Grenze und freiwilliger Anfrage-Check.
+1. **Produziert, QA-bestanden, nicht veröffentlicht:** 64-sekündiges, bildschirmgeführtes
+   16:9-Kernvideo aus echten Produktansichten: Problem, vollständige Anfrage, menschliche Grenze und
+   freiwilliger Anfrage-Check. Produktionspaket:
+   `assets/zunftecho-core-video-2026-09-09/`; Quelle `youtube-product-core-01` bleibt inaktiv.
+   Empfohlener Publikationsslot: 12. September, 18:30 Uhr, vor Video B und nur nach separater
+   Upload-/Planungsbestätigung.
 2. Ein 4:5-Dokumentbeitrag „8 Punkte einer planbaren Website-Anfrage“ für LinkedIn, sobald die
    ausstehende LinkedIn-Datenschutzentscheidung vom Inhaber selbst getroffen wurde.
 3. Ein Partner-One-Pager für Webagenturen: gemeinsamer Website-Abnahmepunkt, keine White-Label-,
