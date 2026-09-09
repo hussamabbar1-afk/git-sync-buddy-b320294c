@@ -1,0 +1,93 @@
+# ZunftEcho Kampagnen-Command-Center
+
+Stand: 9. September 2026, Europe/Berlin
+
+## Auftrag und Führungsregel
+
+Die Kampagne wird ab jetzt als zusammenhängendes Akquisitionsprogramm geführt: Produktion,
+Veröffentlichung, organische Suche, Partnerkanäle, Antwortbearbeitung und spätere bezahlte Tests
+werden gemeinsam priorisiert. Ziel bleibt der erste passende SHK-Pilotbetrieb in Berlin oder
+Brandenburg. Reichweite, Versand, Öffnungen und eigene Kanalaktivität sind keine Kundenabschlüsse.
+
+Die bestehende Positionierung, der Preis und die rechtlichen Sperren bleiben unverändert. Insbesondere
+werden Live-Zahlungen, Rechnungen und bezahlte Werbung nicht vor der Gewerbe- und Steuerfreigabe
+aktiviert. Kalte Massenansprache, automatisierte DMs, erfundene Referenzen und unbelegte
+Erfolgsversprechen bleiben ausgeschlossen.
+
+## Aktuelle Messbasis
+
+Lesender Stand am 9. September 2026, 17:46 Uhr:
+
+- Anfrage-Check-Short A: 36 Aufrufe seit Veröffentlichung, davon 91,7 % aus dem Shorts-Feed;
+- Abonnentenänderung: keine ausgewiesene Änderung;
+- noch keine belastbaren Daten zur Zuschauerbindung;
+- Pilotanfragen: 0;
+- Kampagnen-Konversationen: 0;
+- Kampagnen-Leads: 0;
+- Workflow-Fehler in den letzten 24 Stunden: 0;
+- im korrekten Projektpostfach keine neue menschliche Partner- oder Kundenantwort; sichtbar sind
+  nur die bekannte HeWo-Antwort und die automatische Craftboxx-Eingangsbestätigung.
+
+Diese frühe Stichprobe reicht nicht für eine Aussage über die Wirkung des Formats. Video A erhält
+mindestens bis zum nächsten Werktag eine eigene Lernphase; die fehlende Sofort-Conversion wird nicht
+mit hektischen Mehrfach-Uploads beantwortet.
+
+## Verbindlicher Veröffentlichungsplan
+
+| Datum         | Kanal                     | Inhalt                                       | Quelle                                            | Status                                            |
+| ------------- | ------------------------- | -------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
+| 09.09.        | YouTube Short + Community | Video A: acht Fragen                         | `youtube-check-video-01` / `youtube-community-01` | live                                              |
+| 14.09., 18:30 | YouTube Short             | Video B: Kontaktformular oder echter Ablauf  | `youtube-check-video-02`                          | produktionsbereit, Veröffentlichung zu bestätigen |
+| 17.09., 18:30 | YouTube Short             | Video C: Ergebnis mit Team/Webagentur teilen | `youtube-check-video-03`                          | produktionsbereit, Veröffentlichung zu bestätigen |
+| 21.09., 18:30 | YouTube Short             | kontrollierter 16-Sekunden-Workflow          | `youtube-higgsfield-video-04`                     | produktionsbereit, Veröffentlichung zu bestätigen |
+
+Der Abstand verhindert, dass drei sehr ähnliche Shorts ihre erste Auslieferung gegenseitig
+kannibalisieren. Quellen werden erst ab tatsächlicher Veröffentlichung als aktiv gemessen.
+
+## Produktions-Backlog
+
+1. Ein 60- bis 90-sekündiges, bildschirmgeführtes 16:9-Kernvideo aus echten Produktansichten:
+   Problem, vollständige Anfrage, menschliche Grenze und freiwilliger Anfrage-Check.
+2. Ein 4:5-Dokumentbeitrag „8 Punkte einer planbaren Website-Anfrage“ für LinkedIn, sobald die
+   ausstehende LinkedIn-Datenschutzentscheidung vom Inhaber selbst getroffen wurde.
+3. Ein Partner-One-Pager für Webagenturen: gemeinsamer Website-Abnahmepunkt, keine White-Label-,
+   Provisions- oder Integrationszusage.
+4. Eine zweite fachliche SEO-Seite zu Sicherheitsgrenzen und menschlicher Übergabe, sofern sie eine
+   neue Suchintention abdeckt und nicht bestehende Inhalte dupliziert.
+
+Für jedes Asset gilt vor Freigabe: exaktes ZunftEcho-Logo, Palette und Typografie; vollständige
+Dekodierung; Sichtprüfung mehrerer Zeitpunkte bzw. Größen; keine Pseudo-Schrift, Fahrzeug-/Sci-Fi-
+Interpretation, Kundendaten, fremden Marken, erfundenen Aussagen oder unklaren Sicherheitsversprechen.
+Ein generativer Rohentwurf darf nur als Rohmaterial dienen, wenn er diesen Lock verletzt.
+
+## Antworten und Partner
+
+- Projektpostfach, Pilotformular, YouTube-Kommentare und LinkedIn werden täglich lesend geprüft.
+- Eine echte qualifizierte Anfrage erhält innerhalb eines Arbeitstags eine individuelle schriftliche
+  Antwort vom Absender `ZunftEcho <kontakt@zunftecho.de>`.
+- Bekannte automatische Bestätigungen und Tracking-Öffnungen werden nicht als Interesse gewertet.
+- Keine bereits gesendete Anfrage wird dupliziert. Eine einzige individuelle Nachfrage ist frühestens
+  ab 15. September bei den ausdrücklich einladenden Partnerkanälen zulässig, wenn bis dahin keine
+  menschliche Antwort und kein Widerspruch vorliegt. HeWo bleibt davon ausgeschlossen, solange die
+  dort verlangte Video-/Terminbedingung nicht bewusst akzeptiert wird.
+- Jeder Widerspruch beendet den Kontakt dauerhaft.
+
+## Bezahlte Reichweite
+
+Bezahlte Werbung bleibt ein kontrolliertes Experiment, kein Ersatz für ein unbewiesenes Angebot.
+Sie darf erst starten, wenn Gewerbe-/Steuerdaten und öffentliche Rechtstexte freigegeben sind,
+Live-Formular und Quellenmessung erneut geprüft wurden und eine konkrete Finanzfreigabe vorliegt.
+Der erste Test bleibt auf insgesamt höchstens 150 Euro begrenzt. Priorität hat ein enger
+Suchintent-Test; LinkedIn Ads werden wegen der kleinen Zielgruppe und voraussichtlich hohen Kosten
+nicht automatisch bevorzugt. Es werden nur freiwillig abgesendete Pilotanfragen als harte
+Conversion verwendet, kein zusätzlicher Besuchs-Tracker wird ohne neue Datenschutzentscheidung
+eingebaut.
+
+## Tägliche Entscheidungsschleife
+
+1. echte Antworten, Pilotanfragen, Kommentare und Fehler prüfen;
+2. nur neue menschliche Signale klassifizieren und binnen eines Arbeitstags beantworten;
+3. Leistungsdaten des zuletzt veröffentlichten Assets lesen, ohne eigene Aktivität mitzuzählen;
+4. fälliges Asset nur bei bestandenem QA und funktionierendem Quellenlink veröffentlichen;
+5. PROJECT_STATE und Kampagnenprotokoll nach jeder materiellen Änderung aktualisieren;
+6. bei unverändertem Stand still bleiben und weder Nachrichten noch Indexierungsanträge wiederholen.
