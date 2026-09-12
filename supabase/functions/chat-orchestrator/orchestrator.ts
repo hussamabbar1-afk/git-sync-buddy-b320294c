@@ -349,6 +349,45 @@ export function isAlternativeBookingRequest(message: unknown): boolean {
   );
 }
 
+export function hasExplicitAppointmentSignal(message: unknown): boolean {
+  const value = cleanText(message, 2_000).toLocaleLowerCase();
+  if (!value) return false;
+  if (
+    [
+      "termin",
+      "appointment",
+      "booking",
+      "book a",
+      "schedule",
+      "موعد",
+      "حجز",
+      "randevu",
+      "rezervasyon",
+      "wizyta",
+      "umówi",
+      "rezerw",
+      "встреч",
+      "запис",
+      "візит",
+      "rendez-vous",
+      "rendez vous",
+      "réserver",
+      "cita",
+      "reservar",
+      "appuntamento",
+      "prenot",
+    ].some((term) => value.includes(term))
+  ) {
+    return true;
+  }
+  return [
+    /(?:kann|könn|bitte|jemand|monteur|techniker)[^.!?]{0,60}(?:kommen|vorbeikommen|schicken)/i,
+    /(?:can|could|please|someone|technician)[^.!?]{0,60}(?:come|visit|send)/i,
+    /(?:هل|يمكن|أريد|اريد)[^؟.!]{0,60}(?:زيارة|فني|تأت|حضور|إرسال|ارسال)/,
+    /(?:gelebilir|gönder|ziyaret|przyjecha|wysła|приед|приїх|venir|envoyer|venire|mandare)/i,
+  ].some((pattern) => pattern.test(value));
+}
+
 export function companyLocalDate(timeZone: unknown, now = new Date()): string {
   return new Intl.DateTimeFormat("sv-SE", {
     timeZone: cleanText(timeZone, 80) || "Europe/Berlin",

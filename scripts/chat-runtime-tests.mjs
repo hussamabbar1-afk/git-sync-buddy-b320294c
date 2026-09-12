@@ -211,6 +211,24 @@ Deno.test("runtime: production AI request uses the validated low-latency budget"
   assert.match(analysisCall.body.instructions, /appointment\.requested ist nur/);
   assert.match(analysisCall.body.instructions, /höchstens zwei kurze Sätze/);
 });
+Deno.test("runtime: first-turn problem details cannot invent an appointment request", async () => {
+  const r = await runCase({
+    message:
+      "Ich heiße Jane Test, E-Mail jane@example.invalid, PLZ 10117. Die Heizung ist seit heute ausgefallen und die Wohnung ist kalt.",
+    analysis: {
+      user_language: "de",
+      intent: "booking",
+      reply_de: "Danke. Wir können die Störung prüfen.",
+      appointment: { requested: true, service: "Heizungswartung" },
+    },
+  });
+  assert.equal(r.status, 200);
+  assert.equal(r.data.message, "Danke. Wir können die Störung prüfen.");
+  assert.equal(
+    r.calls.some((call) => call.url.pathname.endsWith("/rpc/get_next_available_slots")),
+    false,
+  );
+});
 Deno.test(
   "runtime: provider failure is measured and logging failure cannot break a response",
   async () => {
@@ -432,6 +450,7 @@ Deno.test("runtime: rejecting an offered booking never creates an appointment", 
 });
 Deno.test("runtime: booking requires a prior matching proposal", async () => {
   const r = await runCase({
+    message: "Ich möchte den Termin am 09.09.2026 um 10 Uhr buchen.",
     analysis: {
       intent: "booking",
       appointment: {
@@ -448,6 +467,7 @@ Deno.test("runtime: booking requires a prior matching proposal", async () => {
 });
 Deno.test("runtime: matching confirmation books once and clears the draft", async () => {
   const r = await runCase({
+    message: "Ja, bitte buchen Sie den Termin.",
     lead: pending,
     analysis: {
       intent: "booking",
@@ -469,6 +489,7 @@ Deno.test("runtime: matching confirmation books once and clears the draft", asyn
 });
 Deno.test("runtime: atomic booking conflict cannot be presented as a success", async () => {
   const r = await runCase({
+    message: "Ja, bitte buchen Sie den Termin.",
     lead: pending,
     analysis: {
       intent: "booking",
@@ -564,6 +585,7 @@ Deno.test(
   "runtime: past booking is rejected before availability and never offers a past waitlist",
   async () => {
     const r = await runCase({
+      message: "Ich möchte einen Termin am 06.09.2026 um 10 Uhr.",
       analysis: {
         intent: "booking",
         appointment: {

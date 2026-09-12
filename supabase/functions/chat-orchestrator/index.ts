@@ -13,6 +13,7 @@ import {
   companyLocalDate,
   shouldEscalateSentiment,
   formatAppointment,
+  hasExplicitAppointmentSignal,
   isQuestionWorthRecording,
   isPhotoUploadQuestion,
   normalizeLanguage,
@@ -439,9 +440,25 @@ knowledge_supported ist true, wenn reply_de durch strukturierte Unternehmensdate
       },
     },
   };
-  return asAnalysis(
+  const analysis = asAnalysis(
     await openAIJson("zunftecho_chat_analysis", instructions, input, schema, 1_400, args.telemetry),
   );
+  if (
+    history.length === 0 &&
+    (analysis.intent === "booking" || analysis.appointment.requested) &&
+    !hasExplicitAppointmentSignal(args.message)
+  ) {
+    analysis.intent = "general";
+    analysis.appointment = {
+      ...analysis.appointment,
+      requested: false,
+      date: "",
+      start_time: "",
+      confirmed: false,
+      rejected: false,
+    };
+  }
+  return analysis;
 }
 
 async function localize(

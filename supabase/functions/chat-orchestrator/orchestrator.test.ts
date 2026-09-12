@@ -3,6 +3,7 @@ import {
   appointmentActionSummary,
   availabilityReply,
   containsAcuteDanger,
+  hasExplicitAppointmentSignal,
   isPhotoUploadQuestion,
   normalizeIssueType,
   normalizeQuickReplyAction,
@@ -23,6 +24,27 @@ Deno.test("normalizes dates and times", () => {
   if (validIsoDate("2026-02-31") !== null) throw new Error("invalid date accepted");
   if (validTime("8:05") !== "08:05:00") throw new Error("time not normalized");
   if (validTime("25:00") !== null) throw new Error("invalid time accepted");
+});
+
+Deno.test("requires an explicit first-turn appointment signal", () => {
+  const positives = [
+    "Ich möchte einen Termin für die Heizungswartung.",
+    "Could you send a technician tomorrow?",
+    "أريد حجز موعد لصيانة التدفئة",
+    "Je voudrais réserver un rendez-vous.",
+    "Chcę umówić wizytę.",
+  ];
+  const negatives = [
+    "Meine Heizung ist seit heute ausgefallen und die Wohnung ist kalt.",
+    "My heating stopped today. My email is jane@example.invalid.",
+    "Die Störung begann gestern um 10:00 Uhr.",
+  ];
+  if (positives.some((message) => !hasExplicitAppointmentSignal(message))) {
+    throw new Error("explicit appointment signal missed");
+  }
+  if (negatives.some((message) => hasExplicitAppointmentSignal(message))) {
+    throw new Error("problem details treated as an appointment request");
+  }
 });
 
 Deno.test("resolves only configured services", () => {

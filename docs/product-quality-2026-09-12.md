@@ -72,6 +72,18 @@ did not invent appointments or identifiers, and kept deterministic danger/photo 
 detail-rich cases correctly extracted synthetic name, email, postal code, issue and urgency without
 creating an appointment request.
 
+The first production gate then exposed a stochastic failure that the initial canary sample had not:
+one detail-rich English first message was presented as an unavailable appointment although the user
+had not requested one. v20 was therefore rejected immediately and the previous v19 behaviour was
+redeployed as v21 before any frontend rollout. Only synthetic QA traffic reached v20.
+
+The follow-up fix adds a deterministic first-turn guard: model output cannot enter the booking path
+without an explicit appointment/booking/visit signal in the current message. It does not apply to
+existing conversation history and recognises the ten customer languages available in product
+settings. Canary v2 repeated the failing English input five times and the German equivalent twice;
+all seven remained outside the booking path, left pending appointment fields empty and created zero
+appointments. Separate explicit English and German booking requests still entered the booking path.
+
 Raw Responses streaming is deliberately not added. The current model output is strict structured
 JSON and is followed by deterministic booking, handoff, safety and localization decisions; streaming
 that opaque JSON would not provide a safe useful customer response. A split response/extraction
@@ -79,8 +91,10 @@ architecture would add consistency and call-count risks and is not justified by 
 
 ## Verification and rollout gate
 
-The repository now contains a regression that asserts the validated AI request budget and prompt
-guard. Edge/runtime tests pass 58/58, ESLint passes and the production build succeeds. Production
-deployment remains gated on the pushed commit's GitHub Quality result, followed by Edge health and
-synthetic response checks, a staged frontend Worker preview/smoke, authenticated Testchat acceptance
-where available, cleanup of the isolated QA records and final source-of-truth update.
+The repository contains regressions for the validated AI request budget, prompt guard, multilingual
+explicit-signal classifier and deterministic runtime override. Edge/runtime tests pass 60/60, ESLint
+passes and the production build succeeds. The first implementation commit passed GitHub Quality but
+its v20 production gate was rejected as described above. The deterministic guard now requires its own
+pushed GitHub Quality result before Edge redeployment, followed by health and repeated synthetic
+checks, a staged frontend Worker preview/smoke, authenticated Testchat acceptance where available,
+cleanup of the isolated QA records and final source-of-truth update.
