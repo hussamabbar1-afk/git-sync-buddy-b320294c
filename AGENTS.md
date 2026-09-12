@@ -7,7 +7,9 @@
 - Preserve every existing project rule and Master Operating Directive, including
   `docs/zunftecho-master-operating-directive-addendum-2026-09-12.md`,
   `docs/zunftecho-product-quality-addendum-2026-09-12.md` and
-  `docs/zunftecho-static-creative-hypothesis-addendum-2026-09-12.md`.
+  `docs/zunftecho-static-creative-hypothesis-addendum-2026-09-12.md`, plus the execution-speed and
+  continuity rule in `docs/zunftecho-execution-speed-continuity-addendum-2026-09-12.md` and recovery/language
+  rules in `docs/zunftecho-usage-recovery-language-addendum-2026-09-13.md`.
 - Keep this file lightweight; retain detailed state and history in `PROJECT_STATE.md`.
 
 <!-- LOVABLE:BEGIN -->

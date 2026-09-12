@@ -14,6 +14,11 @@ werden Live-Zahlungen, Rechnungen und bezahlte Werbung nicht vor der Gewerbe- un
 aktiviert. Kalte Massenansprache, automatisierte DMs, erfundene Referenzen und unbelegte
 Erfolgsversprechen bleiben ausgeschlossen.
 
+Ausführung folgt dem Grundsatz „frühester strategisch begründeter Zeitpunkt“. Ein zukünftiger Termin
+braucht einen konkreten Vorteil für Zielgruppen-Timing, Qualität, Abhängigkeiten, Compliance,
+Attribution oder Lernwert; reine Kalenderästhetik ist kein Grund. Unabhängige Recherche-, Content-,
+Conversion- und Monitoring-Arbeit läuft parallel, solange sie aktive Experimente nicht verwischt.
+
 ## Aktuelle Messbasis
 
 Lesender Stand am 12. September 2026, 19:37 Uhr:
@@ -53,6 +58,13 @@ mit hektischen Mehrfach-Uploads beantwortet.
 Der Abstand verhindert, dass drei sehr ähnliche Shorts ihre erste Auslieferung gegenseitig
 kannibalisieren. Quellen werden erst ab tatsächlicher Veröffentlichung als aktiv gemessen.
 
+**Timing-Reassessment 12. September, 20:08 Uhr:** Video B bleibt am Montag, 14. September, 18:30
+Uhr. Die Erstbeobachtung des um 18:30 Uhr veröffentlichten Kernvideos bleibt unverändert, statt
+gleichzeitig zusätzliche Auslieferungen anzustoßen. Bessere B2B-Erreichbarkeit am Montag ist eine
+unbestätigte Timing-Hypothese, keine gemessene Tatsache.
+Video C und der Workflow bleiben wegen ihrer ähnlichen Zielgruppe und der getrennten Quellen am 17. beziehungsweise 21. September. Wenn Live-Daten diese Gründe entkräften, werden die Termine
+vorgezogen; der Kalender selbst besitzt keinen Schutzwert.
+
 Die drei geplanten Shorts sind in YouTube Studio als „Geplant“ bestätigt, bleiben bis zum jeweiligen
 Termin privat und haben die Copyright-Prüfung ohne Befund abgeschlossen:
 
@@ -79,7 +91,7 @@ Termin privat und haben die Copyright-Prüfung ohne Befund abgeschlossen:
    aktuelle Engpass ist Reichweite, nicht ein belegter Formatmangel; deshalb beginnt keine Produktion
    vor einem verwertbaren Signal aus den laufenden Veröffentlichungen oder einem nutzbaren Kanal.
    Erster sinnvoller Test: 2–3 klar unterschiedliche Problem-/Produktbeweis-/Workflow-Konzepte, jeweils
-   plattformspezifisch statt blind skaliert, mit gemeinsamer CTA und sauberer Quelle. LinkedIn setzt die
+   plattformspezifisch statt blind skaliert, mit gemeinsamer CTA und eigener Quelle je Konzept. LinkedIn setzt die
    ausstehende EU-Entscheidung und relevante Reichweite voraus; Meta bleibt unvalidiert; Paid bleibt
    hinter den bestehenden Rechts-, Mess- und Budget-Gates. Qualitätsgrundlage:
    `../docs/zunftecho-static-creative-hypothesis-addendum-2026-09-12.md`.
@@ -94,6 +106,22 @@ Interpretation, Kundendaten, fremden Marken, erfundenen Aussagen oder unklaren S
 Ein generativer Rohentwurf darf nur als Rohmaterial dienen, wenn er diesen Lock verletzt.
 
 ## Antworten und Partner
+
+### Statischer Test: messbereite Vorbereitung, noch nicht gestartet
+
+- Zwei erste Konzepte: Produktbeweis (echte Demo-Anfrageübersicht) und Problemaufnahme (welche Angaben
+  einer kurzen SHK-Nachricht fehlen). Keine Verlust-/Zeitersparnisbehauptung ohne Kundenevidenz.
+- Gleiche Zielgruppe, gleiches Angebot, gleiche CTA zum Anfrage-Check und vergleichbare organische
+  Auslieferungsfenster; keine gleichzeitige Änderung von Kanal, Zielgruppe und Botschaft.
+- Reservierte Quellen: `linkedin-static-proof-01` und `linkedin-static-problem-01`. Beide bleiben
+  inaktiv, bis ein tatsächlicher, QA-bestandener Post publiziert wurde; Score-Suffixe bleiben erhalten.
+- Native Plattform-Klickdaten nur verwenden, wenn verfügbar. Es gibt keinen neuen Besuchertracker:
+  qualifizierte Besuche, CTR oder Demo-Intent dürfen ohne Messsignal nicht behauptet werden. Harte
+  Messung sind freiwillige Anfragen mit Quelle, qualifizierte menschliche Antworten und spätere Demo.
+- Bei zu geringer Auslieferung: Ergebnis `inconclusive`, nicht „Format gescheitert“ oder „Gewinner“.
+  Organische unterschiedliche Auslieferungszeiten liefern Richtungshinweise, keinen kausalen A/B-Beweis.
+- Produktions-/Veröffentlichungsgate bleibt Kanalzugang und ein sinnvoller Distributionstest; aktuelle
+  Plattform-Spezifikationen erst bei tatsächlicher Produktion prüfen. Kein Paid, keine Credits jetzt.
 
 - Projektpostfach, Pilotformular, YouTube-Kommentare und LinkedIn werden täglich lesend geprüft.
 - Eine echte qualifizierte Anfrage erhält innerhalb eines Arbeitstags eine individuelle schriftliche

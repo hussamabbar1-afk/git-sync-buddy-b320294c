@@ -83,11 +83,27 @@ keine erneute Einzelprüfung am Ausführungstag.
 
 ## Experiment und nächste Aktion
 
+### Abgeschlossene öffentliche Nachprüfung: Balic — 13. September 2026
+
+Die bereits begonnene Einzelprüfung wurde ohne Wiederholung der übrigen neun Betriebe abgeschlossen.
+Die aktuelle [Unternehmensseite](https://balic-shk.de/) bestätigt SHK-Leistungen, Wartung/Reparatur,
+Privat-/Gewerbekunden und Hausverwaltungen sowie mehrsprachige Beratung und 24h-Notdienst. Das
+[Impressum](https://balic-shk.de/sample-page/) nennt Adresse und Kontakt, aber keinen Geschäftsführer;
+die [Über-uns-Seite](https://balic-shk.de/ueber-uns/) nennt ein Team, aber keine Mitarbeiterzahl.
+Ein [öffentlicher historischer Registerhinweis aus 2015](https://www.unternehmen24.info/Handelsregister/Deutschland/Handelsregisterauszug/Firma/4101112)
+nennt Maruf Balic; er ist kein aktueller
+Primärnachweis und wird nicht zum bestätigten Entscheider hochgestuft.
+
+**Ergebnis:** `Research` bleibt bestehen, weil aktuelle Vertretungsberechtigung und Größenfit nicht
+belastbar öffentlich belegt sind. Die Recherche ist nicht gleichbedeutend mit Qualifizierung. Keine
+kostenpflichtige Registerbestellung, keine Apollo-Credits und kein Kontakt. Eine erneute Suche erfolgt
+erst bei neuer Primärevidenz oder wenn dieser Kandidat tatsächlich für den nächsten Test benötigt wird.
+
 **ACTION:** Bis zur 14-Tage-Auswertung nach einem vom Inhaber bestätigten Versanddatum der ersten
 Briefwelle bleibt die Auswahl im Status `Qualified` oder `Research`; es wird weder gemailt noch ein
 Formular abgesendet. Das Versanddatum ist im bestehenden Messprotokoll noch nicht bestätigt und wird
-nicht aus dem vorgesehenen Termin abgeleitet. Parallel werden nur neue freiwillige Inbounds
-beantwortet und bereits geplante Inhalte gemessen.
+nicht aus dem vorgesehenen Termin abgeleitet. Unabhängige interne Recherche und Testvorbereitung
+können parallel weiterlaufen; neue freiwillige Inbounds und geplante Inhalte bleiben vorrangig.
 
 **COST:** 0 Euro Werbebudget, keine Apollo-Credits, keine generativen Video-Credits und keine neue
 Subscription.
