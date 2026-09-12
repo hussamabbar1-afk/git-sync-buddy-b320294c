@@ -42,7 +42,7 @@ mit hektischen Mehrfach-Uploads beantwortet.
 | Datum         | Kanal                     | Inhalt                                       | Quelle                                            | Status                  |
 | ------------- | ------------------------- | -------------------------------------------- | ------------------------------------------------- | ----------------------- |
 | 09.09.        | YouTube Short + Community | Video A: acht Fragen                         | `youtube-check-video-01` / `youtube-community-01` | live                    |
-| 12.09., 18:30 | YouTube Video             | Produktkern: von Nachricht zu klarer Anfrage | `youtube-product-core-01`                         | hochgeladen und geplant |
+| 12.09., 18:30 | YouTube Video             | Produktkern: von Nachricht zu klarer Anfrage | `youtube-product-core-01`                         | live                    |
 | 14.09., 18:30 | YouTube Short             | Video B: Kontaktformular oder echter Ablauf  | `youtube-check-video-02`                          | hochgeladen und geplant |
 | 17.09., 18:30 | YouTube Short             | Video C: Ergebnis mit Team/Webagentur teilen | `youtube-check-video-03`                          | hochgeladen und geplant |
 | 21.09., 18:30 | YouTube Short             | kontrollierter 16-Sekunden-Workflow          | `youtube-higgsfield-video-04`                     | hochgeladen und geplant |
@@ -59,12 +59,12 @@ Termin privat und haben die Copyright-Prüfung ohne Befund abgeschlossen:
 
 ## Produktions-Backlog
 
-1. **Produziert, QA-/Copyright-bestanden und geplant:** 64-sekündiges, bildschirmgeführtes
+1. **Produziert, QA-/Copyright-bestanden und veröffentlicht:** 64-sekündiges, bildschirmgeführtes
    16:9-Kernvideo aus echten Produktansichten: Problem, vollständige Anfrage, menschliche Grenze und
    freiwilliger Anfrage-Check. Produktionspaket:
-   `assets/zunftecho-core-video-2026-09-09/`; YouTube `https://youtu.be/6wfiYojrUZU`. Die Quelle
-   `youtube-product-core-01` bleibt bis zur öffentlichen Freischaltung am 12. September um18:30 Uhr
-   inaktiv.
+   `assets/zunftecho-core-video-2026-09-09/`; YouTube `https://youtu.be/6wfiYojrUZU`. Die öffentliche
+   URL wurde nach dem Termin am 12. September um18:30 Uhr erneut geöffnet; die Quelle
+   `youtube-product-core-01` ist aktiv. Eigene Prüfaufrufe bleiben von Conversionzahlen ausgeschlossen.
 2. **Produziert und QA-bestanden, nicht verteilt:** Partner-One-Pager für Webagenturen mit gemeinsamem
    Website-Abnahmepunkt und ausdrücklichen Grenzen gegen White-Label-, Provisions- oder
    Integrationszusagen. Paket: `assets/partner-one-pager-2026-09-12/`; PDF:

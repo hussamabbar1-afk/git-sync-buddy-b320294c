@@ -197,6 +197,20 @@ Deno.test(
     assert.equal(r.data.ai, undefined);
   },
 );
+Deno.test("runtime: production AI request uses the validated low-latency budget", async () => {
+  const r = await runCase({ message: "Meine Heizung ist seit heute ausgefallen." });
+  const analysisCall = r.calls.find(
+    (call) =>
+      call.url.hostname === "api.openai.com" &&
+      call.body?.text?.format?.name === "zunftecho_chat_analysis",
+  );
+  assert.ok(analysisCall);
+  assert.equal(analysisCall.body.reasoning.effort, "minimal");
+  assert.equal(analysisCall.body.text.verbosity, "low");
+  assert.equal(analysisCall.body.max_output_tokens, 1_400);
+  assert.match(analysisCall.body.instructions, /appointment\.requested ist nur/);
+  assert.match(analysisCall.body.instructions, /höchstens zwei kurze Sätze/);
+});
 Deno.test(
   "runtime: provider failure is measured and logging failure cannot break a response",
   async () => {

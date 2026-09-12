@@ -80,9 +80,10 @@ youtube-product-core-01
 
 Die ersten drei Quellen gehören zu bereits geplanten YouTube-Shorts und werden erst zum jeweiligen
 öffentlichen Veröffentlichungstermin aktiviert. `youtube-product-core-01` gehört zum
-QA- und Copyright-geprüften 64-Sekunden-Kernvideo und ist für den 12. September 2026 um 18:30 Uhr
-geplant (`https://youtu.be/6wfiYojrUZU`). Keine dieser Quellen wird vor ihrer tatsächlichen
-Veröffentlichung als aktive Reichweite oder Conversionbasis gewertet.
+QA- und Copyright-geprüften 64-Sekunden-Kernvideo und wurde am 12. September 2026 um 18:30 Uhr
+öffentlich veröffentlicht (`https://youtu.be/6wfiYojrUZU`). Die URL wurde nach Fälligkeit erneut
+geöffnet; `youtube-product-core-01` ist aktiv. Die übrigen vorbereiteten Quellen werden erst nach ihrer
+tatsächlichen Veröffentlichung als aktive Reichweite oder Conversionbasis gewertet.
 
 Der öffentliche Anfrage-Check wurde am 9. September 2026 mit
 `source=youtube-product-core-01` vollständig durchlaufen. Seine Ergebnislinks übernahmen die Quelle

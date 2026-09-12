@@ -6,6 +6,7 @@ import {
   MapPin,
   Paperclip,
   Phone,
+  Plus,
   RefreshCw,
   Send,
   ThumbsDown,
@@ -241,6 +242,7 @@ export function ChatWidget({
   const [photoCount, setPhotoCount] = useState(0);
   const [photoPending, setPhotoPending] = useState(false);
   const [photoNotice, setPhotoNotice] = useState<string | null>(null);
+  const [secondaryActionsOpen, setSecondaryActionsOpen] = useState(false);
   const conversationId = useRef<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -399,6 +401,7 @@ export function ChatWidget({
   };
 
   const requestBrowserLocation = () => {
+    setSecondaryActionsOpen(false);
     const requestId = ++locationRequest.current;
     setLocationNotice(null);
     if (!("geolocation" in navigator)) {
@@ -729,8 +732,18 @@ export function ChatWidget({
         </div>
       ) : null}
 
-      <div className="border-t p-2">
-        <div className="mb-2 flex flex-wrap items-center gap-2">
+      <div className="border-t p-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/*,.heic,.heif"
+          className="hidden"
+          onChange={(event) => {
+            const file = event.target.files?.[0];
+            if (file) void uploadPhoto(file);
+          }}
+        />
+        <div className="mb-2 hidden flex-wrap items-center gap-2 sm:flex">
           <Button
             type="button"
             variant="outline"
@@ -754,16 +767,6 @@ export function ChatWidget({
           >
             <MapPin className="mr-1.5 size-3.5" /> Adresse eingeben
           </Button>
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/*,.heic,.heif"
-            className="hidden"
-            onChange={(event) => {
-              const file = event.target.files?.[0];
-              if (file) void uploadPhoto(file);
-            }}
-          />
           <Button
             type="button"
             variant="ghost"
@@ -779,6 +782,60 @@ export function ChatWidget({
             Foto anhängen (optional)
           </Button>
         </div>
+        {secondaryActionsOpen ? (
+          <div
+            id="chat-secondary-actions"
+            className="mb-2 grid grid-cols-3 gap-1.5 rounded-md border bg-muted/30 p-1.5 sm:hidden"
+            role="group"
+            aria-label="Weitere Optionen"
+          >
+            <Button
+              type="button"
+              variant="ghost"
+              className="h-auto min-h-11 flex-col gap-1 whitespace-normal px-1 py-2 text-[11px] leading-tight"
+              onClick={requestBrowserLocation}
+              disabled={pending || locationPending}
+            >
+              {locationPending ? (
+                <Loader2 className="size-4 animate-spin" />
+              ) : (
+                <LocateFixed className="size-4" />
+              )}
+              Standort
+            </Button>
+            <Button
+              type="button"
+              variant="ghost"
+              className="h-auto min-h-11 flex-col gap-1 whitespace-normal px-1 py-2 text-[11px] leading-tight"
+              onClick={() => {
+                setSecondaryActionsOpen(false);
+                if (locationOpen) closeLocationEditor();
+                else setLocationOpen(true);
+              }}
+              disabled={pending}
+            >
+              <MapPin className="size-4" />
+              Adresse
+            </Button>
+            <Button
+              type="button"
+              variant="ghost"
+              className="h-auto min-h-11 flex-col gap-1 whitespace-normal px-1 py-2 text-[11px] leading-tight"
+              onClick={() => {
+                setSecondaryActionsOpen(false);
+                fileInputRef.current?.click();
+              }}
+              disabled={pending || photoPending || photoCount >= 3}
+            >
+              {photoPending ? (
+                <Loader2 className="size-4 animate-spin" />
+              ) : (
+                <Paperclip className="size-4" />
+              )}
+              Foto
+            </Button>
+          </div>
+        ) : null}
         {locationOpen ? (
           <div
             className="mb-2 rounded-md border bg-muted/30 p-2"
@@ -839,6 +896,21 @@ export function ChatWidget({
           <p className="mb-2 text-[11px] text-muted-foreground">{photoNotice}</p>
         ) : null}
         <div className="flex items-end gap-2">
+          <Button
+            type="button"
+            variant="outline"
+            size="icon"
+            className="shrink-0 sm:hidden"
+            aria-label={secondaryActionsOpen ? "Weitere Optionen schließen" : "Weitere Optionen"}
+            aria-expanded={secondaryActionsOpen}
+            aria-controls="chat-secondary-actions"
+            onClick={() => setSecondaryActionsOpen((open) => !open)}
+            disabled={pending}
+          >
+            <Plus
+              className={`size-4 transition-transform ${secondaryActionsOpen ? "rotate-45" : ""}`}
+            />
+          </Button>
           <Textarea
             rows={2}
             maxLength={maxMessageLength}

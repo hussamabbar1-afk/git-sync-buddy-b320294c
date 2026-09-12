@@ -45,9 +45,10 @@ strukturierten Arbeitsstand und macht die menschliche Grenze ausdrücklich sicht
 - reservierte Quelle: `youtube-product-core-01`;
 - CTA: `https://zunftecho.de/anfrage-check?source=youtube-product-core-01`;
 - YouTube: `https://youtu.be/6wfiYojrUZU`;
-- Status: produziert, QA- und Copyright-Check bestanden, **für den 12. September 2026 um
-  18:30 Uhr Europe/Berlin geplant**;
-- die Quelle bleibt bis zur tatsächlichen Veröffentlichung in der Conversionmessung inaktiv.
+- Status: produziert, QA- und Copyright-Check bestanden und am **12. September 2026 um
+  18:30 Uhr Europe/Berlin öffentlich veröffentlicht**;
+- die öffentliche URL wurde nach Fälligkeit erneut geöffnet; `youtube-product-core-01` ist seitdem
+  eine aktive Quelle in der Conversionmessung. Eigene Prüfaufrufe bleiben ausgeschlossen.
 
 ## QA-Gates
 
