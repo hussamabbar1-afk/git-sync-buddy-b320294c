@@ -1,6 +1,6 @@
 # ZunftEcho Higgsfield workflow asset
 
-Stand: 9. September 2026
+Stand: 13. September 2026, Europe/Berlin
 
 ## Zweck
 
@@ -53,15 +53,20 @@ Die vollständige projektweite Referenz steht in `go-to-market/zunftecho-visual-
 - Kosten: kostenlose Genjutsu-Generation; keine zusätzlichen Credits.
 - Eingaben: kontrollierter `reference-frame.png` plus der Veo-Rohentwurf als reine
   Bewegungsreferenz.
-- Freigabe: erst nach vollständiger Dekodierung und visueller Kontrolle auf Pseudo-Schrift,
-  Geometrie, Markenfarben, Fahrzeugassoziation und Schleifenfähigkeit.
+- Abschlussprüfung am 13. September: Anbieterstatus `failed`, terminal; keine Ergebnis-URL und
+  kein prüfbarer Output. Fehlerursache wurde vom Statusaufruf nicht angegeben.
+- Experiment geschlossen. Keine erneute Einreichung, keine weiteren Credits und keine weitere
+  Statusabfrage ohne einen konkreten neuen Anlass. Keine visuelle QA oder Veröffentlichung möglich.
 
 ## Kontrollierte Produktionsfassung
 
-Weil der erste KI-Rohentwurf den QA-Lock verletzte und Genjutsu extern in der Warteschlange steht,
+Weil der erste KI-Rohentwurf den QA-Lock verletzte und Genjutsu damals extern in der Warteschlange stand,
 wurde zusätzlich eine deterministische Produktionsfassung erstellt. Sie verwendet ausschließlich
 die autoritative Bildmarke, die dokumentierte Palette und kontrollierte deutsche Typografie. Es
 werden keine generierten Wörter oder Kundendaten verwendet.
+
+Der spätere Genjutsu-Fehlschlag verändert diese unabhängige, QA-bestandene Fassung und ihren
+bestätigten Veröffentlichungstermin am 21. September um 18:30 Uhr nicht.
 
 - Final: `zunftecho-anfrage-workflow-16s-vertical.mp4`.
 - Format: H.264, `yuv420p`, 1080 × 1920, 30 fps, 16 Sekunden, ohne Audio.

@@ -1,6 +1,6 @@
 # ZunftEcho Kampagnen-Command-Center
 
-Stand: 12. September 2026, 19:42 Uhr, Europe/Berlin
+Stand: 13. September 2026, 01:35 Uhr, Europe/Berlin
 
 ## Auftrag und Führungsregel
 
@@ -20,6 +20,13 @@ Attribution oder Lernwert; reine Kalenderästhetik ist kein Grund. Unabhängige 
 Conversion- und Monitoring-Arbeit läuft parallel, solange sie aktive Experimente nicht verwischt.
 
 ## Aktuelle Messbasis
+
+Aktualisierung 13. September, 01:33 Uhr: Supabase zeigt weiterhin 0 Pilotanfragen,
+0 Kampagnen-Konversationen, 0 Kampagnen-Leads und 0 Workflow-Fehler in 24 Stunden.
+Eine separate Prüfung aller nicht ausgeschlossenen Pilotanfragen ergab ebenfalls keine Zeilen.
+Die Plattform-/Postfachwerte unten bleiben die letzte erfolgreiche Lesung: Browsersteuerung scheitert
+aktuell vor der Initialisierung, und der Gmail-Connector gehört zu einem anderen Konto und wurde nicht
+durchsucht. Fehlende neue Prüfung bedeutet nicht fehlende Antworten.
 
 Lesender Stand am 12. September 2026, 19:37 Uhr:
 
@@ -132,6 +139,18 @@ Ein generativer Rohentwurf darf nur als Rohmaterial dienen, wenn er diesen Lock 
   menschliche Antwort und kein Widerspruch vorliegt. HeWo bleibt davon ausgeschlossen, solange die
   dort verlangte Video-/Terminbedingung nicht bewusst akzeptiert wird.
 - Jeder Widerspruch beendet den Kontakt dauerhaft.
+
+Am 13. September wurden drei lokale, nicht gesendete Nachfragen für Craftboxx, Plancraft und HERO
+in `partner-outreach-2026-09-08.md` vorbereitet. Aktuelle offizielle Einladungen wurden geprüft;
+vor der Aktion sind trotzdem Postfach, menschlicher Antwortstand, Widerspruch, Kanal und
+toolabhängige Bestätigung erneut zu prüfen. KIMEO bleibt Kriterien-/Gebührenklärung, keine bezahlte
+Mitgliedschaft. Keine Formularwiederholung oder weitere Erinnerung nach dieser einen Nachfrage.
+
+Der Genjutsu-Job `cef39d7b-6776-45df-becf-9a23a934406d` ist seit der Prüfung am 13. September
+terminal `failed`, ohne Ergebnis. Experiment geschlossen, keine erneute Abfrage/Einreichung oder
+Credits. Der unabhängige kontrollierte Workflow bleibt unverändert geplant. Die bestehende tägliche
+Kontrolle um18:35 wurde entsprechend aktualisiert, einschließlich der aktiven SEO-Quelle und der
+Briefauswertung am21. September; keine neue parallele Überwachung.
 
 ## Vertriebspipeline und ICP-Lernen
 

@@ -18,7 +18,10 @@ The official pages below explicitly invite partnership inquiries at the listed a
 | Badheld | https://www.badheld.com/installateure/ | kontakt@badheld.com | Sent once; Brevo delivered 23:56 |
 | KIMEO | https://kimeo-handwerk.de/netzwerk | info@kimeo-handwerk.de | Sent once; Brevo delivered 23:57 |
 
-Do not send again without a substantive reply. Use only the verified `ZunftEcho <kontakt@zunftecho.de>` identity for replies. No recipient was subscribed to a list or recurring campaign.
+Do not duplicate an inquiry. The later approved rule permits at most one individual follow-up from
+15 September, only after checking the actual project inbox, absence of a human reply or objection,
+and the current explicit invitation. This is not an automatic sending authorization. Use only the
+verified `ZunftEcho <kontakt@zunftecho.de>` identity. No recipient was subscribed to a list or recurring campaign.
 
 ## Craftboxx — individual inquiry
 
@@ -91,3 +94,108 @@ Sent once after the official network page invited software providers and startup
 3. If interested, answer their criteria in writing. No commissions, paid listing, integration commitment or customer-data exchange without a separate decision.
 4. For a voluntary referral, let the interested business contact ZunftEcho itself. Qualify its website, trade and request volume using the existing async qualification process.
 5. A positive partner reply is not a won customer. Contract/Pilot activation and billing remain held pending Gewerbe/legal readiness.
+
+## Follow-up preparation — 13 September 2026
+
+Status: **Three local German messages prepared; none sent or scheduled.** Current project inbox
+coverage is unavailable because browser control fails before initialization; the Gmail connector
+belongs to a different account and was not searched. The last successful inbox check remains
+12 September, 19:37 Berlin time. Never infer absence of a reply from this gap.
+
+### Priority and evidence
+
+1. **Craftboxx:** direct service/product listing invitation is still visible at
+   [its official partner page](https://www.craftboxx.de/partnerprogramme), including `info@craftboxx.de`.
+   Ask only whether a non-integrated early product can be considered; no discount/listing promise.
+2. **Plancraft:** [its official partner page](https://plancraft.com/de-de/partner) still invites
+   cooperation ideas at `kooperation@plancraft.com`. Ask whether written review without an integration
+   is within scope; keep existing source `plancraft-partner-01`.
+3. **HERO:** [its official partner page](https://hero-software.de/kooperationen/partnerschaften)
+   still lists `kooperationen@hero-software.de` and several partner routes. Ask which route, if any,
+   fits without a native integration, rather than proposing an unapproved webinar or deal.
+
+These invitations were rechecked on 13 September. They are evidence of the advertised contact route,
+not proof of consent to repeated marketing or legal clearance for a follow-up.
+
+KIMEO remains a criteria-only opportunity: [its network page](https://kimeo-handwerk.de/netzwerk)
+states that software partners require reviewed EU-AI-Act status and membership contributions.
+Any human reply is handled promptly; no paid membership or compliance certification is assumed.
+Badheld is outside this first follow-up preparation because the software-partner fit is less direct.
+HeWo remains excluded by its video/meeting condition. Bauleo's form is not resubmitted.
+
+### Action-time gates
+
+- Earliest date: 15 September, preserving the previously approved response window after 8 September.
+  No additional calendar delay once the gates are satisfied.
+- Check the correct suffix-4 receiving inbox and original thread immediately before each action.
+  If there is a human reply, answer it instead. Any refusal/objection ends the contact permanently.
+- Recheck current invitation and applicable contact restrictions. If ambiguous, hold; no cold-email fallback.
+- Reply within the existing thread, individually, from `ZunftEcho <kontakt@zunftecho.de>` with the same
+  Reply-To; no CC/BCC, attachments, tracking pixels, new list, duplicated original pitch or customer-data request.
+- Obtain any action-time confirmation required by the sending tool. No automatic follow-up.
+- Record provider evidence separately from human interest. If this one follow-up receives no reply,
+  close the route for this experiment; no second reminder.
+- No Pilot activation/billing, commission, discount, integration or paid listing commitment.
+
+### Craftboxx — prepared reply
+
+To: `info@craftboxx.de`; reply to the existing subject/thread.
+
+Guten Tag Craftboxx-Team,
+
+ich greife meine Anfrage vom 8. September zu Ihrer Einladung für Handwerks-Services einmal kurz auf.
+Passt ein früher Anbieter für strukturierte SHK-Website-Anfragen grundsätzlich in Ihre Partnerübersicht,
+auch ohne direkte Craftboxx-Schnittstelle?
+
+ZunftEcho nimmt Anliegen, Einsatzort und Erreichbarkeit auf; die weitere Bearbeitung bleibt beim Betrieb.
+Eine kurze schriftliche Einschätzung Ihrer Voraussetzungen genügt. Pilotstart und Abrechnung bleiben
+bis zum Abschluss unserer rechtlichen Einrichtung ausgesetzt.
+
+Falls der Ansatz nicht passt, genügt ein kurzer Hinweis; wir fragen dann nicht erneut nach.
+
+Freundliche Grüße
+ZunftEcho
+kontakt@zunftecho.de
+https://zunftecho.de/impressum
+
+### Plancraft — prepared reply
+
+To: `kooperation@plancraft.com`; reply to the existing subject/thread.
+
+Guten Tag plancraft-Partnerteam,
+
+zu meiner Kooperationsanfrage vom 8. September habe ich eine kurze Frage: Ist eine schriftliche
+Prüfung für einen frühen Anbieter ohne plancraft-Integration grundsätzlich möglich?
+
+ZunftEcho strukturiert Erstanfragen auf SHK-Websites vor der Auftragsbearbeitung. Die Demo verwendet
+Beispieldaten: https://zunftecho.de/demo?source=plancraft-partner-01
+
+Wir suchen zunächst nur eine Einschätzung Ihrer Partnerkriterien, keine Integrationszusage oder
+Kundendaten. Pilotstart und Abrechnung bleiben bis zum Abschluss unserer rechtlichen Einrichtung ausgesetzt.
+Falls der Ansatz nicht passt, fragen wir nicht erneut nach.
+
+Freundliche Grüße
+ZunftEcho
+kontakt@zunftecho.de
+https://zunftecho.de/impressum
+
+### HERO — prepared reply
+
+To: `kooperationen@hero-software.de`; reply to the existing subject/thread.
+
+Guten Tag HERO-Partnerschaftsteam,
+
+ich greife meine Anfrage vom 8. September einmal kurz auf. Welcher Ihrer Partnerwege käme,
+wenn überhaupt, für einen frühen Anbieter strukturierter SHK-Website-Anfragen ohne native HERO-Integration infrage?
+
+ZunftEcho erfasst fehlende Angaben zur Erstanfrage; der Betrieb prüft und bearbeitet sie weiter.
+Es geht zunächst ausschließlich um Ihre Voraussetzungen, nicht um einen Schnittstellen-, Webinar-
+oder Vergütungsauftrag. Eine kurze Antwort per E-Mail genügt.
+
+Pilotstart und Abrechnung bleiben bis zum Abschluss unserer rechtlichen Einrichtung ausgesetzt.
+Falls kein Weg passt, genügt ein kurzer Hinweis; wir fragen dann nicht erneut nach.
+
+Freundliche Grüße
+ZunftEcho
+kontakt@zunftecho.de
+https://zunftecho.de/impressum
