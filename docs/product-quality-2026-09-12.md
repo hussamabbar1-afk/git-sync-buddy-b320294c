@@ -25,8 +25,9 @@ composer and action menu were visible without overlap; the tablet/desktop layout
 overflow (`body.scrollWidth === innerWidth`). Manual-address disclosure/close and responsive toolbar
 switching were exercised. Actual iPhone Safari, a physical Android keyboard, browser permission
 acceptance and a real photo upload remain real-device acceptance items; Chromium viewport emulation
-is not evidence for those device-specific behaviours. The shared implementation means the fix also
-applies to Testchat, but authenticated post-deployment visual acceptance remains required.
+is not evidence for those device-specific behaviours. Authenticated production Testchat was also
+inspected after rollout: the full toolbar remains present at desktop width, and the 390px viewport
+exposes only the compact labelled options disclosure beside the composer.
 
 ## Production chat path and measured bottleneck
 
@@ -89,12 +90,31 @@ JSON and is followed by deterministic booking, handoff, safety and localization 
 that opaque JSON would not provide a safe useful customer response. A split response/extraction
 architecture would add consistency and call-count risks and is not justified by the current evidence.
 
-## Verification and rollout gate
+## Verification and production rollout
 
 The repository contains regressions for the validated AI request budget, prompt guard, multilingual
 explicit-signal classifier and deterministic runtime override. Edge/runtime tests pass 60/60, ESLint
-passes and the production build succeeds. The first implementation commit passed GitHub Quality but
-its v20 production gate was rejected as described above. The deterministic guard now requires its own
-pushed GitHub Quality result before Edge redeployment, followed by health and repeated synthetic
-checks, a staged frontend Worker preview/smoke, authenticated Testchat acceptance where available,
-cleanup of the isolated QA records and final source-of-truth update.
+passes and the production build succeeds. Both implementation commits passed GitHub Quality; the
+second run covered the deterministic guard before the final rollout.
+
+Production now runs `chat-orchestrator` v22 (`cc81e2f8…`) with the bounded latency settings and the
+first-turn guard. Three repeated detail-rich English probes remained outside booking, while an
+explicit English appointment request still entered the correct booking path. One additional
+synthetic probe encountered a transient `database_504` Gateway Timeout and succeeded on immediate
+retry; this is retained as an operational reliability signal, not counted as a customer incident.
+
+The frontend was uploaded first as a zero-traffic Cloudflare Worker version and passed the complete
+public smoke suite on its preview alias. Worker version `618f9d50-5779-4e7c-a018-52ec3456692e` was
+then promoted to 100%, after which the production smoke suite and public/mobile and authenticated
+Testchat visual checks passed.
+
+Cleanup is complete. The isolated QA company and all of its dependent data were deleted by exact
+UUID: 32 conversations, 63 messages, 31 leads, the synthetic Gateway Timeout record and 32 rate
+buckets, plus the company configuration. There were no appointments, attachments or profiles. A
+post-delete query returned zero for every scoped table, and `chat-orchestrator-canary` was removed;
+the production v22 function remains active.
+
+Remaining acceptance is deliberately device-specific: actual iPhone Safari, physical Android
+keyboard behaviour, real location-permission handling and a real photo upload should be checked on
+owned devices. These do not block the validated Chromium production rollout, but they must not be
+represented as completed.
