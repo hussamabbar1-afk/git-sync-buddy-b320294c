@@ -101,7 +101,6 @@ const sections: KnowledgeSection[] = [
     title: "Was Sie in der ZunftEcho-Demo prüfen können",
     paragraphs: [
       "Die öffentliche Demo zeigt den Ablauf mit Beispieldaten: Kundenanfrage, fehlende Angaben, Team-Alarm und weitere Bearbeitung. Sie benötigt keine Anmeldung und schreibt keine Produktionsdaten. Das hilft, die Übergabepunkte zu besprechen; es ist kein Nachweis einer zugestellten Benachrichtigung oder eines tatsächlich erreichbaren Mitarbeiters in Ihrem Betrieb.",
-      "Übergabepunkte in der Demo ansehen",
       "Für die Vollständigkeit Ihrer Website-Anfragen gibt es außerdem die Checkliste mit acht Prüfpunkten. Eine Verbindung zu Ihrer bestehenden Handwerkersoftware darf nur zugesagt werden, wenn sie tatsächlich vorhanden und geprüft ist.",
     ],
     links: [
@@ -164,7 +163,8 @@ export const Route = createFileRoute("/shk-chatbot-menschliche-uebergabe")({
               description,
               inLanguage: "de-DE",
               mainEntityOfPage: url,
-              // Add actual publication dates only after the visual release gate passes.
+              datePublished: "2026-09-13",
+              dateModified: "2026-09-13",
               author: { "@type": "Organization", name: "ZunftEcho" },
               publisher: {
                 "@type": "Organization",

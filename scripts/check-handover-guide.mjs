@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 
 // Read-only HTTP checks. This does not submit forms or create test conversations.
 const base = process.argv[2] ?? "http://127.0.0.1:8790";
+const versionId = process.argv[3];
 const route = "/shk-chatbot-menschliche-uebergabe";
 const source = "seo-shk-uebergabe";
 const canonical = `https://zunftecho.de${route}`;
@@ -34,6 +35,8 @@ const structured = [
   .flatMap((value) => value["@graph"] ?? [value]);
 const articleSchema = structured.find((item) => item["@type"] === "Article");
 assert.equal(articleSchema?.mainEntityOfPage, canonical);
+assert.equal(articleSchema?.datePublished, "2026-09-13");
+assert.equal(articleSchema?.dateModified, "2026-09-13");
 const faqSchema = structured.find((item) => item["@type"] === "FAQPage");
 assert.equal(faqSchema?.mainEntity.length, 4);
 const visibleText = decode(article.replace(/<[^>]+>/g, " "));
@@ -49,7 +52,12 @@ assert.ok(
   (await get("/wissen")).includes(`href="${route}?source=wissen-hub"`),
   "Knowledge hub links to guide with its existing source",
 );
-assert.ok((await get("/sitemap.xml")).includes(`<loc>${canonical}</loc>`));
+assert.ok(
+  (await get("/sitemap.xml"))
+    .replace(/\r\n/g, "\n")
+    .includes(`<loc>${canonical}</loc>\n    <lastmod>2026-09-13</lastmod>`),
+  "Sitemap has the actual release date",
+);
 for (const existing of [
   "/shk-anfragen-automatisieren",
   "/chatbot-fuer-handwerksbetriebe",
@@ -68,7 +76,17 @@ console.log(
 );
 
 async function get(path) {
-  const response = await fetch(new URL(path, base));
+  const response = await fetch(new URL(path, base), {
+    headers: {
+      "user-agent": "ZunftEcho-Handover-Smoke/1.0",
+      ...(versionId
+        ? {
+            "Cloudflare-Workers-Version-Overrides": `hussamabbar1-afk-git-sync-buddy-b320294c="${versionId}"`,
+          }
+        : {}),
+    },
+    signal: AbortSignal.timeout(15_000),
+  });
   assert.equal(response.status, 200, `${path} HTTP 200`);
   return response.text();
 }
