@@ -27,6 +27,7 @@ import { Route as PasswortZuruecksetzenRouteImport } from './routes/passwort-zur
 import { Route as PreiseRouteImport } from './routes/preise'
 import { Route as RegistrierenRouteImport } from './routes/registrieren'
 import { Route as ShkAnfragenAutomatisierenRouteImport } from './routes/shk-anfragen-automatisieren'
+import { Route as ShkChatbotMenschlicheUebergabeRouteImport } from './routes/shk-chatbot-menschliche-uebergabe'
 import { Route as VertrauenRouteImport } from './routes/vertrauen'
 import { Route as WebsiteAnfragenHandwerkChecklisteRouteImport } from './routes/website-anfragen-handwerk-checkliste'
 import { Route as WidgetRouteImport } from './routes/widget'
@@ -139,6 +140,12 @@ const ShkAnfragenAutomatisierenRoute =
   ShkAnfragenAutomatisierenRouteImport.update({
     id: '/shk-anfragen-automatisieren',
     path: '/shk-anfragen-automatisieren',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ShkChatbotMenschlicheUebergabeRoute =
+  ShkChatbotMenschlicheUebergabeRouteImport.update({
+    id: '/shk-chatbot-menschliche-uebergabe',
+    path: '/shk-chatbot-menschliche-uebergabe',
     getParentRoute: () => rootRouteImport,
   } as any)
 const VertrauenRoute = VertrauenRouteImport.update({
@@ -272,6 +279,7 @@ export interface FileRoutesByFullPath {
   '/preise': typeof PreiseRoute
   '/registrieren': typeof RegistrierenRoute
   '/shk-anfragen-automatisieren': typeof ShkAnfragenAutomatisierenRoute
+  '/shk-chatbot-menschliche-uebergabe': typeof ShkChatbotMenschlicheUebergabeRoute
   '/vertrauen': typeof VertrauenRoute
   '/website-anfragen-handwerk-checkliste': typeof WebsiteAnfragenHandwerkChecklisteRoute
   '/widget': typeof WidgetRoute
@@ -312,6 +320,7 @@ export interface FileRoutesByTo {
   '/preise': typeof PreiseRoute
   '/registrieren': typeof RegistrierenRoute
   '/shk-anfragen-automatisieren': typeof ShkAnfragenAutomatisierenRoute
+  '/shk-chatbot-menschliche-uebergabe': typeof ShkChatbotMenschlicheUebergabeRoute
   '/vertrauen': typeof VertrauenRoute
   '/website-anfragen-handwerk-checkliste': typeof WebsiteAnfragenHandwerkChecklisteRoute
   '/widget': typeof WidgetRoute
@@ -354,6 +363,7 @@ export interface FileRoutesById {
   '/preise': typeof PreiseRoute
   '/registrieren': typeof RegistrierenRoute
   '/shk-anfragen-automatisieren': typeof ShkAnfragenAutomatisierenRoute
+  '/shk-chatbot-menschliche-uebergabe': typeof ShkChatbotMenschlicheUebergabeRoute
   '/vertrauen': typeof VertrauenRoute
   '/website-anfragen-handwerk-checkliste': typeof WebsiteAnfragenHandwerkChecklisteRoute
   '/widget': typeof WidgetRoute
@@ -396,6 +406,7 @@ export interface FileRouteTypes {
     | '/preise'
     | '/registrieren'
     | '/shk-anfragen-automatisieren'
+    | '/shk-chatbot-menschliche-uebergabe'
     | '/vertrauen'
     | '/website-anfragen-handwerk-checkliste'
     | '/widget'
@@ -436,6 +447,7 @@ export interface FileRouteTypes {
     | '/preise'
     | '/registrieren'
     | '/shk-anfragen-automatisieren'
+    | '/shk-chatbot-menschliche-uebergabe'
     | '/vertrauen'
     | '/website-anfragen-handwerk-checkliste'
     | '/widget'
@@ -477,6 +489,7 @@ export interface FileRouteTypes {
     | '/preise'
     | '/registrieren'
     | '/shk-anfragen-automatisieren'
+    | '/shk-chatbot-menschliche-uebergabe'
     | '/vertrauen'
     | '/website-anfragen-handwerk-checkliste'
     | '/widget'
@@ -519,6 +532,7 @@ export interface RootRouteChildren {
   PreiseRoute: typeof PreiseRoute
   RegistrierenRoute: typeof RegistrierenRoute
   ShkAnfragenAutomatisierenRoute: typeof ShkAnfragenAutomatisierenRoute
+  ShkChatbotMenschlicheUebergabeRoute: typeof ShkChatbotMenschlicheUebergabeRoute
   VertrauenRoute: typeof VertrauenRoute
   WebsiteAnfragenHandwerkChecklisteRoute: typeof WebsiteAnfragenHandwerkChecklisteRoute
   WidgetRoute: typeof WidgetRoute
@@ -651,6 +665,13 @@ declare module '@tanstack/react-router' {
       path: '/shk-anfragen-automatisieren'
       fullPath: '/shk-anfragen-automatisieren'
       preLoaderRoute: typeof ShkAnfragenAutomatisierenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shk-chatbot-menschliche-uebergabe': {
+      id: '/shk-chatbot-menschliche-uebergabe'
+      path: '/shk-chatbot-menschliche-uebergabe'
+      fullPath: '/shk-chatbot-menschliche-uebergabe'
+      preLoaderRoute: typeof ShkChatbotMenschlicheUebergabeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/vertrauen': {
@@ -865,6 +886,7 @@ const rootRouteChildren: RootRouteChildren = {
   PreiseRoute: PreiseRoute,
   RegistrierenRoute: RegistrierenRoute,
   ShkAnfragenAutomatisierenRoute: ShkAnfragenAutomatisierenRoute,
+  ShkChatbotMenschlicheUebergabeRoute: ShkChatbotMenschlicheUebergabeRoute,
   VertrauenRoute: VertrauenRoute,
   WebsiteAnfragenHandwerkChecklisteRoute:
     WebsiteAnfragenHandwerkChecklisteRoute,

@@ -8,6 +8,7 @@ export type KnowledgeSection = {
   title: string;
   paragraphs: string[];
   bullets?: string[];
+  links?: { href: string; label: string }[];
 };
 
 export type KnowledgeFaq = {
@@ -87,6 +88,19 @@ export function KnowledgeArticle({
                     <p key={paragraph}>{paragraph}</p>
                   ))}
                 </div>
+                {section.links ? (
+                  <div className="mt-4 flex flex-wrap gap-x-5 gap-y-3">
+                    {section.links.map((link) => (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        className="font-semibold text-primary underline underline-offset-4"
+                      >
+                        {link.label}
+                      </a>
+                    ))}
+                  </div>
+                ) : null}
                 {section.bullets ? (
                   <ul className="mt-6 grid gap-3">
                     {section.bullets.map((bullet) => (

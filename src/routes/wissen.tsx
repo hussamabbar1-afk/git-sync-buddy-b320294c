@@ -41,6 +41,14 @@ const guides = [
       "Ein klarer Ablauf für Problem, Kontaktdaten, Einsatzort, Dringlichkeit und Terminwunsch.",
   },
   {
+    to: "/shk-chatbot-menschliche-uebergabe" as const,
+    icon: ClipboardCheck,
+    label: "6-Fälle-Abnahmetest",
+    title: "Menschliche Übergabe eines SHK-Chatbots prüfen",
+    description:
+      "Kundenwunsch, Teamübernahme, Feierabend und Fehlerfall mit klaren Abnahmekriterien testen.",
+  },
+  {
     to: "/chatbot-fuer-handwerksbetriebe" as const,
     icon: Bot,
     label: "Entscheidungshilfe",
