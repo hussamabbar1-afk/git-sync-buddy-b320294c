@@ -44,9 +44,9 @@ strukturierten Arbeitsstand und macht die menschliche Grenze ausdrücklich sicht
 
 - reservierte Quelle: `youtube-product-core-01`;
 - CTA: `https://zunftecho.de/anfrage-check?source=youtube-product-core-01`;
-- Status: produziert und QA-bestanden, **nicht veröffentlicht**;
-- empfohlener Uploadtermin nach ausdrücklicher Ausführungsbestätigung: 12. September 2026,
-  18:30 Uhr Europe/Berlin;
+- YouTube: `https://youtu.be/6wfiYojrUZU`;
+- Status: produziert, QA- und Copyright-Check bestanden, **für den 12. September 2026 um
+  18:30 Uhr Europe/Berlin geplant**;
 - die Quelle bleibt bis zur tatsächlichen Veröffentlichung in der Conversionmessung inaktiv.
 
 ## QA-Gates

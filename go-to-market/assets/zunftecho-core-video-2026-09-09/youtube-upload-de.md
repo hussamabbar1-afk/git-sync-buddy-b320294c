@@ -4,8 +4,9 @@ Stand: 9. September 2026
 
 ## Veröffentlichungsentscheidung
 
-- Status: fertig zur Freigabe, noch nicht hochgeladen oder veröffentlicht;
-- empfohlener Termin: 12. September 2026, 18:30 Uhr Europe/Berlin;
+- Status: am 12. September 2026 hochgeladen, Copyright-Check bestanden und geplant;
+- Veröffentlichung: 12. September 2026, 18:30 Uhr Europe/Berlin;
+- YouTube: `https://youtu.be/6wfiYojrUZU`;
 - Zielgruppe: Inhaber und operative Verantwortliche kleiner SHK-Betriebe in Deutschland,
   zunächst Berlin und Brandenburg;
 - Funnel-Stufe: Consideration — vom Problembewusstsein zum anonymen Anfrage-Check;
@@ -63,6 +64,7 @@ ZunftEcho stellt keine Ferndiagnosen und gibt keine automatischen Notdienst- ode
 
 ## Freigabe vor Upload
 
-Vor dem externen Upload erneut prüfen: Dateihash gegen README, Termin und Zeitzone, Titel,
-Beschreibung, Quellenparameter und Sichtbarkeit. Der Upload selbst erfolgt erst nach einer
-ausdrücklichen Bestätigung zum Ausführungszeitpunkt.
+Vor dem externen Upload wurden Dateihash, Termin und Zeitzone, Titel, Beschreibung,
+Quellenparameter und Sichtbarkeit geprüft. Der Inhaber bestätigte die Ausführung am 12. September
+2026; YouTube bestätigte anschließend die Planung und einen Copyright-Check ohne Befund. Nach dem
+Termin bleibt die öffentliche Sichtbarkeit separat zu kontrollieren.

@@ -16,18 +16,19 @@ Erfolgsversprechen bleiben ausgeschlossen.
 
 ## Aktuelle Messbasis
 
-Lesender Stand am 9. September 2026, 19:08 Uhr:
+Lesender Stand am 12. September 2026, 14:01 Uhr:
 
-- Anfrage-Check-Short A: aktuell 35 Aufrufe; YouTube hat die frühere Anzeige von 36 nachträglich
-  korrigiert. Der zuletzt verfügbare Herkunftswert lag bei 91,7 % aus dem Shorts-Feed;
+- Anfrage-Check-Short A: aktuell 44 Aufrufe; der zuletzt verfügbare Herkunftswert lag bei 91,7 %
+  aus dem Shorts-Feed;
 - Abonnentenänderung: keine ausgewiesene Änderung;
 - noch keine belastbaren Daten zur Zuschauerbindung;
 - Pilotanfragen: 0;
 - Kampagnen-Konversationen: 0;
 - Kampagnen-Leads: 0;
 - Workflow-Fehler in den letzten 24 Stunden: 0;
-- im korrekten Projektpostfach keine neue menschliche Partner- oder Kundenantwort; sichtbar sind
-  nur die bekannte HeWo-Antwort und die automatische Craftboxx-Eingangsbestätigung.
+- im korrekten Projektpostfach keine neue menschliche Partner- oder Kundenantwort; im aktuellen
+  Suchfenster sichtbar sind nur ein automatischer DMARC-Bericht und die automatische
+  Craftboxx-Eingangsbestätigung.
 - alle drei geplanten Shorts weiterhin als `Geplant` sichtbar; null Kommentare vor ihrer
   Veröffentlichung. Short A zeigt einen Kommentar, der vom eigenen ZunftEcho-Konto stammt und nicht
   als Interessent zählt.
@@ -41,6 +42,7 @@ mit hektischen Mehrfach-Uploads beantwortet.
 | Datum         | Kanal                     | Inhalt                                       | Quelle                                            | Status                  |
 | ------------- | ------------------------- | -------------------------------------------- | ------------------------------------------------- | ----------------------- |
 | 09.09.        | YouTube Short + Community | Video A: acht Fragen                         | `youtube-check-video-01` / `youtube-community-01` | live                    |
+| 12.09., 18:30 | YouTube Video             | Produktkern: von Nachricht zu klarer Anfrage | `youtube-product-core-01`                         | hochgeladen und geplant |
 | 14.09., 18:30 | YouTube Short             | Video B: Kontaktformular oder echter Ablauf  | `youtube-check-video-02`                          | hochgeladen und geplant |
 | 17.09., 18:30 | YouTube Short             | Video C: Ergebnis mit Team/Webagentur teilen | `youtube-check-video-03`                          | hochgeladen und geplant |
 | 21.09., 18:30 | YouTube Short             | kontrollierter 16-Sekunden-Workflow          | `youtube-higgsfield-video-04`                     | hochgeladen und geplant |
@@ -57,12 +59,12 @@ Termin privat und haben die Copyright-Prüfung ohne Befund abgeschlossen:
 
 ## Produktions-Backlog
 
-1. **Produziert, QA-bestanden, nicht veröffentlicht:** 64-sekündiges, bildschirmgeführtes
+1. **Produziert, QA-/Copyright-bestanden und geplant:** 64-sekündiges, bildschirmgeführtes
    16:9-Kernvideo aus echten Produktansichten: Problem, vollständige Anfrage, menschliche Grenze und
    freiwilliger Anfrage-Check. Produktionspaket:
-   `assets/zunftecho-core-video-2026-09-09/`; Quelle `youtube-product-core-01` bleibt inaktiv.
-   Empfohlener Publikationsslot: 12. September, 18:30 Uhr, vor Video B und nur nach separater
-   Upload-/Planungsbestätigung.
+   `assets/zunftecho-core-video-2026-09-09/`; YouTube `https://youtu.be/6wfiYojrUZU`. Die Quelle
+   `youtube-product-core-01` bleibt bis zur öffentlichen Freischaltung am 12. September um18:30 Uhr
+   inaktiv.
 2. Ein 4:5-Dokumentbeitrag „8 Punkte einer planbaren Website-Anfrage“ für LinkedIn, sobald die
    ausstehende LinkedIn-Datenschutzentscheidung vom Inhaber selbst getroffen wurde.
 3. Ein Partner-One-Pager für Webagenturen: gemeinsamer Website-Abnahmepunkt, keine White-Label-,
