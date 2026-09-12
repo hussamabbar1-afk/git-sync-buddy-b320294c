@@ -1,6 +1,6 @@
 # ZunftEcho Kampagnen-Command-Center
 
-Stand: 9. September 2026, Europe/Berlin
+Stand: 12. September 2026, 19:42 Uhr, Europe/Berlin
 
 ## Auftrag und Führungsregel
 
@@ -16,19 +16,22 @@ Erfolgsversprechen bleiben ausgeschlossen.
 
 ## Aktuelle Messbasis
 
-Lesender Stand am 12. September 2026, 14:01 Uhr:
+Lesender Stand am 12. September 2026, 19:37 Uhr:
 
-- Anfrage-Check-Short A: aktuell 44 Aufrufe; der zuletzt verfügbare Herkunftswert lag bei 91,7 %
+- Anfrage-Check-Short A: aktuell 49 Aufrufe; der zuletzt verfügbare Herkunftswert lag bei 91,7 %
   aus dem Shorts-Feed;
+- das am 12. September veröffentlichte Produktkernvideo: 0 Aufrufe und 0 Kommentare in der ersten
+  Stunde; daraus wird noch keine Formatentscheidung abgeleitet;
 - Abonnentenänderung: keine ausgewiesene Änderung;
 - noch keine belastbaren Daten zur Zuschauerbindung;
 - Pilotanfragen: 0;
 - Kampagnen-Konversationen: 0;
 - Kampagnen-Leads: 0;
 - Workflow-Fehler in den letzten 24 Stunden: 0;
-- im korrekten Projektpostfach keine neue menschliche Partner- oder Kundenantwort; im aktuellen
-  Suchfenster sichtbar sind nur ein automatischer DMARC-Bericht und die automatische
-  Craftboxx-Eingangsbestätigung.
+- im korrekten Projektpostfach keine passende Nachricht im Zwei-Tage-Fenster und bei den bekannten
+  Partnerdomains keine Antwort im Sieben-Tage-Fenster; keine unbeantworteten YouTube-Kommentare;
+- der LinkedIn-Pilotbeitrag zeigt 5 Impressions und keinen sichtbaren Kommentar. Der Nachrichtenzugang
+  bleibt hinter der ausstehenden EU-Entscheidung zur Verknüpfung von LinkedIn-Services gesperrt;
 - alle drei geplanten Shorts weiterhin als `Geplant` sichtbar; null Kommentare vor ihrer
   Veröffentlichung. Short A zeigt einen Kommentar, der vom eigenen ZunftEcho-Konto stammt und nicht
   als Interessent zählt.
@@ -71,9 +74,18 @@ Termin privat und haben die Copyright-Prüfung ohne Befund abgeschlossen:
    `../output/pdf/ZunftEcho-Partner-One-Pager-Webagenturen.pdf`. Die Quelle
    `partner-onepager-01` bleibt bis zur tatsächlichen Nutzung in einem erlaubten Antwort-, Einladungs-
    oder Referral-Kontext inaktiv.
-3. Ein 4:5-Dokumentbeitrag „8 Punkte einer planbaren Website-Anfrage“ für LinkedIn, sobald die
+3. **Bewertete, noch nicht aktive Hypothese:** eine kleine kontrollierte Serie hochwertiger statischer
+   Product-led Creatives aus echten ZunftEcho-Oberflächen. Sie ersetzt weder Video noch Outreach. Der
+   aktuelle Engpass ist Reichweite, nicht ein belegter Formatmangel; deshalb beginnt keine Produktion
+   vor einem verwertbaren Signal aus den laufenden Veröffentlichungen oder einem nutzbaren Kanal.
+   Erster sinnvoller Test: 2–3 klar unterschiedliche Problem-/Produktbeweis-/Workflow-Konzepte, jeweils
+   plattformspezifisch statt blind skaliert, mit gemeinsamer CTA und sauberer Quelle. LinkedIn setzt die
+   ausstehende EU-Entscheidung und relevante Reichweite voraus; Meta bleibt unvalidiert; Paid bleibt
+   hinter den bestehenden Rechts-, Mess- und Budget-Gates. Qualitätsgrundlage:
+   `../docs/zunftecho-static-creative-hypothesis-addendum-2026-09-12.md`.
+4. Ein 4:5-Dokumentbeitrag „8 Punkte einer planbaren Website-Anfrage“ für LinkedIn, sobald die
    ausstehende LinkedIn-Datenschutzentscheidung vom Inhaber selbst getroffen wurde.
-4. Eine zweite fachliche SEO-Seite zu Sicherheitsgrenzen und menschlicher Übergabe, sofern sie eine
+5. Eine zweite fachliche SEO-Seite zu Sicherheitsgrenzen und menschlicher Übergabe, sofern sie eine
    neue Suchintention abdeckt und nicht bestehende Inhalte dupliziert.
 
 Für jedes Asset gilt vor Freigabe: exaktes ZunftEcho-Logo, Palette und Typografie; vollständige

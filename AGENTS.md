@@ -5,8 +5,9 @@
 - Treat that section as the authoritative operational state unless newer code or live evidence
   contradicts it.
 - Preserve every existing project rule and Master Operating Directive, including
-  `docs/zunftecho-master-operating-directive-addendum-2026-09-12.md` and the queued quality task in
-  `docs/zunftecho-product-quality-addendum-2026-09-12.md`.
+  `docs/zunftecho-master-operating-directive-addendum-2026-09-12.md`,
+  `docs/zunftecho-product-quality-addendum-2026-09-12.md` and
+  `docs/zunftecho-static-creative-hypothesis-addendum-2026-09-12.md`.
 - Keep this file lightweight; retain detailed state and history in `PROJECT_STATE.md`.
 
 <!-- LOVABLE:BEGIN -->
