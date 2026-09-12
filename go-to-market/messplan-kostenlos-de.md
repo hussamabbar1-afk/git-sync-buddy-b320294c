@@ -1,6 +1,6 @@
 # ZunftEcho - kostenloser und datensparsamer Messplan
 
-Stand: 9. September 2026
+Stand: 12. September 2026
 
 Die zehn Schreiben sind gedruckt und kuvertiert. Die Übergabe zum Versand ist
 noch nicht durch den Inhaber als tatsächlich erfolgt bestätigt; das Feld `versendet am` bleibt bis
@@ -88,6 +88,16 @@ Der öffentliche Anfrage-Check wurde am 9. September 2026 mit
 `source=youtube-product-core-01` vollständig durchlaufen. Seine Ergebnislinks übernahmen die Quelle
 erwartungsgemäß mit Score-Suffix (`youtube-product-core-01-s0`) in Demo und Pilotformular. Damit ist
 die Zuordnung der freiwilligen Folgeschritte technisch bestätigt; der Test selbst ist kein Lead.
+
+## Reservierte, noch inaktive Partnerquelle — 12. September 2026
+
+```text
+partner-onepager-01
+```
+
+Die Quelle gehört zum QA-geprüften Partner-One-Pager für Webagenturen. Sie bleibt inaktiv, solange
+das Dokument nicht in einem erlaubten Antwort-, Einladungs- oder Referral-Kontext tatsächlich
+geteilt wurde. Produktion und eigener QR-Test zählen weder als Reichweite noch als Partnerinteresse.
 
 ## Qualifizierungsübersicht
 

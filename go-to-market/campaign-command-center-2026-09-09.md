@@ -65,10 +65,14 @@ Termin privat und haben die Copyright-Prüfung ohne Befund abgeschlossen:
    `assets/zunftecho-core-video-2026-09-09/`; YouTube `https://youtu.be/6wfiYojrUZU`. Die Quelle
    `youtube-product-core-01` bleibt bis zur öffentlichen Freischaltung am 12. September um18:30 Uhr
    inaktiv.
-2. Ein 4:5-Dokumentbeitrag „8 Punkte einer planbaren Website-Anfrage“ für LinkedIn, sobald die
+2. **Produziert und QA-bestanden, nicht verteilt:** Partner-One-Pager für Webagenturen mit gemeinsamem
+   Website-Abnahmepunkt und ausdrücklichen Grenzen gegen White-Label-, Provisions- oder
+   Integrationszusagen. Paket: `assets/partner-one-pager-2026-09-12/`; PDF:
+   `../output/pdf/ZunftEcho-Partner-One-Pager-Webagenturen.pdf`. Die Quelle
+   `partner-onepager-01` bleibt bis zur tatsächlichen Nutzung in einem erlaubten Antwort-, Einladungs-
+   oder Referral-Kontext inaktiv.
+3. Ein 4:5-Dokumentbeitrag „8 Punkte einer planbaren Website-Anfrage“ für LinkedIn, sobald die
    ausstehende LinkedIn-Datenschutzentscheidung vom Inhaber selbst getroffen wurde.
-3. Ein Partner-One-Pager für Webagenturen: gemeinsamer Website-Abnahmepunkt, keine White-Label-,
-   Provisions- oder Integrationszusage.
 4. Eine zweite fachliche SEO-Seite zu Sicherheitsgrenzen und menschlicher Übergabe, sofern sie eine
    neue Suchintention abdeckt und nicht bestehende Inhalte dupliziert.
 
