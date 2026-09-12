@@ -1,6 +1,6 @@
 # ZunftEcho Kampagnen-Command-Center
 
-Stand: 13. September 2026, 01:35 Uhr, Europe/Berlin
+Stand: 13. September 2026, 01:45 Uhr, Europe/Berlin
 
 ## Auftrag und Führungsregel
 
@@ -104,8 +104,14 @@ Termin privat und haben die Copyright-Prüfung ohne Befund abgeschlossen:
    `../docs/zunftecho-static-creative-hypothesis-addendum-2026-09-12.md`.
 4. Ein 4:5-Dokumentbeitrag „8 Punkte einer planbaren Website-Anfrage“ für LinkedIn, sobald die
    ausstehende LinkedIn-Datenschutzentscheidung vom Inhaber selbst getroffen wurde.
-5. Eine zweite fachliche SEO-Seite zu Sicherheitsgrenzen und menschlicher Übergabe, sofern sie eine
-   neue Suchintention abdeckt und nicht bestehende Inhalte dupliziert.
+5. **Text und Implementierung vorbereitet, nicht veröffentlicht:** SEO-Abnahmeleitfaden
+   „SHK-Chatbot: menschliche Übergabe in sechs Fällen prüfen“. Allgemeine Sicherheit ist bereits in
+   drei Leitfäden enthalten; der neue Ansatz prüft Kundenhinweis, tatsächliche Teamübernahme und
+   Fehler-/Feierabendfälle statt diese Inhalte zu wiederholen. Suchnachfrage ist eine unvalidierte
+   Hypothese. Text: `seo-human-handover-2026-09-13-de.md`; Code ausschließlich auf
+   `codex/shk-handover-guide` bei `5408d10`. Build/Type/Lint und lesende lokale HTTP-Prüfung bestanden;
+   Mobile/Desktop-Sichtprüfung durch Browserausfall blockiert. Keine Zusammenführung mit main oder
+   Veröffentlichung vor Sichtprüfung und normalem Preview-Gate. Quelle `seo-shk-uebergabe` inaktiv.
 
 Für jedes Asset gilt vor Freigabe: exaktes ZunftEcho-Logo, Palette und Typografie; vollständige
 Dekodierung; Sichtprüfung mehrerer Zeitpunkte bzw. Größen; keine Pseudo-Schrift, Fahrzeug-/Sci-Fi-
