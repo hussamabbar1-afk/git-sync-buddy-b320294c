@@ -1,13 +1,11 @@
 # ZunftEcho - kostenloser und datensparsamer Messplan
 
-Stand: 12. September 2026
+Stand: 13. September 2026
 
-Die zehn Schreiben sind gedruckt und kuvertiert. Die Übergabe zum Versand ist
-noch nicht durch den Inhaber als tatsächlich erfolgt bestätigt; das Feld `versendet am` bleibt bis
-zu dieser Bestätigung bewusst leer und die 14-Tage-Auswertung beginnt nicht am früher nur
-vorgesehenen 7. September. Das Schreiben an Andrea Tschichholz wurde
-nach dem erneuten Werbewiderspruchs-Check gesperrt und wird aus dem Stapel
-entfernt; die aktive Versandwelle umfasst neun Schreiben.
+Der Inhaber hat am 13. September den tatsächlichen Versand am **7. September 2026** bestätigt.
+Die freigegebene Welle umfasst neun Schreiben; `brief-tschichholz` bleibt wegen des dokumentierten
+Werbewiderspruchs dauerhaft ausgeschlossen. Das Versanddatum ist nun bestätigt, nicht aber die
+Zustellung beim Empfänger. Die 14-Tage-Auswertung ist am **21. September 2026** fällig.
 
 ## Entscheidung
 
@@ -154,18 +152,22 @@ order by source;
 
 | Quelle             | versendet am | Antwort | Demo/Pilot | Widerspruch        | nächster Schritt         |
 | ------------------ | ------------ | ------- | ---------- | ------------------ | ------------------------ |
-| brief-ro-do        |              |         |            |                    |                          |
-| brief-bolowski     |              |         |            |                    |                          |
-| brief-grelak       |              |         |            |                    |                          |
-| brief-koblitz      |              |         |            |                    |                          |
-| brief-wilcks       |              |         |            |                    |                          |
-| brief-tim-gaertner |              |         |            |                    |                          |
-| brief-roesch       |              |         |            |                    |                          |
+| brief-ro-do        | 07.09.2026   |         |            |                    | Auswertung 21.09.2026    |
+| brief-bolowski     | 07.09.2026   |         |            |                    | Auswertung 21.09.2026    |
+| brief-grelak       | 07.09.2026   |         |            |                    | Auswertung 21.09.2026    |
+| brief-koblitz      | 07.09.2026   |         |            |                    | Auswertung 21.09.2026    |
+| brief-wilcks       | 07.09.2026   |         |            |                    | Auswertung 21.09.2026    |
+| brief-tim-gaertner | 07.09.2026   |         |            |                    | Auswertung 21.09.2026    |
+| brief-roesch       | 07.09.2026   |         |            |                    | Auswertung 21.09.2026    |
 | brief-tschichholz  |              |         |            | Website 06.09.2026 | dauerhaft ausgeschlossen |
-| brief-protoss      |              |         |            |                    |                          |
-| brief-a-m          |              |         |            |                    |                          |
+| brief-protoss      | 07.09.2026   |         |            |                    | Auswertung 21.09.2026    |
+| brief-a-m          | 07.09.2026   |         |            |                    | Auswertung 21.09.2026    |
 
 ## Auswertung nach 14 Tagen
+
+Fällig am 21. September 2026, gerechnet ab dem durch den Inhaber bestätigten Versand vom 7. September.
+Versand allein zählt nicht als Antwort, Interessent oder Conversion. Bis dahin werden echte Inbounds
+laufend bearbeitet; es gibt keine automatische Nachfassaktion oder zweite Briefwelle.
 
 - Primär: freiwillige Antworten und qualifizierte Gespräche, nicht Seitenaufrufe.
 - Sekundär: abgesendete Pilotanfragen pro eindeutiger Briefquelle.

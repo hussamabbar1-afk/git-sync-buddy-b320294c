@@ -1,6 +1,6 @@
 # ZunftEcho – qualifizierte Prospect-Pipeline
 
-Stand: 9. September 2026, Europe/Berlin
+Stand: 13. September 2026, Europe/Berlin
 
 ## Zweck und Ausgangslage
 
@@ -99,10 +99,9 @@ belastbar öffentlich belegt sind. Die Recherche ist nicht gleichbedeutend mit Q
 kostenpflichtige Registerbestellung, keine Apollo-Credits und kein Kontakt. Eine erneute Suche erfolgt
 erst bei neuer Primärevidenz oder wenn dieser Kandidat tatsächlich für den nächsten Test benötigt wird.
 
-**ACTION:** Bis zur 14-Tage-Auswertung nach einem vom Inhaber bestätigten Versanddatum der ersten
-Briefwelle bleibt die Auswahl im Status `Qualified` oder `Research`; es wird weder gemailt noch ein
-Formular abgesendet. Das Versanddatum ist im bestehenden Messprotokoll noch nicht bestätigt und wird
-nicht aus dem vorgesehenen Termin abgeleitet. Unabhängige interne Recherche und Testvorbereitung
+**ACTION:** Der Inhaber hat den Versand der freigegebenen ersten Briefwelle am 7. September 2026
+bestätigt. Bis zur 14-Tage-Auswertung am 21. September bleibt diese zweite Auswahl im Status
+`Qualified` oder `Research`; es wird weder gemailt noch ein Formular abgesendet. Unabhängige interne Recherche und Testvorbereitung
 können parallel weiterlaufen; neue freiwillige Inbounds und geplante Inhalte bleiben vorrangig.
 
 **COST:** 0 Euro Werbebudget, keine Apollo-Credits, keine generativen Video-Credits und keine neue
@@ -121,8 +120,7 @@ ausgelöst.
 **DECISION:** Reichweite wird nicht durch eine sofortige zweite Welle erhöht. Zuerst wird der erste
 Test ausgewertet; danach wird Segment, Botschaft oder Kanal gezielt verändert, nicht alles zugleich.
 
-**NEXT ACTION:** Zuerst nur das tatsächliche Versanddatum der neun freigegebenen Briefe vom Inhaber
-übernehmen. Vierzehn Tage danach Quellen und Antworten prüfen, daraus eine
+**NEXT ACTION:** Am 21. September Quellen und Antworten der am 7. September versandten Welle prüfen, daraus eine
 STOP/CONTINUE/IMPROVE-Entscheidung ableiten und höchstens fünf Kandidaten von A1–A6 zur erneuten
 48-Stunden-Prüfung freigeben.
 

@@ -142,9 +142,9 @@ Entscheidern. Der aktuelle Pipeline-Stand lautet:
 
 `Qualified 9 · Research 1 · Contacted 0 · Replied 0 · Interested 0 · Demo 0 · Trial 0 · Customer 0`
 
-Die Auswahl ist kein Versandauftrag. Sie bleibt bis zur 14-Tage-Auswertung nach einem vom Inhaber
-bestätigten Versanddatum der ersten Briefwelle im Status `Qualified/Research`; der bisher nur
-vorgesehene Termin wird nicht als Versandnachweis behandelt. Betriebe mit nachweislich mehr als zehn
+Die Auswahl ist kein Versandauftrag. Der Inhaber bestätigte am 13. September den tatsächlichen Versand
+der neun freigegebenen Briefe am 7. September. Die zweite Auswahl bleibt bis zur 14-Tage-Auswertung am 21. September im Status `Qualified/Research`. Versand ist kein Zustellungs- oder Interessensnachweis.
+Betriebe mit nachweislich mehr als zehn
 Mitarbeitenden sind für den ersten Pilot-Sprint unabhängig von ihrer Punktzahl ausgesteuert. Vor jeder
 späteren Aktion gilt erneut die 48-Stunden-Prüfung von Impressum, Widerspruch, Kontaktdaten und
 zulässigem Kanal.
