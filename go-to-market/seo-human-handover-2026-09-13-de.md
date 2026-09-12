@@ -1,12 +1,12 @@
 # SEO content package: SHK human-handover acceptance
 
-Status: German editorial draft implemented on `codex/shk-handover-guide`; **not published or indexed**.
+Status: **published** on 13 September 2026, 01:55 Europe/Berlin; indexing not yet verified.
 Prepared: 13 September 2026, Europe/Berlin.
 
 ## Implementation brief
 
 - Proposed route: `/shk-chatbot-menschliche-uebergabe`.
-- Reserved source: `seo-shk-uebergabe`; inactive until an actual verified production launch.
+- Active source: `seo-shk-uebergabe`, since the verified production launch.
 - Search-intent hypothesis: a small SHK owner assessing whether a website assistant hands work
   to a person reliably. This is an acceptance protocol, not another general chatbot/safety overview.
 - No validated search volume, ranking, traffic or conversion forecast. Search results alone do not
@@ -20,9 +20,14 @@ Prepared: 13 September 2026, Europe/Berlin.
 - Verified: build, TypeScript, targeted ESLint and read-only local HTTP checks passed. Six cases,
   four visible/schema-matching FAQs, DVGW reference, source links, Wissen, sitemap and three existing
   articles checked by `scripts/check-handover-guide.mjs` on the implementation branch. No database writes.
-- Code checkpoint: `5408d10`, pushed on `codex/shk-handover-guide`; not merged into `main`.
-  The current checkout returned to main. Rebuild the intended branch before preview/deploy; ignored
-  `.output` currently contains the draft build. Local preview was stopped after verification.
+- Release checkpoint: `3623c71` on synchronized `main`; GitHub quality run `34726620657` succeeded.
+  Visual acceptance passed at 320/390 and desktop. Cloudflare version
+  `ab165970-ad5b-4eb2-ba1a-3c24e39fb313` passed zero-traffic preview and production HTTP/smoke checks.
+  Six cases, four FAQs, source preservation after hydration and no horizontal mobile overflow verified.
+  The superseded draft checkpoint `5408d10` must not be redeployed.
+- Bing reports not discovered. Its final indexing Submit is pending owner confirmation; no request
+  submitted or indexing claimed. Monitor updates require the existing purpose-built automation tool,
+  unavailable in this session; CURRENT STATE already records the active source.
 - `datePublished` must reflect the actual launch, not this drafting date. Add this source to the
   existing monitor only after launch; do not activate it merely because the text exists.
 - Related content already covers general automation, feature selection and the eight intake fields.

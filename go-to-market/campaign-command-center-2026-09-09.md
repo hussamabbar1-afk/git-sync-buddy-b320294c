@@ -1,6 +1,6 @@
 # ZunftEcho Kampagnen-Command-Center
 
-Stand: 13. September 2026, 01:45 Uhr, Europe/Berlin
+Stand: 13. September 2026, 01:56 Uhr, Europe/Berlin
 
 ## Auftrag und Führungsregel
 
@@ -24,9 +24,11 @@ Conversion- und Monitoring-Arbeit läuft parallel, solange sie aktive Experiment
 Aktualisierung 13. September, 01:33 Uhr: Supabase zeigt weiterhin 0 Pilotanfragen,
 0 Kampagnen-Konversationen, 0 Kampagnen-Leads und 0 Workflow-Fehler in 24 Stunden.
 Eine separate Prüfung aller nicht ausgeschlossenen Pilotanfragen ergab ebenfalls keine Zeilen.
-Die Plattform-/Postfachwerte unten bleiben die letzte erfolgreiche Lesung: Browsersteuerung scheitert
-aktuell vor der Initialisierung, und der Gmail-Connector gehört zu einem anderen Konto und wurde nicht
-durchsucht. Fehlende neue Prüfung bedeutet nicht fehlende Antworten.
+Chrome ist wieder erreichbar. Neue Lesung am 13. September: Kernvideo 1 Aufruf/0 Kommentare,
+Short A 49 Aufrufe/1 eigener Kommentar. Veröffentlichte Kommentare sind nur die zwei bekannten eigenen.
+Im korrekten Postfach: keine neue passende Nachricht im Zwei-Tage-Fenster; Partnerdomain-Suche über
+sieben Tage zeigt nur den bekannten HeWo-Reply und die Craftboxx-Automatik. Kein neuer menschlicher
+Inbound sichtbar. Der Gmail-Connector des anderen Kontos wurde nicht durchsucht.
 
 Lesender Stand am 12. September 2026, 19:37 Uhr:
 
@@ -104,14 +106,14 @@ Termin privat und haben die Copyright-Prüfung ohne Befund abgeschlossen:
    `../docs/zunftecho-static-creative-hypothesis-addendum-2026-09-12.md`.
 4. Ein 4:5-Dokumentbeitrag „8 Punkte einer planbaren Website-Anfrage“ für LinkedIn, sobald die
    ausstehende LinkedIn-Datenschutzentscheidung vom Inhaber selbst getroffen wurde.
-5. **Text und Implementierung vorbereitet, nicht veröffentlicht:** SEO-Abnahmeleitfaden
+5. **Veröffentlicht und QA-bestanden:** SEO-Abnahmeleitfaden
    „SHK-Chatbot: menschliche Übergabe in sechs Fällen prüfen“. Allgemeine Sicherheit ist bereits in
    drei Leitfäden enthalten; der neue Ansatz prüft Kundenhinweis, tatsächliche Teamübernahme und
    Fehler-/Feierabendfälle statt diese Inhalte zu wiederholen. Suchnachfrage ist eine unvalidierte
-   Hypothese. Text: `seo-human-handover-2026-09-13-de.md`; Code ausschließlich auf
-   `codex/shk-handover-guide` bei `5408d10`. Build/Type/Lint und lesende lokale HTTP-Prüfung bestanden;
-   Mobile/Desktop-Sichtprüfung durch Browserausfall blockiert. Keine Zusammenführung mit main oder
-   Veröffentlichung vor Sichtprüfung und normalem Preview-Gate. Quelle `seo-shk-uebergabe` inaktiv.
+   Hypothese. Text: `seo-human-handover-2026-09-13-de.md`; main `3623c71`. Build/Type/Lint,
+   Mobile/Desktop-Sichtprüfung, GitHub-CI, isoliertes 0%-Preview und Produktions-Smoke bestanden.
+   Live seit13. September01:55: `https://zunftecho.de/shk-chatbot-menschliche-uebergabe`;
+   Quelle `seo-shk-uebergabe` aktiv. Bing noch nicht entdeckt; finaler Submit wartet auf Bestätigung.
 
 Für jedes Asset gilt vor Freigabe: exaktes ZunftEcho-Logo, Palette und Typografie; vollständige
 Dekodierung; Sichtprüfung mehrerer Zeitpunkte bzw. Größen; keine Pseudo-Schrift, Fahrzeug-/Sci-Fi-
