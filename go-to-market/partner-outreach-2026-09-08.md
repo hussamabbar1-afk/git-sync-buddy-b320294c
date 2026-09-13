@@ -8,15 +8,21 @@ Historical setup note: a separate standard Brevo SMTP key named `ZunftEcho Gmail
 
 ## HWK Berlin — Netzwerk-Eignungsanfrage, 13 September 2026
 
-**Status: local draft only; NOT sent, NOT joined.** Selected by the final whole-project capacity
+**Status: sent once, 13 September 2026 13:55 Europe/Berlin; NOT joined.** Selected by the final whole-project capacity
 audit, not a replacement for HPH or the existing follow-up plan. Official
 [network invitation](https://www.hwk-berlin.de/artikel/technologietransfer-netzwerke-und-partner-91,0,368.html)
 addresses interested parties at `wiktor@hwk-berlin.de`; participation eligibility and fees for an
 early-stage external software provider are unknown. No implied endorsement or guaranteed SHK access.
-Current browser policy requires action-time confirmation before representational communication.
-Do not fill/send through the browser before that confirmation. Before actual send, check the
-correct project mailbox for previous contact/refusal and use the existing verified business sender.
-No reminder scheduled; do not count this draft as a contacted partner, reply or referral.
+The owner confirmed the specific sender, destination and inquiry in the next turn. Before composing,
+`in:anywhere {from:hwk-berlin.de to:hwk-berlin.de}` returned no matches in both the receiving suffix4
+and sending suffix55 Gmail accounts. The existing business alias was selected for this message only.
+Gmail confirmed `تمّ إرسال الرسالة`; View message verified From `ZunftEcho <kontakt@zunftecho.de>`,
+To `wiktor@hwk-berlin.de`, 13:55, exact subject/body and `mailed-by: zunftecho.de`.
+This proves sender-side submission, not independent delivery or interest. Brevo logs were not accessed:
+the provider presented a login screen. No credentials, SMTP key or sender settings changed.
+One initial click had left the same draft intact with no Sent record; after dismissing an obstructing
+desktop-notification banner the send completed. Do not retry or recreate this now-sent inquiry.
+No reminder scheduled; one network eligibility inquiry, zero replies/referrals/memberships.
 
 To: `wiktor@hwk-berlin.de` — Kerstin Wiktor, HWK Berlin BIT
 
@@ -51,7 +57,7 @@ kontakt@zunftecho.de
 **Scope:** one invitation-related eligibility inquiry, no attachment/tracking/price/customer data,
 no automatic membership, newsletter, integration, commission or paid commitment. Full comparison:
 `opportunity-capacity-audit-2026-09-13.md`. Sender UI acknowledgement must not be reported as
-independent delivery. After a confirmed send, replace draft status with evidence, never resend it.
+independent delivery. Sent evidence above supersedes the prior local-draft checkpoint; never resend it.
 
 ## Basis and limits
 

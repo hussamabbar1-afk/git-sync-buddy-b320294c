@@ -1,6 +1,6 @@
 # ZunftEcho — Opportunity / Capacity Audit
 
-Stand: 13. September 2026, 13:49 Europe/Berlin. Einschätzungen sind Priorisierungshypothesen,
+Stand: 13. September 2026, 13:56 Europe/Berlin. Einschätzungen sind Priorisierungshypothesen,
 keine berechneten Umsatzprognosen. Zeitangaben betreffen Arbeitsaufwand, nicht zugesagte Antwortzeiten.
 
 ## Ausgangspunkt und Entscheidung
@@ -23,7 +23,7 @@ Zugang und fachliche Rückmeldung sind plausibel; Aufnahme und Kundenzugang sind
 | LinkedIn / Entscheider | mittel bei neuem belastbarem Nachweis; neun Entscheider schon benannt, Balic offen | begrenzte Recherche möglich, Zugriff/Datenschutz beachten | kein Upgrade nötig | aktuelle Rolle + Primärnachweis | public research kann unabhängig sein; eigenes Posting/Inbox hinter EU-Entscheidung; keine erneute Balic-Suche ohne neue Spur |
 | Google Maps / öffentliches SHK-Verzeichnis | mittel für spätere regionale Auswahl/Adressprüfung, derzeit kein neuer Versandbedarf | Verzeichnis vorhanden, Qualifizierung bleibt Einzelarbeit | kostenlos, kein Scraping | nur bestätigter Fit/Adresse zählt | unabhängig als Recherche; kein Werbeeinverständnis, keine neue Welle; Reservequelle statt Exportliste |
 | eigenes Google Business Profile | kein zulässiger Zusatzwert im dokumentierten Online-only-Modell | nicht sinnvoll starten | keine Ausgabe | nicht anwendbar | bisherige Ablehnung bestätigt; kein erfundener Kundenstandort oder Vor-Ort-Service |
-| HWK Berlin / Berliner Handwerk digital | vergleichsweise hoch, aber bedingt: regionaler Multiplikator und qualifiziertes Feedback | Einladung sofort prüfbar, einzelne kurze Anfrage bereit | Anfrage ohne Kauf; Teilnahmegebühr/Aufnahme unbekannt | menschliche Eignungsantwort → erlaubter Fachaustausch → qualifizierte Empfehlung; getrennt zählen | unabhängig von HPH/Shorts/Apollo; ausgewählt, Browser-Sendetätigung fehlt |
+| HWK Berlin / Berliner Handwerk digital | vergleichsweise hoch, aber bedingt: regionaler Multiplikator und qualifiziertes Feedback | einzelne Anfrage am 13.09. 13:55 gesendet | Anfrage ohne Kauf; Teilnahmegebühr/Aufnahme unbekannt | menschliche Eignungsantwort → erlaubter Fachaustausch → qualifizierte Empfehlung; getrennt zählen | unabhängig von HPH/Shorts/Apollo; einmal gesendet, Delivery/Antwort unbewiesen |
 | Innung SHK / andere Verbände und Plattformen | mittel, Zugang/Anbieterfit unbestätigt | Gebühren-/Eignungsprüfung zuerst | Innung nennt Mitgliedschaftskosten; kein Kauf | echte zulässige Teilnahme/Antwort | keine automatische Mitgliedschaft, kein Eckring/Partnerlogo; kein paralleler Serienversand |
 | Webagenturen / warme Empfehlungen | hoch bei bestehender Einladung/Beziehung, derzeit keine neue belegte warme Verbindung | One-Pager schon QA-bestanden | keine Produktion nötig | individuelle Bitte/Antwort/Referral | kein neues Cold-email; fertiges Material erst im angeforderten Kontext, keine breite Agenturliste |
 | SEO / lokale Suchinhalte | mittel langfristig, unmittelbarer Zusatznutzen weiterer Seiten unbewiesen | vorhandene neue Seite schon veröffentlicht, Indexierung asynchron | keine Ads | qualifizierte Pilotquelle; Suchnachfrage noch Hypothese | SEO kann unabhängig sein; keine dünnen Stadtseiten, kein wiederholtes Bing-Submit, jetzt keine Doppelartikel |
@@ -57,17 +57,20 @@ Zugang und fachliche Rückmeldung sind plausibel; Aufnahme und Kundenzugang sind
    altes Dokument enthält eine September-4-Veranstaltungsidee, keine protokollierte Netzwerkanfrage.
 2. Genau eine auf diese Einladung begrenzte deutsche Anfrage lokal im Partnerprotokoll gespeichert.
    Kein Beitrittsformular, Newsletter, Mitgliederkontakt, Anhang oder Tracking-Link.
-3. **Nicht gesendet:** aktuelle Browser-Bestätigungsregel verlangt Aktionzeit-Bestätigung für
-   repräsentative Kommunikation. Keine Empfänger-/Absenderdaten in ein Webformular eingetragen.
-   Vor Versand nach Bestätigung tatsächliches Projektpostfach auf bisherigen Kontakt/Widerspruch
-   prüfen und verifizierten Geschäftssender `ZunftEcho <kontakt@zunftecho.de>` nutzen;
-   nicht den Gmail-Connector des anderen Kontos oder einen privaten From als Ersatz.
+3. **Einmal gesendet, 13:55:** Besitzer bestätigte genau diese Anfrage. Beide relevanten Gmail-Konten
+   (Empfang suffix4, Versand suffix55) zeigten keine bisherige HWK-Korrespondenz bei `in:anywhere`.
+   Verifizierter Geschäftssender `ZunftEcho <kontakt@zunftecho.de>` nur für diese Nachricht ausgewählt.
+   Gmail-Sendebestätigung und gesendete Nachricht inklusive Details prüften Empfänger, From, Zeit und Text.
+   Kein anderer Gmail-Connector, privater From, Anhang, CC/BCC oder Tracking. Provider-Delivery unbewiesen;
+   Brevo zeigte Login. Kein erneuter Versand, keine Änderung von Schlüsseln oder Kontoeinstellungen.
 4. Kein neuer aktiver Kampagnen-Link: Anfrage ist Eignungsklärung, nicht bereits Kundenexposition.
    Messung zunächst am eindeutigen Betreff/Empfänger/Domain; nach Versand UI-Sent von Provider-Delivery
    und menschlicher Antwort trennen. Kein automatischer Reminder oder Serienoutreach.
 
 **Reassessment:** Es gibt eine sinnvolle unabhängige Gelegenheit — daher kein pauschales
-„alle Kanäle müssen warten“. Sie steht jetzt konkret am erforderlichen Bestätigungsgate.
+„alle Kanäle müssen warten“. Sie wurde nach der konkreten Bestätigung ausgeführt und verifiziert.
 Übrige Optionen rechtfertigen derzeit keine neue Produktion, Liste oder überlappenden Tests.
-Nach Freigabe die Anfrage einmal senden/verifizieren, Zustand aktualisieren und neu priorisieren.
+Nach Versand bleibt eine freiwillige Eignungsantwort abzuwarten; kein Reminder. Keine zusätzliche
+unabhängige Maßnahme mit belegtem hohem Zusatzwert jetzt offen. Nächster Trigger: menschliche Antwort,
+Fehlersignal oder geöffneter Kanal, sonst bestehende Monitoring-/Veröffentlichungs-/Auswertungsfenster.
 Kosten-/Mitgliedschafts-/Vertragsangebote benötigen gesonderte Entscheidung; keine automatische Zusage.
