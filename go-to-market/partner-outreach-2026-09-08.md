@@ -6,6 +6,53 @@ Current checkpoint superseding the historical setup below: the domain and `Zunft
 
 Historical setup note: a separate standard Brevo SMTP key named `ZunftEcho Gmail individual replies` was generated (expires 8 September 2027, also subject to provider inactivity expiry). Gmail authenticated over port 587/TLS and the alias was later confirmed. Cloudflare routing still sends all four business aliases to the owner's receiving Gmail account with suffix `4`. No production key, forwarding rule or personal default sender was changed.
 
+## HWK Berlin — Netzwerk-Eignungsanfrage, 13 September 2026
+
+**Status: local draft only; NOT sent, NOT joined.** Selected by the final whole-project capacity
+audit, not a replacement for HPH or the existing follow-up plan. Official
+[network invitation](https://www.hwk-berlin.de/artikel/technologietransfer-netzwerke-und-partner-91,0,368.html)
+addresses interested parties at `wiktor@hwk-berlin.de`; participation eligibility and fees for an
+early-stage external software provider are unknown. No implied endorsement or guaranteed SHK access.
+Current browser policy requires action-time confirmation before representational communication.
+Do not fill/send through the browser before that confirmation. Before actual send, check the
+correct project mailbox for previous contact/refusal and use the existing verified business sender.
+No reminder scheduled; do not count this draft as a contacted partner, reply or referral.
+
+To: `wiktor@hwk-berlin.de` — Kerstin Wiktor, HWK Berlin BIT
+
+From/Reply-To: `ZunftEcho <kontakt@zunftecho.de>` / `kontakt@zunftecho.de`
+
+Subject: `Ihre Netzwerkeinladung: Eignung von ZunftEcho für Berliner Handwerk digital`
+
+Guten Tag Frau Wiktor,
+
+auf Ihrer HWK-Seite laden Sie Interessierte ein, sich zum Netzwerk „Berliner Handwerk digital“
+per E-Mail zu melden. Dazu möchte ich zunächst die Eignung und Teilnahmebedingungen klären.
+
+Ich entwickle ZunftEcho, einen Website-Anfrageassistenten für kleine SHK-Betriebe in Berlin und
+Brandenburg. Er erfasst fehlende Angaben zu Serviceanfragen strukturiert und hält die Informationen
+für die weitere Bearbeitung durch den Betrieb bereit; fachliche Diagnose und Entscheidungen
+bleiben beim Menschen. Das Projekt befindet sich vor dem kommerziellen Pilotstart.
+
+Ist ein fachlicher Austausch im Netzwerk auch für einen externen Softwareanbieter in dieser
+frühen Phase möglich? Welche Voraussetzungen und gegebenenfalls Kosten gelten, und gibt es
+ein passendes produktneutrales Format zum Thema vollständige Website-Anfragen in kleinen Teams?
+
+Ich frage nur nach Eignung und dem zulässigen nächsten Schritt, nicht nach einer Aufnahme oder
+Werbeverteilung an Mitglieder. Eine kurze schriftliche Einordnung genügt; ein Telefon- oder
+Videotermin ist nicht nötig. Wenn dies nicht zu Ihrem Netzwerk passt, respektiere ich das und
+sehe von weiteren Nachrichten ab.
+
+Vielen Dank und freundliche Grüße
+Hussam Alabar
+ZunftEcho
+kontakt@zunftecho.de
+
+**Scope:** one invitation-related eligibility inquiry, no attachment/tracking/price/customer data,
+no automatic membership, newsletter, integration, commission or paid commitment. Full comparison:
+`opportunity-capacity-audit-2026-09-13.md`. Sender UI acknowledgement must not be reported as
+independent delivery. After a confirmed send, replace draft status with evidence, never resend it.
+
 ## Basis and limits
 
 The official pages below explicitly invite partnership inquiries at the listed addresses (verified 8 September). This is a narrow response to that invitation, not permission for newsletters, recurring follow-ups or outreach to their customers. General email-marketing restrictions remain applicable: https://www.gesetze-im-internet.de/uwg_2004/__7.html . This review is not a legal clearance certificate.
