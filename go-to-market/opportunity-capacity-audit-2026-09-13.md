@@ -74,3 +74,30 @@ Nach Versand bleibt eine freiwillige Eignungsantwort abzuwarten; kein Reminder. 
 unabhängige Maßnahme mit belegtem hohem Zusatzwert jetzt offen. Nächster Trigger: menschliche Antwort,
 Fehlersignal oder geöffneter Kanal, sonst bestehende Monitoring-/Veröffentlichungs-/Auswertungsfenster.
 Kosten-/Mitgliedschafts-/Vertragsangebote benötigen gesonderte Entscheidung; keine automatische Zusage.
+
+## Portfolio-Reassessment — 13. September, Abend
+
+Die zusätzliche Dichte-Regel gilt übergreifend; Apollo ist kein erforderlicher Prospecting-Zugang.
+Die Prüfung nutzt die bestehende Gesamtmatrix statt dieselben Quellen erneut zu recherchieren.
+
+| Workstream | aktuell ausführend / wartend | unabhängige Kapazität und nächster Auslöser |
+| --- | --- | --- |
+| Outbound / Prospecting | Auswahl und Versand von Welle 1 abgeschlossen; Auswertung 21.09. ausstehend | Firmenwebsites/öffentliches SHK-Verzeichnis verfügbar, aber 9 Qualified + 1 Research reichen für den begrenzten nächsten Test; keine neue Liste allein wegen Apollo |
+| Inbound / organischer Content | veröffentlichte Assets verfügbar, Plattformauslieferung asynchron; Antwortenprüfung jetzt ausgeführt | echte Reaktion beantworten; Shorts-Timing und getrennte Messung schützen, keine ähnliche Zusatzverteilung ohne Lernwert |
+| SEO | veröffentlichte neue Seite aktiv; Indexierung/qualifizierte Nachfrage asynchron | kein erneutes Submit oder dünne lokale Duplikate; neue Suchnachfrage/Fehlersignal rechtfertigt gezielte Arbeit |
+| Conversion / Demo | Flow live, bestehende QA abgeschlossen; echte Geräteabnahme ausstehend | belegten Abbruch/Fehler gezielt bearbeiten; 0 Pilots allein ist kein Beleg für einen Flow-Defekt |
+| Partnerships / Multiplikatoren | HPH und HWK unabhängig ausgeführt; freiwillige Antworten ausstehend | Antwortkriterien schriftlich klären, keine doppelte Anfrage/automatische Mitgliedschaft; weitere warme Einladung nur bei belegtem Anbieterfit |
+| Follow-up / Sales Enablement | Vorlagen fertig, einmalige Folgeprüfung frühestens 15.09. | vor jedem zulässigen Sendeschritt Einladung/Antwort/Widerspruch prüfen; keine Vorbereitung duplizieren |
+| Market learning / zusätzliche Distribution | Messwerte werden gelesen; LinkedIn hinter EU-Entscheidung, Paid hinter Rechts-/Finanzgates | neue qualifizierte Rückmeldung/zugänglicher Kanal aktiviert passenden nächsten Test, nicht Produktionsmenge ohne Distribution |
+
+Frische Abend-Messung: korrektes Projektpostfach ohne passende Nachricht im letzten Tag;
+Supabase 20:40:48–20:40:58 Berlin: **alle** Pilotzeilen 0, neue 24h 0, Notification-error-Zeilen 0,
+alle Conversations/Leads/Workflow errors 24h jeweils 0, beide neuen SEO-Pilotquellen zusammen 0.
+Weil bereits die gesamten Tabellen/Zeitfenster 0 liefern, kann keine QA-Ausnahme diese Zähler erhöhen.
+Keine Mutation, Schlüssel-, Schema-, Tenant- oder Experimentänderung. YouTube-Lesung wird im
+aktuellen PROJECT_STATE mit ihrem eigenen Zeitfenster dokumentiert; keine Pipeline-Zunahme durch Lesen.
+
+Kein zusätzlicher jetzt ausführbarer Workstream mit gerechtfertigtem hohem Zusatzwert erkennbar.
+Dies ist kein Kapazitätsmaximum der Firma und kein globaler Apollo-/HPH-/Shorts-Blocker, sondern
+eine zeitgebundene Entscheidung über die konkrete geprüfte, zulässige Kapazität. Bei neuem Signal
+erneut das Gesamtportfolio prüfen und den besten unabhängigen Weg aktivieren, ohne andere Tests anzuhalten.
