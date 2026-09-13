@@ -177,6 +177,31 @@ nicht automatisch upgraden. Organisationssuche/Anreicherung benötigt gesonderte
 Board und Versandgates unverändert. Dies ist eine Zugriffsabhängigkeit, kein Nachweis schwacher
 Apollo-ICP-Abdeckung. Keine Listenvergrößerung nur zur Aktivitätssteigerung.
 
+### Apollo-Webprüfung abgeschlossen — 13. September 2026, 13:42
+
+**Zugriff:** Der vom Nutzer bereitgestellte Chrome-Tab `458451357` war angemeldet und wurde anhand
+der tatsächlich zurückgegebenen `id` und URL übernommen. `providerTabId` ist hier ein zusammengesetzter
+Wert, nicht die einfache Chrome-ID. Ein bloßer Vergleich dagegen ist kein Verfügbarkeitsnachweis.
+
+**Begrenzter Test:** Drei belegte Domains im kostenlosen Web-Filter `Companies → Company → Is any of`,
+ohne AI-Recherche, Speichern, Export, Kontaktdatenfreigabe, Anreicherung oder Ansprache:
+
+- `beuthers.de`: Domain-Auswahl meldet `No results found`. Der vorherige Quick-Search war ebenfalls
+  leer, ist aber allein kein Test der globalen Abdeckung.
+- `trautsch-gmbh.de`: genau ein passender Firmendatensatz; Website und Berlin stimmen mit der
+  bereits geprüften Firma überein. Tabelle zeigt Mitarbeiterzahl `0`, Detailfeld ist leer;
+  dazu `Data for this account is limited` und keine Lead-Empfehlungen. **Größe bleibt unbekannt,
+  nicht 0 Mitarbeitende.** Kein verwertbarer neuer Entscheider-/Größennachweis.
+- `balic-shk.de`: korrekte Domain-Auswahl meldet `No results found`; `Research` unverändert.
+
+**Ergebnis/Entscheidung:** 3 Domainprüfungen, 1 Firmenmatch, 0 geschlossene Qualifizierungslücken,
+0 neue qualifizierte Prospects oder Kontakte. Die im UI sichtbare Credit-Anzeige blieb unverändert;
+keine kostenpflichtige Aktion oder Tarifänderung. Gratis-Websuche ist zugänglich, API bleibt tarifbedingt
+gesperrt. Für diese drei konkreten Kleinbetriebe derzeit kein zusätzlicher Qualifizierungswert;
+keine allgemeine Aussage über ganz Apollo, kein breites Suchraster oder Upgrade als nächster Schritt.
+Scores, Board und Brief-/Shorts-Gates unverändert. Erneut nur bei neuer relevanter Evidenz oder
+einem konkret freigegebenen Bedarf; nächste unabhängige Aktion ist die Prüfung neuer Partner-Inbounds.
+
 ## Ziele und Scoreboard
 
 | Horizont | messbares Ziel                                                                                                                                      | aktueller Stand                            |
