@@ -1,12 +1,23 @@
 # محفظة شراكات وكالات الويب — تأهيل فعلي
 
+**آخر تنفيذ — 13 سبتمبر20:54:** أكد المالك الاستفسار المحدد؛ فُحصت السابقة/الرفض في صندوقي
+suffix4/55 باستخدام `in:anywhere {from:handwerker-expertencheck.de to:handwerker-expertencheck.de}`
+ولم توجد مطابقة. أُرسل النص أدناه مرة واحدة من `ZunftEcho <kontakt@zunftecho.de>` إلى
+`info@handwerker-expertencheck.de`؛ Gmail عرض `تمّ إرسال الرسالة` واختفت نافذة الإنشاء.
+إرسال من طرفنا مثبت، التسليم المستقل/الرد/قبول النشر غير مثبت. لا إعادة إرسال أو Reminder.
+بحثSent المحدد أعاد1–1 من1؛ فُتحت الرسالة وتحقق النص كاملًا وFrom/To/التاريخ20:54/الموضوع
+و`mailed-by: zunftecho.de` من عرض التفاصيل. مهلة فتح رابطToast لم تستدع إعادة إرسال؛
+انتقلنا إلى البحث عنSent الوحيد، ثم تحققنا من السجل الفعلي.
+لا تسجيل أو عضوية أو شراء أو تغيير المرسل الافتراضي. النص أدناه سجل الرسالة وليس مسودة جديدة.
+
 تاريخ التحقق: 13 سبتمبر 2026، 20:50 Europe/Berlin. بحث يدوي محدود في مصادر عامة أولية؛
 لا Apollo، لا جمع آلي، لا كشف بيانات مدفوع، لا إرسال أو تسجيل أو شراء.
 
 ## النتيجة التجارية والقياس
 
 **وكالتان مؤهلتان لملاءمة القطاع/التوزيع، مرشح احتياطي واحد، وفرصة نشر/دليل مستقلة موثقة.**
-تأهيل الملاءمة ليس إذن تواصل أو اهتمامًا مثبتًا. Contacted / Replies / Referrals / Customers = 0.
+تأهيل الملاءمة ليس إذن تواصل أو اهتمامًا مثبتًا. للوكالات: Contacted / Replies / Referrals / Customers = 0.
+للبوابةP1: استفسار واحد مرسل20:54، Replies / Publication accepted / Published / Referrals = 0.
 فرصة Handwerker-Expertencheck مرتبطة بأعمال iSpod، وليست وكالة رابعة أو Referral مثبتًا.
 قائمة العملاء السابقة تبقى Qualified 9 / Research 1 دون زيادة بهذه الجهات؛ الخطابات وتجارب الفيديو لا تتغير.
 
@@ -58,11 +69,11 @@ Basis معلن 0 € شهريًا وحتى إعلان واحد؛ Premium 129 €
 لم تُعتمد. لا Logo/عضوية/SEO backlink أو Distribution مكتمل يُحتسب قبل الاستخدام المسموح.
 
 **القرار التنفيذي التالي:** استفسار واحد عن أهلية مساهمة عملية محايدة وتكلفتها، لا طلب بيع
-أو اشتراك. جاهز محليًا أدناه؛ **NOT SENT / يحتاج تأكيد إرسال الرسالة المحددة** قبل العمل في Chrome.
-يُفحص صندوقا المشروع للسابقة/الرفض عند الإرسال. لا تسجيل لمجرد أن Basis مجاني، لا متابعة تلقائية.
+أو اشتراك. **SENT ONCE20:54 بعد التأكيد؛ تأكيد الإرسال أُغلق.** فحص السابقة/الرفض مكتمل.
+الاعتمادية الآن جواب طوعي، لا تسجيل لمجرد أن Basis مجاني، لا متابعة تلقائية.
 فصل القياس: جواب أهلية → قبول تحريري → نشر موثق → استفسارات مؤهلة؛ ليست أحداثًا تحققت الآن.
 
-### الرسالة المحددة — محلية، لم تُرسل
+### الرسالة المحددة — سجل النص المرسل مرة واحدة
 
 From/Reply-To: `ZunftEcho <kontakt@zunftecho.de>` / `kontakt@zunftecho.de`
 
@@ -101,6 +112,7 @@ Keine Anhänge, Tracking-Links, CC/BCC oder Kundendaten. Keine automatische Folg
   ausdrücklich dokumentiert, W3 nicht zum SHK-Fit aufgewertet. Keine bestehende Partneransprache dupliziert.
 - Ergebnis ist nutzbare qualifizierte Multiplikatoren-Pipeline plus sendefertige Einladungsklärung,
   **keine neue Kundenkonversation**. Nach Rechercheabschluss sind nicht plötzlich sieben Streams ACTIVE.
-- Rechercheausgabe COMPLETED; P1-Kommunikation BLOCKED auf konkrete Versandbestätigung. Weitere
-  Agenturnamen vor Öffnung dieses passenden Wegs wären jetzt schwächer als die Einladungsklärung.
+- Rechercheausgabe COMPLETED; P1-Anfrage SENT ONCE20:54 / WAITING auf freiwillige Antwort.
+  Versandbestätigung geschlossen; keine neue Bestätigung erforderlich, kein Reminder oder Fallback.
+  Weitere Agenturnamen und ein unangeforderter Artikel sind vor der Format-/Kostenklärung schwächer.
 - HPH/HWK, Shorts-Fenster, Follow-up 15.09., Briefentscheidung 21.09. und alle Rechts-/Finanzgates bleiben.

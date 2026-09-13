@@ -1,5 +1,17 @@
 # First-customer partner inquiries — 8 September 2026
 
+## أحدث إجراء مستقل — Handwerker-Expertencheck، 13 سبتمبر20:54
+
+استفسار أهلية مجلة واحد أُرسل بعد تأكيد المالك من `ZunftEcho <kontakt@zunftecho.de>` إلى
+`info@handwerker-expertencheck.de`، بعنوان
+`Ihre Magazin-Einladung: Eignung eines Praxisbeitrags zu SHK-Website-Anfragen`.
+السابقة/الرفض فُحصا في suffix4/55 بلا نتائج؛ Gmail أكد الإرسال، وبحثSent أظهر1–1 من1.
+الرسالة وتفاصيلها أثبتتFrom/To/النص/الوقت20:54 وmailed-by:zunftecho.de، لا تسليمًا مستقلًا.
+النص والدعوة والمصدر القانوني في [سجلP1](qualified-webagency-partner-pipeline-2026-09-13.md).
+Sent once / Replies0 / Accepted publication0 / Published0 / Referrals0. لا عضوية أو تسجيل أو شراء.
+لا إعادة إرسال أو Reminder أو دعوة للأعضاء. لا Cold-email للوكالتين المؤهلتين؛ جهة تشغيل البوابة
+Martin Grutzka منفصلة عنiSpod. المخطط القديم والطلبات والمتابعات أدناه لا تتغير.
+
 Status: **Five individual inquiries sent and provider-delivered. No partner, referral or customer acquired.**
 
 Current checkpoint superseding the historical setup below: the domain and `ZunftEcho <kontakt@zunftecho.de>` sender are authenticated. A new internal message was received with domain signing and TLS. Craftboxx and HERO were sent once at 23:39 Berlin time and logged as delivered by Brevo. Plancraft was delivered at 23:44, Badheld at 23:56 and KIMEO at 23:57. See `business-sender-verification-2026-09-08.md`. Do not resend or recreate the SMTP key.
