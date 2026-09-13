@@ -25,8 +25,11 @@ Prepared: 13 September 2026, Europe/Berlin.
   `ab165970-ad5b-4eb2-ba1a-3c24e39fb313` passed zero-traffic preview and production HTTP/smoke checks.
   Six cases, four FAQs, source preservation after hydration and no horizontal mobile overflow verified.
   The superseded draft checkpoint `5408d10` must not be redeployed.
-- Bing reports not discovered. Its final indexing Submit is pending owner confirmation; no request
-  submitted or indexing claimed. Monitor updates require the existing purpose-built automation tool,
+- Owner approved the final Submit; Bing accepted one request at13 September02:00 and displayed
+  `Indexing requested`. Actual indexing is not verified; do not resubmit without a concrete reason.
+  At02:02, aggregate SQL returned0 Pilot requests/0 notification errors for both the direct source
+  and `demo-seo-shk-uebergabe`. This is an initial baseline, not a traffic or experiment-result claim.
+  Monitor updates require the existing purpose-built automation tool,
   unavailable in this session; CURRENT STATE already records the active source.
 - `datePublished` must reflect the actual launch, not this drafting date. Add this source to the
   existing monitor only after launch; do not activate it merely because the text exists.

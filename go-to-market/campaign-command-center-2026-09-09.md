@@ -1,6 +1,6 @@
 # ZunftEcho Kampagnen-Command-Center
 
-Stand: 13. September 2026, 01:56 Uhr, Europe/Berlin
+Stand: 13. September 2026, 02:02 Uhr, Europe/Berlin
 
 ## Auftrag und Führungsregel
 
@@ -113,7 +113,10 @@ Termin privat und haben die Copyright-Prüfung ohne Befund abgeschlossen:
    Hypothese. Text: `seo-human-handover-2026-09-13-de.md`; main `3623c71`. Build/Type/Lint,
    Mobile/Desktop-Sichtprüfung, GitHub-CI, isoliertes 0%-Preview und Produktions-Smoke bestanden.
    Live seit13. September01:55: `https://zunftecho.de/shk-chatbot-menschliche-uebergabe`;
-   Quelle `seo-shk-uebergabe` aktiv. Bing noch nicht entdeckt; finaler Submit wartet auf Bestätigung.
+   Quelle `seo-shk-uebergabe` aktiv. Bing-Antrag nach Inhaberfreigabe am13. September02:00 akzeptiert
+   (`Indexing requested`), Indexierung noch nicht bestätigt. Direkte Quelle und
+   `demo-seo-shk-uebergabe`:02:02 jeweils0 Pilotanfragen/0 Benachrichtigungsfehler. Nur Startbasis,
+   keine Aussage über Traffic oder Formatwirkung; keine erneute Einreichung ohne konkreten Anlass.
 
 Für jedes Asset gilt vor Freigabe: exaktes ZunftEcho-Logo, Palette und Typografie; vollständige
 Dekodierung; Sichtprüfung mehrerer Zeitpunkte bzw. Größen; keine Pseudo-Schrift, Fahrzeug-/Sci-Fi-
