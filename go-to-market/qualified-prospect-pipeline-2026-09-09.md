@@ -53,7 +53,7 @@ geprüft.
 | A6        | Rossoll-Feuerung GmbH                     | Berlin      |    10 | Christian Staritz                        | 24/7-Notdienst, Wartung, Heizung, Sanitär und Tankbau, Kontaktformular/Telefon/E-Mail                                   | Qualified – Hold bis Welle 1 bewertet    |
 | B1        | Jens Reischke                             | Oranienburg |     9 | Jens Reischke                            | Inhaberbetrieb, Modernisierung/Wartung/Reparatur, mehrere Planungshilfen und allgemeiner Kontakt                        | Qualified – Größenfit verifizieren       |
 | B2        | SHK Holger Wegner                         | Falkensee   |     9 | Holger Wegner                            | Inhaberbetrieb, Heizung/Sanitär/Klima, Reparaturen, allgemeines Anfrageformular                                         | Qualified – Größenfit verifizieren       |
-| B3        | Frank Luchterhand GmbH                    | Falkensee   |     9 | Frank Luchterhand                        | Heizungswartung und -reparatur, 24-h-Notdienst für Vertragskunden, allgemeines Formular                                 | Qualified – Leistungsbreite verifizieren |
+| B3        | Frank Luchterhand GmbH                    | Falkensee   |    12 | Frank Luchterhand                        | Wartung/Reparatur/Modernisierung von Heizungen; zwei Mitarbeiter plus tätiger Inhaber laut Website; 24-h-Notdienst nur für Wartungsvertragskunden | Qualified – Hold: Welle 1 und Postleitzahl |
 | B4        | Balic Sanitärtechnik GmbH                 | Berlin      |     9 | nicht öffentlich identifiziert           | 24-h-Notdienst, Privat/Gewerbe/Hausverwaltung, breites Leistungsbild, Telefon/E-Mail                                    | Research – Entscheider und Größe offen   |
 
 Nicht in die aktive Auswahl aufgenommen:
@@ -64,7 +64,7 @@ Nicht in die aktive Auswahl aufgenommen:
 
 ## Belegquellen
 
-Verwendet wurden ausschließlich öffentlich sichtbare Unternehmensseiten und Impressen, zuletzt am 9. September 2026 geprüft:
+Grundprüfung am 9. September 2026 ausschließlich anhand öffentlich sichtbarer Unternehmensseiten und Impressen; gezielte spätere Nachprüfungen stehen unten. Nicht alle Quellen wurden am 13. September erneut geprüft:
 
 - <https://www.beuthers.de/> und <https://www.beuthers.de/impressum>;
 - <https://www.trautsch-gmbh.de/> und <https://www.trautsch-gmbh.de/impressum>;
@@ -82,6 +82,35 @@ Eine Textsuche in den erreichbaren Impressen der priorisierten Betriebe fand kei
 keine erneute Einzelprüfung am Ausführungstag.
 
 ## Experiment und nächste Aktion
+
+### Gezielte Nachprüfung: Beuther / Trautsch / Luchterhand — 13. September 2026
+
+- Beuther: Die [Unternehmensseite](https://www.beuthers.de/unternehmen) beschreibt einen
+  Familienbetrieb, nennt aber keine Mitarbeiterzahl. Größenfit bleibt unbekannt; Score 10 unverändert.
+- Trautsch: Die [Über-uns-Seite](https://www.trautsch-gmbh.de/ueber-uns) bestätigt mehrere
+  Service-/Projektfälle, nennt aber keine Mitarbeiterzahl. Größenfit bleibt unbekannt; Score 10 unverändert.
+- Luchterhand: Die [Über-uns-Seite](https://www.luchterhand-gmbh.de/uber-uns) nennt zwei Mitarbeiter
+  und den weiterhin operativ tätigen Inhaber. Dieser Text wurde am 13. September zusätzlich direkt
+  von der öffentlichen Website abgerufen; er belegt deren Kleinbetriebs-Selbstauskunft, keine
+  unabhängig geprüfte Personalzahl. [Startseite](https://www.luchterhand-gmbh.de/) und
+  [Kontakt](https://www.luchterhand-gmbh.de/kontakt) nennen Wartung, Reparatur und Erneuerung/
+  Modernisierung von Heizungsanlagen. Keine unbelegte Sanitär-/Klima-/Wärmepumpenbreite hinzufügen.
+  Der 24-h-Notdienst gilt nur für Wartungsvertragskunden, nicht für jeden Websitebesucher.
+
+**B3-Rechnung nach unveränderter Rubrik:** Region/Segment 2 + Anfragekomplexität 2 +
+Servicebereitschaft 2 + allgemeines Formular 2 + benannter Geschäftsführer 2 + Größenfit 2 = 12.
+Die frühere Gesamtsumme 9 wird damit nachvollziehbar ersetzt; die übrigen Scores werden nicht
+ohne neue Einzelprüfung umgerechnet. Hoher Score ist keine Kontaktfreigabe oder bewiesener Bedarf.
+B3 bleibt als spezialisierter Heizungsservice separat, ohne automatische Umordnung von A1–A6.
+
+**Neue Adressabhängigkeit:** Kontakt und [Impressum](https://www.luchterhand-gmbh.de/impressum)
+nennen im Haupttext 14612 Falkensee, Header/Footer dagegen 14642. Keine davon stillschweigend als
+postalisch validiert auswählen. Vor einer eventuellen Briefaufnahme ist der Konflikt anhand
+belastbarer aktueller Adressevidenz zu schließen; derzeit kein Versand.
+
+**Entscheidung:** Zwei Prüfungen bleiben offen, eine Größen-/Leistungsprüfung ist geschlossen.
+Keine Teamgröße aus Fotos ableiten, keine weitere breite Recherche ohne neue Evidenz. Keine
+Kontaktaufnahme, Kosten oder Veränderung der Shorts-Messung; Entscheidungsboard unverändert.
 
 ### Abgeschlossene öffentliche Nachprüfung: Balic — 13. September 2026
 

@@ -97,10 +97,10 @@ Sent once after the official network page invited software providers and startup
 
 ## Follow-up preparation — 13 September 2026
 
-Status: **Three local German messages prepared; none sent or scheduled.** Current project inbox
-coverage is unavailable because browser control fails before initialization; the Gmail connector
-belongs to a different account and was not searched. The last successful inbox check remains
-12 September, 19:37 Berlin time. Never infer absence of a reply from this gap.
+Status: **Three local German messages prepared; none sent or scheduled.** Browser access recovered
+on 13 September. The verified suffix-4 project inbox showed only the already-known HeWo reply and
+Craftboxx acknowledgement in the latest partner-domain check. The mismatched Gmail connector was
+not searched. Recheck the original thread at action time; this snapshot is not proof of future silence.
 
 ### Priority and evidence
 
@@ -136,6 +136,67 @@ HeWo remains excluded by its video/meeting condition. Bauleo's form is not resub
 - Record provider evidence separately from human interest. If this one follow-up receives no reply,
   close the route for this experiment; no second reminder.
 - No Pilot activation/billing, commission, discount, integration or paid listing commitment.
+
+### HPH — new individual criteria inquiry, 13 September 2026
+
+**Status: prepared in the browser and saved here; NOT submitted.** Official
+[partner page](https://www.hph-software.de/partner-werden/) expressly welcomes software manufacturers
+for small/mid-sized businesses and directs them to its form; its network includes Sage handcraft
+software dealers. This is a potentially relevant distribution route, not proven SHK reach or interest.
+The live [Impressum](https://www.hph-software.de/impressum/) was reviewed; no visible marketing
+objection was found. An `in:anywhere` search limited to this domain in the verified suffix-4 project
+inbox returned no messages. Neither observation constitutes blanket legal clearance.
+
+**Why now:** independent partner qualification does not change YouTube distribution or attribution.
+No artificial future date; the actual dependency is the form's reCAPTCHA, which requires action-time
+user confirmation before the agent interacts with it. No CAPTCHA clicked, no Send clicked, no
+provider acceptance or delivery proof. Do not replace the requested form route with unsolicited email.
+
+Browser handoff: Chrome tab `458451348`, exact URL above, marked for continuation. The previous
+tab `458451013` was no longer present when recovering from the usage interruption at 13:01;
+the same saved draft was restored, not sent again. Name, business
+reply email, manufacturer option, subject and message were verified in the form; telephone stays
+empty. Email presence was visually confirmed because text/DOM observations did not expose its value.
+Do not keep retyping or duplicating it. No file upload, tracking pixel, list enrollment or cost.
+After approval/reCAPTCHA: recheck pending form and send once; verify the actual form success state.
+If session/form expires, recover this draft, recheck gates and do not assume any submission occurred.
+If the response is ambiguous, verify before retrying. No reminder is scheduled for this new route.
+
+Other bounded screening: OneQrew's public partner invitation exists, but its advertised portfolio/
+reseller orientation does not yet prove a low-obligation early-product referral fit; queue, no contact.
+openHandwerk's partner page could not be directly fetched twice; no fresh channel verification or
+contact. Stop further broad searches; HPH is the concrete candidate to finish first.
+
+#### Prepared form content
+
+Name: `Hussam Alabar – ZunftEcho`; email: `kontakt@zunftecho.de`; category: `Hersteller`.
+
+Subject: `Ihre Einladung für Softwarehersteller: schriftliche Prüfung von ZunftEcho`
+
+Guten Tag HPH-Team,
+
+Ihre Netzwerkseite lädt auch Hersteller von Softwarelösungen für kleine Unternehmen ein. Ist eine
+schriftliche Partnerprüfung für einen frühen Anbieter ohne bestehende Sage-Integration grundsätzlich möglich?
+
+ZunftEcho nimmt Anfragen auf SHK-Websites schrittweise auf und ergänzt fehlende Angaben wie Anliegen,
+Einsatzort und Erreichbarkeit. Die Prüfung und weitere Bearbeitung bleiben beim Betrieb; kritische
+Fälle werden an Menschen verwiesen, ohne Ferndiagnose.
+
+Wir suchen zunächst nur eine Einschätzung Ihrer Voraussetzungen und gegebenenfalls eine freiwillige
+Weiterleitung der Demo mit Beispieldaten: https://zunftecho.de/demo
+
+Noch bestehen weder eine Integration noch eine Partnervereinbarung. Es geht nicht um Provisionen,
+Kundendaten oder einen kostenpflichtigen Auftrag. Die rechtliche Einrichtung ist noch nicht
+abgeschlossen; Pilotstart und Abrechnung bleiben ausgesetzt. Eine Antwort per E-Mail genügt, ohne
+Telefon- oder Videotermin.
+
+Falls der Ansatz nicht passt, fragen wir nicht erneut nach.
+
+Freundliche Grüße
+Hussam Alabar
+ZunftEcho
+kontakt@zunftecho.de
+https://zunftecho.de/impressum
 
 ### Craftboxx — prepared reply
 
