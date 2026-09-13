@@ -53,7 +53,7 @@ geprüft.
 | A6        | Rossoll-Feuerung GmbH                     | Berlin      |    10 | Christian Staritz                        | 24/7-Notdienst, Wartung, Heizung, Sanitär und Tankbau, Kontaktformular/Telefon/E-Mail                                   | Qualified – Hold bis Welle 1 bewertet    |
 | B1        | Jens Reischke                             | Oranienburg |     9 | Jens Reischke                            | Inhaberbetrieb, Modernisierung/Wartung/Reparatur, mehrere Planungshilfen und allgemeiner Kontakt                        | Qualified – Größenfit verifizieren       |
 | B2        | SHK Holger Wegner                         | Falkensee   |     9 | Holger Wegner                            | Inhaberbetrieb, Heizung/Sanitär/Klima, Reparaturen, allgemeines Anfrageformular                                         | Qualified – Größenfit verifizieren       |
-| B3        | Frank Luchterhand GmbH                    | Falkensee   |    12 | Frank Luchterhand                        | Wartung/Reparatur/Modernisierung von Heizungen; zwei Mitarbeiter plus tätiger Inhaber laut Website; 24-h-Notdienst nur für Wartungsvertragskunden | Qualified – Hold: Welle 1 und Postleitzahl |
+| B3        | Frank Luchterhand GmbH                    | Falkensee   |    12 | Frank Luchterhand                        | Wartung/Reparatur/Modernisierung von Heizungen; zwei Mitarbeiter plus tätiger Inhaber laut Website; 24-h-Notdienst nur für Wartungsvertragskunden | Qualified – Hold: Welle 1; PLZ für Vorbereitung geklärt |
 | B4        | Balic Sanitärtechnik GmbH                 | Berlin      |     9 | nicht öffentlich identifiziert           | 24-h-Notdienst, Privat/Gewerbe/Hausverwaltung, breites Leistungsbild, Telefon/E-Mail                                    | Research – Entscheider und Größe offen   |
 
 Nicht in die aktive Auswahl aufgenommen:
@@ -111,6 +111,35 @@ belastbarer aktueller Adressevidenz zu schließen; derzeit kein Versand.
 **Entscheidung:** Zwei Prüfungen bleiben offen, eine Größen-/Leistungsprüfung ist geschlossen.
 Keine Teamgröße aus Fotos ableiten, keine weitere breite Recherche ohne neue Evidenz. Keine
 Kontaktaufnahme, Kosten oder Veränderung der Shorts-Messung; Entscheidungsboard unverändert.
+
+### Neuester Ausführungsschritt: B3-Adresskonflikt — 13. September, 21:01
+
+Unabhängige, noch offene Adressprüfung abgeschlossen; keine Wiederholung der Größen-/Leistungsprüfung.
+**Vorbereitungsadresse:** Frank Luchterhand GmbH, Schopenhauerstraße 35, **14612 Falkensee**.
+
+- [Aktuelles Firmenimpressum](https://www.luchterhand-gmbh.de/impressum) nennt diese Adresse im
+  verantwortlichen Haupttext; der widersprechende Header/Footer14642 besteht weiterhin.
+- [OWA-Downloads](https://www.owa-falkensee.de/downloads.html) verlinkt unter Trinkwasserhausanschluss
+  das Installateurverzeichnis-HVL.pdf. Herausgeber ist die Osthavelländische Trinkwasserversorgung
+  und Abwasserbehandlung GmbH, nicht ein kommerzieller Registeraggregator.
+- Direkt heruntergeladenes Original **Stand09.09.2026**, Seite2/3, Zeile33: Firmenname, Hausnummer35,
+  **14612 Falkensee**, Telefon03322/200104 und Fax/231514 stimmen mit dem Firmenimpressum überein.
+  Seite gerendert und vollständig visuell geprüft. Such-/Web-Cache zeigte noch28.02.2026/Zeile32;
+  dieser alte Stand wird nicht als aktuell ausgegeben.
+- OWA schreibt die Straße versehentlich `Schopnehauerstraße`; die Schreibweise der Vorbereitung
+  stammt aus dem Firmenimpressum. Kein stillschweigendes Übernehmen dieses zweiten Tippfehlers.
+- Original nur lokal als Quellenbeleg unter `.private/evidence/public-sources/owa-installateurverzeichnis-hvl-2026-09-09.pdf`,
+  **nicht ins öffentliche Git kopiert**. SHA256 `6FAA67190B72F2FA6A647E17066FAC8CFE2BCA89C9F729927B1DF3112A8A62CD`.
+  Kein Verzeichnisexport oder neuer Datensatzbestand; nur dieser bestehende Firmenadresskonflikt geprüft.
+- Die zusätzlich sichtbare ZVSHK-Verzeichnisseite untersagt werbliche Adressverwertung; sie wird
+  **nicht** als Quelle zur Ergänzung dieser Pipeline verwendet. Keine Kontaktrechte aus öffentlichen Angaben ableiten.
+
+**Ergebnis:** eine Adressabhängigkeit operativ für Vorbereitung geschlossen, null neue Prospects,
+null Kontakte/Antworten. Kein Deutsche-Post-Zustellnachweis oder Empfängerbestätigung behauptet.
+Qualified9 / Research1 und Score12 bleiben. B3 wartet weiter auf die Briefentscheidung21.09. und
+die bestehende Kanal-/Widerspruchs-/48h-Aktualitätsprüfung vor eventuellem Versand; keine neue Welle,
+kein Cold-email, keine UmordnungA1–A6 oder Änderung der Shorts-Messung. Expertencheck bleibt eigene
+Antwortabhängigkeit, nicht Ursache dieser Prüfung oder globaler Blocker.
 
 ### Abgeschlossene öffentliche Nachprüfung: Balic — 13. September 2026
 
