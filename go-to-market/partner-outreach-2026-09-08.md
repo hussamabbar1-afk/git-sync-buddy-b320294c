@@ -139,7 +139,11 @@ HeWo remains excluded by its video/meeting condition. Bauleo's form is not resub
 
 ### HPH — new individual criteria inquiry, 13 September 2026
 
-**Status: prepared in the browser and saved here; NOT submitted.** Official
+**Status: submitted ONCE on 13 September 2026 at 13:07 Berlin time.** After the owner explicitly
+confirmed, reCAPTCHA showed checked and the form was sent once. The visible result was
+`Vielen Dank für deine Mitteilung. Sie wurde versandt.` and the fields reset. This is form-side
+send confirmation, not independent recipient delivery or human interest. No reminder or second
+submission. Official
 [partner page](https://www.hph-software.de/partner-werden/) expressly welcomes software manufacturers
 for small/mid-sized businesses and directs them to its form; its network includes Sage handcraft
 software dealers. This is a potentially relevant distribution route, not proven SHK reach or interest.
@@ -148,24 +152,23 @@ objection was found. An `in:anywhere` search limited to this domain in the verif
 inbox returned no messages. Neither observation constitutes blanket legal clearance.
 
 **Why now:** independent partner qualification does not change YouTube distribution or attribution.
-No artificial future date; the actual dependency is the form's reCAPTCHA, which requires action-time
-user confirmation before the agent interacts with it. No CAPTCHA clicked, no Send clicked, no
-provider acceptance or delivery proof. Do not replace the requested form route with unsolicited email.
+No artificial future date; the reCAPTCHA dependency was closed by explicit owner confirmation.
+Do not replace the form route with email or submit again. Await a voluntary human response and
+handle its criteria individually; no partner agreement, fee, integration or data-transfer commitment.
 
-Browser handoff: Chrome tab `458451348`, exact URL above, marked for continuation. The previous
+Completed browser result: Chrome tab `458451348`, exact URL above, marked as a deliverable. The previous
 tab `458451013` was no longer present when recovering from the usage interruption at 13:01;
-the same saved draft was restored, not sent again. Name, business
+the same saved draft was restored, then sent for the first time after confirmation. Name, business
 reply email, manufacturer option, subject and message were verified in the form; telephone stays
 empty. Email presence was visually confirmed because text/DOM observations did not expose its value.
 Do not keep retyping or duplicating it. No file upload, tracking pixel, list enrollment or cost.
-After approval/reCAPTCHA: recheck pending form and send once; verify the actual form success state.
-If session/form expires, recover this draft, recheck gates and do not assume any submission occurred.
-If the response is ambiguous, verify before retrying. No reminder is scheduled for this new route.
+The visible success state closed the interrupted task. Do not recover the old draft as unfinished
+or resend after a usage interruption. No reminder is scheduled for this new route.
 
 Other bounded screening: OneQrew's public partner invitation exists, but its advertised portfolio/
 reseller orientation does not yet prove a low-obligation early-product referral fit; queue, no contact.
 openHandwerk's partner page could not be directly fetched twice; no fresh channel verification or
-contact. Stop further broad searches; HPH is the concrete candidate to finish first.
+contact. HPH is now completed; stop further broad searches without new fit/distribution evidence.
 
 #### Prepared form content
 

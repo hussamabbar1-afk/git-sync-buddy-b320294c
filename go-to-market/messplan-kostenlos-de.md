@@ -177,6 +177,30 @@ laufend bearbeitet; es gibt keine automatische Nachfassaktion oder zweite Briefw
 - Erst bei einer größeren Welle lohnt eine zusätzliche, datenschutzrechtlich
   geprüfte Reichweitenmessung.
 
+### Entscheidungsbereite Prüfung für den 21. September
+
+Vorbereitung abgeschlossen am 13. September; keine vorgezogene Auswertung oder Versandfreigabe.
+Am Entscheidungstag die neun aktiven Quellen einzeln mit dem Versandprotokoll abgleichen,
+Pilotanfragen und den korrekten Projektposteingang prüfen. Eine leere SQL-Ergebnisliste ist kein
+Nachweis von neun erfolgreichen Einzelprüfungen: fehlende Quellen ausdrücklich als 0 dokumentieren,
+erst nachdem die Abfrage erfolgreich war. Unbekannte Zustellung bleibt unbekannt; eigene Tests,
+automatische Empfangsbestätigungen und Anbieterannahme sind keine menschlichen Antworten.
+
+- **STOP:** Widerspruch oder unpassender Kandidat beendet dessen Kontakt. Ein durch echte Antworten
+  widerlegter Bedarf führt zur Neubewertung, nicht zum Versand derselben Botschaft an mehr Betriebe.
+- **CONTINUE:** Ein qualifizierter menschlicher Austausch wird zuerst individuell und schriftlich
+  bearbeitet. Keine automatische Skalierung oder Aktivierung eines Piloten; Gewerbe-/Rechts-Gates bleiben.
+- **IMPROVE:** Bei null menschlichen Reaktionen nach der bestätigten 14-Tage-Frist werden Segment,
+  Angebot und Text anhand der vorhandenen Evidenz geprüft. Nur wenn ein begründeter nächster Test
+  sinnvoll ist, höchstens fünf A-Prioritäten nach frischer Kanal-/Widerspruch-/Adressprüfung innerhalb
+  von 48 Stunden erwägen; genau eine Botschaft ändern. Noch keine Empfängerliste oder Druckproduktion.
+- **HOLD wegen Messlücke:** Fehlende Inbox-Abdeckung, fehlgeschlagene Abfrage oder ungeklärte
+  Datenzuordnung sind kein Nullergebnis. Zuerst die Lücke schließen; keine Mini-Welle darauf gründen.
+
+Die Entscheidung kurz mit tatsächlichen Zahlen, wörtlichen anonymisierten Einwänden, Einschränkungen,
+einer getesteten Änderung (falls vorhanden), Kosten und nächstem Trigger in PROJECT_STATE festhalten.
+Das ergänzt die bestehende STOP/CONTINUE/IMPROVE-Regel; es ersetzt keine Strategie oder Kontaktfreigabe.
+
 ## Messbasis vor Versand
 
 Am 6. September 2026 lag der aggregierte Ausgangsstand für jede der zehn
