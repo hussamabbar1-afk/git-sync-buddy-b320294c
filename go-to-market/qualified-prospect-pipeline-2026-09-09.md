@@ -153,6 +153,30 @@ Test ausgewertet; danach wird Segment, Botschaft oder Kanal gezielt verändert, 
 STOP/CONTINUE/IMPROVE-Entscheidung ableiten und höchstens fünf Kandidaten von A1–A6 zur erneuten
 48-Stunden-Prüfung freigeben.
 
+### Apollo-Kapazitätsprüfung — 13. September 2026, 13:32
+
+**Hypothese:** Eine begrenzte zusätzliche Datenquelle könnte die offenen Größen-/Entscheiderfragen
+bestehender Kandidaten schließen, ohne neue Ansprache oder Überschneidung mit Shorts/Briefwelle.
+Laut [offizieller Dokumentation](https://docs.apollo.io/reference/people-api-search) kostet People
+API Search 0 Credits; das garantiert jedoch keinen Zugriff im jeweiligen Tarif.
+
+**Versuch/Ergebnis:** Ein einzelner People-API-Aufruf, maximal 10 Ergebnisse, wurde mit
+`API_INACCESSIBLE` abgewiesen: API nicht im aktuellen Free-Tarif enthalten. Kein Suchergebnis,
+kein bestätigter Entscheider/Größenfit, keine Anreicherung, keine Kontaktaufnahme oder Tarifänderung.
+Die Zugriffsrestriktion wurde einmal mit `apollo_feedback_log` gemeldet. Keine Wiederholungen.
+Der beabsichtigte Balic-Domainfilter war nicht die belegte Domain `balic-shk.de`; da der Zugriff
+bereits scheiterte, liegt keinerlei Kandidatenprüfung vor. Vor einem späteren gültigen Suchlauf
+sind ausschließlich die im Quellenblock belegten Domains zu verwenden.
+
+**Web-Fallback:** Chrome-Instanz identifiziert, aber der vom Nutzer bezeichnete Tab war nicht mehr
+mit seiner ID/URL verfügbar. Kein anderer Tab stillschweigend übernommen oder geöffnet; Websuche
+bleibt ungeprüft. Bei wiederhergestelltem gültigem Tab zunächst kostenlose Websuche prüfen,
+nicht automatisch upgraden. Organisationssuche/Anreicherung benötigt gesonderte Kostenfreigabe.
+
+**Messung/Entscheidung:** 1 Zugriffsversuch, 0 verwertbare Datensätze, 0 neu qualifizierte Prospects.
+Board und Versandgates unverändert. Dies ist eine Zugriffsabhängigkeit, kein Nachweis schwacher
+Apollo-ICP-Abdeckung. Keine Listenvergrößerung nur zur Aktivitätssteigerung.
+
 ## Ziele und Scoreboard
 
 | Horizont | messbares Ziel                                                                                                                                      | aktueller Stand                            |
