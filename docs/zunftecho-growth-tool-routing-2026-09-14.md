@@ -1,6 +1,6 @@
 # ZunftEcho — تدقيق أدوات النمو وقاعدة التوجيه
 
-آخر تحديث: 14 سبتمبر 2026، 20:28 `Europe/Berlin`.
+آخر تحديث: 14 سبتمبر 2026، 20:34 `Europe/Berlin`.
 إضافة تشغيلية فقط؛ لا تبديل للأولوية أو بوابات القانونيات/الإنفاق/الموافقة أو التجارب الحالية.
 
 ## نتيجة التدقيق الحي
@@ -68,14 +68,14 @@
 
 | الترتيب | الصفحة المفتوحة/نقطة التوقف | إجراء المالك | تحقق Work بعده |
 | --- | --- | --- | --- |
-| 1 vidIQ | COMPLETED للدخولوربطالـchannel؛ويبai-coachوموصلchannels متطابقان | **فقط**freshYouTubeverification:بطاقةالموصلإنظهرتللمالك،يكملهابنفسه؛ لا إعادةإضافةالقناة | بعدإفادةإتمامالتحقق:authorize0credits ثمverified؛ لاcallحساسقبلذلك. إنلمتظهرالبطاقةفالمعلومةمطلوبة،لاتخمينرابطتحققأوأتمتةأمان |
+| 1 vidIQ | ربط القناة COMPLETED؛ البطاقة لم تظهر. زر Channel Settings → Re-authenticate فتح Google account chooser فيChrome458451870،Handoff20:33 | OWNER ACTION REQUIRED لاختيار حساب مالك ZunftEcho ومراجعة موافقة Google بنفسه؛ لا إزالة/إعادة إضافة أو API key أو شراء | user_channels ثمauthorize0credits مرة واحدة بعد الإتمام؛ لاcallحساسقبلverified. إعادة مصادقة القناة لا تضمن إغلاق حارس الموصل؛ إن بقي طلب بلاUI احجب هذا المسار ولا تكررOAuth |
 | 2 Metricool | COMPLETED للدخول/OAuth/YouTube والخطةوالعداد؛Brand6962406 | لاطلبمالكباقٍلـYouTube؛ LinkedInBLOCKEDعلىFree،لاطلبشراء | الحفاظعلىNativeC/Workflow؛ لاimports/جدولةمكررة؛المقاييسبعداكتمالمزامنةالمنصةوليسقبلها |
 | 3 Clay | COMPLETED للدخول/الهوية/الحصة؛ Workspace1373289،TeamSuffix55Admin | لاخطوةمالك مطلوبةلهذاالتحقق | قبلصرفلاحق: تكلفة/أهليةالعملية والحصةالمتغيرة،لابحث/إثراءللتجربة |
 | 4 Vibe | COMPLETED للدخول/الهوية/رصيد200؛ Hubقوائمفارغة | لاخطوةمالك مطلوبةلهذاالتحقق | dailycap/estimate/sample قبلأيexport،موافقةالتصديرتبقىلازمة |
 | 5 Hunter | COMPLETED للدخول/الهوية/الحصة؛suffix55،Usage10AIمتبقية | لاخطوةمالك مطلوبة | قبلطلبتجاريلاحق:حصةcreditوAI/تكلفةالحساب،لادفعةاتصالاختبارية |
 | 6 Semrush | COMPLETED للدخولوالهويةsuffix55؛ API Unitsتعرضخياراتترقية/شراءفقط | لاطلبشراءأوموافقةمالية؛ المسارBLOCKED فقط | لا report/retryللـMCPgateبلا دليلتغييرأهلية؛ Public/GSC حسبنوعالسؤالبدلsinglepointoffailure |
 
-يمكن للمالك إنجاز1ثم2 أولًا؛ باقي المسارات لا تنتظر اكتمال كل الاتصالات. لا إعادة إنشاءBrand/Workspace/account.
+حاليًا تدخل المالك المطلوب هو1 فقط؛ MetricoolYouTube وبقية تسجيلات الدخول أُنجزت. بقية المسارات لا تنتظر اكتمال كل الاتصالات. لا إعادة إنشاءBrand/Workspace/account.
 لا يفترض Work أن نجاح تسجيل الدخول أنهى OAuth؛ يتحقق من IDs ومصدرالبيانات بعده.
 
 ## خط أساس الرصيد والبيانات
@@ -100,3 +100,11 @@
 
 مهارةplugin-management وجهت التمييز بين التثبيت والاتصال؛ مهارةcomputer-use أوقفت خطواتالدخول/الأمان عند تسليمها للمالك وفقطلبه. لا استبدالMasterDirective.
 سجلالاستئناف:تأكيدالمالك20:21أغلقLoginللأربعنوافذ؛ تأكيد«تم»لاحقأغلقOAuthchannelفيvidIQوMetricoolودخولHunter/Semrush بدليلحي20:26–20:27. طلبvidIQfreshverification جديدومنفصل،لايلغيOAuthالمنجزولايعنيإعادةخطةالنمو.
+
+### بطاقة vidIQ غير الظاهرة — تشخيص محدود20:30–20:34
+
+- إفادة المالك: البطاقة لم تظهر. إعادة فحص مجانية واحدة أعادت `verification_required / youtube_mfa`، بلاURL/Resource link/_meta UI في النتيجة المتاحة؛ لا أداة render/verification بديلة أو مورد vidIQ UI مكشوف في inventory المتاح. لا نجزم بأي طبقة تسبب الخلل.
+- [صفحة MCP الرسمية داخل vidIQ](https://app.vidiq.com/account/settings/mcp) تعرض authorization20:26:23 و20:30:46 **Failed،0credits**؛ channels20:26:06 **Success،0credits**؛ الرصيد150/150. إرشادات ChatGPT عامة للتثبيت، ليست تحققًا حديثًا؛ لم نثبت/ننشيء مفتاحًا.
+- [Channel Settings](https://app.vidiq.com/channel-settings) تعرض YouTube Authentication / ZunftEcho / Re-authenticate. فتح الزر20:33 وصل إلى Google account chooser؛ توقف وفق مهارة computer-use عند الهوية والموافقة وحفظ Chrome458451870 Handoff. لا اختيار حساب أو قبولOAuth بواسطة Work، ولا حفظ رابطstate/token.
+- هذا fallback رسمي لإعادة مصادقة القناة فقط؛ العلاقة مع حارس fresh-authorization غير مثبتة. بعد تدخل المالك تحقق القناة ثم authorization مرة واحدة. إن بقي الطلب بلا بطاقة، اعتبر الحارس الحساس BLOCKED BY TOOL/UI، لا دعوة عمياء لإعادة الربط. Studio الأصلي مجاني للأداء الحالي.
+- [وثائق OpenAI لواجهات MCP](https://developers.openai.com/plugins/build/chatgpt-ui) تميز نتائج البيانات عن موارد/أدوات عرضUI؛ النص وحده لا يثبت عرض بطاقة. لا نستنتج منها أن Codex لا يدعم هذه البطاقة تحديدًا.
