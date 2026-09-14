@@ -1,10 +1,10 @@
 # حالة مشروع ZunftEcho
 
-> آخر تحديث: 14 سبتمبر 2026، 20:23 — المنطقة الزمنية `Europe/Berlin`
+> آخر تحديث: 14 سبتمبر 2026، 20:28 — المنطقة الزمنية `Europe/Berlin`
 > الغرض: هذا الملف هو نقطة البداية الإلزامية لأي محادثة مستقبلية تخص المشروع.  
 > اقرأ أيضًا `AGENTS.md` قبل أي تعديل. عند التعارض، الكود والحالة الحية الأحدث يتقدمان على الوثائق المؤرخة.
 
-## CURRENT STATE — 14 سبتمبر 2026، 20:23 Europe/Berlin
+## CURRENT STATE — 14 سبتمبر 2026، 20:28 Europe/Berlin
 
 <!--
 قالب التحديث الدائم: حدّث هذا القسم فقط بعد كل تغيير تشغيلي جوهري مستخدمًا الحقول نفسها:
@@ -12,7 +12,19 @@
 الخارجية/الموافقات، محفزات القرار، حقائق الإنتاج، والخطوة التالية. أبقه موجزًا ومدعومًا بدليل حي.
 -->
 
-- **استئناف الاتصالات20:21–20:23:** المالكأكملتسجيلالدخولللنوافذالأربع؛ تحققحيClayWorkspace1373289
+- **أحدث إغلاق للاتصالات20:26–20:28:** بعدتأكيدالمالك،vidIQوMetricoolMCP يعرضانرقمقناةZunftEcho
+  الصحيح`UCp_6QWMLCckl7rC9j_-ImqA`،Suffix55؛ ربطالـchannel/OAuthمكتمل،لاإعادةإضافة.
+  Metricool FULLY CONNECTED لـYouTube/Brand6962406،Free مؤكدة1Brand و0من20منشورًامستخدمة/20متبقية؛
+  LinkedIn BLOCKED BY PLANعلىFree،NativeLinkedInبديل بلاشراء. Summaryالجديدة0/-لاتثبتأداءالقناة،
+  وPlannerالفارغلايعنياختفاءC/WorkflowالمجدولينNative؛ لااستيراد/تكرار/تعديلجدولةأوالتعلممنheatmapعام.
+  Hunter FULLY CONNECTED:AccountSuffix55/Free،50searches/100verifications/50creditsمعused0؛
+  DiscoverAI10متبقية/0مستخدمة وreset14أكتوبر13:51UTC. SemrushSuffix55مصادق،لكنSubscription/APIUnits
+  تعرضBuy/Upgradeبدونرصيد؛ BLOCKED BY PLAN/API units باقٍ،لاتقرير/شراء/retryبلا تغيرأهلية.
+  vidIQFree150/150 وقناةصحيحة،لكنauthorize0credits طلبverification_required؛ PARTIALLY CONNECTED
+  فقطلحساسيةfreshauthorization،OWNER ACTION REQUIRED لبطاقةالتحققالحديثإنظهرت؛ لاcallحساسقبلverified.
+  لاخطوةمالكباقيةلدخولHunter/Clay/VibeأوربطMetricoolYouTube. طلبالتحققحديثvidIQ فقط،لايعطلبقيةالنمو.
+  المرجعالحاليوقاعدةالتوجيه: `docs/zunftecho-growth-tool-routing-2026-09-14.md`؛ لاcreditsبحثمصروفة.
+- **استئناف الاتصالات20:21–20:23 محفوظ:** المالكأكملتسجيلالدخولللنوافذالأربع؛ تحققحيClayWorkspace1373289
   وحسابsuffix55Admin،Trial مجانيةقائمة1005DataCredits/3000Actions،Allowance500/3000كلأسبوعين
   وNext paymentظاهر$0في28سبتمبر؛ لاTrialبدأناها/تعديلخطة. VibeSuffix55/200رصيدحتى14أكتوبر؛
   Clay/Vibe FULLY CONNECTED للحسابوالقراءات،لاإثراء/تصديرأواختبارتغطيةSHK. vidIQFree مؤكدة150/150،

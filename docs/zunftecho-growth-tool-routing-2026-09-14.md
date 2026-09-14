@@ -1,6 +1,6 @@
 # ZunftEcho — تدقيق أدوات النمو وقاعدة التوجيه
 
-آخر تحديث: 14 سبتمبر 2026، 20:23 `Europe/Berlin`.
+آخر تحديث: 14 سبتمبر 2026، 20:28 `Europe/Berlin`.
 إضافة تشغيلية فقط؛ لا تبديل للأولوية أو بوابات القانونيات/الإنفاق/الموافقة أو التجارب الحالية.
 
 ## نتيجة التدقيق الحي
@@ -12,13 +12,13 @@
 | --- | --- | --- | --- | --- |
 | Clay | FULLY CONNECTED | MCP مثبت علىWorkspace1373289؛ الويب وTeam يؤكدان `hussamabbar55@gmail.com`،Admin،عضو واحد | Trial قائمة،Pricing Free؛1005 Data Credits و3000 Actions متاحة؛Allowance500credits/3000actions كل أسبوعين؛ Next payment ظاهر$0 في28سبتمبر،Billing/Payment info يعرضان`-` | لا بدء/تعديلTrial؛ سعر العملية وأهلية المرشحات المتقدمة وتغطيةSHK لم تختبر. لا اعتبار1005 حدًا دوريًا دائمًا |
 | AI Vibe Prospecting | FULLY CONNECTED | MCP قائمة0datasets؛ Hub مصادقsuffix55 بلاLists | 200/200 Credits،تنتهي14أكتوبر2026،30يومًا حسبالواجهة؛ لااسمخطة معلن | daily cap وتكلفةالعملية وملاءمةSHK غيرمختبرة؛ لاexport/إثراء |
-| Hunter | PARTIALLY CONNECTED | `get_account_details` مصادق ويعيد حصة Free | 50 searches و100 verifications و50 credits، المستخدم0 في كل عداد؛ reset14 أكتوبر2026 | واجهة MCP لا تكشف اسم/بريد صاحب الحساب؛ تأكيد الحساب المقصود خلف تسجيل دخول الويب. قراءة الحصة تعمل، البحث/الإثراء غير مختبرين |
-| Semrush | BLOCKED BY PLAN | استدعاء اكتشاف `projects` يرفض لعدم كفاية API units | اسم الخطة والعدد المتبقي غير متاحين؛ الموصل يذكر اشتراكًا نشطًا دون تفاصيل مستقلة | لا تقرير قابل للتنفيذ مثبت، ولا `execute_report`؛ صفحة mcp-access تعيد لتسجيل الدخول |
+| Hunter | FULLY CONNECTED | Account settings تؤكدHussam Abbar / `hussamabbar55@gmail.com`؛ MCP الحصة يعمل | Free؛50searches/100verifications/50credits،used0 لكلعداد؛ **Discover AI10متبقية،0من10مستخدمة**؛ reset14أكتوبر2026،13:51UTC حسبUsage | البحث/الإثراء غيرمختبرين؛ مجانيةDiscoverلا تعنيAIqueriesبلاحدود؛ لاجمعالعدادات |
+| Semrush | BLOCKED BY PLAN | الويبمصادقsuffix55؛ Subscription/API Units تعرضUpgrade/Buy دونرصيدرقمي،والـMCPgateالسابقةلم تغلق | اسم الخطة والعددالمتبقي غيرمكشوفين؛ لااشتراكدفعمؤكد. SummaryيعرضPick/SubscribeوليسإثباتStarterنشط | الدخولأُنجز؛ لاreport أوexecute_report أوupgrade. Standard API وMCPليساإثباتأهليةمتبادلة؛ انتظرموردAPIموجودفعلًا،لاشراء |
 | GSC Wizard | FULLY CONNECTED | الحساب `hussamabbar55@gmail.com`؛ الخاصية `sc-domain:zunftecho.de`؛ ملخص Search Console فعلي | `subscription:null`؛ لا اشتراك مدفوع مكتشف. URL inspection:0/2000 مستخدم،2000 متبقٍ اليوم | هذا الحكم لـGSC فقط؛ GA4 غير مربوط (`ga4PropertyId:null`)؛ حصص/تسعير الميزات الأخرى غير مثبتة |
-| Metricool | OWNER ACTION REQUIRED | الويبمصادقBrand6962406/suffix55؛ إعدادتعريفيCompany/Solo/Analytics أُكمل حتىمرحلةربطالشبكات؛ MCP20:21مازالبلاشبكات | خطة الحساب والعداد المتبقي غير مكشوفين | زرYouTubeفُتح؛ GoogleOAuth منفصلChrome458451892 عند«اختيارحساب»،تسليم للمالك؛ LinkedIn حسبالخطة،لاترقية |
-| vidIQ | OWNER ACTION REQUIRED | الويبمصادقsuffix55؛ MCP20:21لايزالchannelsفارغًا | **Free مؤكدة بالواجهة**؛150/150renewable،0add-on،reset14أكتوبر15:48 تقريبًا | Connect Channelفُتح20:21؛ التبويب458451870 انتقل إلىGoogle«اختيارحساب»،تسليم للمالك لاOAuthمكتمل |
+| Metricool | FULLY CONNECTED — YouTube | MCP20:26:Brand6962406/suffix55 و`youtubeData:UCp_6QWMLCckl7rC9j_-ImqA`؛ الويبمصادق؛OAuthأنجزهالمالك | **Free مؤكدة**،1Brand،20منشورًا/شهر؛Planner**0من20منشورًا،20متبقية**. لاPayment history ظاهر؛5AItextالعام لكنالمتبقيغيرمقاس | LinkedIn **BLOCKED BY PLAN** علىFree؛ Nativeبديل. Analyticsجديدة/غيرمكتملة؛ لا ندعيصفرداتا كأداءقناةحقيقي،ولاتكرارNativeQueue |
+| vidIQ | PARTIALLY CONNECTED — fresh verification pending | MCP20:26 يحتويقناةZunftEchoالصحيحة `UCp_6QWMLCckl7rC9j_-ImqA` بحسابsuffix55؛ الويبSelect channel=ZunftEcho | Free مؤكدة؛150/150renewable،0add-on،reset14أكتوبر15:48 تقريبًا | الربطوالهويةأُنجزا؛ `authorize_with_youtube`0credits أعاد**verification_required**. OWNER ACTION REQUIRED للتحقق الحديثبالـwidgetقبلالعملياتالحساسةفقط؛ لا إعادةالقناة |
 
-Hunter ليس محجوبًا عن قراءة الحصة؛ تصنيف PARTIALLY يخص تحقق الحساب/العمليات الكاملة، لا ادعاء أن تسجيل دخول المتصفح شرط لقراءة MCP.
+تحققهويةHunterأغلقPARTIALLYالسابقة؛ FULLY CONNECTED يعنياتصالالحسابالفعلي،لااختباركلعمليةإثراءمدفوعة.
 وبالمثل Clay/Vibe/Metricool/vidIQ ترد عبر MCP حتى حين جلسة الويب غير مسجلة.
 إجابة Semrush ليست تقريرًا ناجحًا رغم `isError:false`؛ تعذر القراءة لا يثبت أن الرصيد بالضبط0.
 
@@ -28,7 +28,7 @@ Hunter ليس محجوبًا عن قراءة الحصة؛ تصنيف PARTIALLY �
 | --- | --- | --- | --- | --- |
 | Clay | Workspace/catalog/status أولًا؛ المستند الرسمي يعفي list sourcing والفلاتر/formulas وCSV export من Actions | Enrichment عادة1 Action مع Data Credits متغيرة؛ AI/waterfalls قد يجمعان تكاليف متعددة | بعض المرشحات المتقدمة/Functions تحتاج أهلية؛ MCP search لا يُفترض مجانيًا بكل تفاصيله؛ تحقق السعر والخطة أولًا | سد فجوة مؤهلة في شركة/مسؤول محدد. موقع الشركة/Impressum وHunter Discover أولًا |
 | Vibe | Metadata واسترجاع القوائم؛ exploration/sample/statistics موصوفة مجانية، و`estimate_cost:true` حين توفره العملية | Base fetch عند materialization نحو1 credit/entity وفق الوثائق، وenrichment/events إضافية؛ التصدير ليس مجانيًا | Intent premium؛ حدود اليوم/التصدير والخطة الحالية مجهولة؛ لا export تلقائي | معاينة شركات/مسؤولين بمعايير ضيقة ثم تأهيل؛ البحث العام وHunter Discover غالبًا أرخص |
-| Hunter | Account/usage، `find_companies`، `email_count`، قوائم metadata | MCP/API Domain Search:1 credit لكل1–10 عناوين راجعة/نطاق؛ Finder1 عند العثور؛ Verifier0.5 وEnrichment0.2 وفق الوثائق الحالية، مع عدم إثبات نموذج حسابنا legacy/separate counters | Free Discover محدود بالصفحة الأولى حتى100؛ فلاتر/pagination تتبع الخطة. قبل أي صرف تحقق من عدادات الحساب ونموذج التكلفة، ولا تجمع عدادات50+100+50 | اكتشاف شركات SHK ثم بريد مهني مفقود فقط؛ البريد الرسمي المنشور أرخص من إعادة كشفه |
+| Hunter | Account/usage، `find_companies`، `email_count`، قوائم metadata؛AIqueryقد يستهلكعداد10المجاني وإنلم يستهلكcredit | MCP/API Domain Search:1 credit لكل1–10 عناوين راجعة/نطاق؛ Finder1 عند العثور؛ Verifier0.5 وEnrichment0.2 وفق الوثائق الحالية، مع عدم إثبات نموذج حسابنا legacy/separate counters | Free Discover محدود بالصفحة الأولى حتى100؛ فلاتر/pagination تتبع الخطة. لاAIqueryلتجربةالاتصال؛ استخدمفلاترمباشرةإنكفت،وسجلالعدادقبله/بعده | اكتشاف شركات SHK ثم بريد مهني مفقود فقط؛ البريد الرسمي المنشور أرخص من إعادة كشفه |
 | Semrush | Metadata/schema قبل report إن أمكن؛ الاكتشاف الحالي محجوب أصلًا | التقارير البحثية/Projects عند التنفيذ قد تستهلك API units، والتكلفة تختلف بحسب التقرير والصفوف | الوحدات غير كافية حاليًا؛ لا شراء أو اقتراح ترقية افتراضي. Free web allowances غير مثبتة | بيانات سوق/منافسين لا يوفرها GSC؛ البحث العام للمقارنة النوعية أرخص، ولا نستبدله بادعاء search volume |
 | GSC Wizard | Account/sites وقراءات first-party ضمن الحصص؛ تم تنفيذ summary فقط | Inspection يستهلك حصة Google اليومية؛ bulk inspections تتطلب حاجة. حدود crawler/report/ميزات إضافية غير معلنة | لا paid subscription مكتشف لا يعني كل الميزات مجانية بلا حدود | Query/page/CTR/indexing للموقع نفسه؛ Search Console الأصلي بديل مجاني |
 | Metricool | Brand metadata؛ MCP نفسه متاح حتىFree. قراءات analytics بعد ربط الشبكة ضمن خطة الحساب | Free العام:20 منشورًا منشورًا/شهر،30 يوم تاريخ،5 AI text credits؛ المتبقي الفعلي غير معلوم | Free لاLinkedIn/X؛ reports/integrations وبعض approvals مدفوعة. API التقليدي Advanced/Custom مختلف عن MCP | تحليلات/تنسيق عضوي بعد الربط عند فائدة فعلية؛ Studio وLinkedIn الأصليان مجانيان الآن |
@@ -68,23 +68,23 @@ Hunter ليس محجوبًا عن قراءة الحصة؛ تصنيف PARTIALLY �
 
 | الترتيب | الصفحة المفتوحة/نقطة التوقف | إجراء المالك | تحقق Work بعده |
 | --- | --- | --- | --- |
-| 1 vidIQ | الدخولانتهى؛ Chrome458451870 محفوظHandoff عندGoogle«اختيارحساب» | اختيارالحسابمالكقناةZunftEcho ثمالقناة ومراجعةOAuthوقبوله بنفسه؛ لا قناة شخصية بديلة | `user_channels` يحتوي القناة الصحيحة `UCp_6QWMLCckl7rC9j_-ImqA` / `@zunftecho`؛ بعدهاauthorization0credits إذا احتاج refresh. الأداةauthorize لا تضيف قناة جديدة |
-| 2 Metricool | الويبمصادق؛ Parent458451867،OAuth458451892 محفوظان | اختيارالحسابمالكقناةZunftEcho ومراجعةOAuthوقبوله بنفسه؛ الحفاظعلىBrand6962406 | Brand networks يظهرYouTubeID الصحيح؛ قراءةplan/planner counter. LinkedIn فقط إذاالخطة القائمة تدعمه وبعد تحقق شخصية/صفحة المالك،لا ترقية |
+| 1 vidIQ | COMPLETED للدخولوربطالـchannel؛ويبai-coachوموصلchannels متطابقان | **فقط**freshYouTubeverification:بطاقةالموصلإنظهرتللمالك،يكملهابنفسه؛ لا إعادةإضافةالقناة | بعدإفادةإتمامالتحقق:authorize0credits ثمverified؛ لاcallحساسقبلذلك. إنلمتظهرالبطاقةفالمعلومةمطلوبة،لاتخمينرابطتحققأوأتمتةأمان |
+| 2 Metricool | COMPLETED للدخول/OAuth/YouTube والخطةوالعداد؛Brand6962406 | لاطلبمالكباقٍلـYouTube؛ LinkedInBLOCKEDعلىFree،لاطلبشراء | الحفاظعلىNativeC/Workflow؛ لاimports/جدولةمكررة؛المقاييسبعداكتمالمزامنةالمنصةوليسقبلها |
 | 3 Clay | COMPLETED للدخول/الهوية/الحصة؛ Workspace1373289،TeamSuffix55Admin | لاخطوةمالك مطلوبةلهذاالتحقق | قبلصرفلاحق: تكلفة/أهليةالعملية والحصةالمتغيرة،لابحث/إثراءللتجربة |
 | 4 Vibe | COMPLETED للدخول/الهوية/رصيد200؛ Hubقوائمفارغة | لاخطوةمالك مطلوبةلهذاالتحقق | dailycap/estimate/sample قبلأيexport،موافقةالتصديرتبقىلازمة |
-| 5 Hunter | `https://hunter.io/users/sign_in`؛ Chrome458451886 جديدمحفوظHandoff،loginفعليًا20:22 | الدخولللحسابالقائم فقط لتأكيدالبريد/الفريق؛ لاتسجيلجديد | قراءةحصة0/50،0/100،0/50 ونموذجالتسعير؛ لا إعادة ربط إذاMCPصحيح |
-| 6 Semrush | mcp-accessإلىLogin؛ Chrome458451889 جديدمحفوظ | اختياري: الدخوللحسابموجود لتأكيدهوية/وحداتموجودةأصلًا فقط؛ لا شراء | إن ظلت الوحداتغيركافية،يبقىBLOCKED؛ لا إطلاق تقرير أو trial |
+| 5 Hunter | COMPLETED للدخول/الهوية/الحصة؛suffix55،Usage10AIمتبقية | لاخطوةمالك مطلوبة | قبلطلبتجاريلاحق:حصةcreditوAI/تكلفةالحساب،لادفعةاتصالاختبارية |
+| 6 Semrush | COMPLETED للدخولوالهويةsuffix55؛ API Unitsتعرضخياراتترقية/شراءفقط | لاطلبشراءأوموافقةمالية؛ المسارBLOCKED فقط | لا report/retryللـMCPgateبلا دليلتغييرأهلية؛ Public/GSC حسبنوعالسؤالبدلsinglepointoffailure |
 
 يمكن للمالك إنجاز1ثم2 أولًا؛ باقي المسارات لا تنتظر اكتمال كل الاتصالات. لا إعادة إنشاءBrand/Workspace/account.
 لا يفترض Work أن نجاح تسجيل الدخول أنهى OAuth؛ يتحقق من IDs ومصدرالبيانات بعده.
 
 ## خط أساس الرصيد والبيانات
 
-- Hunter: Free،searches used0/remaining50،verifications0/100،credits0/50. حقل`calls.available75` deprecated/imprecise؛ لا استخدامه للميزانية ولا جمع العدادات.
+- Hunter20:26–20:27:Free،searches0/50،verifications0/100،credits0/50؛UsageDiscoverAI0/10،10متبقية. حقل`calls.available75`deprecated/imprecise؛ لاجمعالعدادات.
 - vidIQ:150renewable،0add-on؛ استدعاءاbalance/channels أظهرا`_credits.used:0`؛ لم ينفذ أي طلب5credits أوتوليد.
 - GSC: inspection0/2000؛ لم تُنفذinspection. ملخص7 أيام5–11 سبتمبر أعاد2clicks/5impressions/CTR40%/avg.position1.6429؛ settledThrough12سبتمبر وfirstIncomplete13سبتمبر،تاريخالتقريرAmerica/Los_Angeles. عينةضئيلة ليستLead/إثباتقناةرابحة أوتحويل؛ لاGA4ربط.
 - Clay/Vibe: metadata/catalog وقراءةBilling/Usage/Team/Hub فقط،لابحث/إثراء/تصدير. خطأساس20:21–20:23:Clay1005DataCredits/3000Actions،Vibe200/200حتى14أكتوبر؛ لاعدادقبل/بعدمقارنللإثراء لأننالم ننفذه.
-- Semrush: catalog/permission gate فقط،لاexecute_report؛ لاunitsمقاسة. Metricool:Brandmetadata فقط،لاpost/analyticsلشبكةغيرمربوطة.
+- Semrush:catalog/permissiongateوقراءةProfile/Subscription/APIUnits فقط،لاexecute_report؛ لاunitsمقاسة. Metricool:BrandmetadataوقراءةFreePlan/Planner،20متبقية؛ لاpost/AIgeneration/تغييرQueue. SummaryالمعروضةAug15–Sep13بقيم0/-بعدالربطلاتعنيأداءقناةمثبتًا؛ heatmapظاهرةليستدليلًاخاصًايبررتغييرمواعيدالتجربة.
 - ShortB: تحققStudio بعدReload14سبتمبر20:14 بأنه **علني**،المصدر`youtube-check-video-02`؛ لاplay/CTA/حفظ/تعديل أوقياسviews جديد. C/Workflow والmonitor18:35القائم لم يتغيرا.
 
 سجل أي batch لاحق هنا أو في سجل تنفيذه: `timestamp | task/entity | provider/operation | reason | expected units | actual units | remaining | result/status | cache/source`.
@@ -99,4 +99,4 @@ Hunter ليس محجوبًا عن قراءة الحصة؛ تصنيف PARTIALLY �
 - vidIQ: تكلفة كلعملية منmetadataالموصل الحية14سبتمبر2026؛ الرصيدوالقنوات منMCP. Semrush: gateالموصل الحي،لا تسعير أووحداتمفترضة.
 
 مهارةplugin-management وجهت التمييز بين التثبيت والاتصال؛ مهارةcomputer-use أوقفت خطواتالدخول/الأمان عند تسليمها للمالك وفقطلبه. لا استبدالMasterDirective.
-تأكيدالمالك20:21 «تم تأكيد التسجيل في جميع النوافذ المطلوبة» أغلقالدخولللأربعنوافذالمحفوظةبعدتحققحي؛ لميفسر تلقائيًا كموافقةOAuthمكتملة. Hunter/Semrushنوافذجديدة عندLogin؛ لاادعاء بأنالمالكأكملها.
+سجلالاستئناف:تأكيدالمالك20:21أغلقLoginللأربعنوافذ؛ تأكيد«تم»لاحقأغلقOAuthchannelفيvidIQوMetricoolودخولHunter/Semrush بدليلحي20:26–20:27. طلبvidIQfreshverification جديدومنفصل،لايلغيOAuthالمنجزولايعنيإعادةخطةالنمو.
