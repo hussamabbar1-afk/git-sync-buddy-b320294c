@@ -1,10 +1,10 @@
 # حالة مشروع ZunftEcho
 
-> آخر تحديث: 14 سبتمبر 2026، 14:12 — المنطقة الزمنية `Europe/Berlin`
+> آخر تحديث: 14 سبتمبر 2026، 20:15 — المنطقة الزمنية `Europe/Berlin`
 > الغرض: هذا الملف هو نقطة البداية الإلزامية لأي محادثة مستقبلية تخص المشروع.  
 > اقرأ أيضًا `AGENTS.md` قبل أي تعديل. عند التعارض، الكود والحالة الحية الأحدث يتقدمان على الوثائق المؤرخة.
 
-## CURRENT STATE — 14 سبتمبر 2026، 14:12 Europe/Berlin
+## CURRENT STATE — 14 سبتمبر 2026، 20:15 Europe/Berlin
 
 <!--
 قالب التحديث الدائم: حدّث هذا القسم فقط بعد كل تغيير تشغيلي جوهري مستخدمًا الحقول نفسها:
@@ -12,7 +12,23 @@
 الخارجية/الموافقات، محفزات القرار، حقائق الإنتاج، والخطوة التالية. أبقه موجزًا ومدعومًا بدليل حي.
 -->
 
-- **آخر تنفيذ مستقل،14 سبتمبر:** بعد تأكيدات المالك أُرسلت GC/Mario Deibel13:57 وHaustec13:58
+- **أحدث تغيير / تدقيق الأدوات،20:15:** اكتمل تدقيقmetadata والحصص للأدوات السبع بطلبالمالك، دون
+  شراء/ترقية/تجربة مدفوعة/إثراء/تصدير/نشر. المرجعوقاعدةالتوجيهالملزمة قبلlookup:
+  `docs/zunftecho-growth-tool-routing-2026-09-14.md`. GSC FULLY CONNECTED للحسابsuffix55 والخاصية
+  `sc-domain:zunftecho.de`؛ لااشتراكمدفوعمكتشف ولاGA4ربط. بيانات5–11سبتمبر2clicks/5impressions
+  ليستLeads؛ inspection0/2000. HunterMCPيعيدFree50searches/100verifications/50credits،used0 لكلعداد؛
+  الحسابالمقصودغيرمكشوف. ClayWorkspace1373289 وVibeقائمة0datasets يعملانmetadata؛ خططوحصصوهوية
+  غيرمتحققة، PARTIALLY CONNECTED. Semrush BLOCKED BY PLAN/API units دونreport أوشراء.
+  vidIQ150رصيدًا وchannelsفارغة؛ MetricoolBrand6962406/suffix55 بلاشبكات: OWNER ACTION REQUIRED.
+  صفحاتالدخولالقائمةلـvidIQ/Metricool/Clay/Vibe محفوظةChromeHandoff؛ لاجلسةويبمصادقةمتاحة ولاOAuth
+  وافقنا عليه. المالكيسجل ويختارالقناةويقبلOAuth بنفسه؛ بعدهتحققIDs والحصص مننقطةالتوقف،لاإعادةحسابات.
+  MetricoolFreeلاLinkedIn؛ NativeLinkedIn/Studio يبقيانالبديل،ولايلزمشراءSemrush أو انتظاركلالأدوات.
+  الإجراءالتاليالمحدود: ربطYouTubeفيvidIQثمMetricool بالحسابالمقصود،وتأكيدClay/Vibe/Hunter قبلصرف؛
+  بقيةالنمو/المراقبة والطلباتالمُرسلة لا تتغير. لااعتبارمجردأداةمثبتةمسارًاACTIVE أوLead.
+- **Short B نُشر بالفعل:** Studio بعدReload20:14 يؤكد**علني** للفيديو`MFd-i4O6Ze4` والقناة
+  `UCp_6QWMLCckl7rC9j_-ImqA`؛ مصدر`youtube-check-video-02` نشط بالنشر. لاplay/CTA/تغيير أوقراءةviews
+  جديدة؛ C17سبتمبر وWorkflow21سبتمبر والمراقبالقائم محفوظون. الإشاراتالتاريخيةلجدولةB أدناه ليستحالتهالحالية.
+- **آخر تنفيذ مستقل،14 سبتمبر14:12 محفوظ:** بعد تأكيدات المالك أُرسلت GC/Mario Deibel13:57 وHaustec13:58
   من `ZunftEcho <kontakt@zunftecho.de>`، وتحقق سجلSent ورؤوسه والنص والوقت لكل رسالة.
   دعوة Patrick Davidt ذات187حرفًا أُرسلت14:04 منMohamad H. Alabar1 وتحقق **Ausstehend**؛
   بمرجع Bensch متبادل وWordPress/Kirby موثقين. G1/H1/A2 SENT VERIFIED / WAITING، لا قبول/Lead/
@@ -183,8 +199,8 @@
   كشف فحص v20 تذبذب موعد كاذب، فرُفض وأعيد v19 وظيفيًا فورًا كـv21. الحارس الجديد اجتاز60/60،
   وCanary v2 منع الخطأ7/7 مع بقاء طلبَي موعد صريحين صحيحين. فحوص Preview/Production والـTestchat
   المصادق نجحت. ظهر Gateway Timeout اصطناعي واحد ثم نجح الإعادة فورًا؛ يبقى إشارة موثوقية للرصد.
-- **القنوات/التجارب النشطة:** الموقع وAnfrage-Check وSEO، YouTube Short A والفيديو الأساسي، منشور
-  LinkedIn الشخصي، وطلبات الشراكة السابقة. Shorts B/C/Workflow مجدولة14/17/21 سبتمبر18:30.
+- **القنوات/التجارب النشطة:** الموقع وAnfrage-Check وSEO، YouTube Short A وB والفيديو الأساسي، منشور
+  LinkedIn الشخصي، وطلبات الشراكة السابقة. B علني مثبت20:14؛ C/Workflow مجدولان17/21 سبتمبر18:30.
   الوكالات الجديدة: Fit-qualified2 / Reserve1 / Sales-email0 / Networking-invite1 / Replies0 / Referrals0؛ لا تُضاف
   لقائمة عملاءQualified9/Research1. الإنتاج الجديد بهذه الجلسة مكتمل، وليس ACTIVE مستمرًا بعد إغلاق البحث.
   Partner-One-Pager يبقى غير موزع ومصدره غير نشط حتى استخدام مسموح فعليًا. فرضية Static Creative
