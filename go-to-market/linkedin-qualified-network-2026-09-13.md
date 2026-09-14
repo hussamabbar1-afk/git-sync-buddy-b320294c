@@ -5,6 +5,12 @@ einmal am 13.09. um22:38 gesendet; LinkedIn bestätigte `Einladung gesendet`, au
 `Die Einladung wurde an Stephanie Cacciatore gesendet.` sowie `Ausstehend`. Keine Annahme,
 Antwort, Empfehlung oder Kundenzunahme bestätigt. Kein Upgrade, InMail, Posting oder Kauf.
 
+Wiederaufnahme14.09.02:57–02:59: Gültige Teiländerungen übernommen und mit30dbc83 aufmain
+gesichert. Profil nachReload weiterhin `Ausstehend`; keine Annahme oder zweite Einladung.
+Aktualisierte LinkedIn-Nachrichten zeigen nur die bekannte Willkommensnachricht. Recherche/
+Agenda bleiben abgeschlossen; kein erneuter Lookup oder ungefragte DM. Aktueller Stand
+gesendet1/angenommen0/Antwort0/Referral0, kostenlose Folgequote nicht erneut abgefragt.
+
 ## Tatsächlich verfügbare Kapazität
 
 Das angemeldete Gründerprofil heißt `Mohamad H. Alabar1`:
