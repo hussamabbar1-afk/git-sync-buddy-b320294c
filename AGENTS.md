@@ -13,6 +13,8 @@
   rule in `docs/zunftecho-parallel-growth-capacity-addendum-2026-09-13.md` and maximum useful growth
   density rule in `docs/zunftecho-maximum-useful-growth-density-addendum-2026-09-13.md`.
 - Keep this file lightweight; retain detailed state and history in `PROJECT_STATE.md`.
+- Acquisition/distribution is the dominant priority under
+  `docs/zunftecho-acquisition-sprint-geo-addendum-2026-09-16.md`; keep GEO separate from SEO metrics.
 - Before growth-tool lookups, apply `docs/zunftecho-growth-tool-routing-2026-09-14.md`:
   reuse existing evidence, prefer adequate free sources, verify quotas, and preserve approval gates.
 
