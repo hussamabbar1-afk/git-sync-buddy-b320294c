@@ -202,6 +202,21 @@ HeWo remains excluded by its video/meeting condition. Bauleo's form is not resub
   close the route for this experiment; no second reminder.
 - No Pilot activation/billing, commission, discount, integration or paid listing commitment.
 
+### Action-time checkpoint — 16 September 2026, 16:15 Berlin
+
+- Correct suffix-4 receiving inbox was searched read-only from 8 September through the checkpoint,
+  excluding Sent and Drafts, across the documented partner domains. The only matches were the known
+  HeWo reply, automated Craftboxx receipt, and Gmail alias-confirmation message. No new human partner
+  reply or refusal was visible within this bounded search.
+- The current official pages still explicitly invite partnership contact: Craftboxx asks service or
+  product providers to write for listing, plancraft invites cooperation ideas at its partnership address,
+  and HERO lists partnership routes at its cooperation address. This verifies route availability, not
+  acceptance, interest, or permission for repeated reminders.
+- The one-time replies below are now date-eligible and remain the highest-value pending action. No draft
+  or send occurred at this checkpoint. Sending still requires the owner's action-time confirmation.
+  After one confirmed follow-up, each unanswered route closes for this experiment; any reply/refusal
+  supersedes the prepared text and ends the reminder.
+
 ### HPH — new individual criteria inquiry, 13 September 2026
 
 **Status: submitted ONCE on 13 September 2026 at 13:07 Berlin time.** After the owner explicitly

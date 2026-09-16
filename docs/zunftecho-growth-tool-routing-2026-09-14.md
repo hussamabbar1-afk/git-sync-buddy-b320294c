@@ -1,6 +1,6 @@
 # ZunftEcho — تدقيق أدوات النمو وقاعدة التوجيه
 
-آخر تحديث: 14 سبتمبر 2026، 20:34 `Europe/Berlin`.
+آخر تحديث: 16 سبتمبر 2026، 16:15 `Europe/Berlin`.
 إضافة تشغيلية فقط؛ لا تبديل للأولوية أو بوابات القانونيات/الإنفاق/الموافقة أو التجارب الحالية.
 
 ## نتيجة التدقيق الحي
@@ -16,7 +16,7 @@
 | Semrush | BLOCKED BY PLAN | الويبمصادقsuffix55؛ Subscription/API Units تعرضUpgrade/Buy دونرصيدرقمي،والـMCPgateالسابقةلم تغلق | اسم الخطة والعددالمتبقي غيرمكشوفين؛ لااشتراكدفعمؤكد. SummaryيعرضPick/SubscribeوليسإثباتStarterنشط | الدخولأُنجز؛ لاreport أوexecute_report أوupgrade. Standard API وMCPليساإثباتأهليةمتبادلة؛ انتظرموردAPIموجودفعلًا،لاشراء |
 | GSC Wizard | FULLY CONNECTED | الحساب `hussamabbar55@gmail.com`؛ الخاصية `sc-domain:zunftecho.de`؛ ملخص Search Console فعلي | `subscription:null`؛ لا اشتراك مدفوع مكتشف. URL inspection:0/2000 مستخدم،2000 متبقٍ اليوم | هذا الحكم لـGSC فقط؛ GA4 غير مربوط (`ga4PropertyId:null`)؛ حصص/تسعير الميزات الأخرى غير مثبتة |
 | Metricool | FULLY CONNECTED — YouTube | MCP20:26:Brand6962406/suffix55 و`youtubeData:UCp_6QWMLCckl7rC9j_-ImqA`؛ الويبمصادق؛OAuthأنجزهالمالك | **Free مؤكدة**،1Brand،20منشورًا/شهر؛Planner**0من20منشورًا،20متبقية**. لاPayment history ظاهر؛5AItextالعام لكنالمتبقيغيرمقاس | LinkedIn **BLOCKED BY PLAN** علىFree؛ Nativeبديل. Analyticsجديدة/غيرمكتملة؛ لا ندعيصفرداتا كأداءقناةحقيقي،ولاتكرارNativeQueue |
-| vidIQ | PARTIALLY CONNECTED — fresh verification pending | MCP20:26 يحتويقناةZunftEchoالصحيحة `UCp_6QWMLCckl7rC9j_-ImqA` بحسابsuffix55؛ الويبSelect channel=ZunftEcho | Free مؤكدة؛150/150renewable،0add-on،reset14أكتوبر15:48 تقريبًا | الربطوالهويةأُنجزا؛ `authorize_with_youtube`0credits أعاد**verification_required**. OWNER ACTION REQUIRED للتحقق الحديثبالـwidgetقبلالعملياتالحساسةفقط؛ لا إعادةالقناة |
+| vidIQ | CONNECTED للهوية/القناة؛ SENSITIVE AUTH BLOCKED BY TOOL/UI | فحص16.09 بعدRe-authenticate: الحسابsuffix55 والقناة`UCp_6QWMLCckl7rC9j_-ImqA` صحيحان؛authorization بقيverification_required بلاwidget | Free مؤكدة؛150/150renewable،0add-on،reset14أكتوبر15:48 تقريبًا؛ فحصا16.09 استخدما0credits | لاOWNER ACTION أخرى ولا إعادةOAuth عشوائية. احجبanalytics/العمليات التي تشترطfresh auth فقط؛ NativeStudio بديل |
 
 تحققهويةHunterأغلقPARTIALLYالسابقة؛ FULLY CONNECTED يعنياتصالالحسابالفعلي،لااختباركلعمليةإثراءمدفوعة.
 وبالمثل Clay/Vibe/Metricool/vidIQ ترد عبر MCP حتى حين جلسة الويب غير مسجلة.
@@ -68,14 +68,14 @@
 
 | الترتيب | الصفحة المفتوحة/نقطة التوقف | إجراء المالك | تحقق Work بعده |
 | --- | --- | --- | --- |
-| 1 vidIQ | ربط القناة COMPLETED؛ البطاقة لم تظهر. زر Channel Settings → Re-authenticate فتح Google account chooser فيChrome458451870،Handoff20:33 | OWNER ACTION REQUIRED لاختيار حساب مالك ZunftEcho ومراجعة موافقة Google بنفسه؛ لا إزالة/إعادة إضافة أو API key أو شراء | user_channels ثمauthorize0credits مرة واحدة بعد الإتمام؛ لاcallحساسقبلverified. إعادة مصادقة القناة لا تضمن إغلاق حارس الموصل؛ إن بقي طلب بلاUI احجب هذا المسار ولا تكررOAuth |
+| 1 vidIQ | Re-authenticate أكمله المالك؛ فحص16.09 أكد الحساب والقناة ثم بقيverification_required بلاwidget | لا إجراء مالك متبقٍ؛ لا إزالة/إعادة إضافة أوAPI key أو شراء | المسار الحساسBLOCKED BY TOOL/UI؛ لا تكررOAuth. استخدمStudio،ويمكن إعادة الفحص فقط بعد تغير موصل/UI مثبت |
 | 2 Metricool | COMPLETED للدخول/OAuth/YouTube والخطةوالعداد؛Brand6962406 | لاطلبمالكباقٍلـYouTube؛ LinkedInBLOCKEDعلىFree،لاطلبشراء | الحفاظعلىNativeC/Workflow؛ لاimports/جدولةمكررة؛المقاييسبعداكتمالمزامنةالمنصةوليسقبلها |
 | 3 Clay | COMPLETED للدخول/الهوية/الحصة؛ Workspace1373289،TeamSuffix55Admin | لاخطوةمالك مطلوبةلهذاالتحقق | قبلصرفلاحق: تكلفة/أهليةالعملية والحصةالمتغيرة،لابحث/إثراءللتجربة |
 | 4 Vibe | COMPLETED للدخول/الهوية/رصيد200؛ Hubقوائمفارغة | لاخطوةمالك مطلوبةلهذاالتحقق | dailycap/estimate/sample قبلأيexport،موافقةالتصديرتبقىلازمة |
 | 5 Hunter | COMPLETED للدخول/الهوية/الحصة؛suffix55،Usage10AIمتبقية | لاخطوةمالك مطلوبة | قبلطلبتجاريلاحق:حصةcreditوAI/تكلفةالحساب،لادفعةاتصالاختبارية |
 | 6 Semrush | COMPLETED للدخولوالهويةsuffix55؛ API Unitsتعرضخياراتترقية/شراءفقط | لاطلبشراءأوموافقةمالية؛ المسارBLOCKED فقط | لا report/retryللـMCPgateبلا دليلتغييرأهلية؛ Public/GSC حسبنوعالسؤالبدلsinglepointoffailure |
 
-حاليًا تدخل المالك المطلوب هو1 فقط؛ MetricoolYouTube وبقية تسجيلات الدخول أُنجزت. بقية المسارات لا تنتظر اكتمال كل الاتصالات. لا إعادة إنشاءBrand/Workspace/account.
+لا تدخل مالك متبقٍ للاتصالات الحالية؛ MetricoolYouTube وبقية تسجيلات الدخول أُنجزت. vidIQ الحساس عائق أداة لا عائق حساب. بقية المسارات لا تنتظر. لا إعادة إنشاءBrand/Workspace/account.
 لا يفترض Work أن نجاح تسجيل الدخول أنهى OAuth؛ يتحقق من IDs ومصدرالبيانات بعده.
 
 ## خط أساس الرصيد والبيانات
