@@ -1,10 +1,39 @@
 # حالة مشروع ZunftEcho
 
-> آخر تحديث: 16 سبتمبر 2026، 17:08 — المنطقة الزمنية `Europe/Berlin`
+> آخر تحديث: 16 سبتمبر 2026، 17:52 — المنطقة الزمنية `Europe/Berlin`
 > الغرض: هذا الملف هو نقطة البداية الإلزامية لأي محادثة مستقبلية تخص المشروع.  
 > اقرأ أيضًا `AGENTS.md` قبل أي تعديل. عند التعارض، الكود والحالة الحية الأحدث يتقدمان على الوثائق المؤرخة.
 
-## CURRENT STATE — 16 سبتمبر 2026 — Acquisition Sprint / نتائج منفّذة
+## CURRENT STATE — 16 سبتمبر 2026، 17:52 — توسعةPipeline ونشرGEO
+
+- **الأولوية:** Acquisition Sprint؛ لا إعادة تحليل أو رسائل أو اختبارات مكتملة. الحد السابق انقطاع تقني فقط.
+- **Pipeline جديد محفوظ:** `go-to-market/acquisition-expansion-2026-09-16.md`: 67 سجل اكتشاف إضافيًا
+  (36 دليل Innung،20 Clay،5 عينة Vibe،6 بحث مواقع)، مفصولة عن12 السابقة وقائمة الخطابات/الاعتراضات.
+  ليست67 شركة كاملة التأهيل أوSQL. أربع حالات بدليل حجم أقرب لـ1–10: Einecke،Rettig،Alexander Koch،K&K؛
+  قناة الترويج الإلكتروني غير مأذونة. سجل كل شركة يفرق بين ملاءمة البحث والعائق والخطوة المشروعة.
+- **شراكات مستقلة:** Webkontrast بمرجع Fluschnik،gewusst-wo بمرجعKoch،Astrotel بمرجعFischer&Weggen؛
+  Webkontrast ممثلهاMichael Bautz متحقق وHandel/Hersteller برنامجمعلن؛ أهليةSoftware-only غيرمؤكدة،لاPitchبارد.
+  Böhme:6موظفين/TristanBöhme متحقق لكنلديهJotform/configurators؛ Kanold:GFمتحقق/9فنيين وليس إجماليًا مؤكداً.
+  استبعادBergmann(~160) وC&C ذيالنموذج المنظم لعدم فجوة مثبتة. Artesa منخفض القيمة الآن لحجمICP/شرط تكامل.
+- **GEO منفذ فعلًا:** ستة prompts تجارية مستقلة فيPerplexity،17:15–17:28؛ ZunftEcho **0/6 mentions،0/6 citations**.
+  نطاق محرك واحد فقط،ليس حكمًا علىChatGPT/Gemini. الأدلة وروابط الإجابات في`go-to-market/geo-answer-tests-2026-09-16.md`.
+  تحسين صفحتي المقارنة وSHK محليًا: تعريف الفئة/حدود المنتج/إفصاح انحياز المورد/FAQ ومثال افتراضي معلن؛
+  **نُشرت وتحققت~17:50**:TypeScript/eslint/build وsmoke16/16 قبل وبعد النشر وQAسطحالمكتب/390px ناجحة؛
+  الصفحتانHTTP200 ونصجديد/canonical/dateModified/source محفوظة. لا ادعاء تحسنظهورAI بعدالنشر.
+- **الحصص:** Clay continuation20 مرة واحدة؛Usage17:51=1005DataCredits/2998Actions،استهلاكActionإضافية واحدة.
+  عينةVibe5 دونexport/enrichment؛ رصيدبعد-call غيرمقاس. لا ادعاء صفر تكلفة.
+  لا شراء/ترقية/Semrush retry. رصيد LinkedIn notes0 حسابيًا لا يحجب بقية النمو.
+- **نتيجة تجارية:** لا رد بشري أوPilot جديد مثبت؛ آخر فحص الوارد17:02–17:04،Craftboxx آلي فقط. دعوات اليوم3
+  والشركاء السابقونWAITING،لا تكرار. GSC2clicks/8impressions للفترة17أغسطس–13سبتمبر؛ طلبي الفهرسة مقبولان مرة واحدة
+  وليس فهرسة مؤكدة؛ لا إعادة طلب. GEO منفصل عنSEO.
+- **محمي:** ShortsB/C/Workflow،مصادرCTA،خطابات7سبتمبر وبوابة21سبتمبر،مراقب18:35،لا مساس بالتجارب أو الجداول.
+  لاcalls/voice/video/bulk/coldpromo؛ لا إنفاق أو اتفاق دون موافقة؛ بواباتGewerbe/ضريبة/Pilot محفوظة.
+- **الإنتاج:** Cloudflare worker`hussamabbar1-afk-git-sync-buddy-b320294c`،آخر نسخة حية متحققة
+  `c709743f-ca4e-46de-93de-c579ff1ca35b`100%؛keep-vars؛السابقة`ab165970-ad5b-4eb2-ba1a-3c24e39fb313`للرجوع.
+- **أول غير مكتمل:** أهلية/قناةWebkontrast والتحققالمستهدف لبقيةمرشحيالأولوية؛ لا إعادةGEO/طلباتالفهرسة أوبحثBöhme/Kanold.
+  لا ادعاء استنفاد السوق: هناك تأهيل وقنوات شراكة ACTIVE فعلًا؛ حفظ ملفات وحده ليس نموًا تجاريًا أوMaximum Density.
+
+## سجل الحالة السابق — 16 سبتمبر 2026، 17:08 — Acquisition Sprint
 
 - **المرحلة والأولوية:** اكتساب أول Pilot والتوزيع قبل تحسين المنتج، وفق
   `docs/zunftecho-acquisition-sprint-geo-addendum-2026-09-16.md`. لا إعادة Surface Scan؛ الانتظار يعطل مساره فقط.

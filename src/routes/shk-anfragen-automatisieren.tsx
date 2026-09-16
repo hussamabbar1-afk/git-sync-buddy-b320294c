@@ -53,6 +53,28 @@ const sections: KnowledgeSection[] = [
     ],
   },
   {
+    title: "Beispiel: Von der kurzen Nachricht zum bearbeitbaren Vorgang",
+    paragraphs: [
+      "Das folgende Beispiel ist erfunden und zeigt einen Soll-Ablauf, keine echte Kundenanfrage und keinen gemessenen Kundenerfolg. Ausgangsnachricht: Ich möchte meine Heizung warten lassen, am liebsten nächste Woche.",
+      "Für das Büro fehlen jetzt noch der Einsatzort, die Rückrufmöglichkeit, Angaben zur Anlage und ein geeigneter Zeitraum. Diese Rückfragen können ein strukturiertes Formular oder ein geführter Website-Dialog stellen. Unbekannte Angaben bleiben als unbekannt markiert; sie werden nicht ergänzt oder erraten.",
+      "Nach der Aufnahme erhält der Kunde eine klare Rückmeldung: Ihre Wartungsanfrage ist eingegangen. Der gewünschte Zeitraum ist noch nicht bestätigt. Das Team prüft die Anfrage und meldet sich über den vereinbarten Kontaktweg.",
+    ],
+    bullets: [
+      "Anliegen: Heizungswartung; kein Reparaturauftrag aus der Beschreibung ableitbar.",
+      "Einsatzort und Kontakt: vom Kunden angegeben und vor der Übernahme bestätigt.",
+      "Anlage: Hersteller und Modell, soweit bekannt; fehlende Angaben sichtbar lassen.",
+      "Zeitstatus: nächste Woche gewünscht; kein bestätigter Termin.",
+      "Bearbeitung: zuständige Person im Betrieb festlegen, Eingang prüfen und nächsten Schritt dokumentieren.",
+    ],
+    links: [
+      { href: "/kontaktformular-oder-chatbot", label: "Formular und Anfrageassistent vergleichen" },
+      {
+        href: "/website-anfragen-handwerk-checkliste",
+        label: "Checkliste für vollständige Website-Anfragen",
+      },
+    ],
+  },
+  {
     title: "Klein starten und den Nutzen messen",
     paragraphs: [
       "Für einen ersten Pilot reicht eine klar abgegrenzte Website, ein Betrieb und eine kleine Zahl typischer Leistungen. Entscheidend ist, ob mehr vollständige Anfragen ankommen und ob sich Rückfragen oder Reaktionszeit verringern.",
@@ -100,7 +122,7 @@ export const Route = createFileRoute("/shk-anfragen-automatisieren")({
           headline: title,
           description,
           datePublished: "2026-08-29",
-          dateModified: "2026-08-29",
+          dateModified: "2026-09-16",
           inLanguage: "de-DE",
           author: { "@type": "Organization", name: "ZunftEcho" },
           publisher: { "@type": "Organization", name: "ZunftEcho" },

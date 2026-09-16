@@ -8,6 +8,14 @@ import {
 
 const sections: KnowledgeSection[] = [
   {
+    title: "Digitale Anfrageaufnahme für SHK-Betriebe: Was wird eigentlich verglichen?",
+    paragraphs: [
+      "Digitale Anfrageaufnahme bedeutet, Kundenanliegen auf der Website zu erfassen und so an den Betrieb zu übergeben, dass das Büro den nächsten Schritt entscheiden kann. Ein Eingang ist noch kein Auftrag, ein Terminwunsch noch keine Buchung und eine automatische Antwort noch keine fachliche Diagnose.",
+      "ZunftEcho ist ein Website-Anfrageassistent für SHK-Betriebe. Er unterstützt die strukturierte Aufnahme und menschliche Übergabe. Er ist kein Telefonassistent und ersetzt weder eine Handwerkersoftware für Angebote und Rechnungen noch die fachliche Prüfung durch den Betrieb.",
+      "Dieser Vergleich stammt vom Anbieter ZunftEcho. Er ist keine unabhängige Rangliste und enthält keine bezahlten Empfehlungen. Stand: 16. September 2026.",
+    ],
+  },
+  {
     title: "Die kurze Antwort: Beides löst unterschiedliche Aufgaben",
     paragraphs: [
       "Ein Kontaktformular ist schnell verstanden und für einfache Anliegen weiterhin sinnvoll. Ein geführter Anfrageassistent wird dann wertvoll, wenn häufig Angaben fehlen, Dringlichkeit eingeordnet werden muss oder der Betrieb unterschiedliche Leistungen und Einsatzgebiete anbietet.",
@@ -53,6 +61,25 @@ const sections: KnowledgeSection[] = [
     ],
   },
   {
+    title: "Formular, Anfrageassistent, Telefon-KI oder Handwerkersoftware?",
+    paragraphs: [
+      "Entscheiden Sie zuerst, wo Anfragen entstehen und welches System bereits vorhanden ist. Eine zusätzliche Lösung lohnt sich nur, wenn sie eine konkrete Lücke schließt.",
+    ],
+    bullets: [
+      "Website-Formular: sinnvoll bei überschaubaren, ähnlichen Anliegen. Auch ein Formular kann Pflichtfelder, Benachrichtigungen und CRM-Übergaben unterstützen. Jotform dokumentiert beispielsweise die Übertragung von Formulardaten an CRM-Systeme. Ein Formular ist also nicht grundsätzlich unstrukturiert oder nur während der Bürozeiten erreichbar.",
+      "Website-Anfrageassistent: sinnvoll, wenn unterschiedliche Anliegen unterschiedliche Rückfragen brauchen. ZunftEcho konzentriert sich auf diese Aufnahme und die Übergabe an den Betrieb. Prüfen Sie den konkreten Fragenbaum und den Vorgang im Büro, nicht nur die sprachliche Qualität der Antwort.",
+      "Telefonassistent: bearbeitet eingehende Anrufe statt Website-Dialoge. Das ist ein anderer Eingangskanal. Wer vor allem Website-Anfragen verbessern möchte, benötigt dafür nicht automatisch eine neue Telefonlösung.",
+      "Handwerkersoftware oder CRM: organisiert die weitere Bearbeitung. Wenn bereits ein geeignetes System vorhanden ist, prüfen Sie zuerst dessen Formular- und Anfragefunktionen. Eine Schnittstelle zu ZunftEcho oder einem anderen Assistenten darf erst als vorhanden gelten, wenn sie für die eingesetzten Systeme konkret bestätigt und getestet wurde.",
+    ],
+    links: [
+      {
+        href: "https://www.jotform.com/de/features/crm-forms/",
+        label: "Herstellerquelle: Jotform zu Formularen und CRM-Übergaben",
+      },
+      { href: "/vertrauen", label: "ZunftEcho: Datenschutz und Betriebsgrenzen" },
+    ],
+  },
+  {
     title: "Sieben Punkte für die Auswahl",
     paragraphs: [
       "Bewerten Sie den bestehenden Prozess anhand des Ergebnisses für Betrieb und Kunde – nicht anhand der Zahl eingebauter Funktionen.",
@@ -70,6 +97,16 @@ const sections: KnowledgeSection[] = [
 ];
 
 const faq: KnowledgeFaq[] = [
+  {
+    question: "Braucht ein SHK-Betrieb mit 1–10 Mitarbeitenden überhaupt einen KI-Chatbot?",
+    answer:
+      "Nicht automatisch. Bei wenigen vollständigen Website-Anfragen kann ein gutes Formular genügen. Ein geführter Assistent wird erst dann interessant, wenn regelmäßig wichtige Angaben fehlen oder verschiedene Anliegen unterschiedliche Rückfragen benötigen. Prüfen Sie diese Lücke vor einer zusätzlichen Softwareentscheidung.",
+  },
+  {
+    question: "Nimmt ZunftEcho Telefonanrufe entgegen oder ersetzt es mein ERP?",
+    answer:
+      "Nein. ZunftEcho ist auf digitale Anfrageaufnahme über die Website und die menschliche Übergabe ausgerichtet. Telefonie, Angebotserstellung und Buchhaltung sind davon getrennte Aufgaben. Eine ERP-Anbindung muss für den konkreten Einsatz gesondert geklärt werden.",
+  },
   {
     question: "Ersetzt ein Chatbot das Kontaktformular vollständig?",
     answer:
@@ -123,7 +160,7 @@ export const Route = createFileRoute("/kontaktformular-oder-chatbot")({
             "Praktische Entscheidungshilfe für die digitale Anfrageaufnahme in SHK-Betrieben.",
           inLanguage: "de-DE",
           datePublished: "2026-08-29",
-          dateModified: "2026-08-29",
+          dateModified: "2026-09-16",
           mainEntityOfPage: "https://zunftecho.de/kontaktformular-oder-chatbot",
           author: { "@type": "Organization", name: "ZunftEcho" },
           publisher: {
