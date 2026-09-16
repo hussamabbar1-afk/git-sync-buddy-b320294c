@@ -77,27 +77,32 @@ Executed batch and continuation record. Owner directive attachment `3eba8368-49c
 | T16 | Web-Sastre, actual creator credit on Schwarzwald Teltow | [Primary agency](https://web-sastre.de/) identifies independent WordPress designer Sonia; [about page](https://web-sastre.de/ueber-mich/) gives full name Sonia Sanchez. Two verified SHK references: Schwarzwald Heizungsbau and Schreiterer Heizungs-Service. **READY research**; customer-project form is not partner permission, so electronic pitch remains BLOCKED absent consent. |
 | T17 | Betriebssoftware-Kompass; SHK software comparison already cited in today's earlier Perplexity test | Newly qualified distribution target, not newly discovered citation. Steffen Guthardt editorial principal [identity](https://betriebssoftware-kompass.de/impressum); [SHK section](https://betriebssoftware-kompass.de/gewerke/shk). [Methodology](https://betriebssoftware-kompass.de/transparenz) invites factual corrections only, **not promotional submissions**. READY audience/identity research; pitch BLOCKED. Missing ZunftEcho is not a factual error. No message sent. |
 | T18 | Serviceportal SHK of the SHK association organization | [Official portal](https://fachbetriebe.serviceportal-shk.de/) states access to 24,000 Innungsfachbetriebe, 3,300+ registered businesses and free website inquiry flows for members. High-trust audience but direct functional overlap and no vendor-submission invitation. **LOW VALUE as partner now**; record as a competitive/distribution constraint, not a prospect or backlink target. |
-| T19 | Computern im Handwerk / CV Computern-Verlags GmbH | [Current 2026 overview](https://www.handwerke.de/dateien/branchensoftware.html) explicitly covers SHK and says the publication surveys software manufacturers, including newcomers/cloud/apps; [imprint](https://www.handwerke.de/dateien/impressum.html) identifies publisher and responsible editor Horst Neureuther. **READY eligibility inquiry** below; audience-qualified, but no assumption that a website-only pre-pilot product qualifies or that inclusion is free. |
+| T19 | Computern im Handwerk / CV Computern-Verlags GmbH | [Current 2026 overview](https://www.handwerke.de/dateien/branchensoftware.html) explicitly covers SHK and says the publication surveys software manufacturers, including newcomers/cloud/apps; [imprint](https://www.handwerke.de/dateien/impressum.html) identifies publisher and responsible editor Horst Neureuther. **WAITING**: approved eligibility inquiry sent and verified once at19:04; audience-qualified, but no assumption that a website-only pre-pilot product qualifies or that inclusion is free. |
 
-## Execution checkpoint — 18:58 Berlin
+## Execution checkpoint — 19:06 Berlin
 
 - 27 additional deduplicated regional SHK records: **10 Q** (trade/region/explicit small-team + legal identity) and **17 R** with incomplete size/other qualification. Not27 fully qualified ICPs or consented leads. A public legal representative/principal is now identified for all27; this does not imply consent, need or current small-team fit.
 - 15 audience-qualified distribution targets (T01–T08,T12–T17,T19); not15 engaged partners. T10 remains legally incomplete; T09/T11/T18 direct overlap excluded. T08/T13/T17/T19 have overlap/fit/permission caveats.
 - **2 invitation-backed, narrowly scoped written inquiry routes**, not5 outreach permissions. Decision-maker identification target exceeded independently; no public-address-as-consent shortcut.
-- Two specifically approved inquiries sent/verified18:38 and18:40, see below; zero paid provider credit calls. Existing Softwarelotsen/SHK eG remain WAITING, not repeated.
+- Three specifically approved inquiries sent/verified18:38,18:40 and19:04, see below; zero paid provider credit calls. Existing Softwarelotsen/SHK eG remain WAITING, not repeated.
 - Both project Gmail accounts searched18:34–18:35 `in:anywhere {craftnote mycraftnote bauverlag "SHK Profi"}`: no matches. This is targeted duplicate screening, not an all-inbox human-reply audit.
 - Commercial inbox search completed by18:47 in both accounts: `after:2026/09/16 -in:sent -in:drafts {to:kontakt@zunftecho.de "ZunftEcho"}`. Only known Craftboxx16:19 automatic acknowledgement in55 and DMARC report in4; no new human reply found in this scope. No personal mail opened or response duplicated.
 
 ## Capacity disposition after this batch
 
-- **COMPLETED:**27 screened records/27 public principal identifications;10 fully evidence-qualified company records (including one explicit product mismatch and three promotion objections);15 audience-qualified partner packages;3 GoogleAI tests;3 GEO/3SEO action mappings; exact two approved sends verified. Company target20–30 fully qualified **not met**; public size/other evidence remains incomplete for17/27. Do not relax the definition to meet the number.
-- **WAITING:**SHK Profi/Craftnote eligibility and earlier inquiries; not active conversations. No full article/listing/partnership committed. Existing monitoring handles replies; no duplicate monitor.
+- **COMPLETED:**27 screened records/27 public principal identifications;10 fully evidence-qualified company records (including one explicit product mismatch and three promotion objections);15 audience-qualified partner packages;3 GoogleAI tests;3 GEO/3SEO action mappings; exact three approved sends verified. Company target20–30 fully qualified **not met**; public size/other evidence remains incomplete for17/27. Do not relax the definition to meet the number.
+- **WAITING:**SHK Profi/Craftnote/Computern im Handwerk eligibility and earlier inquiries; not active conversations. No full article/listing/partnership committed. Existing monitoring handles replies; no duplicate monitor.
 - **BLOCKED:**direct electronic promotion for named firms/agency targets lacks consent; Hortien/Engler/Heu-Weidner explicitly suppress it and Grobelny explicitly rejects chatbot/AI-assistant positioning. Broader postal execution requires its separate cost/approval/attribution gate; no new wave before existing21September decision. LinkedIn personalized free notes depleted, no empty-invitation bypass. Additional identity/headcount cannot be truthfully inferred.
 - **AVAILABLE BUT LOWER VALUE now:**more undifferentiated names without a permission route. This pass upgraded Petschel, Heu-Weidner, HSK Fläming and Grobelny; targeted checks of HWS, Lesano, Sanartec, TEMA, Kamm, Mettke, IBL Lutter, Obermeit, W.E.S. and Rapid did not produce an exact current total that safely resolves their remaining size gaps. This is diminishing yield for this research pass, not proof that the regional market is exhausted.
 - Additional route screening: [Anbieterzentrale](https://www.anbieterzentrale.de/de/anbieter-werden) requires Gewerbeanmeldung/ID verification and buyer fit is unproven; do not upload identity. [appsIn](https://appsin.de/anbieter-werden) is SAP-led and announces AI expansion1October, with paid solutions listings; LOW VALUE before relevant audience/financial gate. [ExpertLocal](https://www.expertlocal.de/firma-registrieren) and [Macherportal](https://macherportal.de/) lack demonstrated SHK decision-maker demand, so no account/listing merely for a backlink. Deal24/einfachvorort target consumer service/local retail, not this SaaS buyer. No signup, spend, fabricated review or disguised correction pitch.
-- **Next meaningful action/trigger:**owner approval for the exact T19 eligibility inquiry below; otherwise an invited written reply, explicit introduction/consent, replenished permitted networking capacity, or primary size evidence for an existing R record. Prioritize accepted T07 editorial/T14 eligibility over another raw-list pass. Do not re-run today's AI prompts or republish unchanged pages. Independent acquisition is not globally cancelled; no claim of universal market exhaustion or fully achieved Maximum Density.
+- **Next meaningful action/trigger:**an invited written reply, explicit introduction/consent, replenished permitted networking capacity, or new primary size evidence for an existing R record. Prioritize any accepted T07 editorial/T14 or T19 eligibility next step over another raw-list pass. Do not re-run today's AI prompts or republish unchanged pages. Independent acquisition is not globally cancelled; no claim of universal market exhaustion or fully achieved Maximum Density.
 
-## T19 eligibility inquiry — READY, not approved or sent
+## T19 eligibility inquiry — approved and SENT once
+
+Owner explicitly approved this exact inquiry. Sent19:04 Europe/Berlin from **ZunftEcho <kontakt@zunftecho.de>**. Gmail success, Sent copy, exact body, full From/To/date/subject and `mailed-by: zunftecho.de` verified. **WAITING** for a human eligibility response; no acceptance, listing, purchase or commitment is proven. Do not re-request approval or resend.
+
+- Sent UI reference: `QgrcJHsHpDRFcqlzjRfcKjghDHDPKffGwMg`.
+- No attachment, signup, purchase, listing claim, customer data or meeting request was sent.
 
 To: `redaktion@cv-verlag.de`
 
@@ -118,7 +123,7 @@ Mohamad H. Alabar
 ZunftEcho
 kontakt@zunftecho.de
 
-No attachment, signup, purchase, listing claim or customer data. Requires one exact owner approval before sending; do not resend if approved and executed later.
+No attachment, signup, purchase, listing claim or customer data. This is the exact body that was sent; do not resend.
 
 ## Exact inquiries — approved and SENT once each
 
