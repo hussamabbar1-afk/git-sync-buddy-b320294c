@@ -35,12 +35,12 @@ No displayed URL means no website asserted; email domains were not promoted to U
 | --- | --- | --- | --- |
 | D01 | Augar / augar.de | Official homepage: family SHK, Ulrich Augar; historical seven employees is NOT current size | ACTIVE: current size and imprint; no unsolicited email |
 | D02 | B.R.A.S.S.T. / brasst.de | Primary site: Builtech group, larger-project profile | LOW VALUE: outside small first-pilot profile |
-| D03 | Bachmann / wasser-waerme-luft.com | Directory trade/geography only | ACTIVE: primary company/size/intake |
-| D04 | Baldauf / baldauf-gmbh.de | Primary SHK Berlin; apparent headcount string inside HTML comment not accepted | ACTIVE: visible size/decision-maker |
+| D03 | Bachmann / wasser-wärme-luft.com (IDN: xn--wasser-wrme-luft-2nb.com) | Corrected domain verified18:06; primary homepage20-person team, existing repair/bath tools; imprint Frank Schwarzenburg GF and Agentur ID credit | LOW VALUE first pilot: exceeds1–10; existing Agentur ID partner route remains WAITING, no duplicate approach |
+| D04 | Baldauf / baldauf-gmbh.de | Primary SHK Berlin; /impressum confirms representative Mario Tanz and Bauhüttenweg4,12351Berlin at18:04. Hidden-comment headcount still not accepted | ACTIVE: size unknown; authority research improved, no unsolicited email |
 | D05 | Banach H&S Regelungstechnik / no displayed URL | Directory only | ACTIVE: identify official site without guessing |
 | D06 | HIB Ing. Bartz & Partner / no displayed URL | Directory only | ACTIVE: company/size |
 | D07 | Theodor Bergmann / theodor-bergmann.de | Primary homepage ~160 employees, existing maintenance/service forms | LOW VALUE: clearly exceeds first-pilot size |
-| D08 | Beringer / beringer-gmbh.de | Primary homepage: Thomas Fritsch Geschäftsführer, Berlin/Umland; size unknown | ACTIVE: size and lawful route |
+| D08 | Beringer / beringer-gmbh.de | Thomas Fritsch GF; /impressum confirms Nordlichtstraße74,13405Berlin and Websitebutler/Sitejet attribution; /ueber-uns lists private/commercial customers, not employee count | ACTIVE: size and lawful route; agency credit adds evidence to existing Websitebutler surface, not a new partner |
 | D09 | Bernecker & Block / no displayed URL | Directory only | ACTIVE: official site |
 | D10 | Karl Bohra / no displayed URL | Directory, Großbeeren | ACTIVE: official site/size |
 | D11 | Konrad Bolk / no displayed URL | Directory only | ACTIVE: official site/size |
@@ -64,7 +64,7 @@ No displayed URL means no website asserted; email domains were not promoted to U
 | D29 | M&R Fritsche / no displayed URL | Directory only | ACTIVE: official site/size |
 | D30 | Siegmar Fröhling / no displayed URL | Directory only | ACTIVE: official site/size |
 | D31 | Bernhard Frühauf & Sohn / fruehauf-berlin.de | Directory; timeout | BLOCKED: primary verification |
-| D32 | FULL Service / fullservicegmbh.de | Primary gas maintenance Berlin/Umland, contact page; size/owner unknown | ACTIVE: size/decision-maker; do not assume inquiry gap |
+| D32 | FULL Service / www.fullservicegmbh.de | /kontakt.html verified18:08: PrierosserStr.62,12357Berlin; public service email, no named decision-maker. /ueber-uns.html describes services, not team | ACTIVE: size/authority unresolved; correct www source recovered; no assumed inquiry gap or legal diagnosis from old template |
 | D33 | Galla & Wenzel / galla-wenzel.de | Directory; fetch failed | BLOCKED: primary verification |
 | D34 | Karl Ganzhorn / karl-ganzhorn.de | Directory; fetch failed | BLOCKED: primary verification |
 | D35 | Garant / garant-berlin.de | Directory; fetch failed | BLOCKED: primary verification |
@@ -140,10 +140,22 @@ Five-row sample displayed. Pre-call balance200; post-call not observed. Broad in
 | P06 | Lexware / https://www.lexware.de/partner/modelle/ | Potential technology ecosystem; full eligibility/integration conditions not validated | FUTURE ONLY pending relevant working integration and terms; not a ready referral channel |
 | P07 | Softwarelotsen / https://www.softwarelotsen.de/ueber-uns/ | Actual G1 source, explicit free-provider-inquiry invitation; external-integration category gate unproven for us | SENT ONCE / WAITING17:57 after owner approval; see geo-distribution-eligibility-2026-09-16.md; no listing/contract |
 | P08 | Gestaltungsfreunde / https://www.gestaltungsfreun.de/ | Agency credit in Einecke official /impressum/; independent actual SHK reference | BLOCKED primary retrieval; operator/decision-maker/cooperation route unverified; no contact |
+| P09 | SHK eG / https://www.shknet.de/die-kooperation/lieferanten/lieferantenpartner-werden/ | Published introduction invitation to Einkauf; digital-service ecosystem verified; pre-pilot/software eligibility and fees unknown | SENT ONCE / WAITING18:12 after owner approval; alias/recipient/body/Sent verified in geo-distribution-eligibility-2026-09-16.md; no contract |
+| P10 | echte media / https://www.echtemedia.com/impressum | Marc Meyer representative; SHK eG confirms service partnership; own Wulfert SHK case. Referral programme sends clients TO agency, not to us | READY research / BLOCKED outreach permission; no callback, purchase, referral signup or prospect upload |
 
 ## Next unfinished actions and capacity truth
 
-Primary checks of Böhme/Kanold completed; strongest READY cases/partner P01 remain.
+18:10 update: four existing records corrected/enriched (D03/D04/D08/D32), no increase
+to the67-company discovery count. Two new partner records P09/P10 bring this expansion
+table to10 partners, not10 engaged relationships. P09 inquiry sent once18:12 with
+owner approval and verified correct alias; WAITING for eligibility. P10 requires a legitimate introduction.
+Bachmann size20 excludes first-pilot pursuit; its Agentur ID reference reinforces an
+existing WAITING relationship and must not trigger another invitation. Sources for
+company updates: https://xn--wasser-wrme-luft-2nb.com/ and /impressum;
+https://baldauf-gmbh.de/impressum; https://www.beringer-gmbh.de/impressum and /ueber-uns;
+https://www.fullservicegmbh.de/kontakt.html. No paid provider lookup in this batch.
+
+Primary checks of Böhme/Kanold completed; strongest READY cases remain.
 Further primary screening: Jänichen/estonteco/HBH fetch unavailable (not website defect);
 Thermatik homepage confirms Berlin SHK but does not resolve workforce/decision-maker.
 Do not spend credits filling weak11–50-provider records while stronger opportunities exist.
