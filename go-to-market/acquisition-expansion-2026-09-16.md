@@ -82,7 +82,7 @@ Provider headcount bands are estimates, not primary verified employee counts.
 | --- | --- | --- | --- |
 | C01 | Günter Zühlsdorf / zuehlsdorf.gmbh | Provider11–50, fleet30 claim | LOW VALUE pending contrary size evidence |
 | C02 | C&C HLS / cc-hls.de | Provider2–10; primary SHK; impressum.html names Cem Arslan and Cem Vural Geschäftsführer, Berlin. `/kundendienst/kdabfrage/index.html` already captures address, unit, contacts, issue, emergency, requested date and on-site contact | LOW VALUE now: structured intake already exists; no evidenced gap, no form submission |
-| C03 | Jänichen / jaenichen-gmbh.de | Provider11–50 only | ACTIVE: size screen before more enrichment |
+| C03 | Jänichen / jaenichen-gmbh.de | Updated16Sep18:35: [primary team](https://jaenichen-gmbh.de/ueber-uns/) states31 employees, resolving earlier failed fetch | LOW VALUE: outside1–10 pilot; no further enrichment |
 | C04 | Schielke / schielke24.de | Primary Berlin SHK/modernization; provider11–50 | ACTIVE: size screen |
 | C05 | Ingenieurbüro Altindas / ib-altindas.de | Planning not installer | LOW VALUE for direct pilot |
 | C06 | Dernbach / pb-dernbach.de | Planning not installer | LOW VALUE for direct pilot |
