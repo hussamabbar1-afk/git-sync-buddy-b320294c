@@ -202,7 +202,7 @@ HeWo remains excluded by its video/meeting condition. Bauleo's form is not resub
   close the route for this experiment; no second reminder.
 - No Pilot activation/billing, commission, discount, integration or paid listing commitment.
 
-### Action-time checkpoint — 16 September 2026, 16:15 Berlin
+### Action-time checkpoint — 16 September 2026, 16:23 Berlin
 
 - Correct suffix-4 receiving inbox was searched read-only from 8 September through the checkpoint,
   excluding Sent and Drafts, across the documented partner domains. The only matches were the known
@@ -212,10 +212,22 @@ HeWo remains excluded by its video/meeting condition. Bauleo's form is not resub
   product providers to write for listing, plancraft invites cooperation ideas at its partnership address,
   and HERO lists partnership routes at its cooperation address. This verifies route availability, not
   acceptance, interest, or permission for repeated reminders.
-- The one-time replies below are now date-eligible and remain the highest-value pending action. No draft
-  or send occurred at this checkpoint. Sending still requires the owner's action-time confirmation.
-  After one confirmed follow-up, each unanswered route closes for this experiment; any reply/refusal
-  supersedes the prepared text and ends the reminder.
+- The owner explicitly approved the three one-time replies. All three were sent once inside their
+  original threads, with no CC/BCC, attachment, commitment or second reminder:
+  - **Craftboxx:** sent at 16:18 to `info@craftboxx.de`. Gmail unexpectedly used its personal default
+    sender `Hussam Abbar <hussamabbar55@gmail.com>` instead of the required alias; the expanded sent
+    header verified this only after send. Do not resend, delete or send a correction by default: that
+    would create a duplicate. This route is `SENT ONCE / WAITING`; any corrective second message needs
+    a new explicit owner decision.
+  - **Plancraft:** sent at 16:20 from `ZunftEcho <kontakt@zunftecho.de>` to
+    `kooperation@plancraft.com`. The Gmail sent confirmation and expanded header verified sender,
+    recipient, subject and `sent-by: zunftecho.de`.
+  - **HERO:** sent at 16:22 from `ZunftEcho <kontakt@zunftecho.de>` to
+    `kooperationen@hero-software.de`. The Gmail sent confirmation and expanded header verified sender,
+    recipient, subject and `sent-by: zunftecho.de`.
+- None of these send confirmations proves delivery, acceptance, referral or human interest. All three
+  routes are now `SENT ONCE / WAITING`; one voluntary reply may be handled individually, while silence
+  or refusal closes that route with no second reminder.
 
 ### HPH — new individual criteria inquiry, 13 September 2026
 
