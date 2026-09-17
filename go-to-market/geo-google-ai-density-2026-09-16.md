@@ -70,3 +70,15 @@ Public search16Sep18:35, qualitative; **no volume/CPC/rank estimate**. GSC remai
 ## Conversion boundary
 
 No observed ZunftEcho funnel failure or human objection in this batch. No CRO/product change justified. Useful positioning insight: some newly screened companies already have calculators/planners, so sell only a verified missing handoff process, not “you need a form.” Do not claim added content produced leads, citations or conversion uplift.
+
+## Comparable retest — 18 September 2026, 01:20–01:33 Europe/Berlin
+
+Retest trigger: more than 31 hours had elapsed since the two page updates and Google URL inspection now confirmed both `/shk-anfragen-automatisieren` and `/kontaktformular-oder-chatbot` as indexed. The same three prompts above were run once in the same signed-in Google AI Mode environment. This remains a qualitative, personalized and stochastic snapshot, not ranking or market-share evidence.
+
+**Observed ZunftEcho again: 0/3 brand mentions, 0/3 source citations. No measurable GEO inclusion change.**
+
+- **G1:** the answer shifted toward an SHK association/request solution, Heizreport, Typeform/Jotform and comparison/category sources such as OMR Reviews, Zeeg, Lexware and `shk-handwerkersoftware.de`. ZunftEcho was absent.
+- **G2:** recurring form/template and SHK-software sources included Jotform, Typeform, WPForms/Forminator, Serviceportal SHK, HERO/openHandwerk, SIMPL and a Clockin comparison. ZunftEcho was absent.
+- **G3:** the answer again favored an explicit category comparison. It named ToolTime/HERO/Formkit for forms; moinAI/BotCore/IONOS for website assistants; and autarc/HERO Voice/ToolTime Assistant for phone AI. ZunftEcho was absent. Unsupported adoption, price, compliance and emergency claims were not reused as facts.
+
+Decision: indexing alone did not produce inclusion. The repeat strengthens the existing gap—AI answers favor explicit category/comparison pages plus recognized SHK or template sources—but does not justify a new thin page or product pivot. The next credible GEO lever remains a real third-party editorial/listing/partner acceptance or later first-party query evidence; all such eligibility inquiries are currently waiting.
