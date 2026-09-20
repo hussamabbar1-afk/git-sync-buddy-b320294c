@@ -175,6 +175,15 @@ order by source;
   Versand. Vor einem neuen Test werden Segment, Angebot und Text geprüft; ein begründeter Folgetest bleibt auf
   höchstens fünf A-Prioritäten mit frischem 48-Stunden-Check und genau einer Botschaftsänderung begrenzt.
 
+### Gezielte Review nach dem Nullsignal
+
+Die vorhandenen Projektquellen belegen Auswahlgründe, Empfänger, Demo-/QR-Pfad und Messregel, enthalten aber nicht
+den exakten gedruckten Brieftext. Zudem gibt es weder einen wörtlichen menschlichen Einwand noch einen
+Zustellnachweis. Damit lässt sich derzeit keine einzelne Botschaftsvariable evidenzbasiert als Ursache isolieren.
+Ein neuer Brief-Test bleibt deshalb **BLOCKED**, bis mindestens der tatsächlich versandte Text vorliegt oder ein
+neues menschliches Signal beziehungsweise ein belastbarer Zustellhinweis die Änderung begründet. Das ist kein
+Grund, unabhängige Akquise- und Distributionsarbeit anzuhalten.
+
 ## Auswertung nach 14 Tagen
 
 Fällig am 21. September 2026, gerechnet ab dem durch den Inhaber bestätigten Versand vom 7. September.
