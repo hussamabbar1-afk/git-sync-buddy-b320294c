@@ -18,7 +18,7 @@ Pipeline effect: **119** deduplicated research records, **21 Q** under the stric
 
 - **Audience/access:** the R+F services area is explicitly for Handwerk partners; its SHK podcast invites topic suggestions, questions and guest ideas by email to `podcast@r-f.de`.
 - **Why this is different:** this is a published editorial invitation, not a generic public-address-as-consent shortcut. It provides a credible SHK decision-maker distribution surface and an external citation/authority route for the GEO gap.
-- **State:** READY / exact owner confirmation required immediately before external send. No message has been sent.
+- **State:** **SENT VERIFIED / WAITING**. Owner confirmed the exact one-time send; it was sent at 13:37 Europe/Berlin from `ZunftEcho <kontakt@zunftecho.de>` to `podcast@r-f.de`. Gmail success, Sent copy, sender, recipient, subject, body and `sent-by: zunftecho.de` were verified. No attachment, purchase, booking or commitment was included; do not resend or follow up before a contextual reply or a later permitted timing trigger.
 - **No-cost neutral topic draft:**
 
   **Betreff:** `Themenvorschlag: Was macht eine Website-Anfrage für kleine SHK-Betriebe wirklich brauchbar?`
@@ -57,9 +57,8 @@ Three fresh Google AI Mode questions were tested; ZunftEcho appeared in **0/3 me
 
 ## Capacity disposition before the gate
 
-- **COMPLETED this pass:** two new strict-Q companies, one unresolved R record, one invitation-backed distribution route, three distinct GEO measurements, current GSC/YouTube/leads/LinkedIn/inbox trigger readings.
-- **READY:** PD20 exact editorial topic suggestion, pending action-time owner confirmation; PG01/PG02 research packages for a future separately approved post-gate cohort decision.
-- **WAITING:** all prior partner/editorial inquiries and four LinkedIn invitations; Workflow publication and the direct-mail evaluation on 21 September.
+- **COMPLETED this pass:** two new strict-Q companies, one unresolved R record, one invitation-backed distribution route sent once and verified, three distinct GEO measurements, current GSC/YouTube/leads/LinkedIn/inbox trigger readings.
+- **READY:** PG01/PG02 research packages for a future separately approved post-gate cohort decision; neither is executable before the protected gate.
+- **WAITING:** PD20 and all prior partner/editorial inquiries, four LinkedIn invitations, Workflow publication and the direct-mail evaluation on 21 September.
 - **BLOCKED:** promotional electronic contact to SHK companies without consent; integration/spend-dependent partner programs; additional content without a demonstrated distribution path.
 - **No code/CRO change:** no live conversion evidence identifies a new obstacle. Existing indexed content already answers the GEO facts, so changing the product or duplicating pages before the gate is not justified.
-
