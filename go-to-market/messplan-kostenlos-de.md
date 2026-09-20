@@ -152,16 +152,28 @@ order by source;
 
 | Quelle             | versendet am | Antwort | Demo/Pilot | Widerspruch        | nächster Schritt         |
 | ------------------ | ------------ | ------- | ---------- | ------------------ | ------------------------ |
-| brief-ro-do        | 07.09.2026   |         |            |                    | Auswertung 21.09.2026    |
-| brief-bolowski     | 07.09.2026   |         |            |                    | Auswertung 21.09.2026    |
-| brief-grelak       | 07.09.2026   |         |            |                    | Auswertung 21.09.2026    |
-| brief-koblitz      | 07.09.2026   |         |            |                    | Auswertung 21.09.2026    |
-| brief-wilcks       | 07.09.2026   |         |            |                    | Auswertung 21.09.2026    |
-| brief-tim-gaertner | 07.09.2026   |         |            |                    | Auswertung 21.09.2026    |
-| brief-roesch       | 07.09.2026   |         |            |                    | Auswertung 21.09.2026    |
+| brief-ro-do        | 07.09.2026   | 0       | 0          |                    | IMPROVE, keine Folgewelle |
+| brief-bolowski     | 07.09.2026   | 0       | 0          |                    | IMPROVE, keine Folgewelle |
+| brief-grelak       | 07.09.2026   | 0       | 0          |                    | IMPROVE, keine Folgewelle |
+| brief-koblitz      | 07.09.2026   | 0       | 0          |                    | IMPROVE, keine Folgewelle |
+| brief-wilcks       | 07.09.2026   | 0       | 0          |                    | IMPROVE, keine Folgewelle |
+| brief-tim-gaertner | 07.09.2026   | 0       | 0          |                    | IMPROVE, keine Folgewelle |
+| brief-roesch       | 07.09.2026   | 0       | 0          |                    | IMPROVE, keine Folgewelle |
 | brief-tschichholz  |              |         |            | Website 06.09.2026 | dauerhaft ausgeschlossen |
-| brief-protoss      | 07.09.2026   |         |            |                    | Auswertung 21.09.2026    |
-| brief-a-m          | 07.09.2026   |         |            |                    | Auswertung 21.09.2026    |
+| brief-protoss      | 07.09.2026   | 0       | 0          |                    | IMPROVE, keine Folgewelle |
+| brief-a-m          | 07.09.2026   | 0       | 0          |                    | IMPROVE, keine Folgewelle |
+
+## Verifizierte 14-Tage-Auswertung — 21. September 2026
+
+- Neun aktive Briefquellen: **0 menschliche Antworten, 0 Demo-/Pilot-Anfragen, 0 Widersprüche**.
+- Beide Projektpostfächer wurden nach den neun Unternehmensdomains seit dem Versand geprüft: keine Treffer.
+- Das Produktionsprojekt in Supabase zeigt für `public.pilot_requests` **0 Datensätze insgesamt**; damit ist jede
+  der neun aktiven `brief-*`-Quellen ausdrücklich mit 0 belegt, nicht nur durch eine leere Gruppenabfrage.
+- Auf der internen Lead-Oberfläche ist kein neuer Eintrag nach dem 13. September sichtbar.
+- Einschränkung: Die tatsächliche physische Zustellung der Briefe ist weiterhin unbekannt.
+- Entscheidung: **IMPROVE**. Keine automatische zweite Welle, keine Empfängerliste, keine Druckproduktion und kein
+  Versand. Vor einem neuen Test werden Segment, Angebot und Text geprüft; ein begründeter Folgetest bleibt auf
+  höchstens fünf A-Prioritäten mit frischem 48-Stunden-Check und genau einer Botschaftsänderung begrenzt.
 
 ## Auswertung nach 14 Tagen
 
