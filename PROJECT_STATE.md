@@ -1,10 +1,10 @@
 # حالة مشروع ZunftEcho
 
-> آخر تحديث: 20 سبتمبر 2026، 13:56 — المنطقة الزمنية `Europe/Berlin`
+> آخر تحديث: 20 سبتمبر 2026، 14:00 — المنطقة الزمنية `Europe/Berlin`
 > الغرض: هذا الملف هو نقطة البداية الإلزامية لأي محادثة مستقبلية تخص المشروع.  
 > اقرأ أيضًا `AGENTS.md` قبل أي تعديل. عند التعارض، الكود والحالة الحية الأحدث يتقدمان على الوثائق المؤرخة.
 
-## CURRENT STATE — 20 سبتمبر 2026، 13:56 — Hard Maximum Acquisition Throughput
+## CURRENT STATE — 20 سبتمبر 2026، 14:00 — Hard Maximum Acquisition Throughput
 
 - **المرحلة/الأولوية:** قبل أول Pilot؛ الاكتساب والتوزيع في وضع throughput مرتفع، دون تغيير cohort البريد المباشر
   أو Workflow/Shorts أو بوابة21سبتمبر. مرجع هذه الدفعة `go-to-market/hard-throughput-2026-09-20.md`؛ لا إنفاق
@@ -23,7 +23,9 @@
 - **GEO:** ستة prompts شراء Google AI Mode = **0/6 mentions و0/6 citations** لـZunftEcho. تتكرر ZVSHK/
   Serviceportal SHK وHERO/ToolTime/Plancraft وHaustechnikDialog وSi ومورّدو النماذج؛ الفجوة سلطة خارجية وتعريف
   مباشر للفئة. نُفذ على `/kontaktformular-oder-chatbot` قسم Website-only دون ERP بحدود صادقة، FAQ جديدان،
-  `FAQPage` JSON-LD، مصدر ZVSHK وربط الثقة؛ ESLint والبناء الإنتاجي ناجحان. إعادة الاختبار الفوري غير مفيدة.
+  `FAQPage` JSON-LD، مصدر ZVSHK وربط الثقة؛ ESLint والبناء وPreview ناجحة، ثم نُشرت نسخة Cloudflare
+  `5e23c4ea-7ea5-4a27-b5f5-2b106b6a58db` عند100% وتحقق HTTP200 والنص/Schema/المصدر على الإنتاج.
+  إعادة الاختبار الفوري غير مفيدة.
 - **SEO:** ست فرص buyer-intent وُجّهت إلى أصول قائمة بدل صفحات رقيقة؛ نُفذ فعليًا عنقودا
   `digitale Anfrageaufnahme SHK` و`... ohne ERP` على صفحة المقارنة. آخر GSC الحي يبقى5 clicks/11 impressions/
   CTR45.5%/position4.4 حتى17سبتمبر؛ لا يُنسب تحسن قبل نشر/زحف وقياس لاحق.
@@ -31,7 +33,7 @@
   اتصال مباشر بلا رد، ودعوات Julia/Cem/Robert/Stephanie pending؛ لا متابعة ترويجية من قبول الاتصال وحده.
 - **المحمي/الخطوة التالية:** بوابة البريد المباشر ونشر/قياس Workflow في21سبتمبر محفوظان. أعلى إجراءين خارجيين
   متاحين الآن هما استفسارا SHK Fachzeitung وSi بعد تأكيد إرسال صريح؛ لا إرسال قبل التأكيد. بالتوازي، نشر تحسين GEO
-  إلى الإنتاج آمن بعد Git fast-forward check؛ لا تغيير للتجارب أو الجداول.
+  اكتمل وتحقق؛ Git `main`/`origin/main` متزامنان عند`d2282f9` قبل تحديث حالة النشر الحالي، ولا تغيير للتجارب أو الجداول.
 
 ## سجل الحالة السابق — 18 سبتمبر 2026، 01:36 — إعادة تنشيط المحفزات ثم استنفاد السعة الحالية
 

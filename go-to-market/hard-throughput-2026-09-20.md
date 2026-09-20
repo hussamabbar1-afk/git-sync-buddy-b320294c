@@ -140,4 +140,4 @@ Concrete GEO actions:
 | `SHK Chatbot menschliche Übergabe` | `/shk-chatbot-menschliche-uebergabe` — **existing fit**, no thin variant. |
 | `digitale Anfrageaufnahme SHK ohne ERP` | `/kontaktformular-oder-chatbot` — **implemented as a new direct answer**, not a separate thin page. |
 
-Verification: targeted ESLint and the complete production build passed after the route change. The protected direct-mail cohort and scheduled 21 September Workflow publication were not touched.
+Verification: targeted ESLint and the complete production build passed after the route change. Preview verification returned HTTP 200 and exposed the new section, `FAQPage`, ZVSHK source and modified date. Cloudflare version `5e23c4ea-7ea5-4a27-b5f5-2b106b6a58db` was then deployed at 100%; the same four checks passed on production. The protected direct-mail cohort and scheduled 21 September Workflow publication were not touched.
