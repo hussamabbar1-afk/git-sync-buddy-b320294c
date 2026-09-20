@@ -1,10 +1,10 @@
 # حالة مشروع ZunftEcho
 
-> آخر تحديث: 20 سبتمبر 2026، 14:00 — المنطقة الزمنية `Europe/Berlin`
+> آخر تحديث: 20 سبتمبر 2026، 14:05 — المنطقة الزمنية `Europe/Berlin`
 > الغرض: هذا الملف هو نقطة البداية الإلزامية لأي محادثة مستقبلية تخص المشروع.  
 > اقرأ أيضًا `AGENTS.md` قبل أي تعديل. عند التعارض، الكود والحالة الحية الأحدث يتقدمان على الوثائق المؤرخة.
 
-## CURRENT STATE — 20 سبتمبر 2026، 14:00 — Hard Maximum Acquisition Throughput
+## CURRENT STATE — 20 سبتمبر 2026، 14:05 — Hard Maximum Acquisition Throughput
 
 - **المرحلة/الأولوية:** قبل أول Pilot؛ الاكتساب والتوزيع في وضع throughput مرتفع، دون تغيير cohort البريد المباشر
   أو Workflow/Shorts أو بوابة21سبتمبر. مرجع هذه الدفعة `go-to-market/hard-throughput-2026-09-20.md`؛ لا إنفاق
@@ -16,10 +16,11 @@
   Lan Ziegenhagen وThomas Starke وRichardo Holtz وDaniel Schrumpf وThomas/Julia Schröder وDominic Mittelstraß
   وMatthias Noack وLars Kollert وStephan Bahr وJens Przybyszewski وBodo Nitschke. Wersig يرفض الإعلان غير المطلوب
   صراحةً؛ بقية العناوين العامة ليست إذنًا ترويجيًا.
-- **الشراكات/التوزيع:** جرى فحص **16** هدفًا جديدًا؛ SHK Fachzeitung وSi فقط `READY` لأن صفحتيهما تدعوان صراحةً
-  للموضوعات/الاقتراحات التحريرية. رسالتان محايدتان جاهزتان، وفحص الصندوقين لا يثبت مراسلات سابقة؛ الإرسال ينتظر
-  تأكيد المالك وقت الفعل. Digiwerkstatt4.B وmu digital وFlixcheck وsmapOne `ACTIVE qualification`؛ البقية
-  FUTURE/BLOCKED/LOW وفق التداخل أو الصوت/الفيديو أو الإنفاق أو غياب مسار منشور.
+- **الشراكات/التوزيع:** جرى فحص **16** هدفًا جديدًا. بعد تأكيد المالك أُرسل استفسارا SHK Fachzeitung إلى
+  `redaktion.shk@shkfachzeitung.com` وSi إلى`maximilian.doeller@holzmann-medien.de` مرة واحدة14:02 من
+  `ZunftEcho <kontakt@zunftecho.de>`؛ تحقق نجاح Gmail ونسختا Sent والمرسل/المستلم/الموضوع/النص و
+  `sent-by:zunftecho.de`. كلاهما `SENT VERIFIED / WAITING` بلا حجز أو شراء أو التزام. Digiwerkstatt4.B وmu digital
+  وFlixcheck وsmapOne `ACTIVE qualification`؛ البقية FUTURE/BLOCKED/LOW وفق التداخل أو الصوت/الفيديو أو الإنفاق.
 - **GEO:** ستة prompts شراء Google AI Mode = **0/6 mentions و0/6 citations** لـZunftEcho. تتكرر ZVSHK/
   Serviceportal SHK وHERO/ToolTime/Plancraft وHaustechnikDialog وSi ومورّدو النماذج؛ الفجوة سلطة خارجية وتعريف
   مباشر للفئة. نُفذ على `/kontaktformular-oder-chatbot` قسم Website-only دون ERP بحدود صادقة، FAQ جديدان،
@@ -31,9 +32,11 @@
   CTR45.5%/position4.4 حتى17سبتمبر؛ لا يُنسب تحسن قبل نشر/زحف وقياس لاحق.
 - **الإشارات البشرية:** لا reply/Pilot/lead جديد مثبت في آخر فحص؛ R+F وطلبات الشركاء السابقة WAITING. Patrick Davidt
   اتصال مباشر بلا رد، ودعوات Julia/Cem/Robert/Stephanie pending؛ لا متابعة ترويجية من قبول الاتصال وحده.
-- **المحمي/الخطوة التالية:** بوابة البريد المباشر ونشر/قياس Workflow في21سبتمبر محفوظان. أعلى إجراءين خارجيين
-  متاحين الآن هما استفسارا SHK Fachzeitung وSi بعد تأكيد إرسال صريح؛ لا إرسال قبل التأكيد. بالتوازي، نشر تحسين GEO
-  اكتمل وتحقق؛ Git `main`/`origin/main` متزامنان عند`d2282f9` قبل تحديث حالة النشر الحالي، ولا تغيير للتجارب أو الجداول.
+- **المحمي/الخطوة التالية:** بوابة البريد المباشر ونشر/قياس Workflow في21سبتمبر محفوظان. استفسارا SHK Fachzeitung
+  وSi اكتمل إرسالهما والتحقق وأصبحا WAITING؛ لا متابعة مبكرة. حُسمت المسارات الأربعة التالية: Digiwerkstatt4.B/
+  André Voller أصبح `READY` لدعوة LinkedIn مجانية بلا note أو Pitch (ملف صحيح، Geschäftsführer، Vernetzen ظاهر،
+  ولا pending ظاهر) ويحتاج تأكيد المالك وقت الفعل؛ mu digital منافس مباشر LOW، Flixcheck affiliate/API يتطلبان
+  اتفاقًا/تعرفة ولا يجلبان SHK لنا فهما BLOCKED/LOW، وsmapOne بلا مسار شريك مفتوح ظاهر. تحسين GEO منشور ومتحقق.
 
 ## سجل الحالة السابق — 18 سبتمبر 2026، 01:36 — إعادة تنشيط المحفزات ثم استنفاد السعة الحالية
 

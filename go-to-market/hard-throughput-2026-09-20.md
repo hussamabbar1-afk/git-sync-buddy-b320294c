@@ -55,17 +55,17 @@ Ten concrete identities were added or resolved: Christopher Wersig, Lucy Hartman
 
 | Target | Access signal | State / next action |
 |---|---|---|
-| SHK Fachzeitung | Editorial page explicitly invites press material and covers business/marketing for SHK readers. | **READY** — one neutral topic-eligibility inquiry prepared; owner confirmation required at send time. |
-| Si – Das Fachmagazin für SHK-Unternehmer | Named editorial team explicitly invites content questions/suggestions. | **READY** — one neutral topic suggestion prepared; owner confirmation required at send time. |
-| Digiwerkstatt 4.B / André Voller | SHK/TGA digitization network with trusted sector access. | **ACTIVE qualification** — no published open vendor-submission route yet; do not cold-pitch. |
-| mu digital | Handwerker website agency and real distribution adjacency. | **ACTIVE qualification** — decision-maker and a lawful cooperation invitation remain unresolved. |
+| SHK Fachzeitung | Editorial page explicitly invites press material and covers business/marketing for SHK readers. | **SENT VERIFIED / WAITING** — neutral eligibility inquiry sent once at 14:02 after owner confirmation. |
+| Si – Das Fachmagazin für SHK-Unternehmer | Named editorial team explicitly invites content questions/suggestions. | **SENT VERIFIED / WAITING** — neutral topic suggestion sent once at 14:02 after owner confirmation. |
+| Digiwerkstatt 4.B / André Voller | SHK/TGA digitization network with trusted sector access; profile verifies Geschäftsführer and active SHK digitalization/co-marketing relationships. | **READY** — verified LinkedIn profile offers a free connection invitation and no pending invitation is visible; send only after owner confirmation, without note/Pitch/meeting. |
+| mu digital / Muharrem Uzun | Handwerker website agency and real distribution adjacency. | **LOW now** — direct owner identity resolved, but its current offer overlaps website structure, inquiry paths and SEO; no published collaboration invitation. |
 | SHK Radio | Accepts press releases and podcast requests. | **FUTURE / LOW now** — no genuine news release and voice/video are owner-excluded. |
 | LC-TOP podcast | Public guest-suggestion route. | **LOW now** — format conflicts with the no voice/video preference. |
 | Mittelstand-Digital Zentrum Handwerk | Provider-neutral practice cases with high trust. | **FUTURE** — first pilot evidence is needed before a credible case route. |
 | HaustechnikDialog | Repeated AI-answer authority and SHK audience. | **BLOCKED / REQUIRES SPEND** — only commercial advertising route found; no paid action. |
 | Serviceportal SHK / ZVSHK | Strong trade-authority category source. | **LOW as partner / ACTIVE as citation source** — overlapping official service; use as factual source, not a cold partnership target. |
-| Flixcheck | Repeatedly surfaced digital data-capture platform. | **ACTIVE qualification** — possible integration/referral adjacency, but no open route verified. |
-| smapOne | Repeatedly surfaced no-code workflow platform. | **ACTIVE qualification** — possible ecosystem route; open partner eligibility unresolved. |
+| Flixcheck | Repeatedly surfaced digital data-capture platform. | **BLOCKED / LOW now** — affiliate route exists but refers customers away from ZunftEcho and entails commission terms; API requires a paid tariff and per-check fees. No agreement or spend. |
+| smapOne | Repeatedly surfaced no-code workflow platform. | **BLOCKED / LOW now** — product/integration adjacency is real, but no open no-cost partner-submission route was found; no cold pitch. |
 | Förster Digital / Christian Förster | Handwerk sites plus its own structured inquiry flow. | **LOW** — direct overlap/competitor, not a high-value initial partner. |
 | Alpha Handwerk / Dominik Odermatt | Paid Handwerk lead-generation agency. | **LOW** — direct acquisition overlap and paid-service orientation. |
 | Roser Systeme | Recurring AI answer for digital Handwerk forms/workflows. | **LOW as partner** — competitor/alternative; retain for positioning evidence. |
@@ -74,7 +74,9 @@ Ten concrete identities were added or resolved: Christopher Wersig, Lucy Hartman
 
 Primary route sources: [SHK Fachzeitung editorial invitation](https://www.shkfachzeitung.com/redaktion-shk-fachzeitung-fachzeitschrift-magazin/), [Si editorial team](https://www.si-shk.de/service/), [Digiwerkstatt 4.B](https://digiwerkstatt4b.de/ueber-uns/), [Förster Digital](https://foerster-digital.de/), [Alpha Handwerk](https://alphahandwerk.de/), [ZVSHK Serviceportal](https://www.zvshk.de/themen/serviceportal-shk).
 
-### Prepared external actions — not yet sent
+### External actions — sent and verified
+
+Both messages below were sent once at 14:02 Europe/Berlin after explicit owner confirmation. Gmail success, both Sent copies, From/To/subject/body and `sent-by: zunftecho.de` were verified. They are now `WAITING`; do not resend or follow up without a later contextual trigger.
 
 1. **SHK Fachzeitung** — recipient published by the editorial page: `redaktion.shk@shkfachzeitung.com`.
 
