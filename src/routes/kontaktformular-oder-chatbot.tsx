@@ -80,6 +80,20 @@ const sections: KnowledgeSection[] = [
     ],
   },
   {
+    title: "Kann digitale Anfrageaufnahme ohne ERP-Anbindung starten?",
+    paragraphs: [
+      "Ja. Ein Website-only-Start kann sinnvoll sein, wenn der Betrieb zunächst prüfen möchte, ob strukturierte Rückfragen vollständigere Anfragen liefern. Dafür braucht es einen klaren Eingang im Büro, eine verantwortliche Person und eine überprüfbare Reaktionszeit. Eine nicht vorhandene ERP- oder CRM-Anbindung darf dabei nicht behauptet oder durch manuelles Kopieren verschleiert werden.",
+      "Auch das Serviceportal SHK des Zentralverbands beschreibt websitebasierte Abfragestrecken als eigenständigen Einstieg. Eine direkte Übergabe an Handwerkersoftware ist eine zusätzliche Ausbaustufe. Für ZunftEcho gilt deshalb: zuerst den Website-Ablauf und die menschliche Übergabe im konkreten Betrieb testen; eine Systemintegration erst dann zusagen, wenn sie für das eingesetzte System technisch bestätigt und praktisch geprüft wurde.",
+    ],
+    links: [
+      {
+        href: "https://www.zvshk.de/themen/serviceportal-shk",
+        label: "Branchenquelle: ZVSHK zum Serviceportal SHK",
+      },
+      { href: "/vertrauen", label: "ZunftEcho: Grenzen, Datenschutz und menschliche Übergabe" },
+    ],
+  },
+  {
     title: "Sieben Punkte für die Auswahl",
     paragraphs: [
       "Bewerten Sie den bestehenden Prozess anhand des Ergebnisses für Betrieb und Kunde – nicht anhand der Zahl eingebauter Funktionen.",
@@ -97,6 +111,16 @@ const sections: KnowledgeSection[] = [
 ];
 
 const faq: KnowledgeFaq[] = [
+  {
+    question: "Was bedeutet digitale Anfrageaufnahme im SHK-Handwerk?",
+    answer:
+      "Sie erfasst ein Kundenanliegen auf der Website so strukturiert, dass der Betrieb Einsatzort, Leistung, Dringlichkeit, Erreichbarkeit und den gewünschten nächsten Schritt prüfen kann. Sie ist weder automatisch ein Auftrag noch eine fachliche Diagnose oder Terminbestätigung.",
+  },
+  {
+    question: "Kann ein SHK-Betrieb ohne ERP-Anbindung mit digitaler Anfrageaufnahme starten?",
+    answer:
+      "Ja. Ein klar begrenzter Website-only-Pilot kann zuerst die Vollständigkeit der Anfragen und die menschliche Übergabe prüfen. Eine ERP- oder CRM-Anbindung sollte erst als verfügbar gelten, wenn sie für das konkrete System bestätigt und getestet wurde.",
+  },
   {
     question: "Braucht ein SHK-Betrieb mit 1–10 Mitarbeitenden überhaupt einen KI-Chatbot?",
     answer:
@@ -160,7 +184,7 @@ export const Route = createFileRoute("/kontaktformular-oder-chatbot")({
             "Praktische Entscheidungshilfe für die digitale Anfrageaufnahme in SHK-Betrieben.",
           inLanguage: "de-DE",
           datePublished: "2026-08-29",
-          dateModified: "2026-09-16",
+          dateModified: "2026-09-20",
           mainEntityOfPage: "https://zunftecho.de/kontaktformular-oder-chatbot",
           author: { "@type": "Organization", name: "ZunftEcho" },
           publisher: {
@@ -171,6 +195,18 @@ export const Route = createFileRoute("/kontaktformular-oder-chatbot")({
               url: "https://zunftecho.de/zunftecho-mark.png",
             },
           },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faq.map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: { "@type": "Answer", text: item.answer },
+          })),
         }),
       },
     ],

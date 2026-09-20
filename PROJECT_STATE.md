@@ -1,34 +1,37 @@
 # حالة مشروع ZunftEcho
 
-> آخر تحديث: 20 سبتمبر 2026، 13:38 — المنطقة الزمنية `Europe/Berlin`
+> آخر تحديث: 20 سبتمبر 2026، 13:56 — المنطقة الزمنية `Europe/Berlin`
 > الغرض: هذا الملف هو نقطة البداية الإلزامية لأي محادثة مستقبلية تخص المشروع.  
 > اقرأ أيضًا `AGENTS.md` قبل أي تعديل. عند التعارض، الكود والحالة الحية الأحدث يتقدمان على الوثائق المؤرخة.
 
-## CURRENT STATE — 20 سبتمبر 2026، 13:38 — كثافة ما قبل بوابة 21 سبتمبر
+## CURRENT STATE — 20 سبتمبر 2026، 13:56 — Hard Maximum Acquisition Throughput
 
-- **المرحلة/الأولوية:** قبل أول Pilot؛ نُفذ عمل اكتساب مستقل عالي القيمة دون تغيير خطابات7سبتمبر أو موعد التقييم
-  أو Shorts/Workflow. المرجع التفصيلي `go-to-market/pre-gate-density-2026-09-20.md`؛ لا إنفاق ولا أرصدة مزودين محدودة.
-- **Pipeline SHK:** أصبح **119** سجلًا بحثيًا غير متداخل، منها **21 Q** وفق دليل أولي صارم و**6 READY** إضافية
-  خارج Q. الجديد: MMTec وRoger Laube = Q؛ Arndt GmbH = R بسبب غموض الممثل/الحجم. لا واحد منها SQL أو يملك إذن
-  ترويج إلكتروني؛ المسار البريدي للاثنين ينتظر قرار cohort بعد بوابة21سبتمبر.
-- **الشراكات/التوزيع:** R+F podcast أصبح `PD20 SENT VERIFIED / WAITING`: بعد تأكيد المالك أُرسل اقتراح موضوع محايد
-  مرة واحدة13:37 من`ZunftEcho <kontakt@zunftecho.de>` إلى`podcast@r-f.de`. تحقق نجاح Gmail وSent والمرسل/
-  المستلم/الموضوع/النص و`sent-by:zunftecho.de`؛ لا مرفق أو شراء أو موعد أو التزام، ولا إعادة/متابعة قبل رد أو توقيت مشروع.
-  برامج DTG/Open Datapool/Pietsch FUTURE/BLOCKED/LOW VALUE ولا تُضخّم كفرص جاهزة.
-- **الإشارات البشرية:** لا رد Gmail جديد في بحثي الوارد المحددين ولا lead بعد13سبتمبر. Patrick Davidt أصبح اتصالًا مباشرًا
-  وقرأ ملاحظة الدعوة دون رد؛ قرار عدم اعتبار القبول إذنًا ترويجيًا مستمر، فلا متابعة أُرسلت. Julia/Cem/Robert/Stephanie
-  ما زالوا pending. لا جواب شريك أو Pilot مثبت.
-- **SEO/GSC:** القياس الحي حتى17سبتمبر = **5 clicks / 11 impressions / CTR45.5% / position4.4**؛ الاستعلام المكشوف
-  `shk zunft` =0/3. الصفحات: `/anfrage-check`=1/3، `/kontaktformular-oder-chatbot`=1/2،
-  `/shk-anfragen-automatisieren`=0/1. إشارة صغيرة لا تبرر صفحة/تعديل Conversion جديد قبل بيانات أكثر.
-- **GEO:** ثلاث أسئلة شراء جديدة Google AI Mode = **0/3 mentions و0/3 citations** لـZunftEcho. برزت
-  Serviceportal SHK/TemMedia/Buzzard AI وLabelwin/mfr/dahoam.ai وقوالب عامة. الفجوة الحالية سلطة/ذكر خارجي؛
-  `PD20` هو الإجراء التنفيذي الأقوى، لا صفحة رابعة رقيقة. GEO منفصل عن SEO.
-- **YouTube/الموقع:** Studio الحالي: Short C **104/0** (يستبدل رقم114 السابق)، Short B **59/0**، Short A **53**
-  مع عداد تعليق واحد لكن لا تعليق عملي ظاهر. Workflow ما زال مجدولًا21سبتمبر ولم يتغير. `/leads` بلا سجل بعد13سبتمبر.
-- **المحمي/الخطوة التالية:** بوابة البريد المباشر ونشر/قياس Workflow في21سبتمبر محفوظان. PD20 اكتمل إرساله وأصبح
-  WAITING؛ لا يوجد إجراء خارجي آخر عالي القيمة ومأذون قبل البوابة. بقية المسارات WAITING/BLOCKED بلا متابعة مبكرة
-  أو cold promo؛ الاستئناف عند رد بشري أو بوابة21سبتمبر.
+- **المرحلة/الأولوية:** قبل أول Pilot؛ الاكتساب والتوزيع في وضع throughput مرتفع، دون تغيير cohort البريد المباشر
+  أو Workflow/Shorts أو بوابة21سبتمبر. مرجع هذه الدفعة `go-to-market/hard-throughput-2026-09-20.md`؛ لا إنفاق
+  ولا استهلاك أرصدة Apollo/Clay/Vibe/Hunter.
+- **Pipeline SHK:** أصبح **153** سجلًا بحثيًا غير متداخل بعد إضافة34 شركة إقليمية:30 من سجل OWA Osthavelland
+  الحالي و4 من مواقع شركات حالية. يبقى **21 Q صارمًا** بدليل أولي؛ Ralf Noack(2–4) وNITSCHKE(5–9)
+  `Q-supported` بدليل حجم طرف ثالث ولا يُرفعان إلى Q الصارم. لا سجل جديد SQL أو يملك إذن ترويج إلكتروني.
+- **الهوية/الوصول:** حُسمت هوية المسؤول في10 سجلات شركة على الأقل، منها Christopher Wersig وLucy Hartmann/
+  Lan Ziegenhagen وThomas Starke وRichardo Holtz وDaniel Schrumpf وThomas/Julia Schröder وDominic Mittelstraß
+  وMatthias Noack وLars Kollert وStephan Bahr وJens Przybyszewski وBodo Nitschke. Wersig يرفض الإعلان غير المطلوب
+  صراحةً؛ بقية العناوين العامة ليست إذنًا ترويجيًا.
+- **الشراكات/التوزيع:** جرى فحص **16** هدفًا جديدًا؛ SHK Fachzeitung وSi فقط `READY` لأن صفحتيهما تدعوان صراحةً
+  للموضوعات/الاقتراحات التحريرية. رسالتان محايدتان جاهزتان، وفحص الصندوقين لا يثبت مراسلات سابقة؛ الإرسال ينتظر
+  تأكيد المالك وقت الفعل. Digiwerkstatt4.B وmu digital وFlixcheck وsmapOne `ACTIVE qualification`؛ البقية
+  FUTURE/BLOCKED/LOW وفق التداخل أو الصوت/الفيديو أو الإنفاق أو غياب مسار منشور.
+- **GEO:** ستة prompts شراء Google AI Mode = **0/6 mentions و0/6 citations** لـZunftEcho. تتكرر ZVSHK/
+  Serviceportal SHK وHERO/ToolTime/Plancraft وHaustechnikDialog وSi ومورّدو النماذج؛ الفجوة سلطة خارجية وتعريف
+  مباشر للفئة. نُفذ على `/kontaktformular-oder-chatbot` قسم Website-only دون ERP بحدود صادقة، FAQ جديدان،
+  `FAQPage` JSON-LD، مصدر ZVSHK وربط الثقة؛ ESLint والبناء الإنتاجي ناجحان. إعادة الاختبار الفوري غير مفيدة.
+- **SEO:** ست فرص buyer-intent وُجّهت إلى أصول قائمة بدل صفحات رقيقة؛ نُفذ فعليًا عنقودا
+  `digitale Anfrageaufnahme SHK` و`... ohne ERP` على صفحة المقارنة. آخر GSC الحي يبقى5 clicks/11 impressions/
+  CTR45.5%/position4.4 حتى17سبتمبر؛ لا يُنسب تحسن قبل نشر/زحف وقياس لاحق.
+- **الإشارات البشرية:** لا reply/Pilot/lead جديد مثبت في آخر فحص؛ R+F وطلبات الشركاء السابقة WAITING. Patrick Davidt
+  اتصال مباشر بلا رد، ودعوات Julia/Cem/Robert/Stephanie pending؛ لا متابعة ترويجية من قبول الاتصال وحده.
+- **المحمي/الخطوة التالية:** بوابة البريد المباشر ونشر/قياس Workflow في21سبتمبر محفوظان. أعلى إجراءين خارجيين
+  متاحين الآن هما استفسارا SHK Fachzeitung وSi بعد تأكيد إرسال صريح؛ لا إرسال قبل التأكيد. بالتوازي، نشر تحسين GEO
+  إلى الإنتاج آمن بعد Git fast-forward check؛ لا تغيير للتجارب أو الجداول.
 
 ## سجل الحالة السابق — 18 سبتمبر 2026، 01:36 — إعادة تنشيط المحفزات ثم استنفاد السعة الحالية
 
