@@ -28,6 +28,7 @@ import { Route as PreiseRouteImport } from './routes/preise'
 import { Route as RegistrierenRouteImport } from './routes/registrieren'
 import { Route as ShkAnfragenAutomatisierenRouteImport } from './routes/shk-anfragen-automatisieren'
 import { Route as ShkChatbotMenschlicheUebergabeRouteImport } from './routes/shk-chatbot-menschliche-uebergabe'
+import { Route as ShkWartungsanfrageMitFotosRouteImport } from './routes/shk-wartungsanfrage-mit-fotos'
 import { Route as VertrauenRouteImport } from './routes/vertrauen'
 import { Route as WebsiteAnfragenHandwerkChecklisteRouteImport } from './routes/website-anfragen-handwerk-checkliste'
 import { Route as WidgetRouteImport } from './routes/widget'
@@ -146,6 +147,12 @@ const ShkChatbotMenschlicheUebergabeRoute =
   ShkChatbotMenschlicheUebergabeRouteImport.update({
     id: '/shk-chatbot-menschliche-uebergabe',
     path: '/shk-chatbot-menschliche-uebergabe',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ShkWartungsanfrageMitFotosRoute =
+  ShkWartungsanfrageMitFotosRouteImport.update({
+    id: '/shk-wartungsanfrage-mit-fotos',
+    path: '/shk-wartungsanfrage-mit-fotos',
     getParentRoute: () => rootRouteImport,
   } as any)
 const VertrauenRoute = VertrauenRouteImport.update({
@@ -280,6 +287,7 @@ export interface FileRoutesByFullPath {
   '/registrieren': typeof RegistrierenRoute
   '/shk-anfragen-automatisieren': typeof ShkAnfragenAutomatisierenRoute
   '/shk-chatbot-menschliche-uebergabe': typeof ShkChatbotMenschlicheUebergabeRoute
+  '/shk-wartungsanfrage-mit-fotos': typeof ShkWartungsanfrageMitFotosRoute
   '/vertrauen': typeof VertrauenRoute
   '/website-anfragen-handwerk-checkliste': typeof WebsiteAnfragenHandwerkChecklisteRoute
   '/widget': typeof WidgetRoute
@@ -321,6 +329,7 @@ export interface FileRoutesByTo {
   '/registrieren': typeof RegistrierenRoute
   '/shk-anfragen-automatisieren': typeof ShkAnfragenAutomatisierenRoute
   '/shk-chatbot-menschliche-uebergabe': typeof ShkChatbotMenschlicheUebergabeRoute
+  '/shk-wartungsanfrage-mit-fotos': typeof ShkWartungsanfrageMitFotosRoute
   '/vertrauen': typeof VertrauenRoute
   '/website-anfragen-handwerk-checkliste': typeof WebsiteAnfragenHandwerkChecklisteRoute
   '/widget': typeof WidgetRoute
@@ -364,6 +373,7 @@ export interface FileRoutesById {
   '/registrieren': typeof RegistrierenRoute
   '/shk-anfragen-automatisieren': typeof ShkAnfragenAutomatisierenRoute
   '/shk-chatbot-menschliche-uebergabe': typeof ShkChatbotMenschlicheUebergabeRoute
+  '/shk-wartungsanfrage-mit-fotos': typeof ShkWartungsanfrageMitFotosRoute
   '/vertrauen': typeof VertrauenRoute
   '/website-anfragen-handwerk-checkliste': typeof WebsiteAnfragenHandwerkChecklisteRoute
   '/widget': typeof WidgetRoute
@@ -407,6 +417,7 @@ export interface FileRouteTypes {
     | '/registrieren'
     | '/shk-anfragen-automatisieren'
     | '/shk-chatbot-menschliche-uebergabe'
+    | '/shk-wartungsanfrage-mit-fotos'
     | '/vertrauen'
     | '/website-anfragen-handwerk-checkliste'
     | '/widget'
@@ -448,6 +459,7 @@ export interface FileRouteTypes {
     | '/registrieren'
     | '/shk-anfragen-automatisieren'
     | '/shk-chatbot-menschliche-uebergabe'
+    | '/shk-wartungsanfrage-mit-fotos'
     | '/vertrauen'
     | '/website-anfragen-handwerk-checkliste'
     | '/widget'
@@ -490,6 +502,7 @@ export interface FileRouteTypes {
     | '/registrieren'
     | '/shk-anfragen-automatisieren'
     | '/shk-chatbot-menschliche-uebergabe'
+    | '/shk-wartungsanfrage-mit-fotos'
     | '/vertrauen'
     | '/website-anfragen-handwerk-checkliste'
     | '/widget'
@@ -533,6 +546,7 @@ export interface RootRouteChildren {
   RegistrierenRoute: typeof RegistrierenRoute
   ShkAnfragenAutomatisierenRoute: typeof ShkAnfragenAutomatisierenRoute
   ShkChatbotMenschlicheUebergabeRoute: typeof ShkChatbotMenschlicheUebergabeRoute
+  ShkWartungsanfrageMitFotosRoute: typeof ShkWartungsanfrageMitFotosRoute
   VertrauenRoute: typeof VertrauenRoute
   WebsiteAnfragenHandwerkChecklisteRoute: typeof WebsiteAnfragenHandwerkChecklisteRoute
   WidgetRoute: typeof WidgetRoute
@@ -672,6 +686,13 @@ declare module '@tanstack/react-router' {
       path: '/shk-chatbot-menschliche-uebergabe'
       fullPath: '/shk-chatbot-menschliche-uebergabe'
       preLoaderRoute: typeof ShkChatbotMenschlicheUebergabeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shk-wartungsanfrage-mit-fotos': {
+      id: '/shk-wartungsanfrage-mit-fotos'
+      path: '/shk-wartungsanfrage-mit-fotos'
+      fullPath: '/shk-wartungsanfrage-mit-fotos'
+      preLoaderRoute: typeof ShkWartungsanfrageMitFotosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/vertrauen': {
@@ -887,6 +908,7 @@ const rootRouteChildren: RootRouteChildren = {
   RegistrierenRoute: RegistrierenRoute,
   ShkAnfragenAutomatisierenRoute: ShkAnfragenAutomatisierenRoute,
   ShkChatbotMenschlicheUebergabeRoute: ShkChatbotMenschlicheUebergabeRoute,
+  ShkWartungsanfrageMitFotosRoute: ShkWartungsanfrageMitFotosRoute,
   VertrauenRoute: VertrauenRoute,
   WebsiteAnfragenHandwerkChecklisteRoute:
     WebsiteAnfragenHandwerkChecklisteRoute,

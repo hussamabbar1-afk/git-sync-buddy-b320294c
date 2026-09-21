@@ -7,6 +7,7 @@ import {
   ListChecks,
   MessageSquareText,
   SearchCheck,
+  ImagePlus,
   Wrench,
 } from "lucide-react";
 
@@ -39,6 +40,14 @@ const guides = [
     title: "SHK-Anfragen automatisieren, ohne die persönliche Kontrolle zu verlieren",
     description:
       "Ein klarer Ablauf für Problem, Kontaktdaten, Einsatzort, Dringlichkeit und Terminwunsch.",
+  },
+  {
+    to: "/shk-wartungsanfrage-mit-fotos" as const,
+    icon: ImagePlus,
+    label: "Wartungsanfrage mit Fotos",
+    title: "SHK-Wartungsanfragen vollständig und sicher erfassen",
+    description:
+      "Gerätedaten, freiwillige Fotos, Dringlichkeit und Terminwunsch so aufnehmen, dass ein Mitarbeiter verlässlich prüfen kann.",
   },
   {
     to: "/shk-chatbot-menschliche-uebergabe" as const,
