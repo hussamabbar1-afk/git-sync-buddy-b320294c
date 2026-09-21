@@ -115,7 +115,7 @@ Seven new Google AI Mode prompts were run after the earlier six-query baseline; 
 1. **COMPLETED in code:** created `/shk-wartungsanfrage-mit-fotos`, an answer-first article with `Article` + `FAQPage` schema, voluntary-photo boundary, human review, safety/appointment limits and first-party/industry sources.
 2. **COMPLETED in code:** linked the guide from `/wissen` and added it to `sitemap.xml`.
 3. **COMPLETED in code:** linked the new guide to the existing human-handoff and eight-point checklist assets, forming an intent cluster without duplicating pages.
-4. **READY after deployment/indexing:** submit the new URL in Search Console once production HTTP/schema verification succeeds.
+4. **DEPLOYED / INDEXING READY:** Cloudflare version `28985d69-2f26-43da-8ba5-02cb6286e487` is at 100%. Production returned HTTP 200 and exposed the title, canonical, `FAQPage`, ZVSHK source, knowledge-hub link and sitemap entry. Search Console confirms the URL is unknown/not indexed and exposes `Request indexing`; submission is waiting only for action-time owner confirmation.
 5. **WAITING on external authority:** editorial and distribution inquiries already sent remain the legitimate path toward third-party citation; do not duplicate them.
 
 ## O. Buyer-intent SEO opportunity routing

@@ -26,7 +26,11 @@
 - **SEO/GEO تنفيذ ملموس:** أُنشئ `/shk-wartungsanfrage-mit-fotos` كدليل buyer-intent مع `Article` و`FAQPage`
   وحدود الصور الاختيارية/الخطر/التشخيص/الموعد والتسليم البشري، وربط من `/wissen` ومع عنقودَي handoff/checklist
   وإضافة sitemap. ESLint ناجح، build الإنتاج ناجح، وPreview أعاد HTTP200 وتحقق العنوان/Canonical/Schema/رابط
-  المعرفة/sitemap. **لم يُنشر بعد**؛ الخطوة التالية المستقلة هي commit/push الآمن ثم التحقق الإنتاجي وطلب الفهرسة.
+  المعرفة/sitemap. commit `3b73ad4` مدفوع fast-forward إلى `origin/main`، وCloudflare version
+  `28985d69-2f26-43da-8ba5-02cb6286e487` منشور عند100%؛ تحقق الإنتاج يطابق الاختبارات الستة. Search Console يؤكد
+  أن الرابط جديد/غير معروف ويعرض زر طلب الفهرسة؛ الإرسال **READY / OWNER CONFIRMATION REQUIRED AT ACTION TIME**.
+- **SEO live metric:** GSC حتى19سبتمبر أصبح **5 clicks / 12 impressions / CTR41.7% / position4.4**؛ الزيادة
+  Impression واحدة فقط ولا تُنسب للصفحة الجديدة أو نشر اليوم.
 - **المحمي/المحفزات:** Workflow Short يبقى دون تعديل حتى نشر18:30 ومراقبة18:35. بوابة البريد المباشر تبقى
   IMPROVE/BLOCKED حتى نص الخطاب أو دليل تسليم/رد. لا CRO جديد لأن لا دليل عائق تحويل. لا إعادة رسائل أو استعلامات
   GEO نفسها. الاستئناف الخارجي: تأكيد دعوتي LinkedIn، رد بشري، lead، أو بيانات Workflow/GSC لاحقة.
