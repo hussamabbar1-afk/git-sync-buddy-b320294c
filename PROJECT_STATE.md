@@ -1,10 +1,10 @@
 # حالة مشروع ZunftEcho
 
-> آخر تحديث: 21 سبتمبر 2026، 14:46 — المنطقة الزمنية `Europe/Berlin`
+> آخر تحديث: 21 سبتمبر 2026، 14:54 — المنطقة الزمنية `Europe/Berlin`
 > الغرض: هذا الملف هو نقطة البداية الإلزامية لأي محادثة مستقبلية تخص المشروع.  
 > اقرأ أيضًا `AGENTS.md` قبل أي تعديل. عند التعارض، الكود والحالة الحية الأحدث يتقدمان على الوثائق المؤرخة.
 
-## CURRENT STATE — 21 سبتمبر 2026، 14:46 — توسعة فعلية متعددة القنوات قبل نشر Workflow
+## CURRENT STATE — 21 سبتمبر 2026، 14:54 — توسعة فعلية متعددة القنوات قبل نشر Workflow
 
 - **المرحلة/الأولوية:** قبل أول Pilot؛ الاكتساب والتوزيع هما الأولوية. نُفذت دفعة cross-channel موثقة في
   `go-to-market/cross-channel-density-2026-09-21.md` دون تغيير تجربة البريد المباشر أو Workflow Short المجدول
@@ -16,9 +16,10 @@
   لأعضاء SHK. لا Pitch مكرر الآن لأن استفسار Fachverband المركزي ما زال `WAITING`. بقية استفسارات التحرير/
   البرمجيات/الموردين السابقة تبقى `WAITING` بلا متابعة مبكرة.
 - **LinkedIn:** Anke Voss (Heinrich VOSS Gebäudetechnik) وSven Schöpker (Mission Starkes Handwerk) هويتان
-  متحققتان ومسارا `Vernetzen` مجانيان ظاهران بلا Pending؛ نصا دعوتين فرديتين غير ترويجيتين جاهزان، والحالة
-  **READY / OWNER CONFIRMATION REQUIRED AT ACTION TIME**. Bastian Strauß وChristoph Krause `BLOCKED/LOW`
-  لأن المتاح الظاهر Follow فقط. لا دعوة أو DM جديد أُرسل في هذه الدفعة حتى الآن.
+  متحققتان ومسارا `Vernetzen` مجانيان ظاهران بلا Pending. بعد موافقة المالك على دعوتين بنصين فرديين، أثبتت
+  واجهة LinkedIn أن رصيد الملاحظات الشخصية الشهري انتهى وعرضت Premium؛ لم تبدأ تجربة أو ترقية ولم تُرسل أي
+  دعوة. المساران الآن **READY WITHOUT NOTE / OWNER RECONFIRMATION REQUIRED** لأن الإرسال بلا ملاحظة تغيير
+  جوهري عن الصيغة الموافق عليها. Bastian Strauß وChristoph Krause `BLOCKED/LOW` لأن المتاح Follow فقط.
 - **GEO:** نُفذت **7 prompts جديدة** أضيق من baseline السابق = **0/7 mentions و0/7 citations** لـZunftEcho.
   تتكرر Serviceportal/ZVSHK وGC/thermregio/Tool Box وeTermin/Meisterwerk وKiworkSolution/Fachagent/Siteware
   ومواقع/برمجيات SHK. الفجوة المؤكدة: سلطة فئوية/طرف ثالث، وصياغة مباشرة لالتقاط Website-only مع صور وتسليم
@@ -28,12 +29,14 @@
   وإضافة sitemap. ESLint ناجح، build الإنتاج ناجح، وPreview أعاد HTTP200 وتحقق العنوان/Canonical/Schema/رابط
   المعرفة/sitemap. commit `3b73ad4` مدفوع fast-forward إلى `origin/main`، وCloudflare version
   `28985d69-2f26-43da-8ba5-02cb6286e487` منشور عند100%؛ تحقق الإنتاج يطابق الاختبارات الستة. Search Console يؤكد
-  أن الرابط جديد/غير معروف ويعرض زر طلب الفهرسة؛ الإرسال **READY / OWNER CONFIRMATION REQUIRED AT ACTION TIME**.
+  أن الرابط جديد/غير معروف؛ بعد موافقة المالك قُدم طلب الفهرسة مرة واحدة وأظهرت الواجهة نجاح
+  `تم طلب الفهرسة` وإضافته إلى قائمة الزحف ذات الأولوية. الحالة **COMPLETED / INDEXING WAITING**؛ لا تكرار للطلب.
 - **SEO live metric:** GSC حتى19سبتمبر أصبح **5 clicks / 12 impressions / CTR41.7% / position4.4**؛ الزيادة
   Impression واحدة فقط ولا تُنسب للصفحة الجديدة أو نشر اليوم.
 - **المحمي/المحفزات:** Workflow Short يبقى دون تعديل حتى نشر18:30 ومراقبة18:35. بوابة البريد المباشر تبقى
   IMPROVE/BLOCKED حتى نص الخطاب أو دليل تسليم/رد. لا CRO جديد لأن لا دليل عائق تحويل. لا إعادة رسائل أو استعلامات
-  GEO نفسها. الاستئناف الخارجي: تأكيد دعوتي LinkedIn، رد بشري، lead، أو بيانات Workflow/GSC لاحقة.
+  GEO نفسها. الاستئناف الخارجي: إعادة تأكيد إرسال دعوتي LinkedIn بلا ملاحظتين، تجدد رصيد الملاحظات، رد بشري،
+  lead، أو بيانات Workflow/GSC لاحقة.
 
 ## سجل الحالة السابق — 21 سبتمبر 2026، 01:55 — إغلاق بوابة البريد المباشر واستمرار قياس Workflow
 
