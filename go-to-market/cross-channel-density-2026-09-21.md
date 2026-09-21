@@ -86,8 +86,8 @@ Source: [official Fachverband member Innungen](https://www.brandenburg-shk.de/de
 
 | Candidate                                     | Verified relevance                                                                                                                                         | State                                                             |
 | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| Anke Voss — Heinrich VOSS Gebäudetechnik GmbH | Public profile explicitly identifies an SHK family business, Handwerk and leadership. Direct free `Vernetzen` action visible; no pending invitation shown. | **READY WITHOUT NOTE — owner reconfirmation required**.           |
-| Sven Schöpker — Mission Starkes Handwerk      | Founder of a Handwerk network; direct free `Vernetzen` action visible; no pending invitation shown.                                                        | **READY WITHOUT NOTE — owner reconfirmation required**.           |
+| Anke Voss — Heinrich VOSS Gebäudetechnik GmbH | Public profile explicitly identifies an SHK family business, Handwerk and leadership. Direct `Vernetzen` action is visible; no pending invitation shown. | **BLOCKED BY PLAN/QUOTA** — free send was refused.                 |
+| Sven Schöpker — Mission Starkes Handwerk      | Founder of a Handwerk network; direct `Vernetzen` action is visible; no pending invitation shown.                                                        | **BLOCKED BY PLAN/QUOTA** — free send was refused.                 |
 | Bastian Strauß — Wolf + Strauss Solutions     | Handwerk digitalization positioning and broad network; only `Folgen` visible in the current profile state.                                                 | **BLOCKED / lower priority** — do not force or message.           |
 | Christoph Krause                              | Handwerk digitalization/AI multiplier with large public network; only `Folgen` visible.                                                                    | **BLOCKED / lower priority** — no direct connection action found. |
 
@@ -96,7 +96,7 @@ Prepared non-promotional connection notes (no link, price, pitch or meeting):
 - Anke Voss: `Guten Tag Frau Voss, Ihre Perspektive aus einem SHK-Familienunternehmen auf Digitalisierung und Führung passt zu meinem Fokus bei ZunftEcho. Ich würde mich gern zum fachlichen Austausch über strukturierte Website-Anfragen vernetzen.`
 - Sven Schöpker: `Guten Tag Herr Schöpker, Ihre Mission Starkes Handwerk passt zu meinem Fokus auf strukturierte Website-Anfragen für kleine SHK-Betriebe bei ZunftEcho. Ich würde mich gern zum fachlichen Austausch vernetzen.`
 
-Live execution result after owner approval: LinkedIn reported that the monthly allowance for personalized invitations is exhausted and offered Premium. No trial or upgrade was started. Neither invitation was sent; both profiles still expose `Vernetzen`. Sending without a note is technically available but requires a new owner confirmation because it materially differs from the approved action.
+Live execution result after owner approval: LinkedIn first reported that the monthly invitation allowance was exhausted and offered Premium. After the owner explicitly reconfirmed sending both without notes, each `Ohne Notiz senden` path was attempted once. LinkedIn refused both and returned the same Premium gate. No trial or upgrade was started, neither invitation was sent, and both profiles still expose `Vernetzen`. The routes are blocked until the quota resets or a future owner-approved paid gate opens.
 
 ## P. GEO — seven new buyer-context tests
 
@@ -136,8 +136,8 @@ Seven new Google AI Mode prompts were run after the earlier six-query baseline; 
 | Class                             | Current state after execution     | Concrete exhaustion reason / next trigger                                                                                          |
 | --------------------------------- | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | A SHK prospecting                 | **ACTIVE / COMPLETED batch**      | 46 new official records added; next work is targeted size/need resolution, not another raw-list scrape.                            |
-| B decision-makers & lawful routes | **ACTIVE / PARTIAL**              | 22 owner/proprietor identities surfaced in names; public email is not consent. Two lawful LinkedIn actions are confirmation-ready. |
-| C LinkedIn networking             | **READY WITHOUT NOTE / BLOCKED NOTES** | Personalized-note allowance is exhausted; no invite was sent. Both can be invited without a note only after owner reconfirmation. |
+| B decision-makers & lawful routes | **ACTIVE / PARTIAL**              | 22 owner/proprietor identities surfaced in names; public email is not consent. The two selected LinkedIn routes are quota-blocked. |
+| C LinkedIn networking             | **BLOCKED BY PLAN/QUOTA**          | Both noted and no-note paths were tried with owner approval; LinkedIn refused them behind Premium. No invite was sent.             |
 | D partnerships/distribution       | **ACTIVE / WAITING**              | 14 local Innungen qualified; duplicate outreach is withheld while Fachverband inquiry is pending.                                  |
 | E SHK-focused agencies            | **ACTIVE / WAITING**              | Existing three verified agency invitations pending; agency-oriented GEO prompt produced a distribution artifact.                   |
 | F software/integrators            | **WAITING**                       | Craftnote/Softwarelotsen and related inquiries already sent; no duplicate or paid integration action.                              |
@@ -147,7 +147,7 @@ Seven new Google AI Mode prompts were run after the earlier six-query baseline; 
 | J Innungen/Verbände               | **ACTIVE / WAITING**              | 14 named local targets qualified; central response is the clean next trigger.                                                      |
 | K media/editorial                 | **WAITING**                       | Multiple legitimate neutral topic/eligibility inquiries sent and verified; no premature follow-up.                                 |
 | L directories/ecosystems          | **WAITING / BLOCKED**             | Softwarelotsen/expertencheck/SHK ecosystem routes pending; no paid listing.                                                        |
-| M referral/co-marketing           | **READY / WAITING**               | Two no-note networking invites await reconfirmation; formal referral offer remains premature before first pilot evidence.          |
+| M referral/co-marketing           | **WAITING / BLOCKED**             | Both networking invitations are quota-blocked; formal referral offer remains premature before first pilot evidence.               |
 | N paid acquisition                | **BLOCKED**                       | Owner/spend gate remains closed; no paid action.                                                                                   |
 | O SEO                             | **ACTIVE / INDEXING WAITING**     | Guide is built, deployed and submitted once to Search Console; wait for crawl/index evidence without duplicate submission.         |
 | P GEO                             | **ACTIVE / COMPLETED test batch** | 0/7 new mentions/citations; concrete source/category gaps converted into the new guide and authority-routing actions.              |
