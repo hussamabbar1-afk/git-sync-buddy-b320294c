@@ -1,5 +1,14 @@
 # First-customer partner inquiries — 8 September 2026
 
+## أحدث تصحيح — Handwerker Expertencheck، 23 سبتمبر00:03
+
+بعد تأكيد المالك أُرسل تصحيح مستقل قصير بعنوان
+`Kurze Absenderkorrektur zum gesendeten Gastbeitrag` من `ZunftEcho <kontakt@zunftecho.de>` إلى
+`info@handwerker-expertencheck.de`. أوضح أن Gmail استخدم العنوان الشخصي خطأً في رسالة المقال السابقة، وأن
+المقال والمرفق يظلان صالحين. لم يُرفق الملف مجددًا. أكدت Gmail `تمّ إرسال الرسالة`، وأظهرت نسخة Sent:
+From=`ZunftEcho kontakt@zunftecho.de`، To=`info@handwerker-expertencheck.de`، الوقت00:03، والمرسل التقني
+`zunftecho.de`. الحالة **SENDER CORRECTED / WAITING EDITORIAL RESPONSE**؛ لا إرسال ثالث ولا Reminder مبكر.
+
 ## أحدث تنفيذ — Handwerker Expertencheck، 22 سبتمبر23:55
 
 بعد تأكيد المالك أُرسل المقال مرة واحدة داخل سلسلة الرد إلى

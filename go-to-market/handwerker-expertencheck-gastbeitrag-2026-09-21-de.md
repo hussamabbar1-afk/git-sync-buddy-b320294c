@@ -1,6 +1,6 @@
 # Gastbeitrag für Handwerker Expertencheck — redaktionelle Fassung
 
-Status: **SENT ONCE / WAITING EDITORIAL RESPONSE — SENDER DEVIATION RECORDED**
+Status: **SENT / SENDER CORRECTED / WAITING EDITORIAL RESPONSE**
 
 Stand: 22. September 2026
 
@@ -153,4 +153,5 @@ Finale Einreichungsdatei: `output/docx/ZunftEcho-Gastbeitrag-Handwerker-Experten
 - [x] Redaktionelle Endkontrolle von Sprache, Links und Dateiformat; DOCX strukturell geprüft und dreiseitig visuell kontrolliert.
 - [x] Ausdrückliche Bestätigung des Eigentümers unmittelbar vor dem Versand.
 - [x] Einmal am 22. September 2026 um 23:55 an `info@handwerker-expertencheck.de` gesendet; Betreff, Text, Empfänger, 41-KB-DOCX und Sent-Kopie geprüft.
-- [x] Absenderabweichung dokumentiert: Gmail verwendete `hussamabbar4@gmail.com` statt `kontakt@zunftecho.de`; nicht automatisch erneut senden.
+- [x] Absenderabweichung dokumentiert: Gmail verwendete zunächst `hussamabbar4@gmail.com` statt `kontakt@zunftecho.de`.
+- [x] Nach Eigentümerbestätigung am 23. September 2026 um 00:03 eine kurze, separate Korrektur von `ZunftEcho <kontakt@zunftecho.de>` gesendet; Sent-Details bestätigen Empfänger, Betreff und `zunftecho.de`. DOCX nicht erneut angehängt.
