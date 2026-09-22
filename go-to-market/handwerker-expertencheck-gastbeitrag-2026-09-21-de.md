@@ -1,6 +1,6 @@
 # Gastbeitrag für Handwerker Expertencheck — redaktionelle Fassung
 
-Status: **SEND READY / OWNER CONFIRMATION REQUIRED**
+Status: **SENT ONCE / WAITING EDITORIAL RESPONSE — SENDER DEVIATION RECORDED**
 
 Stand: 22. September 2026
 
@@ -121,7 +121,7 @@ So wird aus einer unstrukturierten Nachricht eine bearbeitbare Anfrage – ohne 
 - DVGW, „Was tun bei Gasgeruch?“: https://www.dvgw.de/themen/gas/verbraucherinformationen/was-tun-bei-gasgeruch
 - Verordnung (EU) 2016/679, Artikel 5, Grundsatz der Datenminimierung: https://eur-lex.europa.eu/legal-content/DE/ALL/?uri=celex:32016R0679
 
-## Vorgeschlagene Begleitmail — noch nicht gesendet
+## Gesendete Begleitmail
 
 **An:** Michaela Wirsich
 
@@ -151,5 +151,6 @@ Finale Einreichungsdatei: `output/docx/ZunftEcho-Gastbeitrag-Handwerker-Experten
 - [x] Fotos freiwillig; Sicherheits- und Datenminimierungsgrenzen genannt.
 - [x] Primärquellen geprüft am 21. September 2026.
 - [x] Redaktionelle Endkontrolle von Sprache, Links und Dateiformat; DOCX strukturell geprüft und dreiseitig visuell kontrolliert.
-- [ ] Ausdrückliche Bestätigung des Eigentümers unmittelbar vor dem Versand.
-- [ ] Nach Versand: genau eine Sent-Kopie und Absender/Empfänger/Betreff/Anhang prüfen; nicht erneut senden.
+- [x] Ausdrückliche Bestätigung des Eigentümers unmittelbar vor dem Versand.
+- [x] Einmal am 22. September 2026 um 23:55 an `info@handwerker-expertencheck.de` gesendet; Betreff, Text, Empfänger, 41-KB-DOCX und Sent-Kopie geprüft.
+- [x] Absenderabweichung dokumentiert: Gmail verwendete `hussamabbar4@gmail.com` statt `kontakt@zunftecho.de`; nicht automatisch erneut senden.

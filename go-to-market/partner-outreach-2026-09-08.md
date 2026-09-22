@@ -1,5 +1,17 @@
 # First-customer partner inquiries — 8 September 2026
 
+## أحدث تنفيذ — Handwerker Expertencheck، 22 سبتمبر23:55
+
+بعد تأكيد المالك أُرسل المقال مرة واحدة داخل سلسلة الرد إلى
+`Handwerker Expertencheck DE <info@handwerker-expertencheck.de>`، بالموضوع
+`Re: Ihre Magazin-Einladung: Eignung eines Praxisbeitrags zu SHK-Website-Anfragen` ومرفق Word الصحيح
+`ZunftEcho-Gastbeitrag-Handwerker-Expertencheck-2026-09-21.docx` (41KB). أكدت Gmail نجاح الإرسال، وظهرت
+نسخة الرسالة والنص والمرفق في السلسلة عند23:55. كشف فحص التفاصيل انحرافًا: المرسل الظاهر كان
+`hussam abbar <hussamabbar4@gmail.com>` و`Gesendet von: gmail.com` بدل الاسم المستعار المقصود
+`ZunftEcho <kontakt@zunftecho.de>`. لا يمكن التراجع بعد انتهاء نافذته، ولا إعادة إرسال تلقائية كي لا تصل نسخة
+مكررة. الحالة **SENT ONCE / WAITING EDITORIAL RESPONSE / SENDER DEVIATION**؛ لا Reminder مبكر، والخطوة التالية
+إما انتظار الرد أو قرار المالك بشأن تصحيح موجز من الهوية التجارية.
+
 ## أحدث نتيجة — Handwerker Expertencheck، 22 سبتمبر23:50
 
 رد Michaela Wirsich البشري المؤرخ21سبتمبر15:30 حوّل الاستفسار السابق إلى فرصة تحريرية **READY**: مساهمة
