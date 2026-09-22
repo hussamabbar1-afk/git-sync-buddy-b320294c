@@ -16,6 +16,15 @@ Live account inspection on 23 September 2026 established the following facts for
   currently available** before any send. No message was typed or sent and no credit was consumed.
 - A live connection-invitation composer displayed the Premium marker and an actual **300-character** note
   allowance. The former free-plan note/quota gate did not appear. No invitation was sent in this audit.
+- The live people-search filter drawer exposes connection degree (1st/2nd/3rd+), location, current company,
+  connections of, followers of, past company, school, industry, profile language, open-to-volunteering,
+  service category and keyword fields for first name, last name, name, company and school. It also exposes a
+  Premium `actively hiring` job-title filter, which is not relevant to the ZunftEcho acquisition lane. The drawer
+  did **not** expose Sales Navigator-style seniority, function, company-headcount, years-in-role or saved-lead
+  filters; do not imply that it did.
+- Profile-view analytics reports **2 visitors in the last 90 days**: Ram Prakash Pandey (`Section Head
+  mechanical`, viewed six days ago) and one private-mode member. Neither is a qualified ZunftEcho signal, so no
+  invitation or follow-up was prepared from this data.
 - The account does **not** expose Sales Navigator in the verified plan surface. Do not claim Sales Navigator
   lead lists, account lists, Sales Navigator filters, alerts or its separate credit pool.
 
@@ -44,6 +53,9 @@ GATED FOR REPRESENTATIONAL ACTIONS**.
 2. Use public profile and activity evidence to score role, geography, SHK relevance, recency, network reach and
    a truthful personalization hook. Do not treat a public email, a connection acceptance or an active profile as
    consent to receive promotion.
+   Route the verified filters as follows: location + current company + industry for regional SHK discovery;
+   connections-of/followers-of for legitimate network paths around Innungen, Verbände and ecosystem leaders;
+   service categories for agencies/consultants; and exact company/name keywords for decision-maker resolution.
 3. Prefer a small personalized connection invitation over InMail when a legitimate relationship premise exists.
    The Premium note capacity removes the former monthly note blockage, but LinkedIn's overall connection limits
    and anti-abuse rules remain; the live weekly/overall invitation allowance is **not yet quantified**.
