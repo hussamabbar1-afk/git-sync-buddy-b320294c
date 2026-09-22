@@ -1,8 +1,10 @@
 # Gastbeitrag für Handwerker Expertencheck — redaktionelle Fassung
 
-Status: **SEND READY / OWNER CONFIRMATION REQUIRED**  
-Stand: 22. September 2026  
-Vorgesehene Kennzeichnung durch die Redaktion: `Gastbeitrag von Hussam Alabar (ZunftEcho)`  
+Status: **SEND READY / OWNER CONFIRMATION REQUIRED**
+
+Stand: 22. September 2026
+
+Vorgesehene Kennzeichnung durch die Redaktion: `Gastbeitrag von Hussam Alabar (ZunftEcho)`
 Redaktioneller Rahmen: sachlich, anbieterneutral, nicht werblich; keine Kundenreferenz, keine Wirkungsbehauptung, keine Ferndiagnose.
 
 ## Einreichungsdaten
@@ -121,7 +123,8 @@ So wird aus einer unstrukturierten Nachricht eine bearbeitbare Anfrage – ohne 
 
 ## Vorgeschlagene Begleitmail — noch nicht gesendet
 
-**An:** Michaela Wirsich  
+**An:** Michaela Wirsich
+
 **Betreff:** Gastbeitrag: Digitale SHK-Anfragen sinnvoll vorsortieren
 
 Guten Tag Frau Wirsich,
