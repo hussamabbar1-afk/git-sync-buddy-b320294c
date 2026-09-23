@@ -1,0 +1,54 @@
+# ZunftEcho — cross-channel continuation, 23 September 2026
+
+Scope: fresh findings after `cross-channel-execution-2026-09-23.md`. R = distinct research record, not a lead or contact permission. Strict Q requires primary evidence of local SHK fit, 1–10 staff, service demand and a visible intake gap. No promotional cold outreach.
+
+## SHK and decision makers
+
+| New record | Verification and fit | Decision maker / next lawful route | Status |
+| --- | --- | --- | --- |
+| HSE GmbH, Rathenow | [Own site](https://www.goettlin.de/) says 8 staff, SHK repair/emergency service, generic name/address/message form without service triage; [imprint](https://www.goettlin.de/impressum/) names current Geschäftsführer | Jonas Möschl; identify a genuinely invited, non-promotional route before contact | **Q strict / ACTIVE research** |
+| Marcel Siegert, Potsdam | [Own site](https://siegert-versorgungstechnik.de/) confirms SHK and generic form; heating/bath configurators already exist. Employer job text names four craftspeople, but total headcount remains unknown | Marcel Siegert; check current total size and residual maintenance-intake gap | **R / ACTIVE** |
+| Genentz Sanitär und Heizung, Berlin | [Own site](https://www.genentz.berlin/) says five staff and SHK service; form already has topic, callback and appointment choices | Patrick Genentz on [imprint](https://www.genentz.berlin/impressum/); verify any residual gap; agency credit links to previously known Cem Karahan | **R / LOW VALUE until gap shown** |
+| Heizung & Sanitär Rohde GmbH, Potsdam | [Own site](https://www.hsrohde.de/) shows SHK and generic name/email/message form; employer-authored job listing suggests 8 staff plus apprentice, but current size is not confirmed on own site | Maximilian Rohde on [imprint](https://www.hsrohde.de/impressum/); verify current staff total | **R / ACTIVE** |
+| Haustechnik Buchholz GmbH, Rathenow | [Own site](https://www.ht-buchholz.de/) confirms SHK service; [contact form](https://www.ht-buchholz.de/kontakt/) has a topic selector and uploads, so a gap is not assumed | Jannik Buchholz on [imprint](https://www.ht-buchholz.de/impressum/); size and gap unknown | **R / ACTIVE** |
+| Strehlow, Rathenow | [Own site](https://strehlow-gas.de/) confirms SHK repairs/maintenance alongside gas retail; [contact form](https://strehlow-gas.de/kontakt/) is generic | Inka Strehlow on [imprint](https://strehlow-gas.de/impressum/); mixed business and size unknown | **R / ACTIVE** |
+| Thiele & von Hoff, Panketal/Bernau | [Own site](https://pankeheizung.de/) confirms SHK service and agency credit to HomepageHandmade; size and intake gap unknown | Michael von Hoff named by [agency case](https://homepagehandmade.de/webdesign-shk/); verify on own imprint before treating as decision maker | **R / ACTIVE** |
+| Schütz Haustechnik GmbH, Rathenow | [Own site](https://www.haustechnikschuetz.de/) confirms SHK maintenance/repair; [contact form](https://www.haustechnikschuetz.de/kontakt.php) is generic. Current team size is not stated | [Imprint](https://www.haustechnikschuetz.de/impressum.php) names Geschäftsführer Erich Schütz; size remains a strict-Q gate | **R / ACTIVE** |
+| Aqua Therm OHG, Pritzwalk | [Own site](https://www.aquatherm-prignitz.de/) shows SHK maintenance and a generic message form; [Prignitz installer register](https://www.pvu-gmbh.de/fileadmin/pvu_de/content/dateien/service/installateurverzeichnis_08_2025.pdf) confirms company/phone/Gernot Wiedmann. The site says Mozartweg 2 while the register says Burgwall 4; present address and team size require confirmation | Gernot Wiedmann is listed in the installer register; do not rely on the unverified succession or performance claims on the site | **R / ACTIVE verification** |
+| Bernd Schönhardt GmbH, Pritzwalk | [Employer's job page](https://schoenhardt.de/ueber-uns/jobs) confirms SHK service and multiple roles; full site/contact path could not be inspected reliably, and present team size is unknown | Bernd Schönhardt is named as contact on the employer page; confirm current customer intake and size before upgrading | **R / ACTIVE verification** |
+
+New: **10 R / 1 strict Q**; cumulative **248 R / 24 strict Q**. H.E.S. Solution was screened but is mixed electrical/heating with a heating calculator; Karsten Kube has heating and bath request assistants; Hendrick Bensch states ten professionals plus leadership. None is counted as strict Q. No direct sales message or call was sent to an SHK company.
+
+## Distribution, LinkedIn and editorial
+
+- [IN-Software](https://www.in-software.com/kooperationspartner.html) explicitly invites cooperation inquiries and has SHK wholesale partners. One approved, neutral eligibility inquiry was sent 23 September 16:13 Berlin from `ZunftEcho <kontakt@zunftecho.de>` to `info@in-software.com`; Gmail confirmed `تمّ إرسال الرسالة` and the sent copy. It asks only about criteria and explicitly disclaims pilot customers and IN-FORM integration. **WAITING for reply**, with no follow-up scheduled.
+- New distribution research: [HomepageHandmade](https://homepagehandmade.de/webdesign-shk/) (two SHK cases, Tobias Fabian), [Webprojekte Lierse](https://webprojekte.de/) ([Strehlow imprint](https://strehlow-gas.de/impressum/) credits the agency; Jan Lierse), [Hawepro](https://hawepro.de/partner/) (craft/technology network, no integration claim), [Gremers Media](https://gremers-media.de/webdesign/projekte/) (Mahnert SHK case), [TwooDoo](https://www.twoodoo.de/content/case-studies/webdesign/sanitaer-eckers.html) (older SHK case), [Schmiede Digital](https://www.schmiede-digital.de/referenzen/) (SHK case but lead-generation overlap). These are **research targets**, not partnerships or referrals. Existing Agentur ID, Kowerk, Maigut and KIMEO were deduplicated.
+- Additional agency target: [Unzweideutig](https://www.unzweideutig-webdesign.de/projekte/ehrhardt/) shows a specific Ehrhardt SHK website/SEO case and serves Germany remotely. Its existing request-page service creates a fit question; research only. [maimultimedia](https://www.mai-multimedia.de/) created Schütz's site and offers its own request-channeling tools, so treat it as overlapping supplier rather than a referral claim.
+- Competitive discovery: [Daniela Twardy](https://www.daniela-twardy.de/) serves small Berlin/Brandenburg firms, cites a local SHK website case, and advertises a structured inquiry assistant with a sanitizer version marked forthcoming. This is a concrete competing/adjacent offer; no partnership or customer traction is inferred from her marketing page.
+- Approved personal LinkedIn invitations sent and verified with `Die Einladung wurde an … gesendet.` plus `Ausstehend`: [Marco Bullin](https://www.linkedin.com/in/marco-bullin/), [Tobias Maigut](https://www.linkedin.com/in/tobias-maigut-media/), [Dietmar Bleck](https://www.linkedin.com/in/dietmar-bleck-fachautor-podcastproduzent/), [Tobias Fabian](https://www.linkedin.com/in/tobias-fabian-854b6535a/), [Jan Lierse](https://www.linkedin.com/in/janlierse/). **5 new; 14 cumulative verified Premium invitations**, last verified InMail balance 15. No InMail or DM used. No resend.
+- [Computern im Handwerk 2026 overview](https://www.handwerke.de/dateien/branchensoftware.html) looked promising, but dedup found its eligibility inquiry already sent 16 September 19:04. Despite a fresh approval, **no duplicate was sent**. [SHK-Journal](https://www.shk-journal.de/kontakt.html) is editorial research only; no invitation to submit a vendor article was established. No paid/unknown-cost listing was created.
+
+## GEO, SEO and other tracks
+
+- After Google AI Mode CAPTCHA, tested five new commercially relevant prompts in Perplexity Pro ([1](https://www.perplexity.ai/search/ca960dc3-dc2c-45a9-9d31-c54cc58c7cf9), [2](https://www.perplexity.ai/search/99c074f5-91f3-4a1f-8e42-34bf027b9df8), [3](https://www.perplexity.ai/search/32d945d2-7ca5-422e-a6db-90f86f54c324), [4](https://www.perplexity.ai/search/d1ffef65-feed-4baa-8b2e-9606ed45508b), [5](https://www.perplexity.ai/search/a067bc70-2894-4c53-ab65-9e6ebb205344)) and one in Microsoft Copilot. **0/6 ZunftEcho mention or citation**, recent cross-engine **0/20** including prior 14 Google AI Mode. Recurrent SHK authorities include Serviceportal SHK/ZVSHK; use editorial/partner source eligibility as the next authority path. No CAPTCHA bypass and no unverified AI claim treated as fact. GEO counts remain separate from GSC/SEO.
+- SEO: reviewed buyer-intent SHK chatbot/intake cluster against existing `shk-chatbot-menschliche-uebergabe`, `shk-anfragen-automatisieren`, checklist and photo-maintenance pages. Current coverage exists; no distinct high-value page or edit justified from this batch. Prior internal links were already deployed, not repeated.
+- Organic LinkedIn/YouTube: no new audience response or distribution arrangement observed that warrants a generic post or another Short. Conversion: latest verified `public.pilot_requests=0`; no new measured blocker to justify product changes. Directory candidates were screened for buyer fit and no-cost vendor submission; none established both, so no low-value listing made.
+
+## Twelve-track disposition at this checkpoint
+
+| Track | Status | Next useful condition/action |
+| --- | --- | --- |
+| 1 SHK pipeline | ACTIVE | Qualify further distinct Berlin/Brandenburg SHK firms, especially size and actual intake path |
+| 2 Decision makers | EXECUTED | Named routes recorded with owner-vs-agency distinction; new records still need size and identity checks |
+| 3 LinkedIn Premium | EXECUTED | Five approved personal invitations verified; monitor acceptance without promotional automation |
+| 4 Partner distribution | ACTIVE | Verify fit of newly identified agencies/software, including Unzweideutig; IN-Software reply pending only for that entity |
+| 5 Referral/co-marketing | ACTIVE | HomepageHandmade/Webprojekte/Hawepro hypotheses need reciprocal fit and lawful invitation |
+| 6 Media/editorial | ACTIVE | New SHK-Journal route screened; earlier editorial inquiries individually WAITING, no duplicate |
+| 7 GEO | EXECUTED | Six alternative-engine checks; pursue independent authoritative mentions if eligible |
+| 8 SEO | LOW VALUE | Existing cluster covers observed questions; require distinct query/evidence before editing |
+| 9 LinkedIn organic | LOW VALUE | Need real audience/distribution hypothesis rather than generic volume |
+| 10 YouTube | LOW VALUE | No new viewer/comment or justified new Short after prior checks |
+| 11 Directories | LOW VALUE | No verified free, fitting vendor submission found in sampled directories |
+| 12 Conversion | LOW VALUE | No verified inbound lead or measured product blocker |
+
+Global state is **ACTIVE**, not WAITING: broad market qualification and partner discovery remain open. Individual sent inquiries and invitations wait for recipients.
