@@ -107,3 +107,34 @@ Do not send all available invitations merely to consume capacity. Sven Schöpker
 already-qualified connection candidates, but their external sends require a new owner confirmation at the execution
 gate. InMail remains unspent until a higher-value context or a connection-route failure makes it the better lawful
 option.
+
+## Continuation, 23 September 2026, 11:11 CEST
+
+- Rechecked all four prior invitees: each remains `Ausstehend`; notifications and inbox have no qualifying new
+  acceptance or reply. No duplicate invitation or DM. A fresh non-connection composer still showed `1 von 15
+  InMails verwenden`; **15 remain**, no draft content typed and no InMail sent.
+- Targeted Premium people search for `SHK Geschäftsführer Brandenburg` exposed two named, verified new profiles
+  on page 2. Many other search hits were `LinkedIn Mitglied` without a usable person identity; they were not
+  promoted to verified decision-makers. Search query also attracted false SHK = university `studentische
+  Hilfskraft` results, so role, company and trade require independent verification.
+
+| Priority | Person / basis | Qualification | Current route / guardrail |
+| --- | --- | --- | --- |
+| A1 | [Jürgen Kamps](https://www.linkedin.com/in/j%C3%BCrgen-kamps-abb825327/), Berlin | Self-described owner/manager of an **8-person SHK** business; [company site](https://www.xn--jrgenkamps-haustechnik-slc.de/kontakt/) confirms trade, maintenance/service and only a general name/email/message form | Connection invitation sent with owner approval; `Ausstehend`. No promotional DM or use of public email as consent |
+| A1 ecosystem / conditional buyer | [Thomas Haun](https://www.linkedin.com/in/thomas-haun-3a085a71/), Berlin | Managing director, current Innung Berlin `Lehrlingswart`; [rbb/Tagesschau](https://www.tagesschau.de/wirtschaft/unternehmen/handwerk-kuenstliche-intelligenz-100.html) reports 10 staff and his public view that AI assists customer care. Existing intake technology and exact gap unknown. | Relationship-led connection invitation sent with owner approval; `Ausstehend`, not a product pitch |
+| A2 partner / compatibility check | [Martina Hovi](https://www.linkedin.com/in/martina-hovi-62635b41/), Falkensee | Owner of hovi.biz, [real Wittowski Sanitär web reference](https://www.hovi.biz/referenzen/handwerk), and also managing director of easy2book online booking; adjacent access but feature overlap | Research integration/referral fit first; optional personal connection only after owner confirmation |
+
+The owner confirmed the exact Jürgen Kamps and Thomas Haun notes at the action gate. Both were sent on 23
+September 2026 around 11:15–11:18 CEST. The live LinkedIn UI showed `Die Einladung wurde an … gesendet.` and
+`Ausstehend` for each profile. These are **sent records, not drafts**; do not send them again. The respective
+note lengths were 248 and 255 characters, no InMail or DM was used, and the previously verified InMail balance
+remains 15. Acceptance alone does not license a promotional follow-up.
+
+Sent notes (approved verbatim):
+
+- Jürgen Kamps: `Guten Tag Herr Kamps, Ihr Berliner SHK-Meisterbetrieb mit acht Mitarbeitenden und Kundendienst passt gut zu meiner Arbeit an verständlicheren Website-Anfragen im Handwerk. Ich würde mich gern zu praxistauglicher digitaler Anfrageaufnahme vernetzen.`
+- Thomas Haun: `Guten Tag Herr Haun, Ihre Perspektive als SHK-Geschäftsführer und Lehrlingswart der Innung Berlin auf KI im Handwerk fand ich spannend. Ich arbeite bei ZunftEcho an klareren Website-Anfragen mit menschlicher Prüfung und würde mich gern fachlich vernetzen.`
+
+Still unsent; a separate owner confirmation is required for any future external send:
+
+- Sven Schöpker: reuse the individual unsent note in `go-to-market/cross-channel-density-2026-09-21.md` only if still contextually accurate when a separate send is confirmed.
