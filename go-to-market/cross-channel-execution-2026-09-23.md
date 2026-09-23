@@ -39,7 +39,7 @@ Gmail had no newer human commercial reply; the Expertencheck sender-correction t
 
 Five completed new Google AI Mode answers to distinct commercial prompts yielded **0/5 ZunftEcho mentions and 0/5 citations**, bringing the recent completed total to **0/14**. Prompt clusters: SHK AI with human handoff; Handwerk request classification; small-SHK website chat; SHK requests with photos/postcode and no automatic diagnosis; SHK digital customer communication. Cited/surfaced domains repeatedly included ZVSHK/serviceportal-shk.de, TemMedia, HERO, ToolTime, Label and ki-im-shk.de; other one-off names included werk-ai.de, chatbyte.ai, siteware.io, mesina.ai, meisterio.de, streit-software.de, voice-one.ai and 123formular. Further prompt submissions streamed incompletely and are **not counted**. Google then showed a CAPTCHA/unusual-traffic page, so stop this environment rather than bypassing or treating partial results as completed checks. The actionable GEO hypothesis is to earn relevant editorial/sector citations and strengthen existing evidence-rich pages, with GEO measured separately from SEO.
 
-Four commercial SEO searches showed competing request-assistant/form pages and authority sites. Two existing articles now link contextually to the published [SHK maintenance-photo guide](https://zunftecho.de/shk-wartungsanfrage-mit-fotos): `/shk-anfragen-automatisieren` and `/kontaktformular-oder-chatbot`; their `Article.dateModified` reflects the change. Production build and diff check passed. This is an internal-link action, not an indexing or rank claim. No repeat GSC indexing request. GSC last verified 5 clicks/12 impressions through 20 September.
+Four commercial SEO searches showed competing request-assistant/form pages and authority sites. Two existing articles now link contextually to the published [SHK maintenance-photo guide](https://zunftecho.de/shk-wartungsanfrage-mit-fotos): `/shk-anfragen-automatisieren` and `/kontaktformular-oder-chatbot`; their `Article.dateModified` reflects the change. Production build, targeted ESLint and diff check passed. Commit `6d40742` was pushed to `main`; Cloudflare version `dded7dc1-7e0d-4b51-8169-63cb4527d323` was deployed. Both production URLs returned HTTP 200 with the new link label and modified date. This is an internal-link action, not an indexing or rank claim. No repeat GSC indexing request. GSC last verified 5 clicks/12 impressions through 20 September.
 
 ## Cross-channel matrix
 
@@ -52,7 +52,7 @@ Four commercial SEO searches showed competing request-assistant/form pages and a
 | 5 Referral/co-marketing | ACTIVE | Anke, Sven and Richard invitations now pending; no introduction promised. |
 | 6 Media/editorial | WAITING | Prior legitimate submissions awaiting replies; new podcast route lacks an explicit submission invitation. |
 | 7 GEO | EXECUTED | Five completed new checks, zero ZunftEcho; environment then CAPTCHA-gated. |
-| 8 SEO | EXECUTED | Two contextual internal links and modified dates; build passed. |
+| 8 SEO | EXECUTED | Two contextual internal links and modified dates; build, deployment and production checks passed. |
 | 9 LinkedIn organic | LOW VALUE | No new audience or measurable distribution signal for a generic post. |
 | 10 YouTube | LOW VALUE | No meaningful new view/comment signal or distinct video hypothesis. |
 | 11 Directories | BLOCKED | softwareabc24 free exposure unresolved; SHK.de paid. No sound free listing now. |
