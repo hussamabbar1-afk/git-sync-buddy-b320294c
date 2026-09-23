@@ -76,6 +76,10 @@ const sections: KnowledgeSection[] = [
         href: "https://www.jotform.com/de/features/crm-forms/",
         label: "Herstellerquelle: Jotform zu Formularen und CRM-Übergaben",
       },
+      {
+        href: "/shk-wartungsanfrage-mit-fotos",
+        label: "SHK-Wartungsanfragen mit freiwilligen Fotos erfassen",
+      },
       { href: "/vertrauen", label: "ZunftEcho: Datenschutz und Betriebsgrenzen" },
     ],
   },
@@ -184,7 +188,7 @@ export const Route = createFileRoute("/kontaktformular-oder-chatbot")({
             "Praktische Entscheidungshilfe für die digitale Anfrageaufnahme in SHK-Betrieben.",
           inLanguage: "de-DE",
           datePublished: "2026-08-29",
-          dateModified: "2026-09-20",
+          dateModified: "2026-09-23",
           mainEntityOfPage: "https://zunftecho.de/kontaktformular-oder-chatbot",
           author: { "@type": "Organization", name: "ZunftEcho" },
           publisher: {

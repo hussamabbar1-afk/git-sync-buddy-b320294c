@@ -69,6 +69,10 @@ const sections: KnowledgeSection[] = [
     links: [
       { href: "/kontaktformular-oder-chatbot", label: "Formular und Anfrageassistent vergleichen" },
       {
+        href: "/shk-wartungsanfrage-mit-fotos",
+        label: "Wartungsanfragen mit freiwilligen Fotos vorbereiten",
+      },
+      {
         href: "/website-anfragen-handwerk-checkliste",
         label: "Checkliste für vollständige Website-Anfragen",
       },
@@ -122,7 +126,7 @@ export const Route = createFileRoute("/shk-anfragen-automatisieren")({
           headline: title,
           description,
           datePublished: "2026-08-29",
-          dateModified: "2026-09-16",
+          dateModified: "2026-09-23",
           inLanguage: "de-DE",
           author: { "@type": "Organization", name: "ZunftEcho" },
           publisher: { "@type": "Organization", name: "ZunftEcho" },
