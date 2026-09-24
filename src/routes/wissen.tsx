@@ -165,6 +165,30 @@ function KnowledgeHub() {
           </div>
         </section>
 
+        <section className="mx-auto max-w-7xl px-5 pb-14 sm:px-8 lg:px-10">
+          <div className="rounded-3xl border border-sky-200 bg-sky-50 p-7 sm:p-9">
+            <p className="text-xs font-semibold tracking-[0.14em] text-primary uppercase">
+              Externer Fachbeitrag
+            </p>
+            <h2 className="mt-3 text-2xl font-semibold tracking-tight">
+              Digitale SHK-Anfragen sinnvoll vorsortieren
+            </h2>
+            <p className="mt-3 max-w-3xl leading-7 text-slate-600">
+              Ein Gastbeitrag von Hussam Alabar | ZunftEcho im Handwerker Expertencheck über
+              Rückfragen, Dringlichkeit und die Übergabe an Menschen. Der Beitrag beschreibt einen
+              Ansatz vor dem ersten Pilot und keine nachgewiesenen Kundenergebnisse.
+            </p>
+            <a
+              className="mt-5 inline-flex items-center gap-2 font-semibold text-primary hover:underline"
+              href="https://www.handwerker-expertencheck.de/handwerker-magazin/digitale-shk-anfragen-sinnvoll-vorsortieren"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Beitrag beim Herausgeber lesen <ArrowRight className="size-4" />
+            </a>
+          </div>
+        </section>
+
         <section className="border-y border-slate-200 bg-slate-50">
           <div className="mx-auto grid max-w-7xl gap-6 px-5 py-14 sm:px-8 md:grid-cols-3 lg:px-10">
             {principles.map((item) => (
