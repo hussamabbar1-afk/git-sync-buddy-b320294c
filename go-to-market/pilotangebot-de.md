@@ -1,5 +1,7 @@
 # ZunftEcho Pilotangebot
 
+> Historisches Dokument vom 24. August, nicht als aktuelle Vertriebsvorlage kopieren. Maßgeblich sind die aktuellen öffentlichen Seiten, `async-pilot-qualifizierung-de.md` und `strategic-review-2026-09-27.md`. Keine bestehende Kundennutzung, Telefon-/Videodemo oder automatische Terminbestätigung aus den alten Beispielen ableiten. Preise bleiben 99 € netto / 30 Tage und danach optional 149 € netto pro Monat; keine Preisänderung durch die strategische Prüfung.
+
 Stand: 24. August 2026
 
 ## Positionierung
