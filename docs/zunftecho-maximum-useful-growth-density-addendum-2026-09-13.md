@@ -52,3 +52,7 @@ Only conclude that no useful work exists after checking the full acquisition sys
 Optimize for maximum useful commercial throughput, not maximum task count.
 
 Continue communicating with me in Arabic.
+
+## Hard execution floor — owner instruction, 27 September 2026
+
+An ACTIVE session must continue through substantial batches across qualification, lawful access, LinkedIn, partner distribution, new channel classes and external authority while meaningful executable capacity remains. Confirmed buyer offer exposure, meaningful replies, problem exchanges and Pilot interest are the primary measures; prospect counts and sent eligibility inquiries are not substitutes. Prefer alternate evidence that changes a decision; do not repeat completed checks or manufacture activity to meet quotas. Prepare any genuinely required similar approvals as one reviewable batch. Pending replies and an individual tool/listing block never establish global WAITING; retain the existing legal, spending, credential and contact restrictions. Record batches minimally and state any session boundary precisely, without claiming market exhaustion.
