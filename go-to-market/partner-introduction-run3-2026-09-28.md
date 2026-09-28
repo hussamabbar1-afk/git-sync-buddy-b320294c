@@ -151,3 +151,9 @@ All18 verified relevant professional invitation routes selected for advancement 
 On acceptance of any invited partner, first establish whether it has an ongoing suitable small-SHK relationship and is willing to hold a short written exchange. After reciprocal context, ask for ONE voluntary opt-in introduction, never lists/private customer data. A proper introduction requires both partner willingness and the SHK company entering voluntarily; record subsequent offer exposure only on actual confirmation. New unreviewed organizations remain discoverable; no assertion of market exhaustion or global WAITING. Project remains ACTIVE; this checkpoint records the advanced currently reviewed routes and their gates.
 
 Application confirmation has a specific consent boundary, not a global block. Do not declare available capacity exhausted merely because the currently contacted partners are waiting.
+
+## Newer conversion checkpoint —28Sep2026,19:43Berlin
+
+Continue from [partner-conversion-run3-2026-09-28.md](partner-conversion-run3-2026-09-28.md) and its39-route CSV. The19:23 checkpoint above remains historical and its completed actions must not be repeated.
+
+Two additional verified contextual messages: Anke Voss first professional question19:32 on an already accepted connection; Handwerker Expertencheck ONE voluntary opt-in introduction ask19:34:12 in the established editorial exchange, Gmail `1a0e914d6adc542d`. Run3 plus conversion external actions25, invitation counts unchanged18/50, no new application, acceptance, introduction-capable partner, voluntary introduction or confirmed buyer exposure. The20 original Run3 waiting organizations remain a bounded scope, not the total historical pipeline. All eight priority routes have tailored next actions and triggers; no time-based reminder or duplicate inquiry was sent. OMR consent clarification remains pending; DOI link inactive.
