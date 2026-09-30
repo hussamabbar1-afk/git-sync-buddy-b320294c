@@ -184,6 +184,19 @@ Ein neuer Brief-Test bleibt deshalb **BLOCKED**, bis mindestens der tatsächlich
 neues menschliches Signal beziehungsweise ein belastbarer Zustellhinweis die Änderung begründet. Das ist kein
 Grund, unabhängige Akquise- und Distributionsarbeit anzuhalten.
 
+### Ergänzung vom 30. September 2026: Originaltext wiedergefunden
+
+Das ursprüngliche zehnseitige Druck-PDF wurde außerhalb des Checkouts wiedergefunden:
+`C:/Users/Alabar/Documents/Codex/2026-08-24/new-chat/output/pdf/final/zunftecho-erste-briefwelle-10-drucksatz.pdf`.
+Alle zehn Seiten wurden gelesen; der tatsächlich freigegebene Stapel bestand weiter aus neun Briefen
+ohne Andrea Tschichholz. Die damalige Bedingung "tatsächlich versandter Text liegt vor" ist jetzt erfüllt.
+Zustellung/Lesen bleiben unbekannt; die 14-Tage-Nullauswertung wird nicht nachträglich umgedeutet.
+Nach dem ausdrücklichen Evaluationsauftrag des Owners ist ein begründeter, auf drei neue geeignete
+Empfänger reduzierter Folgetest vorbereitet. Hauptänderung: eine kurze schriftliche Praxisantwort als CTA
+statt der Demo als erster Schritt. Kein kausaler A/B-Nachweis aus unterschiedlichen Kleinstgruppen.
+Details und private Druckdateien: `go-to-market/direct-mail-wave2-2026-09-30.md`.
+**PREPARED / OWNER APPROVAL REQUIRED / NOT SENT**; keine automatische Folgewelle oder Nachfassaktion.
+
 ## Auswertung nach 14 Tagen
 
 Fällig am 21. September 2026, gerechnet ab dem durch den Inhaber bestätigten Versand vom 7. September.
