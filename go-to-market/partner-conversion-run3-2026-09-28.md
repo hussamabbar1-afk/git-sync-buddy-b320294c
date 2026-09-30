@@ -1,4 +1,6 @@
 # Run 3 — Partner conversion / first SHK introduction
+
+Latest continuation: 30Sep17:11Berlin. Authoritative delta is `direct-exposure-channel-run-2026-09-30.md` and latest PROJECT_STATE. Two human administrative replies handled; Trovarit Chapter6 completed/reported and public search presence verified; CV questionnaire mid-October then arrival+7days. Expertencheck approved document and owner-approved logo/free profile published17:04, author-link notice17:06:07 SENT VERIFIED; prior ONE opt-in ask not repeated. Six new written mechanisms advanced, one email bounced with no valid written fallback; five routes await reply/eligibility. Eight communication attempts + one technical update + one free publication; extended Run3 total54 including two known failed attempts. No new buyer exposure/problem/Pilot/introduction, no global market-exhaustion claim. Current matrix47 routes retained; only three changed existing route rows updated. No duplicate invitations/messages or paid/contract/account action.
 Stand: 28 September 2026, 19:43 Europe/Berlin. ACTIVE project; conversion checkpoint, not market exhaustion.
 
 ## Scope and evidence
